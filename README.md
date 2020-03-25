@@ -1,3 +1,8 @@
+[![Development build](https://travis-ci.com/UN-OCHA/site-assessments8.svg?branch=develop)](https://travis-ci.com/UN-OCHA/site-assessments8)
+[![Master build](https://travis-ci.com/UN-OCHA/site-assessments8.svg?branch=master)](https://travis-ci.com/UN-OCHA/site-assessments8)
+![Development image](https://github.com/UN-OCHA/site-assessments8/workflows/Build%20docker%20image/badge.svg?branch=develop)
+![Master image](https://github.com/UN-OCHA/site-assessments8/workflows/Build%20docker%20image/badge.svg?branch=master)
+
 # Assessment Registry
 
 ## Pages
