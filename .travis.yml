@@ -33,8 +33,8 @@ env:
 
 before_script:
   # Check the docker images we want actually exists.
-  - grep 'unocha/unified-builder:' docker/Dockerfile | awk '{print $2}' | xargs docker pull -q
-  - grep 'unocha/php7-k8s:' docker/Dockerfile | awk '{print $2}' | xargs docker pull -q
+  - grep 'unocha/unified-builder:' docker/Dockerfile | awk '{print $2}' | xargs docker pull --quiet
+  - grep 'unocha/php7-k8s:' docker/Dockerfile | awk '{print $2}' | xargs docker pull --quiet
   # Composer.
   - sed -i '1i export PATH="$HOME/.composer/vendor/bin:$PATH"' $HOME/.bashrc
   - source $HOME/.bashrc
