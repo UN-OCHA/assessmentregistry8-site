@@ -7,7 +7,7 @@ RUN composer install --quiet --no-dev --prefer-dist && \
     cp -a docker/settings.php docker/services.yml html/sites/default && \
     composer run gulp
 
-FROM unocha/php7-k8s:7.3.14-r0-202003-03-NR
+FROM unocha/php7-k8s:7.3.14-r0-202004-03-NR
 
 ARG VCS_REF
 ARG VCS_URL
