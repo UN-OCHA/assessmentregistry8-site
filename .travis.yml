@@ -16,6 +16,9 @@ mysql:
   username: root
   encoding: utf8
 
+services:
+  - docker
+
 env:
   global:
      - DRUPAL_REPO='git://drupalcode.org/project/drupal.git'
@@ -25,10 +28,13 @@ env:
      - CODER_VERSION='dev-8.x-2.x'
      - DB=mysql
 
-# install:
+#install:
 #  - test -n "${SSH_AGENT_PID}" && ssh-agent -k
 
 before_script:
+  # Check the docker images we want actually exists.
+  - grep 'unocha/unified-builder:' docker/Dockerfile | awk '{print $2}' | xargs docker pull -q
+  - grep 'unocha/php7-k8s:' docker/Dockerfile | awk '{print $2}' | xargs docker pull -q
   # Composer.
   - sed -i '1i export PATH="$HOME/.composer/vendor/bin:$PATH"' $HOME/.bashrc
   - source $HOME/.bashrc
