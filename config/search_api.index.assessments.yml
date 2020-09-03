@@ -2,30 +2,69 @@ uuid: 25047385-0e66-44bc-85c3-48153b4d6916
 langcode: ru
 status: true
 dependencies:
+  module:
+    - search_api_solr
+    - node
+    - file
+    - search_api
+    - ocha_locations
   config:
     - field.storage.node.field_assessment_data
     - field.storage.node.field_ass_date
-    - field.storage.node.field_assessment_questionnaire
-    - field.storage.node.field_assessment_report
-    - field.storage.node.field_local_groups
+    - field.storage.node.field_asst_organizations
     - field.storage.node.field_countries
     - field.storage.node.field_disasters
     - field.storage.node.field_key_findings
-    - field.storage.node.field_organizations
     - field.storage.node.field_level_of_representation
+    - field.storage.node.field_local_groups
     - field.storage.node.field_locations
-    - field.storage.node.field_asst_organizations
+    - field.storage.node.field_organizations
     - field.storage.node.field_population_types
     - field.storage.node.field_sources
     - field.storage.node.field_status
     - field.storage.node.field_themes
-    - search_api.server.db
+    - field.storage.node.field_assessment_questionnaire
+    - field.storage.node.field_assessment_report
+    - search_api.server.solr
     - core.entity_view_mode.node.search_index
-  module:
-    - file
-    - node
-    - search_api
-    - ocha_locations
+third_party_settings:
+  search_api_solr:
+    finalize: false
+    commit_before_finalize: false
+    commit_after_finalize: false
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    mlt:
+      mintf: 1
+      mindf: 1
+      maxdf: 0
+      maxdfpct: 0
+      minwl: 0
+      maxwl: 0
+      maxqt: 100
+      maxntp: 2000
+      boost: false
+      interestingTerms: none
+    advanced:
+      index_prefix: ''
+      collection: ''
+      timezone: ''
 id: assessments
 name: Assessments
 description: ''
@@ -472,6 +511,7 @@ processor_settings:
     weights:
       preprocess_index: -45
   rendered_item: {  }
+  solr_date_range: {  }
   transliteration:
     all_fields: true
     fields:
@@ -519,4 +559,4 @@ tracker_settings:
 options:
   index_directly: true
   cron_limit: 50
-server: db
+server: solr

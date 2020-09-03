@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
+    - search_api_solr
     - node
     - taxonomy
     - file
@@ -19,8 +20,46 @@ dependencies:
     - field.storage.taxonomy_term.field_display_label
     - field.storage.node.field_km_publication_date
     - field.storage.node.field_population_types
-    - search_api.server.db
+    - search_api.server.solr
     - core.entity_view_mode.node.search_index
+third_party_settings:
+  search_api_solr:
+    finalize: false
+    commit_before_finalize: false
+    commit_after_finalize: false
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    mlt:
+      mintf: 1
+      mindf: 1
+      maxdf: 0
+      maxdfpct: 0
+      minwl: 0
+      maxwl: 0
+      maxqt: 100
+      maxntp: 2000
+      boost: false
+      interestingTerms: none
+    advanced:
+      index_prefix: ''
+      collection: ''
+      timezone: ''
 id: knowledge_management
 name: 'Knowledge Management'
 description: ''
@@ -176,27 +215,15 @@ processor_settings:
       - field_km_life_cycle_steps_label
       - field_population_types_label
       - rendered_item
-    weights:
-      preprocess_index: -20
-      preprocess_query: -20
   language_with_fallback: {  }
   rendered_item: {  }
-  transliteration:
-    all_fields: true
-    fields:
-      - field_countries_label
-      - field_km_context_label
-      - field_km_document_url
-      - field_km_life_cycle_steps_label
-      - field_population_types_label
-      - rendered_item
+  solr_date_range:
     weights:
-      preprocess_index: -20
-      preprocess_query: -20
+      preprocess_index: 0
 tracker_settings:
   default:
     indexing_order: fifo
 options:
   index_directly: true
   cron_limit: 50
-server: db
+server: solr
