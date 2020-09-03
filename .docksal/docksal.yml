@@ -1,1 +1,19 @@
 version: "2.1"
+services:
+  # Solr
+  solr:
+    hostname: solr
+    image: docksal/solr:7.7
+    volumes:
+      - project_root:/var/www:ro,nocopy,cached  # Project root volume (read-only)
+    labels:
+      - io.docksal.virtual-host=solr.${VIRTUAL_HOST},solr.${VIRTUAL_HOST}.*
+      - io.docksal.virtual-port=8983
+      - io.docksal.cert-name=${VIRTUAL_HOST_CERT_NAME:-none}
+    dns:
+      - ${DOCKSAL_DNS1}
+      - ${DOCKSAL_DNS2}
+    logging:
+      options:
+        max-size: ${DOCKSAL_CONTAINER_LOG_MAX_SIZE}
+        max-file: ${DOCKSAL_CONTAINER_LOG_MAX_FILE}
