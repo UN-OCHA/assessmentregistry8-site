@@ -11,7 +11,7 @@ dependencies:
     - common_design_subtheme
 id: docstore_facetsummary
 theme: common_design_subtheme
-region: sidebar_first
+region: facets
 weight: -1
 provider: null
 plugin: 'facets_summary_block:docstore_facet_summary'

@@ -11,7 +11,7 @@ dependencies:
     - common_design_subtheme
 id: countries_2
 theme: common_design_subtheme
-region: sidebar_first
+region: facets
 weight: 11
 provider: null
 plugin: 'facet_block:map_countries'
