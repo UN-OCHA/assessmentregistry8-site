@@ -34,9 +34,30 @@
   content: ':';
 }
 
-
 // Document Store External entity.
 .cd-article {
+  .field--name-field-description .field__item {
+    max-width: var(--cd-max-content-width);
+  }
+
+  // Document link.
+  .field--type-ocha-doc-store-file a {
+    word-break: break-word;
+  }
+}
+
+// This will likely change.
+.path-km {
+  // ID column.
+  .cd-table tr td:first-child {
+    word-break: break-word;
+  }
+}
+
+// Document Store form.
+.km-form {
+  --cd-flow-space: 2rem;
+
   .cd-form__item {
     display: flex;
     flex-wrap: wrap;
@@ -62,20 +83,6 @@
     }
   }
 
-  .field--name-field-description .field__item {
-    max-width: var(--cd-max-content-width);
-  }
-
-  // Document link.
-  .field--type-ocha-doc-store-file a {
-    word-break: break-word;
-  }
-}
-
-// Document Store form.
-.km-form {
-  --cd-flow-space: 2rem;
-
   // Make h4 look like a label.
   h4,
   legend {
@@ -89,13 +96,22 @@
     margin: 0 0 1rem;
   }
 
+  .cd-table {
+    margin-bottom: 1rem;
+  }
+
   a.tabledrag-handle .handle {
     width: auto;
     height: auto;
     margin-top: 0;
   }
 
-  .field-multiple-drag a,
+  // Position the Show Row Order button atop the row below.
+  .tabledrag-toggle-weight {
+    position: relative;
+    top: 2.5rem;
+  }
+
   .field-multiple-drag .cd-form__item {
     margin-bottom: 1rem;
   }
@@ -127,18 +143,11 @@
     a {
       display: block;
       margin-bottom: 1rem;
+      word-break: break-word;
     }
 
     .cd-form__item {
       margin-bottom: 1rem;
     }
-  }
-}
-
-// This will likely change.
-.path-km {
-  // ID column.
-  .cd-table tr td:first-child {
-    word-break: break-word;
   }
 }
