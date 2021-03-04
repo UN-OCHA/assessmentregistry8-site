@@ -18,7 +18,9 @@ regions:
   header_navigation: Header navigation
   hero: Hero
   highlighted: Highlighted
+  page_title: Page title
   content: Content
+  facets: Facets
   sidebar_first: First sidebar
   footer_soft: Soft footer
   footer_navigation: Footer navigation

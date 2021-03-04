@@ -12,7 +12,7 @@ _core:
   default_config_hash: rH6PpAn7-RScha1rGkohGAYSSh_1OVeZzioJPzPw6O4
 id: common_design_tools
 theme: common_design
-region: sidebar_first
+region: facets
 weight: 0
 provider: null
 plugin: 'system_menu_block:tools'

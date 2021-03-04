@@ -11,7 +11,7 @@ dependencies:
     - common_design_subtheme
 id: sources
 theme: common_design_subtheme
-region: sidebar_first
+region: facets
 weight: 17
 provider: null
 plugin: 'facet_block:sources'

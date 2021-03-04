@@ -30,6 +30,10 @@
                     "reference": "DOC-42"
                 }
             }
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/UN-OCHA/common_design.git"
         }
     ],
     "require": {
@@ -62,7 +66,7 @@
         "npm-asset/select2": "^4.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "phpoffice/phpspreadsheet": "^1.11",
-        "unocha/common_design": "^2.8.9",
+        "unocha/common_design": "dev-cd-226-design-system",
         "unocha/ocha_integrations": "^1.0",
         "webflo/drupal-finder": "^1.0.0",
         "zaporylie/composer-drupal-optimizations": "^1.0"
