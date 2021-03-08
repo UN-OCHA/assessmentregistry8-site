@@ -11,8 +11,8 @@ dependencies:
     - common_design_subtheme
 id: table_authoredon
 theme: common_design_subtheme
-region: facets
-weight: -25
+region: sidebar_first
+weight: -26
 provider: null
 plugin: 'facet_block:table_authored_on'
 settings:

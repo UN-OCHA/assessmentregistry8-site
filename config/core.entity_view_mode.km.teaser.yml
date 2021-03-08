@@ -1,0 +1,10 @@
+uuid: 6689845c-be5d-4131-9b16-d489eb87c8ab
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: km.teaser
+label: Teaser
+targetEntityType: km
+cache: true

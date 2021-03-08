@@ -11,8 +11,8 @@ dependencies:
     - common_design_subtheme
 id: clusters_sectors
 theme: common_design_subtheme
-region: facets
-weight: 7
+region: sidebar_first
+weight: 5
 provider: null
 plugin: 'facet_block:clusters_sectors'
 settings:

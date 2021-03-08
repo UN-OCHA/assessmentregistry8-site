@@ -11,8 +11,8 @@ dependencies:
     - common_design_subtheme
 id: map_organizations
 theme: common_design_subtheme
-region: facets
-weight: -20
+region: sidebar_first
+weight: -21
 provider: null
 plugin: 'facet_block:map_organizations'
 settings:

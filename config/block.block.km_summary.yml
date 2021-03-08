@@ -1,4 +1,4 @@
-uuid: 3ce7c864-ed27-496c-99b9-c6fdb4d87b31
+uuid: 83938404-307c-456a-a3bf-749ed62beddb
 langcode: en
 status: true
 dependencies:
@@ -11,15 +11,15 @@ dependencies:
     - common_design_subtheme
 id: km_summary
 theme: common_design_subtheme
-region: facets
-weight: -32
+region: sidebar_first
+weight: -2
 provider: null
 plugin: 'facets_summary_block:km_summary'
 settings:
   id: 'facets_summary_block:km_summary'
-  label: 'km summary'
+  label: Summary
   provider: facets_summary
-  label_display: visible
+  label_display: '0'
 visibility:
   request_path:
     id: request_path

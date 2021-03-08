@@ -1,23 +1,23 @@
-uuid: 102eaa5f-8650-4082-8a90-fc147eb90593
+uuid: 9657f013-b2fb-4022-bc8e-cad5ade47228
 langcode: en
 status: true
 dependencies:
   config:
-    - search_api.index.knowledge_management
+    - search_api.index.km
     - views.view.knowledge_management
   module:
     - facets_pretty_paths
     - search_api
 third_party_settings:
   facets_pretty_paths:
-    coder: taxonomy_term_coder
-id: document_type
+    coder: default_coder
+id: km_document_type
 name: 'Document type'
-url_alias: document_type
+url_alias: km_document_type
 weight: 0
 min_count: 1
-show_only_one_result: true
-field_identifier: field_km_document_type
+show_only_one_result: false
+field_identifier: field_document_type
 facet_source_id: 'search_api:views_page__knowledge_management__page_1'
 widget:
   type: select2

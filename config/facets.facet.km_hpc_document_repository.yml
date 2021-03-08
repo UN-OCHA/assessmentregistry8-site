@@ -1,29 +1,32 @@
-uuid: fb6cb9e2-b5cc-4e44-9e5d-65375fc2a185
+uuid: b6f76a3f-20e4-477a-aa36-8fefc26a3c9e
 langcode: en
 status: true
 dependencies:
   config:
-    - search_api.index.knowledge_management
+    - search_api.index.km
     - views.view.knowledge_management
   module:
     - facets_pretty_paths
     - search_api
 third_party_settings:
   facets_pretty_paths:
-    coder: ocha_integer_list_coder
-id: rest_country
-name: 'REST Country'
-url_alias: country
+    coder: default_coder
+id: km_hpc_document_repository
+name: 'HPC document repository'
+url_alias: km_hpc_document_repository
 weight: 0
 min_count: 1
 show_only_one_result: false
-field_identifier: field_countries
-facet_source_id: 'search_api:views_rest__knowledge_management__rest_export_1'
+field_identifier: field_hpc_document_repository
+facet_source_id: 'search_api:views_page__knowledge_management__page_1'
 widget:
-  type: array
+  type: select2
   config:
     show_numbers: true
-query_operator: and
+    width: 100%
+    autocomplete: false
+    match_operator: CONTAINS
+query_operator: or
 use_hierarchy: false
 hierarchy:
   type: taxonomy
@@ -34,6 +37,17 @@ hard_limit: 0
 exclude: false
 only_visible_when_facet_source_is_visible: true
 processor_configs:
+  display_value_widget_order:
+    processor_id: display_value_widget_order
+    weights:
+      sort: 40
+    settings:
+      sort: ASC
+  translate_entity:
+    processor_id: translate_entity
+    weights:
+      build: 5
+    settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler
     weights:

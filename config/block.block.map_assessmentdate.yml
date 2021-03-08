@@ -11,8 +11,8 @@ dependencies:
     - common_design_subtheme
 id: map_assessmentdate
 theme: common_design_subtheme
-region: facets
-weight: 5
+region: sidebar_first
+weight: 3
 provider: null
 plugin: 'facet_block:map_assessment_date'
 settings:

@@ -7,9 +7,13 @@ dependencies:
     - external_entities
     - search_api
   config:
-    - field.storage.km.field_author
     - field.storage.km.field_context
+    - field.storage.km.field_countries
+    - field.storage.km.field_document_type
+    - field.storage.km.field_hpc_document_repository
     - field.storage.km.field_life_cycle_steps
+    - field.storage.km.field_original_publication_date
+    - field.storage.km.field_population_types
     - search_api.server.solr
 third_party_settings:
   search_api_solr:
@@ -57,33 +61,39 @@ name: km
 description: ''
 read_only: false
 field_settings:
-  field_author:
-    label: Author
+  field_countries:
+    label: Countries
     datasource_id: 'entity:km'
-    property_path: field_author
+    property_path: field_countries
     type: string
     dependencies:
       config:
-        - field.storage.km.field_author
-  title:
-    label: 'Context » Context » Title'
+        - field.storage.km.field_countries
+  field_document_type:
+    label: 'Document type'
     datasource_id: 'entity:km'
-    property_path: 'field_context:entity:title'
+    property_path: field_document_type
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_document_type
+  field_hpc_document_repository:
+    label: 'HPC document repository'
+    datasource_id: 'entity:km'
+    property_path: field_hpc_document_repository
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_hpc_document_repository
+  field_km_context:
+    label: Context
+    datasource_id: 'entity:km'
+    property_path: field_context
     type: string
     dependencies:
       config:
         - field.storage.km.field_context
-      module:
-        - external_entities
-  title_1:
-    label: Title
-    datasource_id: 'entity:km'
-    property_path: title
-    type: string
-    dependencies:
-      module:
-        - external_entities
-  title_2:
+  field_km_life_cycle_steps_label:
     label: 'Life cycle steps » Life cycle step » Title'
     datasource_id: 'entity:km'
     property_path: 'field_life_cycle_steps:entity:title'
@@ -91,6 +101,40 @@ field_settings:
     dependencies:
       config:
         - field.storage.km.field_life_cycle_steps
+      module:
+        - external_entities
+  field_life_cycle_steps:
+    label: 'Life cycle steps'
+    datasource_id: 'entity:km'
+    property_path: field_life_cycle_steps
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_life_cycle_steps
+  field_original_publication_date:
+    label: 'Original publication date'
+    datasource_id: 'entity:km'
+    property_path: field_original_publication_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.km.field_original_publication_date
+  field_population_types:
+    label: 'Population types'
+    datasource_id: 'entity:km'
+    property_path: field_population_types
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_population_types
+  title_1:
+    label: 'Population types » Population Type » Title'
+    datasource_id: 'entity:km'
+    property_path: 'field_population_types:entity:title'
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_population_types
       module:
         - external_entities
 datasource_settings:

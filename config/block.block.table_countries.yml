@@ -11,8 +11,8 @@ dependencies:
     - common_design_subtheme
 id: table_countries
 theme: common_design_subtheme
-region: facets
-weight: 12
+region: sidebar_first
+weight: 10
 provider: null
 plugin: 'facet_block:table_countries'
 settings:

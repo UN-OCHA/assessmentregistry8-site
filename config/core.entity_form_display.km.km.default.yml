@@ -51,31 +51,23 @@ content:
     region: content
   field_document_type:
     weight: 1
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_select
     region: content
   field_files:
     weight: 5
     settings:
-      size: 60
-      placeholder: ''
+      endpoint: 'http://docstore.local.docksal/api/v1/files'
+      api-key: abcd
     third_party_settings: {  }
     type: ocha_doc_store_file_widget
     region: content
   field_hpc_document_repository:
     weight: 2
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_select
     region: content
   field_life_cycle_steps:
     weight: -1
@@ -91,13 +83,9 @@ content:
     region: content
   field_population_types:
     weight: 4
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_select
     region: content
   title:
     type: string_textfield

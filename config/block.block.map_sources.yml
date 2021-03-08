@@ -11,8 +11,8 @@ dependencies:
     - common_design_subtheme
 id: map_sources
 theme: common_design_subtheme
-region: facets
-weight: 18
+region: sidebar_first
+weight: 15
 provider: null
 plugin: 'facet_block:map_sources'
 settings:

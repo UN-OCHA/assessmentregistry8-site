@@ -1,26 +1,26 @@
-uuid: 8e67ba15-e3c8-4be0-bed5-fe1fb3e257c0
+uuid: 1f6ce3f0-9a8a-4951-9971-c020444acfc6
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.document_type
+    - facets.facet.km_hpc_document_repository
   module:
     - facets
     - system
   theme:
     - common_design_subtheme
-id: documenttype
+id: km_hpcdocumentrepository
 theme: common_design_subtheme
-region: facets
-weight: -29
+region: sidebar_first
+weight: 0
 provider: null
-plugin: 'facet_block:document_type'
+plugin: 'facet_block:km_hpc_document_repository'
 settings:
-  id: 'facet_block:document_type'
-  label: 'Document type'
+  id: 'facet_block:km_hpc_document_repository'
+  label: 'HPC document repository'
   provider: facets
   label_display: visible
-  block_id: documenttype
+  block_id: km_hpcdocumentrepository
 visibility:
   request_path:
     id: request_path
