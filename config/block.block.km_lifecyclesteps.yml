@@ -1,26 +1,26 @@
-uuid: d278c383-7d5d-439c-993d-93c43ea2967e
+uuid: 97b65260-3fc9-4944-ae8f-7bb6cc573a91
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.hpc_document_repository
+    - facets.facet.km_life_cycle_steps
   module:
     - facets
     - system
   theme:
     - common_design_subtheme
-id: hpcdocumentrepository
+id: km_lifecyclesteps
 theme: common_design_subtheme
-region: facets
-weight: 3
+region: sidebar_first
+weight: -1
 provider: null
-plugin: 'facet_block:hpc_document_repository'
+plugin: 'facet_block:km_life_cycle_steps'
 settings:
-  id: 'facet_block:hpc_document_repository'
-  label: 'HPC Document Repository'
+  id: 'facet_block:km_life_cycle_steps'
+  label: 'Life cycle steps'
   provider: facets
   label_display: visible
-  block_id: hpcdocumentrepository
+  block_id: km_lifecyclesteps
 visibility:
   request_path:
     id: request_path

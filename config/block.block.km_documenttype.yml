@@ -1,29 +1,29 @@
-uuid: c0611193-17a6-477a-a1e0-697a1b5534ff
+uuid: 04adb3d6-2633-4b6e-aa78-253455bf11ac
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.docstore_context
+    - facets.facet.km_document_type
   module:
     - facets
     - system
   theme:
     - common_design_subtheme
-id: docstore_context
+id: km_documenttype
 theme: common_design_subtheme
-region: facets
+region: sidebar_first
 weight: 0
 provider: null
-plugin: 'facet_block:docstore_context'
+plugin: 'facet_block:km_document_type'
 settings:
-  id: 'facet_block:docstore_context'
-  label: Context
+  id: 'facet_block:km_document_type'
+  label: 'Document type'
   provider: facets
   label_display: visible
-  block_id: docstore_context
+  block_id: km_documenttype
 visibility:
   request_path:
     id: request_path
-    pages: "/docstore-knowledge-management\r\n/docstore-knowledge-management/*"
+    pages: "/knowledge-management\r\n/knowledge-management/*"
     negate: false
     context_mapping: {  }

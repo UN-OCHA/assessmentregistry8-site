@@ -11,8 +11,8 @@ dependencies:
     - common_design_subtheme
 id: organizations
 theme: common_design_subtheme
-region: facets
-weight: -21
+region: sidebar_first
+weight: -22
 provider: null
 plugin: 'facet_block:organizations'
 settings:

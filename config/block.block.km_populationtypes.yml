@@ -1,26 +1,26 @@
-uuid: 642daa21-bbc5-4060-80e1-97006f6b471e
+uuid: 263c390f-e2dd-466e-9e46-c0d57823524a
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.context
+    - facets.facet.km_population_types
   module:
     - facets
     - system
   theme:
     - common_design_subtheme
-id: context
+id: km_populationtypes
 theme: common_design_subtheme
-region: facets
-weight: -28
+region: sidebar_first
+weight: 0
 provider: null
-plugin: 'facet_block:context'
+plugin: 'facet_block:km_population_types'
 settings:
-  id: 'facet_block:context'
-  label: Context
+  id: 'facet_block:km_population_types'
+  label: 'Population types'
   provider: facets
   label_display: visible
-  block_id: context
+  block_id: km_populationtypes
 visibility:
   request_path:
     id: request_path

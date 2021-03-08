@@ -11,8 +11,8 @@ dependencies:
     - common_design_subtheme
 id: map_summary
 theme: common_design_subtheme
-region: facets
-weight: -34
+region: sidebar_first
+weight: -30
 provider: null
 plugin: 'facets_summary_block:map_summary'
 settings:

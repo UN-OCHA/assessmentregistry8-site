@@ -11,8 +11,8 @@ dependencies:
     - common_design_subtheme
 id: table_participating_organizations
 theme: common_design_subtheme
-region: facets
-weight: -16
+region: sidebar_first
+weight: -17
 provider: null
 plugin: 'facet_block:table_participating_organizations'
 settings:

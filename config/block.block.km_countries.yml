@@ -1,26 +1,26 @@
-uuid: 81b4b387-e301-4b99-a9a6-7a4fe1f777a4
+uuid: 29aa12e9-f9ba-4602-90eb-7feab54bf824
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.km_population_types
+    - facets.facet.km_countries
   module:
     - facets
     - system
   theme:
     - common_design_subtheme
-id: km_population_types
+id: km_countries
 theme: common_design_subtheme
-region: facets
-weight: -31
+region: sidebar_first
+weight: 0
 provider: null
-plugin: 'facet_block:km_population_types'
+plugin: 'facet_block:km_countries'
 settings:
-  id: 'facet_block:km_population_types'
-  label: 'Population Type(s)'
+  id: 'facet_block:km_countries'
+  label: Countries
   provider: facets
   label_display: visible
-  block_id: km_population_types
+  block_id: km_countries
 visibility:
   request_path:
     id: request_path

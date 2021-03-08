@@ -1,23 +1,23 @@
-uuid: 4d0dfb4a-28f9-4121-95da-44831f843e00
+uuid: e37f0371-1b33-467a-95ce-72b1b11ea13d
 langcode: en
 status: true
 dependencies:
   config:
-    - search_api.index.knowledge_management
+    - search_api.index.km
     - views.view.knowledge_management
   module:
     - facets_pretty_paths
     - search_api
 third_party_settings:
   facets_pretty_paths:
-    coder: taxonomy_term_coder
-id: hpc_document_repository
-name: 'HPC Document Repository'
-url_alias: hpc_document_repository
+    coder: default_coder
+id: km_life_cycle_steps
+name: 'Life cycle steps'
+url_alias: km_life_cycle_steps
 weight: 0
 min_count: 1
-show_only_one_result: true
-field_identifier: field_km_hpc_document_repository
+show_only_one_result: false
+field_identifier: field_life_cycle_steps
 facet_source_id: 'search_api:views_page__knowledge_management__page_1'
 widget:
   type: select2
@@ -27,20 +27,20 @@ widget:
     autocomplete: false
     match_operator: CONTAINS
 query_operator: or
-use_hierarchy: true
+use_hierarchy: false
 hierarchy:
   type: taxonomy
   config: {  }
-expand_hierarchy: true
+expand_hierarchy: false
 enable_parent_when_child_gets_disabled: true
 hard_limit: 0
 exclude: false
 only_visible_when_facet_source_is_visible: true
 processor_configs:
-  term_weight_widget_order:
-    processor_id: term_weight_widget_order
+  display_value_widget_order:
+    processor_id: display_value_widget_order
     weights:
-      sort: 60
+      sort: 40
     settings:
       sort: ASC
   translate_entity:

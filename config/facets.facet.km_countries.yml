@@ -1,29 +1,31 @@
-uuid: 60be959d-c300-4fc9-8de0-60cda12b00d3
+uuid: eaed4814-0628-48a5-8a8b-291639e76ebd
 langcode: en
 status: true
 dependencies:
   config:
     - search_api.index.km
-    - views.view.knowledge_management_docstore_
+    - views.view.knowledge_management
   module:
     - facets_pretty_paths
     - search_api
 third_party_settings:
   facets_pretty_paths:
     coder: default_coder
-id: docstore_context
-name: Context
-url_alias: context
+id: km_countries
+name: Countries
+url_alias: km_countries
 weight: 0
 min_count: 1
 show_only_one_result: false
-field_identifier: title
-facet_source_id: 'search_api:views_page__knowledge_management_docstore___page_1'
+field_identifier: field_countries
+facet_source_id: 'search_api:views_page__knowledge_management__page_1'
 widget:
-  type: dropdown
+  type: select2
   config:
     show_numbers: true
-    default_option_label: Choose
+    width: 100%
+    autocomplete: false
+    match_operator: CONTAINS
 query_operator: or
 use_hierarchy: false
 hierarchy:
@@ -41,17 +43,10 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
-  exclude_specified_items:
-    processor_id: exclude_specified_items
+  translate_entity:
+    processor_id: translate_entity
     weights:
-      build: 50
-    settings:
-      exclude: ^$
-      regex: true
-  hide_non_narrowing_result_processor:
-    processor_id: hide_non_narrowing_result_processor
-    weights:
-      build: 40
+      build: 5
     settings: {  }
   url_processor_handler:
     processor_id: url_processor_handler

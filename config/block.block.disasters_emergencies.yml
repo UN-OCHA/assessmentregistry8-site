@@ -11,8 +11,8 @@ dependencies:
     - common_design_subtheme
 id: disasters_emergencies
 theme: common_design_subtheme
-region: facets
-weight: -3
+region: sidebar_first
+weight: -4
 provider: null
 plugin: 'facet_block:disasters_emergencies'
 settings:

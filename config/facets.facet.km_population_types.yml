@@ -1,18 +1,18 @@
-uuid: 817c962c-9b4d-44d3-b5ab-717ebb2f48a7
+uuid: 3743ae8c-9bb9-4a97-8636-71eaf7fdf47a
 langcode: en
 status: true
 dependencies:
   config:
-    - search_api.index.knowledge_management
+    - search_api.index.km
     - views.view.knowledge_management
   module:
     - facets_pretty_paths
     - search_api
 third_party_settings:
   facets_pretty_paths:
-    coder: ocha_integer_list_coder
+    coder: default_coder
 id: km_population_types
-name: 'Population Type(s)'
+name: 'Population types'
 url_alias: km_population_types
 weight: 0
 min_count: 1
@@ -22,7 +22,7 @@ facet_source_id: 'search_api:views_page__knowledge_management__page_1'
 widget:
   type: select2
   config:
-    show_numbers: false
+    show_numbers: true
     width: 100%
     autocomplete: false
     match_operator: CONTAINS
@@ -43,8 +43,8 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
-  list_item:
-    processor_id: list_item
+  translate_entity:
+    processor_id: translate_entity
     weights:
       build: 5
     settings: {  }

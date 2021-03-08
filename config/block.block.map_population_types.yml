@@ -11,8 +11,8 @@ dependencies:
     - common_design_subtheme
 id: map_population_types
 theme: common_design_subtheme
-region: facets
-weight: -5
+region: sidebar_first
+weight: -6
 provider: null
 plugin: 'facet_block:map_population_types'
 settings:

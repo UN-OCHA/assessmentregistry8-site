@@ -1,0 +1,71 @@
+uuid: 08ec1371-6dd5-4af1-9538-155caf77803a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.km.teaser
+    - field.field.km.km.field_author
+    - field.field.km.km.field_context
+    - field.field.km.km.field_countries
+    - field.field.km.km.field_description
+    - field.field.km.km.field_document_type
+    - field.field.km.km.field_files
+    - field.field.km.km.field_hpc_document_repository
+    - field.field.km.km.field_life_cycle_steps
+    - field.field.km.km.field_original_publication_date
+    - field.field.km.km.field_population_types
+  module:
+    - external_entities
+    - ocha_knowledge_management
+id: km.km.teaser
+targetEntityType: km
+bundle: km
+mode: teaser
+content:
+  field_context:
+    type: entity_reference_label
+    weight: 2
+    region: content
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_description:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_life_cycle_steps:
+    weight: 3
+    label: inline
+    settings:
+      link: 0
+    third_party_settings: {  }
+    type: ocha_knowledge_management_lfs
+    region: content
+  field_population_types:
+    weight: 4
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  title:
+    type: string
+    label: hidden
+    region: content
+    weight: 0
+    settings:
+      link_to_entity: true
+    third_party_settings: {  }
+hidden:
+  field_author: true
+  field_countries: true
+  field_document_type: true
+  field_files: true
+  field_hpc_document_repository: true
+  field_original_publication_date: true
+  search_api_excerpt: true
