@@ -11,7 +11,7 @@ dependencies:
     - common_design_subtheme
 id: table_authoredon_month
 theme: common_design_subtheme
-region: sidebar_first
+region: facets
 weight: -23
 provider: null
 plugin: 'facet_block:table_authored_on_month'
