@@ -1,0 +1,85 @@
+@media print {
+  html.snap--pdf {
+    header.navbar {
+      display: block;
+    }
+
+    a[href]::after {
+      content: '';
+    }
+
+    body,
+    p {
+      font-size: 11pt;
+      line-height: 1.5;
+    }
+
+    h1 {
+      font-size: 24pt;
+      font-weight: 400;
+    }
+
+    h2 {
+      font-size: 18pt;
+    }
+
+    h3 {
+      font-size: 14pt;
+    }
+
+    h4 {
+      font-size: 12pt;
+    }
+
+    .cd-mobile {
+      display: none;
+    }
+
+    .cd-table {
+      font-size: 10pt;
+      margin-bottom: 1rem;
+    }
+
+    .cd-table th,
+    .cd-table td {
+      padding: 0.25rem 0.5rem;
+     }
+
+    .project-list td {
+      padding: 0.25rem 0.5rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .metadata th {
+      width: 10rem;
+    }
+
+    .metadata td,
+    .metadata th {
+      padding: 0.25rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .metadata--project-start,
+    .metadata--project-end {
+      display: inline-block;
+    }
+
+    .cd-separator {
+      display: inline-block;
+      margin: 0 1rem;
+    }
+
+    .project-list--code {
+      white-space: nowrap;
+    }
+
+    .project-list--amount {
+      min-width: 9rem;
+    }
+
+    .table--readmore {
+      display: none;
+    }
+  }
+}
