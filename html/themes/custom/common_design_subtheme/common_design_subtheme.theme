@@ -45,13 +45,11 @@ function common_design_subtheme_form_alter(&$form, FormStateInterface $form_stat
   }
 }
 
-
 /**
  * Implements hook_preprocess_page().
  *
  * Remove the default page title and local tasks blocks if they were already
  * rendered by a page title paragraph or when viewing full article nodes.
- *
  */
 function common_design_subtheme_preprocess_page(&$variables) {
   if (isset($variables['node'])) {
@@ -82,8 +80,6 @@ function common_design_subtheme_preprocess_page(&$variables) {
  * @see common_design_subtheme_get_block_render_array()
  */
 function common_design_subtheme_preprocess_node(&$variables) {
-  $node = $variables['node'];
-
   // Prepare the title and local tasks so we have better control over where
   // to display them for content in full node.
   $view_mode = $variables['view_mode'] ?? '';
