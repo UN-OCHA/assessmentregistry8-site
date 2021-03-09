@@ -1,0 +1,26 @@
+uuid: 14a32787-67cc-41d4-a37b-af54b1dbeaca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_sources
+  module:
+    - external_entities
+id: assessment.assessment.field_sources
+field_name: field_sources
+entity_type: assessment
+bundle: assessment
+label: Source(s)
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:organization'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

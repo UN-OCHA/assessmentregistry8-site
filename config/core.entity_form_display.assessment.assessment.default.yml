@@ -1,0 +1,181 @@
+uuid: b5b5734a-ed85-4271-bab4-8c41733ce4d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.assessment.assessment.field_asst_organizations
+    - field.field.assessment.assessment.field_author
+    - field.field.assessment.assessment.field_collection_methods
+    - field.field.assessment.assessment.field_contacts
+    - field.field.assessment.assessment.field_date
+    - field.field.assessment.assessment.field_frequency
+    - field.field.assessment.assessment.field_key_findings
+    - field.field.assessment.assessment.field_level_of_representation
+    - field.field.assessment.assessment.field_methodology
+    - field.field.assessment.assessment.field_organizations
+    - field.field.assessment.assessment.field_population_types
+    - field.field.assessment.assessment.field_related_content
+    - field.field.assessment.assessment.field_sample_size
+    - field.field.assessment.assessment.field_sources
+    - field.field.assessment.assessment.field_status
+    - field.field.assessment.assessment.field_subject_objective
+    - field.field.assessment.assessment.field_themes
+  module:
+    - datetime_range
+    - external_entities
+    - link
+    - select2
+id: assessment.assessment.default
+targetEntityType: assessment
+bundle: assessment
+mode: default
+content:
+  field_asst_organizations:
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      autocomplete: false
+      width: 100%
+    third_party_settings: {  }
+    type: select2_entity_reference
+    region: content
+  field_author:
+    weight: -4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_collection_methods:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_contacts:
+    weight: -2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_date:
+    weight: -1
+    settings: {  }
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_frequency:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_key_findings:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_level_of_representation:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_methodology:
+    weight: 6
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_organizations:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      autocomplete: false
+      width: 100%
+    third_party_settings: {  }
+    type: select2_entity_reference
+    region: content
+  field_population_types:
+    weight: 7
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      autocomplete: false
+      width: 100%
+    third_party_settings: {  }
+    type: select2_entity_reference
+    region: content
+  field_related_content:
+    weight: 8
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_sample_size:
+    weight: 9
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_sources:
+    weight: 10
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      autocomplete: false
+      width: 100%
+    third_party_settings: {  }
+    type: select2_entity_reference
+    region: content
+  field_status:
+    weight: 14
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      autocomplete: false
+      width: 100%
+    third_party_settings: {  }
+    type: select2_entity_reference
+    region: content
+  field_subject_objective:
+    weight: 12
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_themes:
+    weight: 13
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      autocomplete: false
+      width: 100%
+    third_party_settings: {  }
+    type: select2_entity_reference
+    region: content
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }
