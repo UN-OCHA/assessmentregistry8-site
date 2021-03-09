@@ -11,7 +11,7 @@ dependencies:
     - common_design_subtheme
 id: km_summary
 theme: common_design_subtheme
-region: sidebar_first
+region: facets
 weight: -2
 provider: null
 plugin: 'facets_summary_block:km_summary'

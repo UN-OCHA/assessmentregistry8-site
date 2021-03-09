@@ -11,7 +11,7 @@ dependencies:
     - common_design_subtheme
 id: table_themes
 theme: common_design_subtheme
-region: sidebar_first
+region: facets
 weight: 13
 provider: null
 plugin: 'facet_block:table_themes'
