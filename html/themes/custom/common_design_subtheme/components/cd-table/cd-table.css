@@ -31,14 +31,14 @@
   }
 
   .cd-table--responsive tr {
-    border-bottom: 1px solid var(--cd-light-grey);
+    border-bottom: 1px solid var(--cd-grey--light);
     padding: 0 !important;
   }
 
   .cd-table--responsive td {
     /* Behave  like a "row" */
     border: none;
-    border-bottom: 1px solid var(--cd-site-bg-color);
+    border-bottom: 1px solid var(--cd-blue-grey);
     position: relative;
     padding: 0.5rem;
     padding-left: 40% !important;
