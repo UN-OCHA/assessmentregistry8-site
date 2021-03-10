@@ -86,7 +86,7 @@ class RestJson extends Rest implements PluginFormInterface {
   public function load($id) {
     $response = $this->httpClient->request(
       'GET',
-      $this->configuration['endpoint'] . '/' . $id,
+      ocha_docstore_files_get_endpoint_base($this->configuration['endpoint'] . '/' . $id),
       [
         'headers' => $this->getHttpHeaders(),
         'query' => $this->getSingleQueryParameters($id),
@@ -105,11 +105,10 @@ class RestJson extends Rest implements PluginFormInterface {
    * {@inheritdoc}
    */
   public function save(ExternalEntityInterface $entity) {
-    dpm($entity->extractRawData(), 'post');
     if ($entity->id()) {
-      $debug = $this->httpClient->request(
+      $this->httpClient->request(
         'PUT',
-        $this->configuration['endpoint'] . '/' . $entity->id(),
+        ocha_docstore_files_get_endpoint_base($this->configuration['endpoint'] . '/' . $entity->id()),
         [
           'body' => json_encode($entity->extractRawData()),
           'headers' => $this->getHttpHeaders(),
@@ -124,7 +123,7 @@ class RestJson extends Rest implements PluginFormInterface {
 
       $this->httpClient->request(
         'POST',
-        $this->configuration['endpoint'],
+        ocha_docstore_files_get_endpoint_base($this->configuration['endpoint']),
         [
           'body' => json_encode($raw_data),
           'headers' => $this->getHttpHeaders(),
@@ -142,7 +141,7 @@ class RestJson extends Rest implements PluginFormInterface {
   public function query(array $parameters = [], array $sorts = [], $start = NULL, $length = NULL) {
     $response = $this->httpClient->request(
       'GET',
-      $this->configuration['endpoint'],
+      ocha_docstore_files_get_endpoint_base($this->configuration['endpoint']),
       [
         'headers' => $this->getHttpHeaders(),
         'query' => $this->getListQueryParameters($parameters, $start, $length),
