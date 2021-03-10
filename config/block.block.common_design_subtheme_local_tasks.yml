@@ -8,8 +8,8 @@ _core:
   default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
 id: common_design_subtheme_local_tasks
 theme: common_design_subtheme
-region: content
-weight: -17
+region: page_title
+weight: -32
 provider: null
 plugin: local_tasks_block
 settings:
