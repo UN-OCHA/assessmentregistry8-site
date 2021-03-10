@@ -76,7 +76,7 @@ class OchaDocStoreFileFormatter extends FormatterBase {
       $output = $item->filename . ' (Private)';
     }
     else {
-      $output = '<a target="_blank" rel="noopener noreferrer" href="' . $item->uri . '">' . $item->filename . '</a>';
+      $output = '<a target="_blank" rel="noopener noreferrer" href="/attachments/' . $item->media_uuid . '/' . $item->filename . '">' . $item->filename . '</a>';
     }
 
     return $output;
