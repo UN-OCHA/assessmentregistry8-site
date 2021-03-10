@@ -51,17 +51,11 @@
   page.sidebar_first|render|striptags|trim and page.sidebar_second|render|striptags|trim ? 'cd-layout-with-sidebar-both'
 ]
 %}
-
-{% block attach %}
-{% endblock %}
-
 <div class="cd-layout-container">
 
   {% block header %}
     {% include '@common_design_subtheme/cd/cd-header/cd-header.html.twig' %}
   {% endblock %}
-
-  {{ page.help }}
 
   {% if page.highlighted %}
     {% block highlighted %}
@@ -70,6 +64,8 @@
       </div>
     {% endblock %}
   {% endif %}
+
+  {{ page.help }}
 
   {% block main %}
 
