@@ -12,7 +12,7 @@ dependencies:
 id: map_locations
 theme: common_design_subtheme
 region: facets
-weight: -13
+weight: -15
 provider: null
 plugin: 'facet_block:map_locations'
 settings:

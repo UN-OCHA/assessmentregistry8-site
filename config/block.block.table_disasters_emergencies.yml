@@ -12,7 +12,7 @@ dependencies:
 id: table_disasters_emergencies
 theme: common_design_subtheme
 region: facets
-weight: 0
+weight: 1
 provider: null
 plugin: 'facet_block:table_disasters_emergencies'
 settings:

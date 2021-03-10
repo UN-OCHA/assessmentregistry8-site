@@ -1,0 +1,15 @@
+diff --git a/src/Plugin/views/field/SearchApiFieldTrait.php b/src/Plugin/views/field/SearchApiFieldTrait.php
+index 1220f36..f3a4076 100644
+--- a/src/Plugin/views/field/SearchApiFieldTrait.php
++++ b/src/Plugin/views/field/SearchApiFieldTrait.php
+@@ -712,7 +712,9 @@ trait SearchApiFieldTrait {
+                   ->getDefinition($entity_type_id);
+                 if ($entity_type->isStaticallyCacheable()) {
+                   $entity_id = $typed_data->getTargetIdentifier();
+-                  $entities_to_load[$entity_type_id][$entity_id] = $entity_id;
++                  if ($entity_id) {
++                    $entities_to_load[$entity_type_id][$entity_id] = $entity_id;
++                  }
+                 }
+               }
+             }

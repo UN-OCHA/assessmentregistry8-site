@@ -1,0 +1,19 @@
+uuid: 60d52df1-17a2-40a5-944c-e530a0f143e3
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: km.field_hpc_document_repository
+field_name: field_hpc_document_repository
+entity_type: km
+type: entity_reference
+settings:
+  target_type: hpc_document_repository
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

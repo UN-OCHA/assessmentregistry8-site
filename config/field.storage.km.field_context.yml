@@ -1,0 +1,19 @@
+uuid: 9ad1835e-64dd-46f6-87cc-6de0ab9275ee
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: km.field_context
+field_name: field_context
+entity_type: km
+type: entity_reference
+settings:
+  target_type: context
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

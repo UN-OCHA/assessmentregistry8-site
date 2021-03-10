@@ -3147,7 +3147,7 @@ display:
           link_to_item: false
           use_highlighting: false
           multi_type: separator
-          multi_separator: ', '
+          multi_separator: '<!--SPLIT-->'
           plugin_id: search_api
         field_asst_organizations_label:
           id: field_asst_organizations_label

@@ -34,6 +34,12 @@ class LifeCycleStepsFormatter extends EntityReferenceLabelFormatter {
           $label = $term->get('field_display_label')->value;
         }
       }
+      elseif ($term->field_parent) {
+        $parents = $term->field_parent->referencedEntities();
+        if (count($parents)) {
+          $label = $parents[0]->label() . ' >> ' . $label;
+        }
+      }
 
       if ($output_as_link && !$term->isNew()) {
         try {

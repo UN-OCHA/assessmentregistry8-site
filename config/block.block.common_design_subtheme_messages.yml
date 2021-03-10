@@ -10,8 +10,8 @@ _core:
   default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
 id: common_design_subtheme_messages
 theme: common_design_subtheme
-region: highlighted
-weight: -35
+region: content
+weight: -18
 provider: null
 plugin: system_messages_block
 settings:

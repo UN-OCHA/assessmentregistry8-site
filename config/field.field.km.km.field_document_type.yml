@@ -1,0 +1,26 @@
+uuid: cfcb1d6e-f767-4d24-874a-489cf3012353
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.km.field_document_type
+  module:
+    - external_entities
+id: km.km.field_document_type
+field_name: field_document_type
+entity_type: km
+bundle: km
+label: 'Document type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:document_type'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

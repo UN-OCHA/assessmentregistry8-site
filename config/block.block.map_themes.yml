@@ -12,7 +12,7 @@ dependencies:
 id: map_themes
 theme: common_design_subtheme
 region: facets
-weight: 13
+weight: 12
 provider: null
 plugin: 'facet_block:map_themes'
 settings:

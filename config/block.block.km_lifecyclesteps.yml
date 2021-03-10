@@ -1,0 +1,29 @@
+uuid: 97b65260-3fc9-4944-ae8f-7bb6cc573a91
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.km_life_cycle_steps
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: km_lifecyclesteps
+theme: common_design_subtheme
+region: facets
+weight: -1
+provider: null
+plugin: 'facet_block:km_life_cycle_steps'
+settings:
+  id: 'facet_block:km_life_cycle_steps'
+  label: 'Life cycle steps'
+  provider: facets
+  label_display: visible
+  block_id: km_lifecyclesteps
+visibility:
+  request_path:
+    id: request_path
+    pages: "/knowledge-management\r\n/knowledge-management/*"
+    negate: false
+    context_mapping: {  }

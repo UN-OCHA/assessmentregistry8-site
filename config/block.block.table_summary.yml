@@ -12,7 +12,7 @@ dependencies:
 id: table_summary
 theme: common_design_subtheme
 region: facets
-weight: -32
+weight: -29
 provider: null
 plugin: 'facets_summary_block:table_summary'
 settings:

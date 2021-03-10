@@ -12,7 +12,7 @@ dependencies:
 id: map_summary
 theme: common_design_subtheme
 region: facets
-weight: -33
+weight: -30
 provider: null
 plugin: 'facets_summary_block:map_summary'
 settings:

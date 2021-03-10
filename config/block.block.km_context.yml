@@ -1,0 +1,29 @@
+uuid: 9ef43e7a-9f3a-4d42-80b8-e8774427274a
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.km_context
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: km_context
+theme: common_design_subtheme
+region: facets
+weight: 0
+provider: null
+plugin: 'facet_block:km_context'
+settings:
+  id: 'facet_block:km_context'
+  label: Context
+  provider: facets
+  label_display: visible
+  block_id: km_context
+visibility:
+  request_path:
+    id: request_path
+    pages: "/knowledge-management\r\n/knowledge-management/*"
+    negate: false
+    context_mapping: {  }

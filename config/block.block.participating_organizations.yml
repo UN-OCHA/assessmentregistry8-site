@@ -12,7 +12,7 @@ dependencies:
 id: participating_organizations
 theme: common_design_subtheme
 region: facets
-weight: -17
+weight: -19
 provider: null
 plugin: 'facet_block:participating_organizations'
 settings:

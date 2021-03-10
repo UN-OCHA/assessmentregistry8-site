@@ -11,7 +11,7 @@ _core:
 id: common_design_subtheme_help
 theme: common_design_subtheme
 region: content
-weight: -33
+weight: -15
 provider: null
 plugin: help_block
 settings:

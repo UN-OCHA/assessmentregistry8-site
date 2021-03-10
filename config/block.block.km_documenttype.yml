@@ -1,0 +1,29 @@
+uuid: 04adb3d6-2633-4b6e-aa78-253455bf11ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.km_document_type
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: km_documenttype
+theme: common_design_subtheme
+region: facets
+weight: 0
+provider: null
+plugin: 'facet_block:km_document_type'
+settings:
+  id: 'facet_block:km_document_type'
+  label: 'Document type'
+  provider: facets
+  label_display: visible
+  block_id: km_documenttype
+visibility:
+  request_path:
+    id: request_path
+    pages: "/knowledge-management\r\n/knowledge-management/*"
+    negate: false
+    context_mapping: {  }

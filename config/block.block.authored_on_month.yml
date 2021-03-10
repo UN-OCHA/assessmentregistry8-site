@@ -12,7 +12,7 @@ dependencies:
 id: authored_on_month
 theme: common_design_subtheme
 region: facets
-weight: -23
+weight: -25
 provider: null
 plugin: 'facet_block:authored_on_month'
 settings:

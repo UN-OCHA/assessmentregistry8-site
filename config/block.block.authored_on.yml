@@ -12,7 +12,7 @@ dependencies:
 id: authored_on
 theme: common_design_subtheme
 region: facets
-weight: -26
+weight: -28
 provider: null
 plugin: 'facet_block:authored_on'
 settings:

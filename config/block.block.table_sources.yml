@@ -12,7 +12,7 @@ dependencies:
 id: table_sources
 theme: common_design_subtheme
 region: facets
-weight: 17
+weight: 16
 provider: null
 plugin: 'facet_block:table_sources'
 settings:

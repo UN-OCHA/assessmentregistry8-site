@@ -12,7 +12,7 @@ dependencies:
 id: themes
 theme: common_design_subtheme
 region: facets
-weight: 12
+weight: 11
 provider: null
 plugin: 'facet_block:themes'
 settings:

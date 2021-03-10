@@ -12,7 +12,7 @@ dependencies:
 id: sources
 theme: common_design_subtheme
 region: facets
-weight: 15
+weight: 14
 provider: null
 plugin: 'facet_block:sources'
 settings:

@@ -12,7 +12,7 @@ dependencies:
 id: map_levelofrepresentation
 theme: common_design_subtheme
 region: facets
-weight: -7
+weight: -9
 provider: null
 plugin: 'facet_block:map_level_of_representation'
 settings:

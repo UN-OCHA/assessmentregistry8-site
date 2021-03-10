@@ -12,7 +12,7 @@ dependencies:
 id: map_authored_on
 theme: common_design_subtheme
 region: facets
-weight: -25
+weight: -27
 provider: null
 plugin: 'facet_block:map_authored_on'
 settings:

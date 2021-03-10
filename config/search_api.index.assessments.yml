@@ -65,6 +65,9 @@ third_party_settings:
       index_prefix: ''
       collection: ''
       timezone: ''
+    term_modifiers:
+      slop: 10000000
+      fuzzy: 2
 id: assessments
 name: Assessments
 description: ''

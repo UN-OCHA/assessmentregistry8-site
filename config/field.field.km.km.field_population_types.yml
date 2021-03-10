@@ -1,0 +1,26 @@
+uuid: c1958bc6-0f55-41db-bb3c-5b761dacbee7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.km.field_population_types
+  module:
+    - external_entities
+id: km.km.field_population_types
+field_name: field_population_types
+entity_type: km
+bundle: km
+label: 'Population types'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:population_type'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference
