@@ -29,6 +29,8 @@ field_mappings:
     value: frequency
   field_key_findings:
     value: key_findings
+  field_locations:
+    target_id: 'locations/*/uuid'
   field_methodology:
     value: methodology
   field_organizations:
