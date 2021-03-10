@@ -12,7 +12,7 @@ dependencies:
 id: km_context
 theme: common_design_subtheme
 region: facets
-weight: 0
+weight: -7
 provider: null
 plugin: 'facet_block:km_context'
 settings:
