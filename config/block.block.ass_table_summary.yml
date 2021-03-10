@@ -1,28 +1,28 @@
-uuid: 83938404-307c-456a-a3bf-749ed62beddb
+uuid: 59263fd7-ad6d-42fc-b0ee-9d2599dfbe69
 langcode: en
 status: true
 dependencies:
   config:
-    - facets_summary.facets_summary.km_summary
+    - facets_summary.facets_summary.ass_table_summary
   module:
     - facets_summary
     - system
   theme:
     - common_design_subtheme
-id: km_summary
+id: ass_table_summary
 theme: common_design_subtheme
 region: facets
-weight: -9
+weight: -10
 provider: null
-plugin: 'facets_summary_block:km_summary'
+plugin: 'facets_summary_block:ass_table_summary'
 settings:
-  id: 'facets_summary_block:km_summary'
+  id: 'facets_summary_block:ass_table_summary'
   label: Summary
   provider: facets_summary
-  label_display: '0'
+  label_display: visible
 visibility:
   request_path:
     id: request_path
-    pages: "/knowledge-management\r\n/knowledge-management/*"
+    pages: "/assessments/table\r\n/assessments/table/*"
     negate: false
     context_mapping: {  }
