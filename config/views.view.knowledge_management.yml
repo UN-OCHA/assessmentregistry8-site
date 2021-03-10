@@ -437,6 +437,7 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      title: 'Knowledge Management'
     cache_metadata:
       max-age: -1
       contexts:
