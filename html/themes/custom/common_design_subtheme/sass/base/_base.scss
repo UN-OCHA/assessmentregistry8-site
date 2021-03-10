@@ -3,7 +3,7 @@
 //——————————————————————————————————————————————————————————————————————————————
 
 body {
-  @include font-size($cd-font-size-base);
+  font-size: $cd-font-size--base;
   font-family: $cd-font;
   color: $cd-grey--dark;
 }
