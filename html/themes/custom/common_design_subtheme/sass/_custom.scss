@@ -14,7 +14,11 @@
 
     @include tablet {
       margin-bottom: 0;
-      max-width: 48%;
+
+      // FOR IE11.
+      @media all and (-ms-high-contrast: none) {
+        max-width: 48%;
+      }
     }
 
     > h2,
