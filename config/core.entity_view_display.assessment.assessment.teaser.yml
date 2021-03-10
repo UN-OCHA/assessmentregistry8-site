@@ -1,0 +1,90 @@
+uuid: f6ef8311-59d9-4574-a848-24be26dc7b99
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.assessment.teaser
+    - field.field.assessment.assessment.field_asst_organizations
+    - field.field.assessment.assessment.field_author
+    - field.field.assessment.assessment.field_collection_methods
+    - field.field.assessment.assessment.field_contacts
+    - field.field.assessment.assessment.field_date
+    - field.field.assessment.assessment.field_frequency
+    - field.field.assessment.assessment.field_key_findings
+    - field.field.assessment.assessment.field_level_of_representation
+    - field.field.assessment.assessment.field_locations
+    - field.field.assessment.assessment.field_methodology
+    - field.field.assessment.assessment.field_organizations
+    - field.field.assessment.assessment.field_population_types
+    - field.field.assessment.assessment.field_related_content
+    - field.field.assessment.assessment.field_sample_size
+    - field.field.assessment.assessment.field_sources
+    - field.field.assessment.assessment.field_status
+    - field.field.assessment.assessment.field_subject_objective
+    - field.field.assessment.assessment.field_themes
+  module:
+    - datetime_range
+    - external_entities
+id: assessment.assessment.teaser
+targetEntityType: assessment
+bundle: assessment
+mode: teaser
+content:
+  field_asst_organizations:
+    weight: 2
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_date:
+    weight: 4
+    label: inline
+    settings:
+      separator: '-'
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_organizations:
+    weight: 1
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_status:
+    weight: 3
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  title:
+    type: string
+    label: hidden
+    region: content
+    weight: 0
+    settings:
+      link_to_entity: true
+    third_party_settings: {  }
+hidden:
+  field_author: true
+  field_collection_methods: true
+  field_contacts: true
+  field_frequency: true
+  field_key_findings: true
+  field_level_of_representation: true
+  field_locations: true
+  field_methodology: true
+  field_population_types: true
+  field_related_content: true
+  field_sample_size: true
+  field_sources: true
+  field_subject_objective: true
+  field_themes: true
+  search_api_excerpt: true

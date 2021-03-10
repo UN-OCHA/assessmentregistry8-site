@@ -24,7 +24,10 @@
 
     <div class="cd-teaser__description node__content">
 
-      {{ entity|without('title') }}
+      {{ entity.field_description }}
+      {{ entity.field_context }}
+      {{ entity.field_life_cycle_steps }}
+      {{ entity.field_population_types }}
 
     </div>
 

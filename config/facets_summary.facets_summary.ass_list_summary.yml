@@ -1,0 +1,50 @@
+uuid: 7038a7ba-a294-4ccf-bb8a-b84f77aa070b
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.assessments
+    - views.view.assessments
+  module:
+    - search_api
+id: ass_list_summary
+name: Summary
+facets:
+  ass_list_leading_coordinating_organization:
+    checked: true
+    label: 'Leading/Coordinating Organization(s)'
+    separator: ', '
+    weight: 0
+    show_count: false
+facet_source_id: 'search_api:views_page__assessments__assessments_list'
+processor_configs:
+  hide_when_not_rendered:
+    processor_id: hide_when_not_rendered
+    weights:
+      build: '45'
+    settings: {  }
+  reset_facets_pretty_path:
+    processor_id: reset_facets_pretty_path
+    weights:
+      build: '30'
+    settings:
+      link_text: 'Reset all filters'
+      clear_string: 1
+  reset_string_ocha:
+    processor_id: reset_string_ocha
+    weights:
+      build: '30'
+    settings: {  }
+  show_summary:
+    processor_id: show_summary
+    weights:
+      build: '20'
+    settings: {  }
+  show_text_when_empty:
+    processor_id: show_text_when_empty
+    weights:
+      build: '10'
+    settings:
+      text:
+        value: 'No results found.'
+        format: plain_text

@@ -1,0 +1,10 @@
+uuid: 51e40fb9-9960-4b78-8df3-b6fb3eadde1d
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment.teaser
+label: Teaser
+targetEntityType: assessment
+cache: true

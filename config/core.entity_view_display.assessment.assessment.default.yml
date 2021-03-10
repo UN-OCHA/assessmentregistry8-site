@@ -1,0 +1,186 @@
+uuid: 729d68bd-1bc9-4bf5-8528-4287f200033e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.assessment.assessment.field_asst_organizations
+    - field.field.assessment.assessment.field_author
+    - field.field.assessment.assessment.field_collection_methods
+    - field.field.assessment.assessment.field_contacts
+    - field.field.assessment.assessment.field_date
+    - field.field.assessment.assessment.field_frequency
+    - field.field.assessment.assessment.field_key_findings
+    - field.field.assessment.assessment.field_level_of_representation
+    - field.field.assessment.assessment.field_locations
+    - field.field.assessment.assessment.field_methodology
+    - field.field.assessment.assessment.field_organizations
+    - field.field.assessment.assessment.field_population_types
+    - field.field.assessment.assessment.field_related_content
+    - field.field.assessment.assessment.field_sample_size
+    - field.field.assessment.assessment.field_sources
+    - field.field.assessment.assessment.field_status
+    - field.field.assessment.assessment.field_subject_objective
+    - field.field.assessment.assessment.field_themes
+  module:
+    - datetime_range
+    - external_entities
+    - link
+    - options
+id: assessment.assessment.default
+targetEntityType: assessment
+bundle: assessment
+mode: default
+content:
+  field_asst_organizations:
+    weight: 9
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_author:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_collection_methods:
+    weight: 6
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_contacts:
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_date:
+    weight: 4
+    label: above
+    settings:
+      separator: '-'
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_frequency:
+    weight: 5
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_key_findings:
+    weight: 7
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_level_of_representation:
+    weight: 10
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_locations:
+    weight: 20
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_methodology:
+    weight: 11
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_organizations:
+    weight: 8
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_population_types:
+    weight: 12
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_related_content:
+    weight: 13
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_sample_size:
+    weight: 14
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_sources:
+    weight: 15
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_status:
+    weight: 19
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_subject_objective:
+    weight: 17
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_themes:
+    weight: 18
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  title:
+    type: string
+    label: hidden
+    region: content
+    weight: 0
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  search_api_excerpt: true
