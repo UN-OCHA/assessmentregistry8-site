@@ -12,3 +12,10 @@ ocha_map.map_legacy:
     _title: 'Assessments map'
   requirements:
     _permission: 'access content'
+ocha_map.map_data:
+  path: '/map-data'
+  defaults:
+    _controller: '\Drupal\ocha_map\Controller\OchaMapController::mapData'
+    _title: 'Assessments map'
+  requirements:
+    _permission: 'access content'
