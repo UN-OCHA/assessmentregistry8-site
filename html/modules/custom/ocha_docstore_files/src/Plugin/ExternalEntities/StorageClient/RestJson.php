@@ -204,4 +204,20 @@ class RestJson extends Rest implements PluginFormInterface {
     return $query_parameters;
   }
 
+  /**
+   * Gets the HTTP headers to add to a request.
+   *
+   * @return array
+   *   Associative array of headers to add to the request.
+   */
+  public function getHttpHeaders() {
+    $headers = [];
+
+    if ($this->configuration['api_key']['header_name'] && $this->configuration['api_key']['key']) {
+      $headers[$this->configuration['api_key']['header_name']] = ocha_docstore_files_get_endpoint_apikey($this->configuration['api_key']['key']);
+    }
+
+    return $headers;
+  }
+
 }
