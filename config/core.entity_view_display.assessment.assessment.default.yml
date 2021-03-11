@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.assessment.assessment.field_assessment_data
     - field.field.assessment.assessment.field_assessment_report
     - field.field.assessment.assessment.field_asst_organizations
     - field.field.assessment.assessment.field_author
@@ -195,4 +196,5 @@ content:
       link_to_entity: false
     third_party_settings: {  }
 hidden:
+  field_assessment_data: true
   search_api_excerpt: true
