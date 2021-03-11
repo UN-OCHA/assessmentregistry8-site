@@ -15,7 +15,7 @@ use Drupal\link\LinkItemInterface;
  *   label = @Translation("OCHA assessment document (docstore)"),
  *   description = @Translation("OCHA assessment document."),
  *   category = @Translation("OCHA"),
- *   default_widget = "ocha_doc_store_assessment_document",
+ *   default_widget = "ocha_doc_store_assessment_document_widget",
  *   default_formatter = "ocha_doc_store_assessment_document_default"
  * )
  */
@@ -63,7 +63,7 @@ class OchaAssessmentDocument extends FieldItemBase {
     $properties = [];
 
     $properties['accessibility'] = DataDefinition::create('string')
-      ->setLabel(t('Text Value'));
+      ->setLabel(t('Accessibility'));
 
     $properties['media_uuid'] = DataDefinition::create('string')
       ->setLabel(t('Media uuid'));
