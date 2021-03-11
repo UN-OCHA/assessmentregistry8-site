@@ -141,7 +141,6 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
    * This method is assigned as a #process callback in formElement() method.
    */
   public static function process($element, FormStateInterface $form_state, $form) {
-    //$element = parent::process($element, $form_state, $form);
     $state_name = $element['#field_name'] . '[' . $element['#delta'] . '][accessibility]';
 
     foreach ([

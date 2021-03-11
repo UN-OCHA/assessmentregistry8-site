@@ -64,10 +64,9 @@ class OchaAssessmentDocumentDefaultFormatter extends FormatterBase {
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $elements = [];
-dpm($items->count(), 'viewElements');
+
     if ($items->count()) {
       foreach ($items as $delta => $item) {
-        dpm($item);
         $output = [];
 
         if ($this->getSetting('display_accessibility')) {

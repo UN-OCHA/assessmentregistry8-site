@@ -85,7 +85,7 @@ class OchaMapController extends ControllerBase {
         $uuids[] = $uuid;
       }
 
-      // @phpstan-ignore-next-line
+      // phpcs:ignore
       $entities = \Drupal::entityTypeManager()
         ->getListBuilder($facet_to_entity[$key]['entity'])
         ->getStorage()
