@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.assessment.assessment.field_assessment_report
     - field.field.assessment.assessment.field_asst_organizations
     - field.field.assessment.assessment.field_author
     - field.field.assessment.assessment.field_collection_methods
@@ -25,12 +26,19 @@ dependencies:
     - datetime_range
     - external_entities
     - link
+    - ocha_docstore_files
     - select2
 id: assessment.assessment.default
 targetEntityType: assessment
 bundle: assessment
 mode: default
 content:
+  field_assessment_report:
+    weight: 16
+    settings: {  }
+    third_party_settings: {  }
+    type: ocha_doc_store_assessment_document_widget
+    region: content
   field_asst_organizations:
     weight: 4
     settings:

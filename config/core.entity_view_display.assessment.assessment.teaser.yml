@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.assessment.teaser
+    - field.field.assessment.assessment.field_assessment_report
     - field.field.assessment.assessment.field_asst_organizations
     - field.field.assessment.assessment.field_author
     - field.field.assessment.assessment.field_collection_methods
@@ -73,6 +74,7 @@ content:
       link_to_entity: true
     third_party_settings: {  }
 hidden:
+  field_assessment_report: true
   field_author: true
   field_collection_methods: true
   field_contacts: true
