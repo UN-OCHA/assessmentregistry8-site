@@ -24,8 +24,10 @@
 
     <div class="cd-teaser__description node__content">
 
-      {# this doesn't seem to work. Title prints regardless #}
-      {{ entity|without('title') }}
+      {{ entity.field_organizations }}
+      {{ entity.field_asst_organizations }}
+      {{ entity.field_status }}
+      {{ entity.field_date }}
 
     </div>
 
