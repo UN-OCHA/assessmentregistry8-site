@@ -26,39 +26,38 @@ class OchaMapController extends ControllerBase {
     ];
   }
 
+  /**
+   * Return map data.
+   */
   public function mapData() {
     $facet_to_entity = [
       'organizations' => [
-          'entity' => 'organization',
-          'field' => 'field_organizations',
-          'title' => 'Leading/Coordinating Organization(s)',
+        'entity' => 'organization',
+        'field' => 'field_organizations',
+        'title' => 'Leading/Coordinating Organization(s)',
       ],
       'participating_organizations' => [
-          'entity' => 'organization',
-          'field' => 'field_asst_organizations',
-          'title' => 'Participating Organization(s)',
+        'entity' => 'organization',
+        'field' => 'field_asst_organizations',
+        'title' => 'Participating Organization(s)',
       ],
     ];
 
     $index = Index::load('assessments');
     $query = $index->query();
+    $query->range(0, 9999);
 
-    $query->setOption('search_api_facets', [
-      'organizations' => [
-        'field' => 'field_organizations',
+    $facet_options = [];
+    foreach ($facet_to_entity as $key => $info) {
+      $facet_options[$key] = [
+        'field' => $info['field'],
         'limit' => 20,
         'operator' => 'AND',
         'min_count' => 1,
-        'missing' => TRUE,
-      ],
-      'asst_organizations' => [
-        'field' => 'field_asst_organizations',
-        'limit' => 20,
-        'operator' => 'AND',
-        'min_count' => 1,
-        'missing' => TRUE,
-      ],
-    ]);
+        'missing' => FALSE,
+      ];
+    }
+    $query->setOption('search_api_facets', $facet_options);
 
     $results = $query->execute();
     $facets = $results->getExtraData('search_api_facets', []);
@@ -86,6 +85,7 @@ class OchaMapController extends ControllerBase {
         $uuids[] = $uuid;
       }
 
+      // @phpstan-ignore-next-line
       $entities = \Drupal::entityTypeManager()
         ->getListBuilder($facet_to_entity[$key]['entity'])
         ->getStorage()
@@ -98,7 +98,7 @@ class OchaMapController extends ControllerBase {
           $options[] = [
             'key' => $key . ':' . $uuid,
             'label' => $entities[$uuid]->label() . ' (' . $facet_value['count'] . ')',
-            'active' => false,
+            'active' => FALSE,
           ];
         }
       }
