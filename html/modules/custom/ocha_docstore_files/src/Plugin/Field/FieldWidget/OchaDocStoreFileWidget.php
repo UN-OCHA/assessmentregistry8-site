@@ -87,7 +87,7 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
     $summary = [];
 
     $summary[] = $this->t('Progress indicator: @progress_indicator', ['@progress_indicator' => $this->getSetting('progress_indicator')]);
-    $summary[] = $this->t('Endpoint: @endpoint', ['@endpoint' => $this->getSetting('endpoint')]);
+    $summary[] = $this->t('Endpoint: @endpoint', ['@endpoint' => ocha_docstore_files_get_endpoint_base($this->getSetting('endpoint'))]);
 
     return $summary;
   }
@@ -436,7 +436,7 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
           // phpcs:ignore
           $response = \Drupal::httpClient()->request(
             'POST',
-            $this->getSetting('endpoint'),
+            ocha_docstore_files_get_endpoint_base($this->getSetting('endpoint')),
             [
               'body' => json_encode([
                 'filename' => $queued_file['filename'],
@@ -444,7 +444,7 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
                 'private' => FALSE,
               ]),
               'headers' => [
-                'API-KEY' => $this->getSetting('api-key'),
+                'API-KEY' => ocha_docstore_files_get_endpoint_apikey($this->getSetting('api-key')),
               ],
             ]
           );
@@ -467,7 +467,7 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
           // phpcs:ignore
           $response = \Drupal::httpClient()->request(
             'POST',
-            $this->getSetting('endpoint'),
+            ocha_docstore_files_get_endpoint_base($this->getSetting('endpoint')),
             [
               'body' => json_encode([
                 'filename' => $queued_file['filename'],
@@ -475,7 +475,7 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
                 'private' => FALSE,
               ]),
               'headers' => [
-                'API-KEY' => $this->getSetting('api-key'),
+                'API-KEY' => ocha_docstore_files_get_endpoint_apikey($this->getSetting('api-key')),
               ],
             ]
           );
