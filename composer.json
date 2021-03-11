@@ -1,6 +1,6 @@
 {
     "name": "unocha/assessmentregistry8-site",
-    "description": "Registry ASssements 8",
+    "description": "Registry Asssements 8",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "authors": [
@@ -53,7 +53,7 @@
         "npm-asset/select2": "^4.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "phpoffice/phpspreadsheet": "^1.11",
-        "unocha/common_design": "dev-cd-226-design-system",
+        "unocha/common_design": "^3.0.0",
         "unocha/ocha_integrations": "^1.0",
         "webflo/drupal-finder": "^1.0.0",
         "zaporylie/composer-drupal-optimizations": "^1.0"
