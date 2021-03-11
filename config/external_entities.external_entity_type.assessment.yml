@@ -14,6 +14,10 @@ field_mappings:
     value: uuid
   title:
     value: title
+  field_assessment_report:
+    accessibility: assessment_report/0/accessibility
+    media_uuid: assessment_report/0/files/0/media_uuid
+    instructions: assessment_report/0/instructions
   field_asst_organizations:
     target_id: 'asst_organizations/*/uuid'
   field_author:

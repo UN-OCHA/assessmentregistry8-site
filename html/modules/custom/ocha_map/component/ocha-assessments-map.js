@@ -241,7 +241,7 @@ const createMarker = () => document.createComment('');
  *    * (") then any non-("), or
  *    * (') then any non-(')
  */
-const lastAttributeNameRegex = 
+const lastAttributeNameRegex =
 // eslint-disable-next-line no-control-regex
 /([ \x09\x0a\x0c\x0d])([^\0-\x1F\x7F-\x9F "'>=/]+)([ \x09\x0a\x0c\x0d]*=[ \x09\x0a\x0c\x0d]*(?:[^ \x09\x0a\x0c\x0d"'`<>=]*|"[^"]*|'[^']*))$/;
 
@@ -2298,7 +2298,7 @@ class LitElement extends UpdatingElement {
             // The last item is kept to try to preserve the cascade order with the
             // assumption that it's most important that last added styles override
             // previous styles.
-            const addStyles = (styles, set) => styles.reduceRight((set, s) => 
+            const addStyles = (styles, set) => styles.reduceRight((set, s) =>
             // Note: On IE set.add() does not return the set
             Array.isArray(s) ? addStyles(s, set) : (set.add(s), set), set);
             // Array.from does not work on Set in IE, otherwise return
@@ -3701,7 +3701,7 @@ class OchaAssessmentsBase extends LitElement {
         options: []
       };
 
-      child.forEach(function (option) {
+      child.options.forEach(function (option) {
         if (typeof option.values.active != 'undefined') {
           dropdown.selected = option.values.value;
           dropdown.selected_url = option.url;
@@ -19281,12 +19281,13 @@ class OchaAssessmentsMap extends OchaAssessmentsBase {
     }
 
     this.data.forEach(row => {
-      if (typeof row.field_locations_lat_lon != 'undefined' && row.field_locations_lat_lon) {
+      console.log(row);
+      if (typeof row.field_locations_lat_lon != 'undefined' && row.field_locations_lat_lon && row.field_locations_lat_lon[0]) {
         const latlon = row.field_locations_lat_lon[0].split(',');
         // Skip empty markers.
-        if (latlon[1] != '' && latlon[0] != '') {
-          const m = new Marker([latlon[1], latlon[0]]);
-          m.bindPopup('<a href="' + this.baseurl + '/node/' + row.nid + '">' + row.title + '</a>');
+        if (latlon[0] != '' && latlon[1] != '') {
+          const m = new Marker([latlon[0], latlon[1]]);
+          m.bindPopup('<a href="' + this.baseurl + '/assessment/' + row.uuid + '">' + row.title + '</a>');
           this.cluster.addLayer(m);
         }
       }
