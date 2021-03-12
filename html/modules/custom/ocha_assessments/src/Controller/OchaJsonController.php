@@ -64,6 +64,37 @@ class OchaJsonController extends ControllerBase {
    *   Docstore API request.
    */
   public function mapData(Request $request) {
+    return $this->fetchData($request, 0, 1000);
+  }
+
+  /**
+   * Return list data.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   Docstore API request.
+   */
+  public function listData(Request $request) {
+    return $this->fetchData($request);
+  }
+
+  /**
+   * Return table data.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   Docstore API request.
+   */
+  public function tableData(Request $request) {
+    return $this->fetchData($request);
+  }
+
+  /**
+   * Redirect old to new.
+   */
+  public function redirectLegacy() {
+    return $this->redirect('ocha_assessments.map');
+  }
+
+  protected function fetchData($request, $offset = 0, $limit = 50) {
     $facet_to_entity = [
       'organizations' => [
         'entity' => 'organization',
@@ -84,7 +115,12 @@ class OchaJsonController extends ControllerBase {
 
     $index = Index::load('assessments');
     $query = $index->query();
-    $query->range(0, 9999);
+    $query->range($offset * $limit, $limit);
+
+    // Check for pager.
+    if ($request->query->has('page')) {
+      $query->range($request->query->get('page') * $limit, $limit);
+    }
 
     // Add filters.
     if ($request->query->has('f')) {
@@ -111,6 +147,12 @@ class OchaJsonController extends ControllerBase {
     $results = $query->execute();
     $facets = $results->getExtraData('search_api_facets', []);
 
+    // Add pagers if needed.
+    if ($extra = $results->getExtraData('search_api_solr_response')) {
+      $data['pager']['current_page'] = $extra['response']['start'] / $limit;
+      $data['pager']['total_pages'] = ceil($extra['response']['numFound'] / $limit);
+    }
+
     // Prepare results.
     $data['search_results'] = [];
     foreach ($results as $item) {
@@ -123,7 +165,6 @@ class OchaJsonController extends ControllerBase {
         'field_organizations_label' => $item->getField('field_organizations_label')->getValues(),
         'field_asst_organizations_label' => $item->getField('field_asst_organizations_label')->getValues(),
         'field_status' => $item->getField('field_status_label')->getValues(),
-        // 'field_local_groups_label' => $item->getField('field_local_groups_label')->getValues(),
       ];
     }
 
@@ -169,33 +210,6 @@ class OchaJsonController extends ControllerBase {
     $response = new JsonResponse($data);
     $response->setStatusCode(200);
     return $response;
-  }
-
-  /**
-   * Return list data.
-   *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *   Docstore API request.
-   */
-  public function listData(Request $request) {
-    return $this->mapData($request);
-  }
-
-  /**
-   * Return table data.
-   *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *   Docstore API request.
-   */
-  public function tableData(Request $request) {
-    return $this->mapData($request);
-  }
-
-  /**
-   * Redirect old to new.
-   */
-  public function redirectLegacy() {
-    return $this->redirect('ocha_assessments.map');
   }
 
 }
