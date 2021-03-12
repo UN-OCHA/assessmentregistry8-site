@@ -182,6 +182,11 @@ export class OchaAssessmentsBase extends LitElement {
       value: ''
     };
 
+    if (dropdown.selected) {
+      emptytOption.label = '- Remove filter -';
+      emptytOption.value = dropdown.selected;
+    }
+
     return html`
       <div class="cd-filter__group">
         <label for="${dropdown.label}">${dropdown.label}</label>
@@ -189,7 +194,7 @@ export class OchaAssessmentsBase extends LitElement {
           <high-option value="${emptytOption.value}">${emptytOption.label}</high-option>
           ${
             dropdown.options.map(function (o) {
-              if (o.label == dropdown.selected) {
+              if (o.key == dropdown.selected) {
                 return html`
                   <high-option value="" selected>${o.label}</high-option>
                 `
