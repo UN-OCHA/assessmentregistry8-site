@@ -52,7 +52,6 @@ module:
   ocha_knowledge_management: 0
   ocha_local_groups: 0
   ocha_locations: 0
-  ocha_map: 0
   ocha_organizations: 0
   ocha_persons: 0
   ocha_population_type: 0

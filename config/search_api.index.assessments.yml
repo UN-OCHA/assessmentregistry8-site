@@ -7,10 +7,13 @@ dependencies:
     - external_entities
     - search_api
   config:
+    - field.storage.assessment.field_date
     - field.storage.assessment.field_organizations
     - field.storage.assessment.field_locations
     - field.storage.location.field_geolocation
     - field.storage.assessment.field_asst_organizations
+    - field.storage.assessment.field_population_types
+    - field.storage.assessment.field_status
     - search_api.server.solr
 third_party_settings:
   search_api_solr:
@@ -66,6 +69,24 @@ field_settings:
     dependencies:
       config:
         - field.storage.assessment.field_asst_organizations
+  field_asst_organizations_label:
+    label: 'Participating Organization(s) » Organization » Title'
+    datasource_id: 'entity:assessment'
+    property_path: 'field_asst_organizations:entity:title'
+    type: string
+    dependencies:
+      config:
+        - field.storage.assessment.field_asst_organizations
+      module:
+        - external_entities
+  field_date:
+    label: Date
+    datasource_id: 'entity:assessment'
+    property_path: field_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.assessment.field_date
   field_locations:
     label: Location(s)
     datasource_id: 'entity:assessment'
@@ -74,6 +95,16 @@ field_settings:
     dependencies:
       config:
         - field.storage.assessment.field_locations
+  field_locations_label:
+    label: 'Location(s) » Location » Title'
+    datasource_id: 'entity:assessment'
+    property_path: 'field_locations:entity:title'
+    type: string
+    dependencies:
+      config:
+        - field.storage.assessment.field_locations
+      module:
+        - external_entities
   field_organizations:
     label: 'Leading/Coordinating Organization(s)'
     datasource_id: 'entity:assessment'
@@ -82,6 +113,42 @@ field_settings:
     dependencies:
       config:
         - field.storage.assessment.field_organizations
+  field_organizations_label:
+    label: 'Leading/Coordinating Organization(s) » Organization » Title'
+    datasource_id: 'entity:assessment'
+    property_path: 'field_organizations:entity:title'
+    type: string
+    dependencies:
+      config:
+        - field.storage.assessment.field_organizations
+      module:
+        - external_entities
+  field_population_types:
+    label: 'Population Type(s)'
+    datasource_id: 'entity:assessment'
+    property_path: field_population_types
+    type: string
+    dependencies:
+      config:
+        - field.storage.assessment.field_population_types
+  field_status:
+    label: Status
+    datasource_id: 'entity:assessment'
+    property_path: field_status
+    type: string
+    dependencies:
+      config:
+        - field.storage.assessment.field_status
+  field_status_label:
+    label: 'Status » Assessment status » Title'
+    datasource_id: 'entity:assessment'
+    property_path: 'field_status:entity:title'
+    type: string
+    dependencies:
+      config:
+        - field.storage.assessment.field_status
+      module:
+        - external_entities
   latlon:
     label: 'Location(s) » Location » geolocation » LatLong Pair'
     datasource_id: 'entity:assessment'
