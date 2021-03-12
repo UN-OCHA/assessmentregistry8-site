@@ -34,8 +34,18 @@ targetEntityType: assessment
 bundle: assessment
 mode: default
 content:
+  field_assessment_data:
+    type: ocha_doc_store_assessment_document_default
+    weight: 20
+    region: content
+    label: above
+    settings:
+      display_accessibility: false
+      display_file: true
+      display_link: true
+    third_party_settings: {  }
   field_assessment_report:
-    weight: 21
+    weight: 19
     label: above
     settings:
       display_accessibility: '1'
@@ -45,7 +55,7 @@ content:
     type: ocha_doc_store_assessment_document_default
     region: content
   field_asst_organizations:
-    weight: 9
+    weight: 8
     label: above
     settings:
       link: false
@@ -61,21 +71,21 @@ content:
     type: string
     region: content
   field_collection_methods:
-    weight: 6
+    weight: 5
     label: above
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_contacts:
-    weight: 3
+    weight: 2
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_date:
-    weight: 4
+    weight: 3
     label: above
     settings:
       separator: '-'
@@ -85,28 +95,28 @@ content:
     type: daterange_default
     region: content
   field_frequency:
-    weight: 5
+    weight: 4
     label: above
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_key_findings:
-    weight: 7
+    weight: 6
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_level_of_representation:
-    weight: 10
+    weight: 9
     label: above
     settings: {  }
     third_party_settings: {  }
     type: list_default
     region: content
   field_locations:
-    weight: 20
+    weight: 18
     label: above
     settings:
       link: true
@@ -114,14 +124,14 @@ content:
     type: entity_reference_label
     region: content
   field_methodology:
-    weight: 11
+    weight: 10
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_organizations:
-    weight: 8
+    weight: 7
     label: above
     settings:
       link: false
@@ -129,7 +139,7 @@ content:
     type: entity_reference_label
     region: content
   field_population_types:
-    weight: 12
+    weight: 11
     label: above
     settings:
       link: false
@@ -137,7 +147,7 @@ content:
     type: entity_reference_label
     region: content
   field_related_content:
-    weight: 13
+    weight: 12
     label: above
     settings:
       trim_length: 80
@@ -149,7 +159,7 @@ content:
     type: link
     region: content
   field_sample_size:
-    weight: 14
+    weight: 13
     label: above
     settings:
       link_to_entity: false
@@ -157,7 +167,7 @@ content:
     type: string
     region: content
   field_sources:
-    weight: 15
+    weight: 14
     label: above
     settings:
       link: false
@@ -165,7 +175,7 @@ content:
     type: entity_reference_label
     region: content
   field_status:
-    weight: 19
+    weight: 17
     label: above
     settings:
       link: false
@@ -173,14 +183,14 @@ content:
     type: entity_reference_label
     region: content
   field_subject_objective:
-    weight: 17
+    weight: 15
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_themes:
-    weight: 18
+    weight: 16
     label: above
     settings:
       link: false
@@ -196,5 +206,4 @@ content:
       link_to_entity: false
     third_party_settings: {  }
 hidden:
-  field_assessment_data: true
   search_api_excerpt: true

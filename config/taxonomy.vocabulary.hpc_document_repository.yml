@@ -1,8 +1,0 @@
-uuid: 66a1fce9-693b-415b-9912-d716950bb884
-langcode: en
-status: true
-dependencies: {  }
-name: 'HPC Document Repository'
-vid: hpc_document_repository
-description: ''
-weight: 0
