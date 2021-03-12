@@ -383,51 +383,6 @@ function insertNodeIntoTemplate(template, node, refNode = null) {
  * http://polymer.github.io/PATENTS.txt
  */
 const directives = new WeakMap();
-/**
- * Brands a function as a directive factory function so that lit-html will call
- * the function during template rendering, rather than passing as a value.
- *
- * A _directive_ is a function that takes a Part as an argument. It has the
- * signature: `(part: Part) => void`.
- *
- * A directive _factory_ is a function that takes arguments for data and
- * configuration and returns a directive. Users of directive usually refer to
- * the directive factory as the directive. For example, "The repeat directive".
- *
- * Usually a template author will invoke a directive factory in their template
- * with relevant arguments, which will then return a directive function.
- *
- * Here's an example of using the `repeat()` directive factory that takes an
- * array and a function to render an item:
- *
- * ```js
- * html`<ul><${repeat(items, (item) => html`<li>${item}</li>`)}</ul>`
- * ```
- *
- * When `repeat` is invoked, it returns a directive function that closes over
- * `items` and the template function. When the outer template is rendered, the
- * return directive function is called with the Part for the expression.
- * `repeat` then performs it's custom logic to render multiple items.
- *
- * @param f The directive factory function. Must be a function that returns a
- * function of the signature `(part: Part) => void`. The returned function will
- * be called with the part object.
- *
- * @example
- *
- * import {directive, html} from 'lit-html';
- *
- * const immutable = directive((v) => (part) => {
- *   if (part.value !== v) {
- *     part.setValue(v)
- *   }
- * });
- */
-const directive = (f) => ((...args) => {
-    const d = f(...args);
-    directives.set(d, true);
-    return d;
-});
 const isDirective = (o) => {
     return typeof o === 'function' && directives.has(o);
 };
@@ -2480,48 +2435,6 @@ LitElement['finalized'] = true;
  */
 LitElement.render = render$1;
 
-/**
- * @license
- * Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
- * This code may only be used under the BSD style license found at
- * http://polymer.github.io/LICENSE.txt
- * The complete set of authors may be found at
- * http://polymer.github.io/AUTHORS.txt
- * The complete set of contributors may be found at
- * http://polymer.github.io/CONTRIBUTORS.txt
- * Code distributed by Google as part of the polymer project is also
- * subject to an additional IP rights grant found at
- * http://polymer.github.io/PATENTS.txt
- */
-// For each part, remember the value that was last rendered to the part by the
-// unsafeHTML directive, and the DocumentFragment that was last set as a value.
-// The DocumentFragment is used as a unique key to check if the last value
-// rendered to the part was with unsafeHTML. If not, we'll always re-render the
-// value passed to unsafeHTML.
-const previousValues = new WeakMap();
-/**
- * Renders the result as HTML, rather than text.
- *
- * Note, this is unsafe to use with any user-provided input that hasn't been
- * sanitized or escaped, as it may lead to cross-site-scripting
- * vulnerabilities.
- */
-const unsafeHTML = directive((value) => (part) => {
-    if (!(part instanceof NodePart)) {
-        throw new Error('unsafeHTML can only be used in text bindings');
-    }
-    const previousValue = previousValues.get(part);
-    if (previousValue !== undefined && isPrimitive(value) &&
-        value === previousValue.value && part.value === previousValue.fragment) {
-        return;
-    }
-    const template = document.createElement('template');
-    template.innerHTML = value; // innerHTML casts to string internally
-    const fragment = document.importNode(template.content, true);
-    part.setValue(fragment);
-    previousValues.set(part, { value, fragment });
-});
-
 // From https://github.com/hivabkbk/high-select
 
 (function () {
@@ -3739,29 +3652,19 @@ class OchaAssessmentsBase extends LitElement {
   }
 
   changeSrc(event) {
-    this.src = event.currentTarget.value;
-  }
-
-  getDropdownLabel(id) {
-    const labels = {
-      authored_on: 'Date',
-      local_groups: 'Local group',
-      clusters_sectors: 'Cluster/sector',
-      countries: 'Country',
-      disasters_emergencies: 'Disasters/Emergencies',
-      disasters: 'Disaster',
-      locations: 'Location',
-      organizations: 'Organization',
-      participating_organizations: 'Participating organization',
-      population_types: 'Population type',
-      themes: 'Theme',
-    };
-
-    if (labels[id]) {
-      return labels[id];
+    if (event.currentTarget.value === '') {
+      this.src = this.resetUrl;
     }
+    else {
+      this.activeFilters.push(event.currentTarget.value);
 
-    return id;
+      const url = new URL(this.resetUrl);
+      this.activeFilters.forEach(function (filter) {
+        url.searchParams.append('f[]', filter);
+      });
+
+      this.src = url.toString();
+    }
   }
 
   buildFacets() {
@@ -3770,6 +3673,7 @@ class OchaAssessmentsBase extends LitElement {
     }
 
     let dropdowns = [];
+    this.activeFilters = [];
 
     for (const child_id in this.facets) {
       // Skip disabled filters.
@@ -3782,21 +3686,20 @@ class OchaAssessmentsBase extends LitElement {
 
       dropdown = {
         id: child_id,
-        label: this.getDropdownLabel(child_id),
+        label: child.label,
         selected: null,
-        selected_url: null,
         options: []
       };
 
-      child.forEach(function (option) {
-        if (typeof option.values.active != 'undefined') {
-          dropdown.selected = option.values.value;
-          dropdown.selected_url = option.url;
+      child.options.forEach(function (option) {
+        if (typeof option.active !== 'undefined' && option.active) {
+          dropdown.selected = option.key;
+          this.activeFilters.push(option.key);
         }
 
         dropdown.options.push({
-          key: option.url,
-          label: option.values.value
+          key: option.key,
+          label: option.label
         });
       });
 
@@ -3840,9 +3743,9 @@ class OchaAssessmentsBase extends LitElement {
       value: ''
     };
 
-    if (dropdown.selected_url) {
+    if (dropdown.selected) {
       emptytOption.label = '- Remove filter -';
-      emptytOption.value = dropdown.selected_url;
+      emptytOption.value = dropdown.selected;
     }
 
     return html`
@@ -3852,7 +3755,7 @@ class OchaAssessmentsBase extends LitElement {
           <high-option value="${emptytOption.value}">${emptytOption.label}</high-option>
           ${
             dropdown.options.map(function (o) {
-              if (o.label == dropdown.selected) {
+              if (o.key == dropdown.selected) {
                 return html`
                   <high-option value="" selected>${o.label}</high-option>
                 `
@@ -4000,7 +3903,7 @@ class OchaAssessmentsBase extends LitElement {
 }
 
 // Extend the LitElement base class
-class OchaAssessmentsList extends OchaAssessmentsBase {
+class OchaAssessmentsTable extends OchaAssessmentsBase {
   static get styles() {
     return [
       super.styles,
@@ -4052,31 +3955,38 @@ class OchaAssessmentsList extends OchaAssessmentsBase {
 
       ${this.renderDropdowns()}
 
-      <ul class="cd-list">
-        ${
-          this.data.map(
-            r =>
-              html`
-                <li>
-                  <h2 class="cd-list__title"><a href="${this.baseurl}/node/${r.nid}">${r.title}</a></h2>
-                  <div class="cd-list__description">
-                    <p>
-                      <span class="label">Leading/Coordinating Organization(s): </span>
-                      <span class="values">${unsafeHTML(r.field_asst_organizations_label)}</span>
-                    </p>
-                    <p>
-                      <span class="label">Status: </span>
-                      <span class="values">${r.field_status}</span>
-                    </p>
-                    <p>
-                      <span class="label">Assessment Date(s): </span>
-                      <span class="values">${this.renderDate(r)}</span>
-                    </p>
-                  </div>
-                </li>
-                `
-        )}
-      </ul>
+      <table class="cd-table cd-table--striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Location(s)</th>
+            <th>Managed by</th>
+            <th>Participating Organization(s)</th>
+            <th>Clusters/Sectors</th>
+            <th>Status</th>
+            <th>Assessment Date(s)</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${
+            this.data.map(
+              r =>
+                html`
+                  <tr>
+                    <td data-content="Title"><a href="${this.baseurl}/assessment/${r.nid}">${r.title}</a></td>
+                    <td data-content="Location(s)">${r.field_locations_label}</td>
+                    <td data-content="Managed by">${r.field_organizations_label}</td>
+                    <td data-content="Participating Organization(s)">${r.field_asst_organizations_label}</td>
+                    <td data-content="Clusters/Sectors">${r.field_local_groups_label}</td>
+                    <td data-content="Status">${r.field_status}</td>
+                    <td data-content="Assessment Date(s)">${this.renderDate(r)}</td>
+                    <td data-content="Data">${this.buildDocument('report', r, 'Report')}${this.buildDocument('questionnaire', r, 'Questionnaire')}${this.buildDocument('data', r, 'Data')}</td>
+                  </tr>
+                  `
+          )}
+        </tbody>
+      </table>
 
       ${this.renderPager()}
     `;
@@ -4088,4 +3998,4 @@ class OchaAssessmentsList extends OchaAssessmentsBase {
 
 }
 
-customElements.define('ocha-assessments-list', OchaAssessmentsList);
+customElements.define('ocha-assessments-table', OchaAssessmentsTable);

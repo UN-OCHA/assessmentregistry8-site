@@ -241,7 +241,7 @@ const createMarker = () => document.createComment('');
  *    * (") then any non-("), or
  *    * (') then any non-(')
  */
-const lastAttributeNameRegex =
+const lastAttributeNameRegex = 
 // eslint-disable-next-line no-control-regex
 /([ \x09\x0a\x0c\x0d])([^\0-\x1F\x7F-\x9F "'>=/]+)([ \x09\x0a\x0c\x0d]*=[ \x09\x0a\x0c\x0d]*(?:[^ \x09\x0a\x0c\x0d"'`<>=]*|"[^"]*|'[^']*))$/;
 
@@ -2298,7 +2298,7 @@ class LitElement extends UpdatingElement {
             // The last item is kept to try to preserve the cascade order with the
             // assumption that it's most important that last added styles override
             // previous styles.
-            const addStyles = (styles, set) => styles.reduceRight((set, s) =>
+            const addStyles = (styles, set) => styles.reduceRight((set, s) => 
             // Note: On IE set.add() does not return the set
             Array.isArray(s) ? addStyles(s, set) : (set.add(s), set), set);
             // Array.from does not work on Set in IE, otherwise return
@@ -3745,7 +3745,7 @@ class OchaAssessmentsBase extends LitElement {
 
     if (dropdown.selected) {
       emptytOption.label = '- Remove filter -';
-      emptytOption.value = dropdown.selected_url;
+      emptytOption.value = dropdown.selected;
     }
 
     return html`
@@ -3755,7 +3755,7 @@ class OchaAssessmentsBase extends LitElement {
           <high-option value="${emptytOption.value}">${emptytOption.label}</high-option>
           ${
             dropdown.options.map(function (o) {
-              if (o.label == dropdown.selected) {
+              if (o.key == dropdown.selected) {
                 return html`
                   <high-option value="" selected>${o.label}</high-option>
                 `

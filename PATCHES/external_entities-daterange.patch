@@ -1,0 +1,25 @@
+diff --git a/src/ExternalEntityStorage.php b/src/ExternalEntityStorage.php
+index 624e6dc..a0e6825 100755
+--- a/src/ExternalEntityStorage.php
++++ b/src/ExternalEntityStorage.php
+@@ -360,6 +360,20 @@ class ExternalEntityStorage extends ContentEntityStorageBase implements External
+           }
+         }
+ 
++        // Date ranges are stored without timezone.
++        if ($field_definition->getType() === 'daterange') {
++          foreach ($field_values as $key => $item) {
++            if (strpos($item['value'], '+') !== FALSE) {
++              $item['value'] = substr($item['value'], 0, strpos($item['value'], '+'));
++            }
++
++            if (strpos($item['end_value'], '+') !== FALSE) {
++              $item['end_value'] = substr($item['end_value'], 0, strpos($item['end_value'], '+'));
++            }
++            $field_values[$key] = $item;
++          }
++        }
++
+         if (!empty($field_values)) {
+           $values[$id][$field_name][LanguageInterface::LANGCODE_DEFAULT] = $field_values;
+         }

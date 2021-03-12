@@ -91,29 +91,19 @@ export class OchaAssessmentsBase extends LitElement {
   }
 
   changeSrc(event) {
-    this.src = event.currentTarget.value;
-  }
-
-  getDropdownLabel(id) {
-    const labels = {
-      authored_on: 'Date',
-      local_groups: 'Local group',
-      clusters_sectors: 'Cluster/sector',
-      countries: 'Country',
-      disasters_emergencies: 'Disasters/Emergencies',
-      disasters: 'Disaster',
-      locations: 'Location',
-      organizations: 'Organization',
-      participating_organizations: 'Participating organization',
-      population_types: 'Population type',
-      themes: 'Theme',
-    };
-
-    if (labels[id]) {
-      return labels[id];
+    if (event.currentTarget.value === '') {
+      this.src = this.resetUrl;
     }
+    else {
+      this.activeFilters.push(event.currentTarget.value);
 
-    return id;
+      const url = new URL(this.resetUrl);
+      this.activeFilters.forEach(function (filter) {
+        url.searchParams.append('f[]', filter);
+      });
+
+      this.src = url.toString();
+    }
   }
 
   buildFacets() {
@@ -122,6 +112,7 @@ export class OchaAssessmentsBase extends LitElement {
     }
 
     let dropdowns = [];
+    this.activeFilters = [];
 
     for (const child_id in this.facets) {
       // Skip disabled filters.
@@ -134,21 +125,20 @@ export class OchaAssessmentsBase extends LitElement {
 
       dropdown = {
         id: child_id,
-        label: this.getDropdownLabel(child_id),
+        label: child.label,
         selected: null,
-        selected_url: null,
         options: []
       };
 
-      child.forEach(function (option) {
-        if (typeof option.values.active != 'undefined') {
-          dropdown.selected = option.values.value;
-          dropdown.selected_url = option.url;
+      child.options.forEach(function (option) {
+        if (typeof option.active !== 'undefined' && option.active) {
+          dropdown.selected = option.key;
+          this.activeFilters.push(option.key);
         }
 
         dropdown.options.push({
-          key: option.url,
-          label: option.values.value
+          key: option.key,
+          label: option.label
         });
       });
 
@@ -192,9 +182,9 @@ export class OchaAssessmentsBase extends LitElement {
       value: ''
     };
 
-    if (dropdown.selected_url) {
+    if (dropdown.selected) {
       emptytOption.label = '- Remove filter -';
-      emptytOption.value = dropdown.selected_url;
+      emptytOption.value = dropdown.selected;
     }
 
     return html`
@@ -204,7 +194,7 @@ export class OchaAssessmentsBase extends LitElement {
           <high-option value="${emptytOption.value}">${emptytOption.label}</high-option>
           ${
             dropdown.options.map(function (o) {
-              if (o.label == dropdown.selected) {
+              if (o.key == dropdown.selected) {
                 return html`
                   <high-option value="" selected>${o.label}</high-option>
                 `

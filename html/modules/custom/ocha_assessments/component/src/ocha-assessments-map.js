@@ -57,12 +57,12 @@ class OchaAssessmentsMap extends OchaAssessmentsBase {
     }
 
     this.data.forEach(row => {
-      if (typeof row.field_locations_lat_lon != 'undefined' && row.field_locations_lat_lon) {
+      if (typeof row.field_locations_lat_lon != 'undefined' && row.field_locations_lat_lon.length > 0) {
         const latlon = row.field_locations_lat_lon[0].split(',');
         // Skip empty markers.
         if (latlon[1] != '' && latlon[0] != '') {
           const m = new Marker([latlon[1], latlon[0]]);
-          m.bindPopup('<a href="' + this.baseurl + '/node/' + row.nid + '">' + row.title + '</a>');
+          m.bindPopup('<a href="' + this.baseurl + '/assessment/' + row.nid + '">' + row.title + '</a>');
           markers.push(m);
           this.cluster.addLayer(m);
         }
@@ -70,9 +70,11 @@ class OchaAssessmentsMap extends OchaAssessmentsBase {
     });
 
     this.map.addLayer(this.cluster);
-    this.map.fitBounds(this.cluster.getBounds(), {
-      maxZoom: this.maxZoom || 15
-    });
+    if (this.cluster.getLayers().length > 0) {
+      this.map.fitBounds(this.cluster.getBounds(), {
+        maxZoom: this.maxZoom || 15
+      });
+    }
   }
 
   connectedCallback() {

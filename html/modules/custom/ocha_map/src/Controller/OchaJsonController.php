@@ -5,11 +5,11 @@ namespace Drupal\ocha_map\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\search_api\Entity\Index;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Symfony\Component\HttpFoundation\Request;
 /**
  * An ocha_map controller.
  */
-class OchaMapController extends ControllerBase {
+class OchaJsonController extends ControllerBase {
 
   /**
    * Returns a map.
@@ -28,8 +28,11 @@ class OchaMapController extends ControllerBase {
 
   /**
    * Return map data.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   Docstore API request.
    */
-  public function mapData() {
+  public function mapData(Request $request) {
     $facet_to_entity = [
       'organizations' => [
         'entity' => 'organization',
@@ -47,6 +50,16 @@ class OchaMapController extends ControllerBase {
     $query = $index->query();
     $query->range(0, 9999);
 
+    // Add filters.
+    if ($request->query->has('f')) {
+      $filters = $request->query->get('f');
+      foreach ($filters as $filter) {
+        $parts = explode(':', $filter);
+        $query->addCondition($parts[0], $parts[1]);
+      }
+    }
+
+    // Add facets.
     $facet_options = [];
     foreach ($facet_to_entity as $key => $info) {
       $facet_options[$key] = [
@@ -96,7 +109,7 @@ class OchaMapController extends ControllerBase {
         $uuid = trim($facet_value['filter'], '"');
         if (isset($entities[$uuid])) {
           $options[] = [
-            'key' => $key . ':' . $uuid,
+            'key' => $facet_to_entity[$key]['field'] . ':' . $uuid,
             'label' => $entities[$uuid]->label() . ' (' . $facet_value['count'] . ')',
             'active' => FALSE,
           ];
@@ -109,7 +122,7 @@ class OchaMapController extends ControllerBase {
 
       $data['facets'][$key]['label'] = $facet_to_entity[$key]['title'];
       $data['facets'][$key]['name'] = $facet_to_entity[$key]['field'];
-      $data['facets'][$key]['options'] = $options;
+      $data['facets'][$key]['options'] = array_values($options);
     }
 
     $response = new JsonResponse($data);
