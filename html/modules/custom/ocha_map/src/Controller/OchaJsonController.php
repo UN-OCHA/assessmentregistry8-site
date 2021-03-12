@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * An ocha_map controller.
  */
-class OchaMapController extends ControllerBase {
+class OchaJsonController extends ControllerBase {
 
   /**
    * Returns a map.
