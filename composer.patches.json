@@ -1,5 +1,8 @@
 {
   "patches": {
+    "drupal/core": {
+      "https://www.drupal.org/project/drupal/issues/2936067": "https://www.drupal.org/files/issues/2021-01-28/2936067-25.patch"
+    },
     "drupal/facets": {
       "https://www.drupal.org/project/facets/issues/3005040": "https://www.drupal.org/files/issues/2018-10-09/facets-hierarchy-allow-different-types-3005040-7.patch"
     },
