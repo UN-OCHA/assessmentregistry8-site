@@ -28,6 +28,7 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $state_name = $this->fieldDefinition->getName() . '[' . $delta . '][accessibility]';
+    $element_process = $element['#process'] ?? [];
     $element = [
       '#type' => 'fieldset',
       '#title' => $this->fieldDefinition->getLabel(),
@@ -35,7 +36,7 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
 
     $element['document'] = [];
     $element['document']['#title'] = $this->t('Document');
-    $element['document']['#process'] = array_merge($element_info['#process'],
+    $element['document']['#process'] = array_merge($element_process,
     [[get_class($this), 'process']]);
 
     $element['accessibility'] = [
