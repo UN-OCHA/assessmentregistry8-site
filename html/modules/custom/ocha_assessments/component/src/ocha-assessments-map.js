@@ -62,7 +62,7 @@ class OchaAssessmentsMap extends OchaAssessmentsBase {
         // Skip empty markers.
         if (latlon[1] != '' && latlon[0] != '') {
           const m = new Marker([latlon[1], latlon[0]]);
-          m.bindPopup('<a href="' + this.baseurl + '/assessment/' + row.nid + '">' + row.title + '</a>');
+          m.bindPopup('<a href="' + this.baseurl + '/assessment/' + row.uuid + '">' + row.title + '</a>');
           markers.push(m);
           this.cluster.addLayer(m);
         }
