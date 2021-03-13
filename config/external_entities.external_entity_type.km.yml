@@ -52,7 +52,7 @@ storage_client_config:
     list:
       sort: uuid
     single: {  }
-persistent_cache_max_age: 0
+persistent_cache_max_age: 900
 annotation_entity_type_id: null
 annotation_bundle_id: null
 annotation_field_name: null
