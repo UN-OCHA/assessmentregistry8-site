@@ -63,7 +63,7 @@ class OchaAssessmentsList extends OchaAssessmentsBase {
             r =>
               html`
                 <li>
-                  <h2 class="cd-list__title"><a href="${this.baseurl}/assessment/${r.nid}">${r.title}</a></h2>
+                  <h2 class="cd-list__title"><a href="${this.baseurl}/assessment/${r.uuid}">${r.title}</a></h2>
                   <div class="cd-list__description">
                     <p>
                       <span class="label">Leading/Coordinating Organization(s): </span>
