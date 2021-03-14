@@ -99,7 +99,7 @@ class OchaJsonController extends ControllerBase {
       'organizations' => [
         'entity' => 'organization',
         'field' => 'field_organizations',
-        'title' => 'Leading/Coordinating Organization(s)',
+        'title' => 'Organization',
       ],
       'participating_organizations' => [
         'entity' => 'organization',
@@ -110,6 +110,21 @@ class OchaJsonController extends ControllerBase {
         'entity' => 'assessment_status',
         'field' => 'field_status',
         'title' => 'Status',
+      ],
+      'locations' => [
+        'entity' => 'location',
+        'field' => 'field_locations',
+        'title' => 'Location(s)',
+      ],
+      'population_types' => [
+        'entity' => 'population_type',
+        'field' => 'field_population_types',
+        'title' => 'Population type(s)',
+      ],
+      'disaster' => [
+        'entity' => 'disaster',
+        'field' => 'field_disaster',
+        'title' => 'Disaster',
       ],
     ];
 
