@@ -29,6 +29,8 @@ field_mappings:
   field_date:
     value: ar_date/start
     end_value: ar_date/end
+  field_disaster:
+    target_id: 'disasters/*/uuid'
   field_frequency:
     value: frequency
   field_key_findings:

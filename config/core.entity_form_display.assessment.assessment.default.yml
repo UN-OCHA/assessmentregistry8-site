@@ -10,6 +10,7 @@ dependencies:
     - field.field.assessment.assessment.field_collection_methods
     - field.field.assessment.assessment.field_contacts
     - field.field.assessment.assessment.field_date
+    - field.field.assessment.assessment.field_disaster
     - field.field.assessment.assessment.field_frequency
     - field.field.assessment.assessment.field_key_findings
     - field.field.assessment.assessment.field_level_of_representation
@@ -83,6 +84,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: daterange_default
+    region: content
+  field_disaster:
+    weight: 21
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_frequency:
     weight: 4
