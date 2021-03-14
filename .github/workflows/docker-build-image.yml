@@ -5,7 +5,7 @@ on:
     branches:
       - develop
       - feature/docstore
-      - master
+      - main
   release:
     types: [published]
 
