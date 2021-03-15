@@ -16,6 +16,7 @@ dependencies:
     - field.field.assessment.assessment.field_level_of_representation
     - field.field.assessment.assessment.field_locations
     - field.field.assessment.assessment.field_methodology
+    - field.field.assessment.assessment.field_operations
     - field.field.assessment.assessment.field_organizations
     - field.field.assessment.assessment.field_population_types
     - field.field.assessment.assessment.field_related_content
@@ -99,7 +100,7 @@ content:
     weight: 21
     label: above
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
@@ -138,6 +139,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_operations:
+    weight: 22
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_organizations:
     weight: 7

@@ -39,6 +39,8 @@ field_mappings:
     target_id: 'locations/*/uuid'
   field_methodology:
     value: methodology
+  field_operations:
+    target_id: 'operations/*/uuid'
   field_organizations:
     target_id: 'organizations/*/uuid'
   field_population_types:

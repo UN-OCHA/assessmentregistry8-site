@@ -16,6 +16,7 @@ dependencies:
     - field.field.assessment.assessment.field_level_of_representation
     - field.field.assessment.assessment.field_locations
     - field.field.assessment.assessment.field_methodology
+    - field.field.assessment.assessment.field_operations
     - field.field.assessment.assessment.field_organizations
     - field.field.assessment.assessment.field_population_types
     - field.field.assessment.assessment.field_related_content
@@ -132,6 +133,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
+    region: content
+  field_operations:
+    weight: 22
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_organizations:
     weight: 7
