@@ -1,0 +1,20 @@
+uuid: 2009f362-00dd-41b1-b38f-a3f4a09f3857
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.km.field_description
+  module:
+    - external_entities
+id: km.km.field_description
+field_name: field_description
+entity_type: km
+bundle: km
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

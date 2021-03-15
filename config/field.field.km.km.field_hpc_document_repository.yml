@@ -1,0 +1,26 @@
+uuid: 0f003db7-c521-4938-93ed-1415893b29c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.km.field_hpc_document_repository
+  module:
+    - external_entities
+id: km.km.field_hpc_document_repository
+field_name: field_hpc_document_repository
+entity_type: km
+bundle: km
+label: 'HPC document repository'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:hpc_document_repository'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

@@ -1,0 +1,28 @@
+uuid: d5420fe6-1822-45ff-a78b-b431612c5664
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets_summary.facets_summary.ass_list_summary
+  module:
+    - facets_summary
+    - system
+  theme:
+    - common_design_subtheme
+id: ass_list_summary
+theme: common_design_subtheme
+region: facets
+weight: -11
+provider: null
+plugin: 'facets_summary_block:ass_list_summary'
+settings:
+  id: 'facets_summary_block:ass_list_summary'
+  label: Summary
+  provider: facets_summary
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/assessments/list\r\n/assessments/list/*"
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,23 @@
+uuid: 2500fc4d-c552-4cd4-a3a1-b9fd476d7852
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_assessment_data
+  module:
+    - external_entities
+    - ocha_docstore_files
+id: assessment.assessment.field_assessment_data
+field_name: field_assessment_data
+entity_type: assessment
+bundle: assessment
+label: 'Assessment data'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: ocha_doc_store_assessment_document

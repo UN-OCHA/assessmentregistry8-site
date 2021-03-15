@@ -241,7 +241,7 @@ const createMarker = () => document.createComment('');
  *    * (") then any non-("), or
  *    * (') then any non-(')
  */
-const lastAttributeNameRegex = 
+const lastAttributeNameRegex =
 // eslint-disable-next-line no-control-regex
 /([ \x09\x0a\x0c\x0d])([^\0-\x1F\x7F-\x9F "'>=/]+)([ \x09\x0a\x0c\x0d]*=[ \x09\x0a\x0c\x0d]*(?:[^ \x09\x0a\x0c\x0d"'`<>=]*|"[^"]*|'[^']*))$/;
 
@@ -2298,7 +2298,7 @@ class LitElement extends UpdatingElement {
             // The last item is kept to try to preserve the cascade order with the
             // assumption that it's most important that last added styles override
             // previous styles.
-            const addStyles = (styles, set) => styles.reduceRight((set, s) => 
+            const addStyles = (styles, set) => styles.reduceRight((set, s) =>
             // Note: On IE set.add() does not return the set
             Array.isArray(s) ? addStyles(s, set) : (set.add(s), set), set);
             // Array.from does not work on Set in IE, otherwise return
@@ -3276,55 +3276,55 @@ const dropdownStyles = css`
     min-width: 10em;
   }
 
-  .cd-filters {
+  .cd-filter {
     margin-bottom: 1rem;
   }
 
-  .cd-filters__form {
+  .cd-filter__form {
     display: block;
     background: var(--cd-light-grey);
     padding: 1rem;
   }
 
-  .cd-filters__form form{
+  .cd-filter__form form{
     margin-bottom: 0;
   }
 
-  .cd-filters__form label {
+  .cd-filter__form label {
     display: block;
     margin: 0 0 0.25rem;
   }
 
-  .cd-filters__group {
+  .cd-filter__group {
     margin: 0 0 1rem;
   }
 
-  .cd-filters__form select {
+  .cd-filter__form select {
     width: 100%;
     max-width: 100%;
   }
 
-  .cd-filters__form .cd-button {
+  .cd-filter__form .cd-button {
     text-transform: unset;
     font-weight: normal;
   }
 
   @media (min-width: 768px) {
-    .cd-filters {
+    .cd-filter {
       margin-bottom: 2rem;
     }
 
-    .cd-filters__form form {
+    .cd-filter__form form {
       display: flex;
       flex-wrap: wrap;
       align-items: flex-start;
     }
 
-    .cd-filters__group {
+    .cd-filter__group {
       padding-right: 1rem;
     }
 
-    .cd-filters__form .cd-button {
+    .cd-filter__form .cd-button {
       align-self: flex-end;
       margin-bottom: 1rem;
     }
@@ -3333,45 +3333,45 @@ const dropdownStyles = css`
     /* https://alistapart.com/article/quantity-queries-for-css */
 
     /* If one element */
-    .cd-filters__group:only-of-type,
+    .cd-filter__group:only-of-type,
     /* If two elements */
-    .cd-filters__group:nth-last-child(2):first-child,
-    .cd-filters__group:nth-last-child(2):first-child ~ .cd-filters__group,
-    .cd-filters__group:nth-last-child(2):first-child ~ .cd-export,
+    .cd-filter__group:nth-last-child(2):first-child,
+    .cd-filter__group:nth-last-child(2):first-child ~ .cd-filter__group,
+    .cd-filter__group:nth-last-child(2):first-child ~ .cd-export,
     /* If three elements */
-    .cd-filters__group:nth-last-child(3):first-child,
-    .cd-filters__group:nth-last-child(3):first-child ~ .cd-filters__group,
-    .cd-filters__group:nth-last-child(3):first-child ~ .cd-export {
+    .cd-filter__group:nth-last-child(3):first-child,
+    .cd-filter__group:nth-last-child(3):first-child ~ .cd-filter__group,
+    .cd-filter__group:nth-last-child(3):first-child ~ .cd-export {
       flex: 1 0 33%;
       max-width: 33%;
     }
 
-    .cd-filters__group:nth-last-child(2):first-child ~ .cd-filters__group:last-child,
-    .cd-filters__group:nth-last-child(3):first-child ~ .cd-filters__group:last-child {
+    .cd-filter__group:nth-last-child(2):first-child ~ .cd-filter__group:last-child,
+    .cd-filter__group:nth-last-child(3):first-child ~ .cd-filter__group:last-child {
       padding-right: 0;
     }
 
     /* If four elements */
-    .cd-filters__group:nth-last-child(4):first-child,
-    .cd-filters__group:nth-last-child(4):first-child ~ .cd-filters__group,
-    .cd-filters__group:nth-last-child(4):first-child ~ .cd-export {
+    .cd-filter__group:nth-last-child(4):first-child,
+    .cd-filter__group:nth-last-child(4):first-child ~ .cd-filter__group,
+    .cd-filter__group:nth-last-child(4):first-child ~ .cd-export {
       flex: 1 0 25%;
       max-width: 25%;
     }
 
-    .cd-filters__group:nth-last-child(4):first-child ~ .cd-filters__group:last-child {
+    .cd-filter__group:nth-last-child(4):first-child ~ .cd-filter__group:last-child {
       padding-right: 0;
     }
 
     /* If five elements */
-    .cd-filters__group:nth-last-child(5):first-child,
-    .cd-filters__group:nth-last-child(5):first-child ~ .cd-filters__group,
-    .cd-filters__group:nth-last-child(5):first-child ~ .cd-export {
+    .cd-filter__group:nth-last-child(5):first-child,
+    .cd-filter__group:nth-last-child(5):first-child ~ .cd-filter__group,
+    .cd-filter__group:nth-last-child(5):first-child ~ .cd-export {
       flex: 1 0 20%;
       max-width: 20%;
     }
 
-    .cd-filters__group:nth-last-child(5):first-child ~ .cd-filters__group:last-child {
+    .cd-filter__group:nth-last-child(5):first-child ~ .cd-filter__group:last-child {
       padding-right: 0;
     }
   }
@@ -3652,29 +3652,19 @@ class OchaAssessmentsBase extends LitElement {
   }
 
   changeSrc(event) {
-    this.src = event.currentTarget.value;
-  }
-
-  getDropdownLabel(id) {
-    const labels = {
-      authored_on: 'Date',
-      local_groups: 'Local group',
-      clusters_sectors: 'Cluster/sector',
-      countries: 'Country',
-      disasters_emergencies: 'Disasters/Emergencies',
-      disasters: 'Disaster',
-      locations: 'Location',
-      organizations: 'Organization',
-      participating_organizations: 'Participating organization',
-      population_types: 'Population type',
-      themes: 'Theme',
-    };
-
-    if (labels[id]) {
-      return labels[id];
+    if (event.currentTarget.value === '') {
+      this.src = this.resetUrl;
     }
+    else {
+      this.activeFilters.push(event.currentTarget.value);
 
-    return id;
+      const url = new URL(this.resetUrl);
+      this.activeFilters.forEach(function (filter) {
+        url.searchParams.append('f[]', filter);
+      });
+
+      this.src = url.toString();
+    }
   }
 
   buildFacets() {
@@ -3683,6 +3673,7 @@ class OchaAssessmentsBase extends LitElement {
     }
 
     let dropdowns = [];
+    this.activeFilters = [];
 
     for (const child_id in this.facets) {
       // Skip disabled filters.
@@ -3695,21 +3686,20 @@ class OchaAssessmentsBase extends LitElement {
 
       dropdown = {
         id: child_id,
-        label: this.getDropdownLabel(child_id),
+        label: child.label,
         selected: null,
-        selected_url: null,
         options: []
       };
 
-      child.forEach(function (option) {
-        if (typeof option.values.active != 'undefined') {
-          dropdown.selected = option.values.value;
-          dropdown.selected_url = option.url;
+      child.options.forEach(function (option) {
+        if (typeof option.active !== 'undefined' && option.active) {
+          dropdown.selected = option.key;
+          this.activeFilters.push(option.key);
         }
 
         dropdown.options.push({
-          key: option.url,
-          label: option.values.value
+          key: option.key,
+          label: option.label
         });
       });
 
@@ -3724,8 +3714,8 @@ class OchaAssessmentsBase extends LitElement {
     let dropdowns = this.buildFacets();
 
     return html`
-      <div class="cd-filters">
-        <div class="cd-filters__form">
+      <div class="cd-filter">
+        <div class="cd-filter__form">
           <form>
             ${
               dropdowns.map(
@@ -3753,13 +3743,13 @@ class OchaAssessmentsBase extends LitElement {
       value: ''
     };
 
-    if (dropdown.selected_url) {
+    if (dropdown.selected) {
       emptytOption.label = '- Remove filter -';
       emptytOption.value = dropdown.selected_url;
     }
 
     return html`
-      <div class="cd-filters__group">
+      <div class="cd-filter__group">
         <label for="${dropdown.label}">${dropdown.label}</label>
         <high-select class="dropdown" search arrow animated @change="${this.changeSrc}" id="${dropdown.id}">
           <high-option value="${emptytOption.value}">${emptytOption.label}</high-option>
@@ -19281,21 +19271,23 @@ class OchaAssessmentsMap extends OchaAssessmentsBase {
     }
 
     this.data.forEach(row => {
-      if (typeof row.field_locations_lat_lon != 'undefined' && row.field_locations_lat_lon) {
+      if (typeof row.field_locations_lat_lon != 'undefined' && row.field_locations_lat_lon.length > 0) {
         const latlon = row.field_locations_lat_lon[0].split(',');
         // Skip empty markers.
         if (latlon[1] != '' && latlon[0] != '') {
           const m = new Marker([latlon[1], latlon[0]]);
-          m.bindPopup('<a href="' + this.baseurl + '/node/' + row.nid + '">' + row.title + '</a>');
+          m.bindPopup('<a href="' + this.baseurl + '/assessment/' + row.nid + '">' + row.title + '</a>');
           this.cluster.addLayer(m);
         }
       }
     });
 
     this.map.addLayer(this.cluster);
-    this.map.fitBounds(this.cluster.getBounds(), {
-      maxZoom: this.maxZoom || 15
-    });
+    if (this.cluster.getLayers().length > 0) {
+      this.map.fitBounds(this.cluster.getBounds(), {
+        maxZoom: this.maxZoom || 15
+      });
+    }
   }
 
   connectedCallback() {
@@ -19378,4 +19370,3 @@ class OchaAssessmentsMap extends OchaAssessmentsBase {
 }
 
 customElements.define('ocha-assessments-map', OchaAssessmentsMap);
-//# sourceMappingURL=ocha-assessments-map.js.map

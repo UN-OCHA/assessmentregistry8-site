@@ -1,0 +1,28 @@
+uuid: 59263fd7-ad6d-42fc-b0ee-9d2599dfbe69
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets_summary.facets_summary.ass_table_summary
+  module:
+    - facets_summary
+    - system
+  theme:
+    - common_design_subtheme
+id: ass_table_summary
+theme: common_design_subtheme
+region: facets
+weight: -10
+provider: null
+plugin: 'facets_summary_block:ass_table_summary'
+settings:
+  id: 'facets_summary_block:ass_table_summary'
+  label: Summary
+  provider: facets_summary
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: "/assessments/table\r\n/assessments/table/*"
+    negate: false
+    context_mapping: {  }

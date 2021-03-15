@@ -1,0 +1,26 @@
+uuid: f3e0d092-1ad5-4e9e-9daa-a0cea4e4c511
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.km.field_countries
+  module:
+    - external_entities
+id: km.km.field_countries
+field_name: field_countries
+entity_type: km
+bundle: km
+label: Countries
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:country'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

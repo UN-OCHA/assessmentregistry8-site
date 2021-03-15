@@ -1,0 +1,75 @@
+uuid: 6b598f5a-3229-49af-8759-5da33a544627
+langcode: en
+status: true
+dependencies: {  }
+id: assessment
+label: Assessment
+label_plural: assessments
+description: ''
+read_only: false
+field_mappings:
+  id:
+    value: uuid
+  uuid:
+    value: uuid
+  title:
+    value: title
+  field_assessment_report:
+    accessibility: assessment_report/0/accessibility
+    media_uuid: assessment_report/0/files/0/media_uuid
+    instructions: assessment_report/0/instructions
+  field_asst_organizations:
+    target_id: 'asst_organizations/*/uuid'
+  field_author:
+    value: author
+  field_collection_methods:
+    value: 'collection_method/*'
+  field_contacts:
+    value: contacts
+  field_date:
+    value: ar_date/start
+    end_value: ar_date/end
+  field_disaster:
+    target_id: 'disasters/*/uuid'
+  field_frequency:
+    value: frequency
+  field_key_findings:
+    value: key_findings
+  field_locations:
+    target_id: 'locations/*/uuid'
+  field_methodology:
+    value: methodology
+  field_organizations:
+    target_id: 'organizations/*/uuid'
+  field_population_types:
+    entity: 'population_types/*/uuid'
+  field_sample_size:
+    value: sample_size
+  field_status:
+    target_id: ar_status/uuid
+  field_subject_objective:
+    value: subject
+  field_themes:
+    target_id: 'themes/*/uuid'
+storage_client_id: restjson
+storage_client_config:
+  endpoint: 'http://docstore.local.docksal/api/v1/documents/assessments'
+  response_format: json
+  pager:
+    default_limit: '50'
+    page_parameter: 'page[offset]'
+    page_parameter_type: pagenum
+    page_size_parameter: 'page[limit]'
+    page_size_parameter_type: pagesize
+  api_key:
+    header_name: API-KEY
+    key: abcd
+  parameters:
+    list:
+      sort: uuid
+    single: {  }
+persistent_cache_max_age: 900
+annotation_entity_type_id: null
+annotation_bundle_id: null
+annotation_field_name: null
+inherits_annotation_fields: false

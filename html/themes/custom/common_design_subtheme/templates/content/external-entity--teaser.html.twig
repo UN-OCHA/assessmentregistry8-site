@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display an external entity.
+ *
+ * Available variables:
+ * - entity: The external entity.
+*/
+#}
+{%
+  set classes = [
+  'cd-teaser [ cd-flow ]'
+]
+%}
+
+{{ attach_library('common_design/cd-teaser') }}
+
+<article{{ attributes.addClass(classes) }}>
+
+  <div class="cd-teaser__container [ cd-flow ]">
+    <h3 class="cd-teaser__title">
+      {{ entity.title }}
+    </h3>
+
+    <div class="cd-teaser__description node__content">
+
+      {# this doesn't seem to work. Title prints regardless #}
+      {{ entity|without('title') }}
+
+    </div>
+
+  </div>
+
+</article>

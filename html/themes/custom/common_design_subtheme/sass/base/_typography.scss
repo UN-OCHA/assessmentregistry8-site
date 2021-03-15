@@ -2,22 +2,11 @@
 // Typography
 //——————————————————————————————————————————————————————————————————————————————
 
-h1,
 h2,
 h3,
 h4,
 h5 {
   color: $implementation-primary;
-}
-
-h1 {
-  color: $implementation-primary;
-}
-
-.page-title {
-  border-bottom: 0 none;
-  color: $implementation-primary;
-  margin-top: 0;
 }
 
 a {
@@ -35,7 +24,7 @@ a {
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
   color: $implementation-primary;
-  border-bottom: 3px solid $cd-mid-bluey-grey;
+  border-bottom: 3px solid $cd-blue-grey;
 }
 
 .cd-heading-3 {

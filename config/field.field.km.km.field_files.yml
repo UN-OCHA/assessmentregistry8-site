@@ -1,0 +1,21 @@
+uuid: 59dfb67d-40ca-49a1-8dab-5d4ffe1f4e72
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.km.field_files
+  module:
+    - external_entities
+    - ocha_docstore_files
+id: km.km.field_files
+field_name: field_files
+entity_type: km
+bundle: km
+label: Files
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: ocha_doc_store_file

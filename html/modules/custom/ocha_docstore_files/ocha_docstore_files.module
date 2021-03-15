@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * OCHA Document store connector.
+ */
+
+/**
+ * Alter base url of the endpoints.
+ */
+function ocha_docstore_files_get_endpoint_base($endpoint) {
+  $base_url = \Drupal::config('ocha_docstore_files.settings')->get('endpoint_url');
+
+  if (empty($base_url)) {
+    return $endpoint;
+  }
+
+  $path = parse_url($endpoint, PHP_URL_PATH);
+  return rtrim($base_url, '/') . $path;
+}
+
+/**
+ * Alter api-key of the endpoints.
+ */
+function ocha_docstore_files_get_endpoint_apikey($apikey) {
+  $endpoint_apikey = \Drupal::config('ocha_docstore_files.settings')->get('endpoint_apikey');
+
+  if (empty($endpoint_apikey)) {
+    return $apikey;
+  }
+
+  return $endpoint_apikey;
+}

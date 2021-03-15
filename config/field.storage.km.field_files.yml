@@ -1,0 +1,19 @@
+uuid: f18b77e7-fcc8-4121-b36a-4580e8638a91
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+    - ocha_docstore_files
+id: km.field_files
+field_name: field_files
+entity_type: km
+type: ocha_doc_store_file
+settings: {  }
+module: ocha_docstore_files
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,7 +1,18 @@
 {
   "patches": {
+    "drupal/core": {
+      "https://www.drupal.org/project/drupal/issues/2936067": "https://www.drupal.org/files/issues/2021-01-28/2936067-25.patch"
+    },
     "drupal/facets": {
       "https://www.drupal.org/project/facets/issues/3005040": "https://www.drupal.org/files/issues/2018-10-09/facets-hierarchy-allow-different-types-3005040-7.patch"
+    },
+    "drupal/search_api": {
+      "Avoid array_flip warning": "PATCHES/search-api-flip.patch"
+    },
+    "drupal/external_entities": {
+      "https://www.drupal.org/project/external_entities/issues/3202811": "https://www.drupal.org/files/issues/2021-03-10/i3202811-support-geofield.patch",
+      "https://www.drupal.org/project/external_entities/issues/3202814": "https://www.drupal.org/files/issues/2021-03-10/i3202814-allow-array-of.patch",
+      "Dateranges": "./PATCHES/external_entities-daterange.patch"
     },
     "drupal/select2": {
       "https://www.drupal.org/project/select2/issues/3078085": "https://www.drupal.org/files/issues/2020-02-27/hierarchical-facet-widget-3078085-2.patch"

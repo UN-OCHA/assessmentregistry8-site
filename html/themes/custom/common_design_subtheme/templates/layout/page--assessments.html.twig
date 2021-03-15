@@ -1,0 +1,29 @@
+{%
+  set facets_layout_classes = [
+  'cd-container',
+  page.sidebar_first or page.facets ? 'cd-layout-with-region-sidebar-first cd-layout-with-sidebar-first',
+]
+%}
+
+{% embed '@common_design_subtheme/layout/page.html.twig' %}
+
+  {% block main %}
+    {# Link to skip to the main content is in html.html.twig #}
+    <main role="main" {{ attributes.setAttribute('id', 'main-content').addClass(facets_layout_classes) }}>
+
+      {{ page.page_title }}
+
+      <div class="cd-layout-content-wrapper">
+
+        <aside class="cd-layout-sidebar-first" role="complementary">{{ page.facets }}{{ page.sidebar_first }}</aside>
+
+        <div class="cd-layout-content">
+          {{ page.content }}
+        </div>{# /.cd-layout-content #}
+
+      </div>
+
+    </main>
+  {% endblock %}
+
+{% endembed %}

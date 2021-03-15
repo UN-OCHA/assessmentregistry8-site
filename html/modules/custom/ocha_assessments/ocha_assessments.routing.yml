@@ -12,3 +12,53 @@ ocha_assessments.ocha_assessments_create_template:
     _title: 'Ocha Assessments Create Template'
   requirements:
     _permission: 'ocha assessments bulk import'
+
+ocha_assessments.map:
+  path: '/map'
+  defaults:
+    _controller: '\Drupal\ocha_assessments\Controller\OchaJsonController::map'
+    _title: 'Assessments map'
+  requirements:
+    _permission: 'access content'
+ocha_assessments.table:
+  path: '/table'
+  defaults:
+    _controller: '\Drupal\ocha_assessments\Controller\OchaJsonController::table'
+    _title: 'Assessments table'
+  requirements:
+    _permission: 'access content'
+ocha_assessments.list:
+  path: '/list'
+  defaults:
+    _controller: '\Drupal\ocha_assessments\Controller\OchaJsonController::list'
+    _title: 'Assessments list'
+  requirements:
+    _permission: 'access content'
+ocha_assessments.map_legacy:
+  path: '/assessments/map'
+  defaults:
+    _controller: '\Drupal\ocha_assessments\Controller\OchaJsonController::redirectLegacy'
+    _title: 'Assessments map'
+  requirements:
+    _permission: 'access content'
+ocha_assessments.map_data:
+  path: '/map-data'
+  defaults:
+    _controller: '\Drupal\ocha_assessments\Controller\OchaJsonController::mapData'
+    _title: 'Assessments map'
+  requirements:
+    _permission: 'access content'
+ocha_assessments.list_data:
+  path: '/list-data'
+  defaults:
+    _controller: '\Drupal\ocha_assessments\Controller\OchaJsonController::listData'
+    _title: 'Assessments list'
+  requirements:
+    _permission: 'access content'
+ocha_assessments.table_data:
+  path: '/table-data'
+  defaults:
+    _controller: '\Drupal\ocha_assessments\Controller\OchaJsonController::tableData'
+    _title: 'Assessments table'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,22 @@
+uuid: 5ceb9847-5cb2-46fc-b386-f788b3690f6e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.km.field_original_publication_date
+  module:
+    - external_entities
+id: km.km.field_original_publication_date
+field_name: field_original_publication_date
+entity_type: km
+bundle: km
+label: 'Original publication date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1611928823
+default_value_callback: ''
+settings: {  }
+field_type: timestamp

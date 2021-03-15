@@ -1,0 +1,31 @@
+uuid: ae06a19b-2ef7-4ca6-80f9-ed47a71a478c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.life_cycle_step.life_cycle_step.field_parent
+  module:
+    - external_entities
+id: life_cycle_step.life_cycle_step.default
+targetEntityType: life_cycle_step
+bundle: life_cycle_step
+mode: default
+content:
+  field_parent:
+    weight: 1
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  title:
+    type: string
+    label: hidden
+    region: content
+    weight: 0
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  search_api_excerpt: true

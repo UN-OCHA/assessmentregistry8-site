@@ -1,118 +1,118 @@
-//——————————————————————————————————————————————————————————————————————————————
-// Common Design: Layout
-//——————————————————————————————————————————————————————————————————————————————
-
-//@TODO This element (main) is one of the core layout elements.
-// Using the element as a selector, instead of a unique class
-// means I cannot @extend the rule below, for the inner layout rules.
-// .cd-container is used as a utility class on other divs, for common padding, width control.
-.cd-layout-container main.cd-container {
-  padding-top: 2rem;
-
-  @include tablet {
-    padding-top: 3rem;
-    display: flex;
-    flex-wrap: wrap;
-    min-width: 50%;
-  }
-
-  @include desktop {
-    flex-wrap: nowrap;
-  }
-}
-
-.cd-layout-container main.cd-container aside {
-  // This is to prevent sidebar region wrapper div displaying when region is empty but still renders.
-  &:empty {
-    display: none;
-  }
-
-  @include tablet {
-    flex-grow: 1;
-  }
-
-  .cd-layout-sidebar-first & {
-    margin-bottom: 1rem;
-    @include tablet {
-      margin-bottom: 0;
-    }
-  }
-}
-
-// One sidebar.
-.cd-layout-with-sidebar-first .cd-layout-sidebar-first {
-  @include tablet {
-    flex-basis: 550px;
-  }
-
-  @include desktop {
-    flex-basis: 285px;
-  }
-}
-
-.cd-layout-sidebar-first {
-  margin-bottom: 1rem;
-
-  @include tablet {
-    margin-bottom: 1rem;
-  }
-
-  @include desktop {
-    margin-bottom: 0;
-  }
-}
-
-.cd-layout-content {
-  @include tablet {
-    .cd-layout-with-sidebar-first &,
-    .cd-layout-with-sidebar-second & {
-      min-width: 50%;
-    }
-  }
-
-  .cd-layout-with-sidebar-first & {
-    @include tablet {
-      margin-left: 0;
-      margin-right: 0;
-    }
-
-    @include desktop {
-      margin-left: 3rem;
-      margin-right: 0;
-    }
-  }
-}
-
-// Faux sidebar in Node content.
-// Requires markup in node-full.html.twig.
-section.cd-layout-two-col {
-  @include desktop {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .cd-layout-main-content {
-    // These override the main layout rules based on which sidebar is enabled.
-    // The status of those sidebars are not important to this inner layout.
-    margin-left: 0;
-
-    @include desktop {
-      margin-right: 2rem;
-      flex-basis: 0;
-      flex-grow: 999;
-    }
-  }
-
-  .cd-layout-sidebar-first {
-    margin-top: 1rem;
-
-    // I've styled this as a block with padding and bg colour.
-    padding: 1rem;
-    background-color: $cd-light-bluey-grey;
-
-    @include desktop {
-      flex-basis: 285px;
-      margin-top: 0;
-    }
-  }
-}
+////——————————————————————————————————————————————————————————————————————————————
+//// Common Design: Layout
+////——————————————————————————————————————————————————————————————————————————————
+//
+////@TODO This element (main) is one of the core layout elements.
+//// Using the element as a selector, instead of a unique class
+//// means I cannot @extend the rule below, for the inner layout rules.
+//// .cd-container is used as a utility class on other divs, for common padding, width control.
+//.cd-layout-container main.cd-container {
+//  padding-top: 2rem;
+//
+//  @include tablet {
+//    padding-top: 3rem;
+//    display: flex;
+//    flex-wrap: wrap;
+//    min-width: 50%;
+//  }
+//
+//  @include desktop {
+//    flex-wrap: nowrap;
+//  }
+//}
+//
+//.cd-layout-container main.cd-container aside {
+//  // This is to prevent sidebar region wrapper div displaying when region is empty but still renders.
+//  &:empty {
+//    display: none;
+//  }
+//
+//  @include tablet {
+//    flex-grow: 1;
+//  }
+//
+//  .cd-layout-sidebar-first & {
+//    margin-bottom: 1rem;
+//    @include tablet {
+//      margin-bottom: 0;
+//    }
+//  }
+//}
+//
+//// One sidebar.
+//.cd-layout-with-sidebar-first .cd-layout-sidebar-first {
+//  @include tablet {
+//    flex-basis: 550px;
+//  }
+//
+//  @include desktop {
+//    flex-basis: 285px;
+//  }
+//}
+//
+//.cd-layout-sidebar-first {
+//  margin-bottom: 1rem;
+//
+//  @include tablet {
+//    margin-bottom: 1rem;
+//  }
+//
+//  @include desktop {
+//    margin-bottom: 0;
+//  }
+//}
+//
+//.cd-layout-content {
+//  @include tablet {
+//    .cd-layout-with-sidebar-first &,
+//    .cd-layout-with-sidebar-second & {
+//      min-width: 50%;
+//    }
+//  }
+//
+//  .cd-layout-with-sidebar-first & {
+//    @include tablet {
+//      margin-left: 0;
+//      margin-right: 0;
+//    }
+//
+//    @include desktop {
+//      margin-left: 3rem;
+//      margin-right: 0;
+//    }
+//  }
+//}
+//
+//// Faux sidebar in Node content.
+//// Requires markup in node-full.html.twig.
+//section.cd-layout-two-col {
+//  @include desktop {
+//    display: flex;
+//    flex-wrap: wrap;
+//  }
+//
+//  .cd-layout-main-content {
+//    // These override the main layout rules based on which sidebar is enabled.
+//    // The status of those sidebars are not important to this inner layout.
+//    margin-left: 0;
+//
+//    @include desktop {
+//      margin-right: 2rem;
+//      flex-basis: 0;
+//      flex-grow: 999;
+//    }
+//  }
+//
+//  .cd-layout-sidebar-first {
+//    margin-top: 1rem;
+//
+//    // I've styled this as a block with padding and bg colour.
+//    padding: 1rem;
+//    background-color: $cd-blue-grey;
+//
+//    @include desktop {
+//      flex-basis: 285px;
+//      margin-top: 0;
+//    }
+//  }
+//}

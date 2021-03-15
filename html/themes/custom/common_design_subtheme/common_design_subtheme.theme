@@ -44,22 +44,3 @@ function common_design_subtheme_form_alter(&$form, FormStateInterface $form_stat
     $form['actions']['submit']['#attributes']['value'][] = 'Search';
   }
 }
-
-/**
- * Implements template_preprocess_region().
- */
-function common_design_subtheme_preprocess_region(&$variables) {
-  $variables['has_filter'] = FALSE;
-
-  if (isset($variables['region']) && $variables['region'] == 'sidebar_first') {
-    $view_id = \Drupal::routeMatch()->getParameter('view_id');
-    if ($view_id === 'assessments' || 'knowledge_management') {
-      $variables['attributes']['class'][] = 'cd-filter';
-    }
-    $variables['has_filter'] = TRUE;
-  }
-
-  // Create the $content variable that templates expect.
-  $variables['content'] = $variables['elements']['#children'];
-  $variables['region'] = $variables['elements']['#region'];
-}

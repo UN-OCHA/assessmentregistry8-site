@@ -83,13 +83,21 @@
       > li > ul {
         a,
         button {
-          &.is-active {
-            border-left: 3px solid $implementation-highlight;
+          &.menu-item--active-trail {
+            border-left: 6px solid $implementation-highlight;
+
+            [dir='rtl'] & {
+              border-right: 6px solid $implementation-highlight;
+            }
           }
         }
 
-        > li.menu-item--active-trail .is-active {
-          border-left: 3px solid $implementation-highlight;
+        > li.menu-item--active-trail {
+          border-left: 6px solid $implementation-highlight;
+
+          [dir='rtl'] & {
+            border-right: 6px solid $implementation-highlight;
+          }
         }
       }
     }

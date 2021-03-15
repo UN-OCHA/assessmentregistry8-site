@@ -11,6 +11,38 @@ use Drupal\ocha_persons\Entity\PersonEntity;
 use Drupal\views\ViewExecutable;
 
 /**
+ * Implements hook_theme().
+ */
+function ocha_assessments_theme($existing, $type, $theme, $path) {
+  return [
+    'ocha_assessments_map' => [
+      'template' => 'ocha-map',
+      'variables' => [
+        'base_url' => 'https://assessmentregistry8-site.docksal',
+        'src' => 'https://assessmentregistry8-site.docksal/rest/assessments-map?items_per_page=800',
+        'component_url' => '/modules/custom/ocha_assessments/component/build/',
+      ],
+    ],
+    'ocha_assessments_table' => [
+      'template' => 'ocha-table',
+      'variables' => [
+        'base_url' => 'https://assessmentregistry8-site.docksal',
+        'src' => 'https://assessmentregistry8-site.docksal/rest/assessments-map?items_per_page=800',
+        'component_url' => '/modules/custom/ocha_assessments/component/build/',
+      ],
+    ],
+    'ocha_assessments_list' => [
+      'template' => 'ocha-list',
+      'variables' => [
+        'base_url' => 'https://assessmentregistry8-site.docksal',
+        'src' => 'https://assessmentregistry8-site.docksal/rest/assessments-map?items_per_page=800',
+        'component_url' => '/modules/custom/ocha_assessments/component/build/',
+      ],
+    ],
+  ];
+}
+
+/**
  * Implements hook_field_widget_info_alter().
  */
 function ocha_assessments_field_widget_info_alter(array &$info) {

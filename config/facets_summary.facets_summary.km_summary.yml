@@ -1,48 +1,48 @@
-uuid: 3524b250-de87-423e-a7fc-2a703fbfe2ad
+uuid: a07377ae-5ede-48cb-b58f-7ef24ffdd3ad
 langcode: en
 status: true
 dependencies:
   config:
-    - search_api.index.knowledge_management
+    - search_api.index.km
     - views.view.knowledge_management
   module:
     - search_api
 id: km_summary
-name: 'km summary'
+name: km_summary
 facets:
-  country:
-    checked: true
-    label: Country
-    separator: ', '
-    weight: 0
-    show_count: false
-  document_type:
-    checked: true
-    label: 'Document type'
-    separator: ', '
-    weight: 0
-    show_count: false
-  hpc_document_repository:
-    checked: true
-    label: 'HPC Document Repository'
-    separator: ', '
-    weight: 0
-    show_count: false
-  context:
+  km_context:
     checked: true
     label: Context
     separator: ', '
     weight: 0
     show_count: false
-  km_population_types:
+  km_countries:
     checked: true
-    label: 'Population Type(s)'
+    label: Countries
     separator: ', '
     weight: 0
     show_count: false
-  life_cycle_steps:
+  km_document_type:
+    checked: true
+    label: 'Document type'
+    separator: ', '
+    weight: 0
+    show_count: false
+  km_hpc_document_repository:
+    checked: true
+    label: 'HPC document repository'
+    separator: ', '
+    weight: 0
+    show_count: false
+  km_life_cycle_steps:
     checked: true
     label: 'Life cycle steps'
+    separator: ', '
+    weight: 0
+    show_count: false
+  km_population_types:
+    checked: true
+    label: 'Population types'
     separator: ', '
     weight: 0
     show_count: false
@@ -51,30 +51,22 @@ processor_configs:
   hide_when_not_rendered:
     processor_id: hide_when_not_rendered
     weights:
-      build: '-5'
+      build: '45'
     settings: {  }
   reset_facets_pretty_path:
     processor_id: reset_facets_pretty_path
     weights:
-      build: '-3'
+      build: '30'
     settings:
       link_text: 'Reset all filters'
       clear_string: 1
   reset_string_ocha:
     processor_id: reset_string_ocha
     weights:
-      build: '-9'
+      build: '30'
     settings: {  }
   show_count:
     processor_id: show_count
     weights:
-      build: '-10'
+      build: '5'
     settings: {  }
-  show_text_when_empty:
-    processor_id: show_text_when_empty
-    weights:
-      build: '-8'
-    settings:
-      text:
-        value: 'No results found.'
-        format: plain_text

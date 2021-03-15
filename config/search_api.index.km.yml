@@ -1,0 +1,154 @@
+uuid: 93a1d2e4-1f67-4b92-b739-3189206d5e8e
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_solr
+    - external_entities
+    - search_api
+  config:
+    - field.storage.km.field_context
+    - field.storage.km.field_countries
+    - field.storage.km.field_document_type
+    - field.storage.km.field_hpc_document_repository
+    - field.storage.km.field_life_cycle_steps
+    - field.storage.km.field_original_publication_date
+    - field.storage.km.field_population_types
+    - search_api.server.solr
+third_party_settings:
+  search_api_solr:
+    finalize: false
+    commit_before_finalize: false
+    commit_after_finalize: false
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
+    highlighter:
+      maxAnalyzedChars: 51200
+      fragmenter: gap
+      regex:
+        slop: 0.5
+        pattern: blank
+        maxAnalyzedChars: 10000
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
+      highlight:
+        mergeContiguous: false
+        requireFieldMatch: false
+        snippets: 3
+        fragsize: 0
+    mlt:
+      mintf: 1
+      mindf: 1
+      maxdf: 0
+      maxdfpct: 0
+      minwl: 0
+      maxwl: 0
+      maxqt: 100
+      maxntp: 2000
+      boost: false
+      interestingTerms: none
+    term_modifiers:
+      slop: 3
+      fuzzy: 1
+    advanced:
+      index_prefix: ''
+      collection: ''
+      timezone: ''
+id: km
+name: km
+description: ''
+read_only: false
+field_settings:
+  field_countries:
+    label: Countries
+    datasource_id: 'entity:km'
+    property_path: field_countries
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_countries
+  field_document_type:
+    label: 'Document type'
+    datasource_id: 'entity:km'
+    property_path: field_document_type
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_document_type
+  field_hpc_document_repository:
+    label: 'HPC document repository'
+    datasource_id: 'entity:km'
+    property_path: field_hpc_document_repository
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_hpc_document_repository
+  field_km_context:
+    label: Context
+    datasource_id: 'entity:km'
+    property_path: field_context
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_context
+  field_km_life_cycle_steps_label:
+    label: 'Life cycle steps » Life cycle step » Title'
+    datasource_id: 'entity:km'
+    property_path: 'field_life_cycle_steps:entity:title'
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_life_cycle_steps
+      module:
+        - external_entities
+  field_life_cycle_steps:
+    label: 'Life cycle steps'
+    datasource_id: 'entity:km'
+    property_path: field_life_cycle_steps
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_life_cycle_steps
+  field_original_publication_date:
+    label: 'Original publication date'
+    datasource_id: 'entity:km'
+    property_path: field_original_publication_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.km.field_original_publication_date
+  field_population_types:
+    label: 'Population types'
+    datasource_id: 'entity:km'
+    property_path: field_population_types
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_population_types
+  title_1:
+    label: 'Population types » Population Type » Title'
+    datasource_id: 'entity:km'
+    property_path: 'field_population_types:entity:title'
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_population_types
+      module:
+        - external_entities
+datasource_settings:
+  'entity:km': {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+  solr_date_range: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: solr

@@ -1,0 +1,19 @@
+uuid: 0ba65f31-0b56-4aeb-875f-147c6eb61ab7
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: km.field_population_types
+field_name: field_population_types
+entity_type: km
+type: entity_reference
+settings:
+  target_type: population_type
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

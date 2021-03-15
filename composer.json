@@ -1,6 +1,6 @@
 {
     "name": "unocha/assessmentregistry8-site",
-    "description": "Registry ASssements 8",
+    "description": "Registry Asssements 8",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "authors": [
@@ -17,6 +17,10 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/UN-OCHA/common_design.git"
         }
     ],
     "require": {
@@ -30,10 +34,12 @@
         "drupal/core": "^8.8.8",
         "drupal/custom_widgets": "^2.0",
         "drupal/dream_block_manager": "^1.0",
+        "drupal/external_entities": "^2.0@alpha",
         "drupal/external_media": "^1.0",
         "drupal/facets": "^1.4",
         "drupal/facets_pretty_paths": "^1.0",
         "drupal/field_group": "^3.0",
+        "drupal/flysystem": "^2.0@alpha",
         "drupal/inline_entity_form": "^1.0",
         "drupal/leaflet": "^1.27",
         "drupal/maintenance200": "^1.0",
@@ -47,7 +53,7 @@
         "npm-asset/select2": "^4.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "phpoffice/phpspreadsheet": "^1.11",
-        "unocha/common_design": "^2.8.9",
+        "unocha/common_design": "^3.0.0",
         "unocha/ocha_integrations": "^1.0",
         "webflo/drupal-finder": "^1.0.0",
         "zaporylie/composer-drupal-optimizations": "^1.0"

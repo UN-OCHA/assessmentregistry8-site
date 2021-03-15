@@ -50,19 +50,20 @@
     flex: 0 1 340px;
   }
 
-  .cd-search--inline__input {
+  .cd-search--inline__input[type='search'],
+  .cd-search--inline__input[type='text'] {
     min-width: 160px;
     width: 100%;
 
     &:focus {
-      border-bottom: 3px solid $implementation-highlight;
+      border-bottom: 6px solid $implementation-highlight;
     }
   }
 
   .cd-search--inline__submit {
     &:hover,
     &:focus {
-      background-color: $cd-mid-bluey-grey;
+      background-color: $cd-blue-grey;
 
       svg {
         fill: $implementation-highlight;

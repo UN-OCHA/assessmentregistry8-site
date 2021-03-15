@@ -1,0 +1,29 @@
+uuid: 263c390f-e2dd-466e-9e46-c0d57823524a
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.km_population_types
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: km_populationtypes
+theme: common_design_subtheme
+region: facets
+weight: -1
+provider: null
+plugin: 'facet_block:km_population_types'
+settings:
+  id: 'facet_block:km_population_types'
+  label: 'Population types'
+  provider: facets
+  label_display: visible
+  block_id: km_populationtypes
+visibility:
+  request_path:
+    id: request_path
+    pages: "/knowledge-management\r\n/knowledge-management/*"
+    negate: false
+    context_mapping: {  }
