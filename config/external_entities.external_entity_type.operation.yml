@@ -1,10 +1,10 @@
-uuid: e30501e4-bce1-4f33-93fa-6cac1fde6676
+uuid: b7f6e231-dfdf-483d-b260-d7b90a850f5e
 langcode: en
 status: true
 dependencies: {  }
-id: disaster
-label: Disaster
-label_plural: Disasters
+id: operation
+label: Operation
+label_plural: Operations
 description: ''
 read_only: true
 field_mappings:
@@ -13,10 +13,12 @@ field_mappings:
   uuid:
     value: uuid
   title:
-    value: title
+    value: label
+  field_hrinfo_id:
+    value: id
 storage_client_id: restjson
 storage_client_config:
-  endpoint: 'http://docstore.local.docksal/api/v1/documents/disasters'
+  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/operations/terms'
   response_format: json
   pager:
     default_limit: '50'
@@ -30,7 +32,7 @@ storage_client_config:
   parameters:
     list: {  }
     single: {  }
-persistent_cache_max_age: 0
+persistent_cache_max_age: 900
 annotation_entity_type_id: null
 annotation_bundle_id: null
 annotation_field_name: null
