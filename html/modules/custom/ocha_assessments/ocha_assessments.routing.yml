@@ -42,21 +42,21 @@ ocha_assessments.map_legacy:
   requirements:
     _permission: 'access content'
 ocha_assessments.map_data:
-  path: '/map-data'
+  path: '/rest/map-data'
   defaults:
     _controller: '\Drupal\ocha_assessments\Controller\OchaJsonController::mapData'
     _title: 'Assessments map'
   requirements:
     _permission: 'access content'
 ocha_assessments.list_data:
-  path: '/list-data'
+  path: '/rest/list-data'
   defaults:
     _controller: '\Drupal\ocha_assessments\Controller\OchaJsonController::listData'
     _title: 'Assessments list'
   requirements:
     _permission: 'access content'
 ocha_assessments.table_data:
-  path: '/table-data'
+  path: '/rest/table-data'
   defaults:
     _controller: '\Drupal\ocha_assessments\Controller\OchaJsonController::tableData'
     _title: 'Assessments table'
