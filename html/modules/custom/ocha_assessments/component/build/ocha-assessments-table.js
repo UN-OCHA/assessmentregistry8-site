@@ -3975,7 +3975,7 @@ class OchaAssessmentsTable extends OchaAssessmentsBase {
                 html`
                   <tr>
                     <td data-content="Title"><a href="${this.baseurl}/assessment/${r.uuid}">${r.title}</a></td>
-                    <td data-content="Location(s)">${r.field_locations_label}</td>
+                    <td data-content="Location(s)">${r.field_locations_label.join(', ')}</td>
                     <td data-content="Managed by">${r.field_organizations_label}</td>
                     <td data-content="Participating Organization(s)">${r.field_asst_organizations_label}</td>
                     <td data-content="Clusters/Sectors">${r.field_local_groups_label}</td>
