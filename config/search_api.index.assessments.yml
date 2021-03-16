@@ -12,6 +12,8 @@ dependencies:
     - field.storage.assessment.field_organizations
     - field.storage.assessment.field_locations
     - field.storage.location.field_geolocation
+    - field.storage.assessment.field_operations
+    - field.storage.operation.field_hrinfo_id
     - field.storage.assessment.field_asst_organizations
     - field.storage.assessment.field_population_types
     - field.storage.assessment.field_status
@@ -167,6 +169,17 @@ field_settings:
       config:
         - field.storage.assessment.field_locations
         - field.storage.location.field_geolocation
+      module:
+        - external_entities
+  operation_id:
+    label: 'Operations » Operation » HRInfo Id'
+    datasource_id: 'entity:assessment'
+    property_path: 'field_operations:entity:field_hrinfo_id'
+    type: integer
+    dependencies:
+      config:
+        - field.storage.assessment.field_operations
+        - field.storage.operation.field_hrinfo_id
       module:
         - external_entities
   title:

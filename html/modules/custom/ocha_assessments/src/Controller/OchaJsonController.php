@@ -17,7 +17,7 @@ class OchaJsonController extends ControllerBase {
    */
   public function map() {
     global $base_url;
-    $src = $base_url . '/map-data';
+    $src = $base_url . '/rest/map-data';
 
     return [
       '#theme' => 'ocha_assessments_map',
@@ -32,7 +32,7 @@ class OchaJsonController extends ControllerBase {
    */
   public function table() {
     global $base_url;
-    $src = $base_url . '/table-data';
+    $src = $base_url . '/rest/table-data';
 
     return [
       '#theme' => 'ocha_assessments_table',
@@ -47,7 +47,7 @@ class OchaJsonController extends ControllerBase {
    */
   public function list() {
     global $base_url;
-    $src = $base_url . '/list-data';
+    $src = $base_url . '/rest/list-data';
 
     return [
       '#theme' => 'ocha_assessments_list',
