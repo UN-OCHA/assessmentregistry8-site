@@ -1,4 +1,4 @@
-uuid: 0680c0b6-7761-4717-82f8-2c8ead452fc9
+uuid: 590e5e9c-8a6e-46da-8886-539b917ecff9
 langcode: en
 status: true
 dependencies:
@@ -11,14 +11,14 @@ dependencies:
 third_party_settings:
   facets_pretty_paths:
     coder: default_coder
-id: ass_table_leading_coordinating_organizations
-name: 'Leading/Coordinating Organization(s)'
-url_alias: ass_list_leading_coordinating_organization
+id: ass_list_operations
+name: Operations
+url_alias: ass_list_operations
 weight: 0
 min_count: 1
 show_only_one_result: false
-field_identifier: field_organizations
-facet_source_id: 'search_api:views_page__assessments__assessments_table'
+field_identifier: field_operations
+facet_source_id: 'search_api:views_page__assessments__assessments_list'
 widget:
   type: select2
   config:

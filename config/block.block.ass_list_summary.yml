@@ -12,7 +12,7 @@ dependencies:
 id: ass_list_summary
 theme: common_design_subtheme
 region: facets
-weight: -11
+weight: -14
 provider: null
 plugin: 'facets_summary_block:ass_list_summary'
 settings:

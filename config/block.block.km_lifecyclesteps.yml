@@ -12,7 +12,7 @@ dependencies:
 id: km_lifecyclesteps
 theme: common_design_subtheme
 region: facets
-weight: -8
+weight: -12
 provider: null
 plugin: 'facet_block:km_life_cycle_steps'
 settings:

@@ -1,29 +1,29 @@
-uuid: 29e9ae96-3ad1-495d-9bfa-347c61d272e4
+uuid: 1c8e109b-16e1-4353-a0a5-a2a9e935e324
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.ass_list_population_types
+    - facets.facet.ass_table_population_types
   module:
     - facets
     - system
   theme:
     - common_design_subtheme
-id: ass_list_populationtypes
+id: ass_table_populationtypes
 theme: common_design_subtheme
 region: facets
 weight: -1
 provider: null
-plugin: 'facet_block:ass_list_population_types'
+plugin: 'facet_block:ass_table_population_types'
 settings:
-  id: 'facet_block:ass_list_population_types'
+  id: 'facet_block:ass_table_population_types'
   label: 'Population Type(s)'
   provider: facets
   label_display: visible
-  block_id: ass_list_populationtypes
+  block_id: ass_table_populationtypes
 visibility:
   request_path:
     id: request_path
-    pages: "/assessments/list\r\n/assessments/list/*"
+    pages: "/assessments/table\r\n/assessments/table/*"
     negate: false
     context_mapping: {  }
