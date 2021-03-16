@@ -32,7 +32,7 @@ class OchaJsonController extends ControllerBase {
    */
   public function table() {
     global $base_url;
-    $src = $base_url . '/rest/table-data';
+    $src = $base_url . '/rest/table-data?sort=-field_date';
 
     return [
       '#theme' => 'ocha_assessments_table',
@@ -47,7 +47,7 @@ class OchaJsonController extends ControllerBase {
    */
   public function list() {
     global $base_url;
-    $src = $base_url . '/rest/list-data';
+    $src = $base_url . '/rest/list-data?sort=-field_date';
 
     return [
       '#theme' => 'ocha_assessments_list',
@@ -144,6 +144,22 @@ class OchaJsonController extends ControllerBase {
         $parts = explode(':', $filter);
         $query->addCondition($parts[0], $parts[1]);
       }
+    }
+
+    // Parse sort parameter.
+    if ($request->query->has('sort')) {
+      $sorts = explode('sort', $request->query->get('sort'));
+      foreach ($sorts as $sort) {
+        if (strpos($sort, '-') === 0) {
+          $query->sort(substr($sort, 1), 'DESC');
+        }
+        else {
+          $query->sort($sort, 'ASC');
+        }
+      }
+    }
+    else {
+      $query->sort('field_date', 'DESC');
     }
 
     // Add facets.
