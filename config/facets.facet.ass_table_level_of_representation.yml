@@ -1,4 +1,4 @@
-uuid: 0680c0b6-7761-4717-82f8-2c8ead452fc9
+uuid: b06fcffa-2d02-4521-ac34-d2fab5e8b090
 langcode: en
 status: true
 dependencies:
@@ -11,13 +11,13 @@ dependencies:
 third_party_settings:
   facets_pretty_paths:
     coder: default_coder
-id: ass_table_leading_coordinating_organizations
-name: 'Leading/Coordinating Organization(s)'
-url_alias: ass_list_leading_coordinating_organization
+id: ass_table_level_of_representation
+name: 'Level of Representation'
+url_alias: ass_table_level_of_representation
 weight: 0
 min_count: 1
 show_only_one_result: false
-field_identifier: field_organizations
+field_identifier: field_level_of_representation
 facet_source_id: 'search_api:views_page__assessments__assessments_table'
 widget:
   type: select2
@@ -43,8 +43,8 @@ processor_configs:
       sort: 40
     settings:
       sort: ASC
-  translate_entity:
-    processor_id: translate_entity
+  list_item:
+    processor_id: list_item
     weights:
       build: 5
     settings: {  }

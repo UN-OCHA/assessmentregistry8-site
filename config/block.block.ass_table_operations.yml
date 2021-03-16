@@ -1,0 +1,29 @@
+uuid: 368cb462-0f92-4294-be89-6d331b30c5f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.ass_table_operations
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: ass_table_operations
+theme: common_design_subtheme
+region: facets
+weight: 1
+provider: null
+plugin: 'facet_block:ass_table_operations'
+settings:
+  id: 'facet_block:ass_table_operations'
+  label: Operations
+  provider: facets
+  label_display: visible
+  block_id: ass_table_operations
+visibility:
+  request_path:
+    id: request_path
+    pages: "/assessments/table\r\n/assessments/table/*"
+    negate: false
+    context_mapping: {  }

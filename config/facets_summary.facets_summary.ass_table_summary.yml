@@ -10,9 +10,33 @@ dependencies:
 id: ass_table_summary
 name: Summary
 facets:
-  ass_table_leading_coordinating_organizations:
+  ass_table_leading_coordinating_organization:
     checked: true
     label: 'Leading/Coordinating Organization(s)'
+    separator: ', '
+    weight: 0
+    show_count: false
+  ass_table_disaster:
+    checked: true
+    label: Disaster
+    separator: ', '
+    weight: 0
+    show_count: false
+  ass_table_participating_organizations:
+    checked: true
+    label: 'Participating Organization(s)'
+    separator: ', '
+    weight: 0
+    show_count: false
+  ass_table_population_types:
+    checked: true
+    label: 'Population Type(s)'
+    separator: ', '
+    weight: 0
+    show_count: false
+  ass_table_status:
+    checked: true
+    label: Status
     separator: ', '
     weight: 0
     show_count: false
@@ -35,11 +59,8 @@ processor_configs:
     weights:
       build: '30'
     settings: {  }
-  show_text_when_empty:
-    processor_id: show_text_when_empty
+  show_count:
+    processor_id: show_count
     weights:
-      build: '10'
-    settings:
-      text:
-        value: 'No results found.'
-        format: plain_text
+      build: '5'
+    settings: {  }

@@ -1,0 +1,29 @@
+uuid: df775b58-d30b-4a8c-879a-1bd98fb56e00
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.ass_table_locations
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: ass_table_locations
+theme: common_design_subtheme
+region: facets
+weight: -4
+provider: null
+plugin: 'facet_block:ass_table_locations'
+settings:
+  id: 'facet_block:ass_table_locations'
+  label: Location(s)
+  provider: facets
+  label_display: visible
+  block_id: ass_table_locations
+visibility:
+  request_path:
+    id: request_path
+    pages: "/assessments/table\r\n/assessments/table/*"
+    negate: false
+    context_mapping: {  }

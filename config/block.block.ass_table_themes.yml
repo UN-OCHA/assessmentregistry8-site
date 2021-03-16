@@ -1,0 +1,29 @@
+uuid: d2ad7473-c5dd-43f9-b816-c65bbffdefd2
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.ass_table_themes
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: ass_table_themes
+theme: common_design_subtheme
+region: facets
+weight: 2
+provider: null
+plugin: 'facet_block:ass_table_themes'
+settings:
+  id: 'facet_block:ass_table_themes'
+  label: Theme(s)
+  provider: facets
+  label_display: visible
+  block_id: ass_table_themes
+visibility:
+  request_path:
+    id: request_path
+    pages: "/assessments/table\r\n/assessments/table/*"
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,29 @@
+uuid: 9f56016a-7573-43c2-9c5f-f977da122b45
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.ass_table_leading_coordinating_organization
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: ass_table_leadingcoordinatingorganizations
+theme: common_design_subtheme
+region: facets
+weight: -7
+provider: null
+plugin: 'facet_block:ass_table_leading_coordinating_organization'
+settings:
+  id: 'facet_block:ass_table_leading_coordinating_organization'
+  label: 'Leading/Coordinating Organization(s)'
+  provider: facets
+  label_display: visible
+  block_id: ass_table_leadingcoordinatingorganizations
+visibility:
+  request_path:
+    id: request_path
+    pages: "/assessments/table\r\n/assessments/table/*\r\n"
+    negate: false
+    context_mapping: {  }
