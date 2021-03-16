@@ -1,0 +1,14 @@
+uuid: a28d5243-247a-45b5-bf35-e423121f488d
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: km
+label: 'Knowledge Management'
+type: 'canonical_entities:km'
+pattern: 'content/[km:title]'
+selection_criteria: {  }
+selection_logic: and
+weight: 0
+relationships: {  }
