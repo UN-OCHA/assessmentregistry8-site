@@ -41,10 +41,6 @@
   ]
 %}
 
-{% if display_id != 'assessments_map' %}
-  {% include '@cd-components/cd-export-button/cd-export-button.html.twig' %}
-{% endif %}
-
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if title %}
