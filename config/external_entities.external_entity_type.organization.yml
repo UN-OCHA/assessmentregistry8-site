@@ -16,7 +16,7 @@ field_mappings:
     value: label
 storage_client_id: restjson
 storage_client_config:
-  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/ar_organizations/terms'
+  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/organizations/terms'
   response_format: json
   pager:
     default_limit: '50'
