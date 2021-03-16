@@ -220,4 +220,26 @@ class RestJson extends Rest implements PluginFormInterface {
     return $headers;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function countQuery(array $parameters = []) {
+    $response = $this->httpClient->request(
+      'GET',
+      ocha_docstore_files_get_endpoint_base($this->configuration['endpoint']),
+      [
+        'headers' => $this->getHttpHeaders(),
+        'query' => $this->getListQueryParameters($parameters, 0, 1),
+      ]
+    );
+
+    $body = $response->getBody() . '';
+    $results = $this
+      ->getResponseDecoderFactory()
+      ->getDecoder($this->configuration['response_format'])
+      ->decode($body);
+
+    return $results['_count'];
+  }
+
 }

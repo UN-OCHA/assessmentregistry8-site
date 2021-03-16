@@ -1,0 +1,14 @@
+uuid: 5a80cc59-f0c5-4b97-b064-09c751032bc3
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessments
+label: Assessments
+type: 'canonical_entities:assessment'
+pattern: 'content/[assessment:title]'
+selection_criteria: {  }
+selection_logic: and
+weight: 0
+relationships: {  }
