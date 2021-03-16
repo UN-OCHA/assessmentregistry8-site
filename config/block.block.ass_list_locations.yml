@@ -1,29 +1,29 @@
-uuid: 29aa12e9-f9ba-4602-90eb-7feab54bf824
+uuid: 9cabe555-9e7a-4127-91e5-d7e51176d8b1
 langcode: en
 status: true
 dependencies:
   config:
-    - facets.facet.km_countries
+    - facets.facet.ass_list_locations
   module:
     - facets
     - system
   theme:
     - common_design_subtheme
-id: km_countries
+id: ass_list_locations
 theme: common_design_subtheme
 region: facets
-weight: -10
+weight: -4
 provider: null
-plugin: 'facet_block:km_countries'
+plugin: 'facet_block:ass_list_locations'
 settings:
-  id: 'facet_block:km_countries'
-  label: Countries
+  id: 'facet_block:ass_list_locations'
+  label: Location(s)
   provider: facets
   label_display: visible
-  block_id: km_countries
+  block_id: ass_list_locations
 visibility:
   request_path:
     id: request_path
-    pages: "/knowledge-management\r\n/knowledge-management/*"
+    pages: "/assessments/list\r\n/assessments/list/*"
     negate: false
     context_mapping: {  }

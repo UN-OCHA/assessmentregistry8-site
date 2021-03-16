@@ -12,7 +12,7 @@ dependencies:
 id: ass_list_leadingcoordinatingorganizations
 theme: common_design_subtheme
 region: facets
-weight: -2
+weight: -7
 provider: null
 plugin: 'facet_block:ass_list_leading_coordinating_organization'
 settings:

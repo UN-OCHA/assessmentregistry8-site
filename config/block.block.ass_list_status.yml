@@ -12,7 +12,7 @@ dependencies:
 id: ass_list_status
 theme: common_design_subtheme
 region: facets
-weight: 0
+weight: -3
 provider: null
 plugin: 'facet_block:ass_list_status'
 settings:

@@ -12,7 +12,7 @@ dependencies:
 id: ass_list__participatingorganizations
 theme: common_design_subtheme
 region: facets
-weight: 0
+weight: -5
 provider: null
 plugin: 'facet_block:ass_list_participating_organizations'
 settings:
