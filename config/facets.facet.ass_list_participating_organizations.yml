@@ -10,7 +10,7 @@ dependencies:
     - search_api
 third_party_settings:
   facets_pretty_paths:
-    coder: ocha_integer_list_coder
+    coder: default_coder
 id: ass_list_participating_organizations
 name: 'Participating Organization(s)'
 url_alias: ass_list_participating_organizations
