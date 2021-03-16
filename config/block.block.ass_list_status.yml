@@ -1,0 +1,29 @@
+uuid: 320d915f-e64f-42bd-a279-5210ef6c7efd
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.ass_list_status
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: ass_list_status
+theme: common_design_subtheme
+region: facets
+weight: 0
+provider: null
+plugin: 'facet_block:ass_list_status'
+settings:
+  id: 'facet_block:ass_list_status'
+  label: Status
+  provider: facets
+  label_display: visible
+  block_id: ass_list_status
+visibility:
+  request_path:
+    id: request_path
+    pages: "/assessments/list\r\n/assessments/list/*"
+    negate: false
+    context_mapping: {  }
