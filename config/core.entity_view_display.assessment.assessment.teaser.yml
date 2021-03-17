@@ -46,9 +46,9 @@ content:
     weight: 4
     label: inline
     settings:
-      separator: '-'
-      format_type: medium
       timezone_override: ''
+      format_type: date_only
+      separator: '-'
     third_party_settings: {  }
     type: daterange_default
     region: content
