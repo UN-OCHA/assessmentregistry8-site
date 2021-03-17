@@ -1,0 +1,7 @@
+ocha_knowledge_management.ocha_knowledge_management_bulk_import:
+  path: '/admin/content/bulk-import-knowledge-management'
+  defaults:
+    _form: '\Drupal\ocha_knowledge_management\Form\OchaKnowledgeManagementBulkImport'
+    _title: 'Ocha knowledge management bulk import'
+  requirements:
+    _permission: 'ocha knowledge management bulk import'

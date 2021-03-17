@@ -1,0 +1,3 @@
+ocha knowledge management bulk import:
+  title: 'Bulk create knowledge management'
+  description: 'Allows user to create knowledge management by importing xlsx file'
