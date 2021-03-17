@@ -159,31 +159,12 @@ class OchaKnowledgeManagementBulkImport extends FormBase {
   protected function createDocument($item) {
     // Trim all fields.
     $item = array_map('trim', $item);
-/*
-    Title
-    Context
-    Country
-    Document
-    Document type
-    Global cluster
-    HPC Document Repository
-    Life cycle steps
-    Media
-    Original publication date
-    Population Type(s)
-    Post date
-    Published status
-    Updated date
-    Description
-    Path
-    Nid
-*/
 
     // Create node object.
     $km = new ExternalEntity([], 'km');
     $km->title = $item['title'];
     $km->field_author = $this->currentUser()->getDisplayName();
-    
+
     // Context.
     if (isset($item['context']) && !empty($item['context'])) {
       // Split and trim.
@@ -222,7 +203,7 @@ class OchaKnowledgeManagementBulkImport extends FormBase {
       }
       $km->set('field_document_type', $uuids);
     }
-  
+
     // Global cluster.
     if (isset($item['global cluster']) && !empty($item['global cluster'])) {
       // Split and trim.
@@ -295,7 +276,7 @@ class OchaKnowledgeManagementBulkImport extends FormBase {
       }
       $km->set('field_population_types', $uuids);
     }
-  
+
     $km->save();
   }
 
