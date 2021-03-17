@@ -430,7 +430,19 @@ display:
             multi_separator: ', '
           plugin_id: search_api_field
       filters: {  }
-      sorts: {  }
+      sorts:
+        field_original_publication_date:
+          id: field_original_publication_date
+          table: search_api_index_km
+          field: field_original_publication_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: search_api
       header: {  }
       footer: {  }
       empty: {  }
