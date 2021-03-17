@@ -1,4 +1,4 @@
-uuid: 59263fd7-ad6d-42fc-b0ee-9d2599dfbe69
+uuid: d660b75d-b027-401f-a488-7c3ea1ce575f
 langcode: en
 status: true
 dependencies:
@@ -12,14 +12,14 @@ dependencies:
 id: ass_table_summary
 theme: common_design_subtheme
 region: facets
-weight: -10
+weight: -14
 provider: null
 plugin: 'facets_summary_block:ass_table_summary'
 settings:
   id: 'facets_summary_block:ass_table_summary'
   label: Summary
   provider: facets_summary
-  label_display: visible
+  label_display: '0'
 visibility:
   request_path:
     id: request_path

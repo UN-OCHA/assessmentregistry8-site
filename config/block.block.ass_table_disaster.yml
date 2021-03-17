@@ -1,0 +1,29 @@
+uuid: ef88aac4-dd9b-4daf-abbb-aac80a4d6524
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.ass_table_disaster
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: ass_table_disaster
+theme: common_design_subtheme
+region: facets
+weight: 0
+provider: null
+plugin: 'facet_block:ass_table_disaster'
+settings:
+  id: 'facet_block:ass_table_disaster'
+  label: Disaster
+  provider: facets
+  label_display: visible
+  block_id: ass_table_disaster
+visibility:
+  request_path:
+    id: request_path
+    pages: "/assessments/table\r\n/assessments/table/*"
+    negate: false
+    context_mapping: {  }

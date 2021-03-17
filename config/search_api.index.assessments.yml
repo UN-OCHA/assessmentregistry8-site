@@ -10,6 +10,7 @@ dependencies:
     - field.storage.assessment.field_date
     - field.storage.assessment.field_disaster
     - field.storage.assessment.field_organizations
+    - field.storage.assessment.field_level_of_representation
     - field.storage.assessment.field_locations
     - field.storage.location.field_geolocation
     - field.storage.assessment.field_operations
@@ -17,6 +18,7 @@ dependencies:
     - field.storage.assessment.field_asst_organizations
     - field.storage.assessment.field_population_types
     - field.storage.assessment.field_status
+    - field.storage.assessment.field_themes
     - search_api.server.solr
 third_party_settings:
   search_api_solr:
@@ -98,6 +100,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.assessment.field_disaster
+  field_level_of_representation:
+    label: 'Level of Representation'
+    datasource_id: 'entity:assessment'
+    property_path: field_level_of_representation
+    type: string
+    dependencies:
+      config:
+        - field.storage.assessment.field_level_of_representation
   field_locations:
     label: Location(s)
     datasource_id: 'entity:assessment'
@@ -116,6 +126,14 @@ field_settings:
         - field.storage.assessment.field_locations
       module:
         - external_entities
+  field_operations:
+    label: Operations
+    datasource_id: 'entity:assessment'
+    property_path: field_operations
+    type: string
+    dependencies:
+      config:
+        - field.storage.assessment.field_operations
   field_organizations:
     label: 'Leading/Coordinating Organization(s)'
     datasource_id: 'entity:assessment'
@@ -160,6 +178,14 @@ field_settings:
         - field.storage.assessment.field_status
       module:
         - external_entities
+  field_themes:
+    label: Theme(s)
+    datasource_id: 'entity:assessment'
+    property_path: field_themes
+    type: string
+    dependencies:
+      config:
+        - field.storage.assessment.field_themes
   latlon:
     label: 'Location(s) » Location » geolocation » LatLong Pair'
     datasource_id: 'entity:assessment'

@@ -32,7 +32,7 @@ class OchaJsonController extends ControllerBase {
    */
   public function table() {
     global $base_url;
-    $src = $base_url . '/rest/table-data';
+    $src = $base_url . '/rest/table-data?sort=-field_date';
 
     return [
       '#theme' => 'ocha_assessments_table',
@@ -47,7 +47,7 @@ class OchaJsonController extends ControllerBase {
    */
   public function list() {
     global $base_url;
-    $src = $base_url . '/rest/list-data';
+    $src = $base_url . '/rest/list-data?sort=-field_date';
 
     return [
       '#theme' => 'ocha_assessments_list',
@@ -146,6 +146,22 @@ class OchaJsonController extends ControllerBase {
       }
     }
 
+    // Parse sort parameter.
+    if ($request->query->has('sort')) {
+      $sorts = explode('sort', $request->query->get('sort'));
+      foreach ($sorts as $sort) {
+        if (strpos($sort, '-') === 0) {
+          $query->sort(substr($sort, 1), 'DESC');
+        }
+        else {
+          $query->sort($sort, 'ASC');
+        }
+      }
+    }
+    else {
+      $query->sort('field_date', 'DESC');
+    }
+
     // Add facets.
     $facet_options = [];
     foreach ($facet_to_entity as $key => $info) {
@@ -171,6 +187,13 @@ class OchaJsonController extends ControllerBase {
     // Prepare results.
     $data['search_results'] = [];
     foreach ($results as $item) {
+      $date = '';
+      if (!empty($item->getField('field_date')->getValues())) {
+        $date = $item->getField('field_date')->getValues();
+        $date = reset($date);
+        $date = date('d.m.Y', $date);
+      }
+
       $data['search_results'][] = [
         'uuid' => $item->getField('uuid')->getValues(),
         'title' => $item->getField('title')->getValues(),
@@ -180,6 +203,7 @@ class OchaJsonController extends ControllerBase {
         'field_organizations_label' => $item->getField('field_organizations_label')->getValues(),
         'field_asst_organizations_label' => $item->getField('field_asst_organizations_label')->getValues(),
         'field_status' => $item->getField('field_status_label')->getValues(),
+        'field_ass_date' => $date,
       ];
     }
 

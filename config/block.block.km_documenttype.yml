@@ -12,7 +12,7 @@ dependencies:
 id: km_documenttype
 theme: common_design_subtheme
 region: facets
-weight: -5
+weight: -9
 provider: null
 plugin: 'facet_block:km_document_type'
 settings:

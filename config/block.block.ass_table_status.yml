@@ -1,0 +1,29 @@
+uuid: e627a34e-2c92-42bc-890f-8ab662dca689
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.ass_table_status
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: ass_table_status
+theme: common_design_subtheme
+region: facets
+weight: -3
+provider: null
+plugin: 'facet_block:ass_table_status'
+settings:
+  id: 'facet_block:ass_table_status'
+  label: Status
+  provider: facets
+  label_display: visible
+  block_id: ass_table_status
+visibility:
+  request_path:
+    id: request_path
+    pages: "/assessments/table\r\n/assessments/table/*"
+    negate: false
+    context_mapping: {  }

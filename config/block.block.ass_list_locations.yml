@@ -1,0 +1,29 @@
+uuid: 9cabe555-9e7a-4127-91e5-d7e51176d8b1
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.ass_list_locations
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: ass_list_locations
+theme: common_design_subtheme
+region: facets
+weight: -4
+provider: null
+plugin: 'facet_block:ass_list_locations'
+settings:
+  id: 'facet_block:ass_list_locations'
+  label: Location(s)
+  provider: facets
+  label_display: visible
+  block_id: ass_list_locations
+visibility:
+  request_path:
+    id: request_path
+    pages: "/assessments/list\r\n/assessments/list/*"
+    negate: false
+    context_mapping: {  }

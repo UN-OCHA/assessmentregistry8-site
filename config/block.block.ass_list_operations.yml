@@ -1,0 +1,29 @@
+uuid: 03c40525-aaf1-4c16-a15e-9a017b5ee9f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.ass_list_operations
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: ass_list_operations
+theme: common_design_subtheme
+region: facets
+weight: 1
+provider: null
+plugin: 'facet_block:ass_list_operations'
+settings:
+  id: 'facet_block:ass_list_operations'
+  label: Operations
+  provider: facets
+  label_display: visible
+  block_id: ass_list_operations
+visibility:
+  request_path:
+    id: request_path
+    pages: "/assessments/list\r\n/assessments/list/*"
+    negate: false
+    context_mapping: {  }

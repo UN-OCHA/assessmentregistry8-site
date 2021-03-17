@@ -12,7 +12,7 @@ dependencies:
 id: km_summary
 theme: common_design_subtheme
 region: facets
-weight: -9
+weight: -13
 provider: null
 plugin: 'facets_summary_block:km_summary'
 settings:

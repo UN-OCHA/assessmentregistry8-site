@@ -16,6 +16,30 @@ facets:
     separator: ', '
     weight: 0
     show_count: false
+  ass_list_disaster:
+    checked: true
+    label: Disaster
+    separator: ', '
+    weight: 0
+    show_count: false
+  ass_list_participating_organizations:
+    checked: true
+    label: 'Participating Organization(s)'
+    separator: ', '
+    weight: 0
+    show_count: false
+  ass_list_population_types:
+    checked: true
+    label: 'Population Type(s)'
+    separator: ', '
+    weight: 0
+    show_count: false
+  ass_list_status:
+    checked: true
+    label: Status
+    separator: ', '
+    weight: 0
+    show_count: false
 facet_source_id: 'search_api:views_page__assessments__assessments_list'
 processor_configs:
   hide_when_not_rendered:
@@ -35,16 +59,8 @@ processor_configs:
     weights:
       build: '30'
     settings: {  }
-  show_summary:
-    processor_id: show_summary
+  show_count:
+    processor_id: show_count
     weights:
-      build: '20'
+      build: '5'
     settings: {  }
-  show_text_when_empty:
-    processor_id: show_text_when_empty
-    weights:
-      build: '10'
-    settings:
-      text:
-        value: 'No results found.'
-        format: plain_text

@@ -12,7 +12,7 @@ dependencies:
 id: km_countries
 theme: common_design_subtheme
 region: facets
-weight: -6
+weight: -10
 provider: null
 plugin: 'facet_block:km_countries'
 settings:

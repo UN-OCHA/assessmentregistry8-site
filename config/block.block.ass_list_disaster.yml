@@ -1,0 +1,29 @@
+uuid: 11bdfa2d-fd4a-46aa-a611-ebebe5591ed1
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.ass_list_disaster
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: ass_list_disaster
+theme: common_design_subtheme
+region: facets
+weight: 0
+provider: null
+plugin: 'facet_block:ass_list_disaster'
+settings:
+  id: 'facet_block:ass_list_disaster'
+  label: Disaster
+  provider: facets
+  label_display: visible
+  block_id: ass_list_disaster
+visibility:
+  request_path:
+    id: request_path
+    pages: "/assessments/list\r\n/assessments/list/*"
+    negate: false
+    context_mapping: {  }
