@@ -1,0 +1,19 @@
+uuid: ad7afb0e-200f-45fc-8dfd-f5d73be8f7a3
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: km.field_global_clusters
+field_name: field_global_clusters
+entity_type: km
+type: entity_reference
+settings:
+  target_type: global_cluster
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

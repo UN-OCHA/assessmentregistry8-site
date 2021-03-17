@@ -9,6 +9,7 @@ dependencies:
     - field.field.km.km.field_description
     - field.field.km.km.field_document_type
     - field.field.km.km.field_files
+    - field.field.km.km.field_global_clusters
     - field.field.km.km.field_hpc_document_repository
     - field.field.km.km.field_life_cycle_steps
     - field.field.km.km.field_original_publication_date
@@ -22,19 +23,11 @@ targetEntityType: km
 bundle: km
 mode: default
 content:
-  field_author:
-    weight: 1
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
   field_context:
     weight: 3
     label: above
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
@@ -42,7 +35,7 @@ content:
     weight: 5
     label: above
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
@@ -57,7 +50,7 @@ content:
     weight: 6
     label: above
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
@@ -68,11 +61,19 @@ content:
     third_party_settings: {  }
     type: ocha_doc_store_file_formatter
     region: content
+  field_global_clusters:
+    weight: 9
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_hpc_document_repository:
     weight: 7
     label: above
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
@@ -80,12 +81,12 @@ content:
     weight: 4
     label: above
     settings:
-      link: '1'
+      link: 0
     third_party_settings: {  }
     type: ocha_knowledge_management_lfs
     region: content
   field_original_publication_date:
-    weight: 8
+    weight: 1
     label: above
     settings:
       date_format: medium
@@ -95,10 +96,10 @@ content:
     type: timestamp
     region: content
   field_population_types:
-    weight: 9
+    weight: 8
     label: above
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
@@ -111,4 +112,5 @@ content:
       link_to_entity: false
     third_party_settings: {  }
 hidden:
+  field_author: true
   search_api_excerpt: true
