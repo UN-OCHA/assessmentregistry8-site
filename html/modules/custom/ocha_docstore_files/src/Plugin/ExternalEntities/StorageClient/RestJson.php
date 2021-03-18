@@ -134,6 +134,7 @@ class RestJson extends Rest implements PluginFormInterface {
       $body = json_decode($body);
 
       if ($body->uuid) {
+        sleep(1);
         $result = $body->uuid;
       }
     }
