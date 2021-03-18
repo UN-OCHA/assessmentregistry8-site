@@ -288,7 +288,7 @@ class OchaKnowledgeManagementBulkImport extends FormBase {
           $media_uuid = $this->createFileInDocstore($input);
           if ($media_uuid) {
             $uuids[] = [
-              'target_id' => $media_uuid,
+              'media_uuid' => $media_uuid,
             ];
           }
         }
@@ -300,13 +300,15 @@ class OchaKnowledgeManagementBulkImport extends FormBase {
           $media_uuid = $this->createFileInDocstore($input);
           if ($media_uuid) {
             $uuids[] = [
-              'target_id' => $media_uuid,
+              'media_uuid' => $media_uuid,
             ];
           }
         }
       }
 
-      $km->set('field_files', $uuids);
+      if (!empty($uuids)) {
+        $km->set('field_files', $uuids);
+      }
     }
 
     $km->save();
@@ -336,9 +338,6 @@ class OchaKnowledgeManagementBulkImport extends FormBase {
       $filename = urldecode(basename(parse_url($uri, PHP_URL_PATH)));
     }
 
-    $this->getLogger('Post files')->notice(ocha_docstore_files_get_endpoint_base('http://docstore.local.docksal/api/v1/files'));
-    $this->getLogger('Post key')->notice(ocha_docstore_files_get_endpoint_apikey('abcd'));
-
     // phpcs:ignore
     $response = \Drupal::httpClient()->request(
       'POST',
@@ -357,8 +356,6 @@ class OchaKnowledgeManagementBulkImport extends FormBase {
 
     $body = $response->getBody() . '';
     $body = json_decode($body);
-
-    $this->getLogger('Response')->notice(print_r($body, TRUE));
 
     // @todo Check return value.
     if ($body->uuid) {
