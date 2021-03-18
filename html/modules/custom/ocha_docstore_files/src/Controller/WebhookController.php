@@ -33,7 +33,6 @@ class WebhookController extends ControllerBase {
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   Docstore API request.
-   *
    */
   public function listen(Request $request) {
     // Parse JSON.
@@ -92,4 +91,5 @@ class WebhookController extends ControllerBase {
     }
     return $content;
   }
+
 }
