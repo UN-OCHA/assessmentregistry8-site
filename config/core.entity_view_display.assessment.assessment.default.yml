@@ -38,7 +38,7 @@ mode: default
 content:
   field_assessment_data:
     type: ocha_doc_store_assessment_document_default
-    weight: 20
+    weight: 19
     region: content
     label: above
     settings:
@@ -47,7 +47,7 @@ content:
       display_link: true
     third_party_settings: {  }
   field_assessment_report:
-    weight: 19
+    weight: 18
     label: above
     settings:
       display_accessibility: '1'
@@ -57,98 +57,6 @@ content:
     type: ocha_doc_store_assessment_document_default
     region: content
   field_asst_organizations:
-    weight: 8
-    label: above
-    settings:
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_author:
-    weight: 1
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_collection_methods:
-    weight: 5
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_contacts:
-    weight: 2
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: basic_string
-    region: content
-  field_date:
-    weight: 3
-    label: above
-    settings:
-      timezone_override: ''
-      format_type: medium
-      separator: '-'
-    third_party_settings: {  }
-    type: daterange_default
-    region: content
-  field_disaster:
-    weight: 21
-    label: above
-    settings:
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_frequency:
-    weight: 4
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_key_findings:
-    weight: 6
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: basic_string
-    region: content
-  field_level_of_representation:
-    weight: 9
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_locations:
-    weight: 18
-    label: above
-    settings:
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_methodology:
-    weight: 10
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: basic_string
-    region: content
-  field_operations:
-    weight: 22
-    label: above
-    settings:
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_organizations:
     weight: 7
     label: above
     settings:
@@ -156,8 +64,92 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_collection_methods:
+    weight: 4
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_contacts:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_date:
+    weight: 2
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: date_only
+      separator: '-'
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_disaster:
+    weight: 20
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_frequency:
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_key_findings:
+    weight: 5
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_level_of_representation:
+    weight: 8
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_locations:
+    weight: 17
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_methodology:
+    weight: 9
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_operations:
+    weight: 21
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_organizations:
+    weight: 6
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_population_types:
-    weight: 11
+    weight: 10
     label: above
     settings:
       link: false
@@ -165,7 +157,7 @@ content:
     type: entity_reference_label
     region: content
   field_related_content:
-    weight: 12
+    weight: 11
     label: above
     settings:
       trim_length: 80
@@ -177,7 +169,7 @@ content:
     type: link
     region: content
   field_sample_size:
-    weight: 13
+    weight: 12
     label: above
     settings:
       link_to_entity: false
@@ -185,7 +177,7 @@ content:
     type: string
     region: content
   field_sources:
-    weight: 14
+    weight: 13
     label: above
     settings:
       link: false
@@ -193,7 +185,7 @@ content:
     type: entity_reference_label
     region: content
   field_status:
-    weight: 17
+    weight: 16
     label: above
     settings:
       link: false
@@ -201,14 +193,14 @@ content:
     type: entity_reference_label
     region: content
   field_subject_objective:
-    weight: 15
+    weight: 14
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
     region: content
   field_themes:
-    weight: 16
+    weight: 15
     label: above
     settings:
       link: false
@@ -224,4 +216,5 @@ content:
       link_to_entity: false
     third_party_settings: {  }
 hidden:
+  field_author: true
   search_api_excerpt: true

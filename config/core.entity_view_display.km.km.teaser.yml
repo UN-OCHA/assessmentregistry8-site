@@ -10,6 +10,7 @@ dependencies:
     - field.field.km.km.field_description
     - field.field.km.km.field_document_type
     - field.field.km.km.field_files
+    - field.field.km.km.field_global_clusters
     - field.field.km.km.field_hpc_document_repository
     - field.field.km.km.field_life_cycle_steps
     - field.field.km.km.field_original_publication_date
@@ -66,6 +67,7 @@ hidden:
   field_countries: true
   field_document_type: true
   field_files: true
+  field_global_clusters: true
   field_hpc_document_repository: true
   field_original_publication_date: true
   search_api_excerpt: true

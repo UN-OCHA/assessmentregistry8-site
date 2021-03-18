@@ -1,0 +1,6 @@
+ocha_knowledge_management.ocha_knowledge_management_bulk_import:
+  title: Bulk import Knowledge Management
+  description: Allows user to create knowledge management by importing xlsx file
+  route_name: ocha_knowledge_management.ocha_knowledge_management_bulk_import
+  base_route: system.admin_content
+  weight: 10

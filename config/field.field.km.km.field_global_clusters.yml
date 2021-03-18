@@ -1,0 +1,26 @@
+uuid: 043c2f70-4071-4cf3-ac76-dc9505f80ced
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.km.field_global_clusters
+  module:
+    - external_entities
+id: km.km.field_global_clusters
+field_name: field_global_clusters
+entity_type: km
+bundle: km
+label: 'Global cluster(s)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:global_cluster'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference
