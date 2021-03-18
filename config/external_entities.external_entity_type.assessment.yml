@@ -17,6 +17,7 @@ field_mappings:
   field_assessment_report:
     accessibility: assessment_report/0/accessibility
     media_uuid: assessment_report/0/files/0/media_uuid
+    filename: assessment_report/0/files/0/filename
     instructions: assessment_report/0/instructions
   field_asst_organizations:
     target_id: 'asst_organizations/*/uuid'

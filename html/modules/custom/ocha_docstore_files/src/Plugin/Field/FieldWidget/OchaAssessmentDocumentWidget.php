@@ -142,6 +142,10 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
    * This method is assigned as a #process callback in formElement() method.
    */
   public static function process($element, FormStateInterface $form_state, $form) {
+    if (!isset($element['#field_name'])) {
+      return;
+    }
+
     $state_name = $element['#field_name'] . '[' . $element['#delta'] . '][accessibility]';
 
     foreach ([
@@ -254,7 +258,6 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
       ];
       $element = $this->formSingleElement($items, $delta, $element, $form, $form_state);
       if ($element) {
-        $element['document']['#required'] = ($element['document']['#required'] && $delta == 0);
         $elements[$delta] = $element;
       }
     }
