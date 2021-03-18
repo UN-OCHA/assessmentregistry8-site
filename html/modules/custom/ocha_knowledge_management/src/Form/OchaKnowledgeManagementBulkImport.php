@@ -277,6 +277,38 @@ class OchaKnowledgeManagementBulkImport extends FormBase {
       $km->set('field_population_types', $uuids);
     }
 
+    // Files and media.
+    if ((isset($item['document']) && !empty($item['document'])) || (isset($item['media']) && !empty($item['media']))) {
+      // Split and trim.
+      $uuids = [];
+
+      if (isset($item['document']) && !empty($item['document'])) {
+        $values = array_map('trim', explode(',', $item['document']));
+        foreach ($values as $input) {
+          $media_uuid = $this->createFileInDocstore($input);
+          if ($media_uuid) {
+            $uuids[] = [
+              'target_id' => $media_uuid,
+            ];
+          }
+        }
+      }
+
+      if (isset($item['media']) && !empty($item['media'])) {
+        $values = array_map('trim', explode(',', $item['media']));
+        foreach ($values as $input) {
+          $media_uuid = $this->createFileInDocstore($input);
+          if ($media_uuid) {
+            $uuids[] = [
+              'target_id' => $media_uuid,
+            ];
+          }
+        }
+      }
+
+      $km->set('field_files', $uuids);
+    }
+
     $km->save();
   }
 
@@ -294,6 +326,41 @@ class OchaKnowledgeManagementBulkImport extends FormBase {
     else {
       return reset($ids);
     }
+  }
+
+  /**
+   * Create a file based on url.
+   */
+  protected function createFileInDocstore($uri, $filename = '') {
+    if (empty($filename)) {
+      $filename = urldecode(basename(parse_url($uri, PHP_URL_PATH)));
+    }
+
+    // phpcs:ignore
+    $response = \Drupal::httpClient()->request(
+      'POST',
+      ocha_docstore_files_get_endpoint_base('http://docstore.local.docksal/api/v1/files'),
+      [
+        'body' => json_encode([
+          'filename' => $filename,
+          'uri' => $uri,
+          'private' => FALSE,
+        ]),
+        'headers' => [
+          'API-KEY' => ocha_docstore_files_get_endpoint_apikey('abcd'),
+        ],
+      ]
+    );
+
+    $body = $response->getBody() . '';
+    $body = json_decode($body);
+
+    // @todo Check return value.
+    if ($body->uuid) {
+      return $body->media_uuid;
+    }
+
+    return FALSE;
   }
 
 }
