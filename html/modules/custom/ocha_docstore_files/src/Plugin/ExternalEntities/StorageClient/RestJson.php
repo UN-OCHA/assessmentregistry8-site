@@ -114,14 +114,14 @@ class RestJson extends Rest implements PluginFormInterface {
           'headers' => $this->getHttpHeaders(),
         ]
       );
-      $result = SAVED_UPDATED;
+      $result = $entity->id();
     }
     else {
       // Remove uuid.
       $raw_data = $entity->extractRawData();
       unset($raw_data['uuid']);
 
-      $this->httpClient->request(
+      $response = $this->httpClient->request(
         'POST',
         ocha_docstore_files_get_endpoint_base($this->configuration['endpoint']),
         [
@@ -129,7 +129,13 @@ class RestJson extends Rest implements PluginFormInterface {
           'headers' => $this->getHttpHeaders(),
         ]
       );
-      $result = SAVED_NEW;
+
+      $body = $response->getBody() . '';
+      $body = json_decode($body);
+
+      if ($body->uuid) {
+        $result = $body->uuid;
+      }
     }
 
     return $result;
