@@ -2070,7 +2070,8 @@
                 },
                 "patches_applied": {
                     "https://www.drupal.org/project/external_entities/issues/3202811": "https://www.drupal.org/files/issues/2021-03-10/i3202811-support-geofield.patch",
-                    "https://www.drupal.org/project/external_entities/issues/3202814": "https://www.drupal.org/files/issues/2021-03-10/i3202814-allow-array-of.patch"
+                    "https://www.drupal.org/project/external_entities/issues/3202814": "https://www.drupal.org/files/issues/2021-03-10/i3202814-allow-array-of.patch",
+                    "Dateranges": "./PATCHES/external_entities-daterange.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -7686,16 +7687,16 @@
         },
         {
             "name": "unocha/common_design",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/common_design.git",
-                "reference": "feef124a654b4e172e87b9bc05764c34b69746f3"
+                "reference": "63f8a577e36adf17984ba268c66307d741104a44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/feef124a654b4e172e87b9bc05764c34b69746f3",
-                "reference": "feef124a654b4e172e87b9bc05764c34b69746f3",
+                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/63f8a577e36adf17984ba268c66307d741104a44",
+                "reference": "63f8a577e36adf17984ba268c66307d741104a44",
                 "shasum": ""
             },
             "require": {
@@ -7707,10 +7708,10 @@
             ],
             "description": "OCHA Common Design base theme for Drupal 8",
             "support": {
-                "source": "https://github.com/UN-OCHA/common_design/tree/v3.0.0",
+                "source": "https://github.com/UN-OCHA/common_design/tree/v3.0.1",
                 "issues": "https://github.com/UN-OCHA/common_design/issues"
             },
-            "time": "2021-03-10T17:06:10+00:00"
+            "time": "2021-03-15T13:05:03+00:00"
         },
         {
             "name": "unocha/ocha_integrations",
