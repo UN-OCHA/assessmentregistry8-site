@@ -19,6 +19,7 @@ permissions:
   - 'view country external entity'
   - 'view disaster external entity'
   - 'view document_type external entity'
+  - 'view global_cluster external entity'
   - 'view hpc_document_repository external entity'
   - 'view km external entity'
   - 'view life_cycle_step external entity'
