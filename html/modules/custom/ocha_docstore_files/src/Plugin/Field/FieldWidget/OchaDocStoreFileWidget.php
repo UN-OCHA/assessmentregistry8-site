@@ -108,7 +108,14 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
     $field_name = $this->fieldDefinition->getName();
     $parents = $form['#parents'];
 
+    // Needed for inline entity form.
+    $trigger = $form_state->getTriggeringElement();
+    if ($trigger && isset($trigger['#method'])) {
+      $this->extractFormValues($items, $form, $form_state);
+    }
+
     $field_state = static::getWidgetState($form['#parents'], $field_name, $form_state);
+
     if (!isset($field_state['queued_files'])) {
       $field_state['queued_files'] = [];
     }
@@ -120,7 +127,14 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
       static::setWidgetState($form['#parents'], $field_name, $form_state, $field_state);
     }
 
-    $ajax_wrapper_id = Html::getUniqueId('ajax-wrapper');
+    if (isset($field_state['ajax_wrapper_id'])) {
+      $ajax_wrapper_id = $field_state['ajax_wrapper_id'];
+    }
+    else {
+      $ajax_wrapper_id = Html::getUniqueId('ajax-wrapper');
+      $field_state['ajax_wrapper_id'] = $ajax_wrapper_id;
+      static::setWidgetState($form['#parents'], $field_name, $form_state, $field_state);
+    }
 
     $elements = [
       '#process' => [[get_class($this), 'process']],
@@ -162,6 +176,7 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
               'options' => [
                 'query' => [
                   'element_parents' => implode('/', $parents),
+                  'ajax_wrapper_id' => $ajax_wrapper_id,
                 ],
               ],
               'wrapper' => $ajax_wrapper_id,
@@ -192,6 +207,7 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
               'options' => [
                 'query' => [
                   'element_parents' => implode('/', $parents),
+                  'ajax_wrapper_id' => $ajax_wrapper_id,
                 ],
               ],
               'wrapper' => $ajax_wrapper_id,
@@ -283,8 +299,9 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
     }
 
     $elements['#tree'] = TRUE;
-    $elements['#prefix'] = '<div id="' . $ajax_wrapper_id . '">';
+    $elements['#prefix'] = '<div class="xyzzy" id="' . $ajax_wrapper_id . '">';
     $elements['#suffix'] = '</div>';
+    $elements['#id'] = $ajax_wrapper_id;
 
     return $elements;
   }
@@ -293,15 +310,18 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
    * Form API callback.
    */
   public static function process($element, FormStateInterface $form_state, $form) {
+    $ajax_wrapper_id = $element['#id'];
     $element['add_files']['from_uri']['fetch']['#ajax']['options'] = [
       'query' => [
         'element_parents' => implode('/', $element['#array_parents']),
+        'ajax_wrapper_id' => $ajax_wrapper_id,
       ],
     ];
 
     $element['add_files']['from_local']['upload']['#ajax']['options'] = [
       'query' => [
         'element_parents' => implode('/', $element['#array_parents']),
+        'ajax_wrapper_id' => $ajax_wrapper_id,
       ],
     ];
 
@@ -325,6 +345,7 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
             'options' => [
               'query' => [
                 'element_parents' => implode('/', $element['#array_parents']),
+                'ajax_wrapper_id' => $ajax_wrapper_id,
               ],
             ],
             'wrapper' => $element['add_files']['from_local']['upload']['#ajax']['wrapper'],
@@ -395,6 +416,7 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
    */
   public static function rebuildWidgetForm(array &$form, FormStateInterface &$form_state, Request $request) {
     $form_parents = explode('/', $request->query->get('element_parents'));
+    $ajax_wrapper_id = $request->query->get('ajax_wrapper_id');
 
     // Sanitize form parents before using them.
     $form_parents = array_filter($form_parents, [Element::class, 'child']);
@@ -411,7 +433,7 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
     $response = new AjaxResponse();
     $response->setAttachments($form['#attached']);
 
-    return $response->addCommand(new ReplaceCommand(NULL, $output));
+    return $response->addCommand(new ReplaceCommand('#' . $ajax_wrapper_id, $output));
   }
 
   /**
@@ -513,6 +535,7 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
 
     $field_name = $this->fieldDefinition->getName();
     $field_state = static::getWidgetState($form['#parents'], $field_name, $form_state);
+
     if (!isset($field_state['queued_files'])) {
       $field_state['queued_files'] = [];
     }
