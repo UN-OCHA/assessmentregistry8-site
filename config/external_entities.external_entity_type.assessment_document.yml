@@ -16,6 +16,8 @@ field_mappings:
     value: title
   field_accessibility:
     value: accessibility
+  field_author:
+    value: author
   field_files:
     media_uuid: 'files/*/uuid'
     filename: 'files/*/filename'

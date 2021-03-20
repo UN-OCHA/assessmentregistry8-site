@@ -17,6 +17,11 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: null
-  handler_settings: {  }
+  handler: 'default:assessment_document'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: id
+      direction: DESC
+    auto_create: false
 field_type: entity_reference

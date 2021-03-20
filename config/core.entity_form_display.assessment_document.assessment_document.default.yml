@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.assessment_document.assessment_document.field_accessibility
+    - field.field.assessment_document.assessment_document.field_author
     - field.field.assessment_document.assessment_document.field_files
     - field.field.assessment_document.assessment_document.field_instructions
   module:
@@ -15,13 +16,21 @@ bundle: assessment_document
 mode: default
 content:
   field_accessibility:
-    weight: 1
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
+  field_author:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_files:
-    weight: 2
+    weight: 3
     settings:
       endpoint: 'http://docstore.local.docksal/api/v1/files'
       api-key: abcd
@@ -29,7 +38,7 @@ content:
     type: ocha_doc_store_file_widget
     region: content
   field_instructions:
-    weight: 3
+    weight: 4
     settings:
       rows: 5
       placeholder: ''

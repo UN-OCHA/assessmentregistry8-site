@@ -27,6 +27,7 @@ dependencies:
   module:
     - datetime_range
     - external_entities
+    - inline_entity_form
     - link
     - path
     - select2
@@ -35,6 +36,23 @@ targetEntityType: assessment
 bundle: assessment
 mode: default
 content:
+  field_assessment_report:
+    type: inline_entity_form_complex
+    weight: 21
+    region: content
+    settings:
+      form_mode: default
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      revision: false
+      override_labels: false
+      collapsible: false
+      collapsed: false
+      allow_duplicate: false
+    third_party_settings: {  }
   field_asst_organizations:
     weight: 8
     settings:
@@ -207,7 +225,7 @@ content:
     region: content
   path:
     type: path
-    weight: 21
+    weight: 22
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -219,5 +237,4 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-hidden:
-  field_assessment_report: true
+hidden: {  }

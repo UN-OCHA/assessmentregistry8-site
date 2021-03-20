@@ -17,5 +17,7 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings: {  }
+settings:
+  endpoint: 'http://docstore.local.docksal/api/v1/files'
+  api-key: abcd
 field_type: ocha_doc_store_file
