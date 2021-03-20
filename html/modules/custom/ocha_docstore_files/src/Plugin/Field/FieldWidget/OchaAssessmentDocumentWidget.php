@@ -132,7 +132,9 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
     ];
 
     if ($items[$delta]->media_uuid) {
-      $element['file']['#description'] = 'Current file: ' . $items[$delta]->filename;
+      $element['file']['#description'] = $this->t('Current file: @filename', [
+        '@filename' => $items[$delta]->filename,
+      ]);
     }
 
     return $element;
@@ -142,8 +144,7 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
    * {@inheritdoc}
    */
   public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
-    $new_values = [];
-
+    // phpcs:ignore
     $all_files = \Drupal::request()->files->get('files', []);
     foreach ($all_files as $file_info) {
       if (!is_object($file_info)) {
