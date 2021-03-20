@@ -73,7 +73,7 @@ class OchaAssessmentDocument extends FieldItemBase {
       ->setSetting('case_sensitive', TRUE)
       ->setRequired(FALSE);
 
-      $properties['uri'] = DataDefinition::create('string')
+    $properties['uri'] = DataDefinition::create('string')
       ->setLabel(t('URI'));
 
     $properties['title'] = DataDefinition::create('string')

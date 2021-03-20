@@ -4,8 +4,6 @@ namespace Drupal\ocha_docstore_files\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Link;
-use Drupal\Core\Url;
 use Drupal\Core\Field\FormatterBase;
 
 /**

@@ -145,7 +145,6 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
     $new_values = [];
 
     $all_files = \Drupal::request()->files->get('files', []);
-    dpm($all_files, 'all_files');
     foreach ($all_files as $file_info) {
       if (!is_object($file_info)) {
         continue;
@@ -174,7 +173,6 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
 
         $body = $response->getBody() . '';
         $body = json_decode($body);
-        dpm($body, 'response');
 
         // @todo Check return value.
         if ($body->uuid) {
@@ -185,30 +183,6 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
     }
 
     return $values;
-
-    foreach ($values as &$value) {
-      $value['fids'] = $value['document']['fids'];
-      $value['display'] = $value['document']['display'];
-      $value['description'] = $value['document']['description'];
-      unset($value['document']);
-
-      if (empty($value['fids'])) {
-        $new_value = $value;
-        $new_value['target_id'] = 0;
-        unset($new_value['fids']);
-        $new_values[] = $new_value;
-      }
-      else {
-        foreach ($value['fids'] as $fid) {
-          $new_value = $value;
-          $new_value['target_id'] = $fid;
-          unset($new_value['fids']);
-          $new_values[] = $new_value;
-        }
-      }
-    }
-
-    return $new_values;
   }
 
   /**
