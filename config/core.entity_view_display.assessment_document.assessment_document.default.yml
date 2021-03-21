@@ -18,18 +18,10 @@ mode: default
 content:
   field_accessibility:
     weight: 0
-    label: above
+    label: visually_hidden
     settings: {  }
     third_party_settings: {  }
     type: list_default
-    region: content
-  field_author:
-    weight: 3
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
     region: content
   field_files:
     weight: 1
@@ -46,5 +38,6 @@ content:
     type: basic_string
     region: content
 hidden:
+  field_author: true
   search_api_excerpt: true
   title: true

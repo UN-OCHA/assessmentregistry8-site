@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.assessment.assessment.field_assessment_data
+    - field.field.assessment.assessment.field_assessment_questionnaire
     - field.field.assessment.assessment.field_assessment_report
     - field.field.assessment.assessment.field_asst_organizations
     - field.field.assessment.assessment.field_author
@@ -34,13 +36,32 @@ targetEntityType: assessment
 bundle: assessment
 mode: default
 content:
+  field_assessment_data:
+    weight: 23
+    label: above
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_assessment_questionnaire:
+    weight: 24
+    label: above
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
   field_assessment_report:
     weight: 22
     label: above
     settings:
-      link: true
+      view_mode: default
+      link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
   field_asst_organizations:
     weight: 7

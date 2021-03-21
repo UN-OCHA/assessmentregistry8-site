@@ -14,6 +14,10 @@ field_mappings:
     value: uuid
   title:
     value: title
+  field_assessment_data:
+    target_id: assessment_data/0/uuid
+  field_assessment_questionnaire:
+    target_id: assessment_questionnaire/0/uuid
   field_assessment_report:
     target_id: assessment_report/0/uuid
   field_asst_organizations:

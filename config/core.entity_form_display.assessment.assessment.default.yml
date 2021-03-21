@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.assessment.assessment.field_assessment_data
+    - field.field.assessment.assessment.field_assessment_questionnaire
     - field.field.assessment.assessment.field_assessment_report
     - field.field.assessment.assessment.field_asst_organizations
     - field.field.assessment.assessment.field_author
@@ -36,6 +38,40 @@ targetEntityType: assessment
 bundle: assessment
 mode: default
 content:
+  field_assessment_data:
+    weight: 22
+    settings:
+      form_mode: default
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      match_operator: CONTAINS
+      revision: false
+      override_labels: false
+      collapsible: false
+      collapsed: false
+      allow_existing: false
+      allow_duplicate: false
+    third_party_settings: {  }
+    type: inline_entity_form_complex
+    region: content
+  field_assessment_questionnaire:
+    weight: 23
+    settings:
+      match_operator: CONTAINS
+      form_mode: default
+      revision: false
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      collapsible: false
+      collapsed: false
+      allow_new: true
+      allow_existing: false
+      allow_duplicate: false
+    third_party_settings: {  }
+    type: inline_entity_form_complex
+    region: content
   field_assessment_report:
     type: inline_entity_form_complex
     weight: 21
@@ -45,12 +81,12 @@ content:
       label_singular: ''
       label_plural: ''
       allow_new: true
-      allow_existing: true
       match_operator: CONTAINS
       revision: false
       override_labels: false
       collapsible: false
       collapsed: false
+      allow_existing: false
       allow_duplicate: false
     third_party_settings: {  }
   field_asst_organizations:
@@ -225,7 +261,7 @@ content:
     region: content
   path:
     type: path
-    weight: 22
+    weight: 24
     region: content
     settings: {  }
     third_party_settings: {  }
