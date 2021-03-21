@@ -4,8 +4,6 @@ namespace Drupal\ocha_docstore_files\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Link;
-use Drupal\Core\Url;
 use Drupal\Core\Field\FormatterBase;
 
 /**
@@ -75,10 +73,12 @@ class OchaAssessmentDocumentDefaultFormatter extends FormatterBase {
 
         // Publicly Available.
         if ($item->accessibility == 'Publicly Available') {
-          if ($this->getSetting('display_link')) {
-            if (!empty($item->uri)) {
-              $link_text = !empty($item->title) ? $item->title : $item->uri;
-              $output[] = Link::fromTextAndUrl($link_text, Url::fromUri($item->uri, []))->toString();
+          if (isset($item->filename) && isset($item->media_uuid)) {
+            if ($item->private) {
+              $output[] = $item->filename . ' (Private)';
+            }
+            else {
+              $output[] = '<a target="_blank" rel="noopener noreferrer" href="/attachments/' . $item->media_uuid . '/' . $item->filename . '">' . $item->filename . '</a>';
             }
           }
         }

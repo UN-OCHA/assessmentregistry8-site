@@ -7,10 +7,10 @@ dependencies:
     - external_entities
     - search_api
   config:
-    - field.storage.km.field_context
     - field.storage.km.field_countries
     - field.storage.km.field_document_type
     - field.storage.km.field_hpc_document_repository
+    - field.storage.km.field_context
     - field.storage.km.field_life_cycle_steps
     - field.storage.km.field_original_publication_date
     - field.storage.km.field_population_types
@@ -149,6 +149,6 @@ tracker_settings:
   default:
     indexing_order: fifo
 options:
-  index_directly: true
+  index_directly: false
   cron_limit: 50
 server: solr

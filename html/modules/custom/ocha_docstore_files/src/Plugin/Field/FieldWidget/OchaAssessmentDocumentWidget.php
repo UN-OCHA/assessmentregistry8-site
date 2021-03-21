@@ -26,6 +26,51 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
   /**
    * {@inheritdoc}
    */
+  public static function defaultSettings() {
+    return [
+      'endpoint' => 'http://docstore.local.docksal/api/v1/files',
+      'api-key' => 'abcd',
+    ] + parent::defaultSettings();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsForm(array $form, FormStateInterface $form_state) {
+    $element = parent::settingsForm($form, $form_state);
+
+    $element['endpoint'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('API end point'),
+      '#default_value' => $this->getSetting('endpoint'),
+      '#weight' => 17,
+    ];
+
+    $element['api-key'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('API key'),
+      '#default_value' => $this->getSetting('api-key'),
+      '#weight' => 18,
+    ];
+
+    return $element;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function settingsSummary() {
+    $summary = [];
+
+    $summary[] = $this->t('Progress indicator: @progress_indicator', ['@progress_indicator' => $this->getSetting('progress_indicator')]);
+    $summary[] = $this->t('Endpoint: @endpoint', ['@endpoint' => ocha_docstore_files_get_endpoint_base($this->getSetting('endpoint'))]);
+
+    return $summary;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $state_name = $this->fieldDefinition->getName() . '[' . $delta . '][accessibility]';
     $element_process = $element['#process'] ?? [];
@@ -52,34 +97,6 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
       '#weight' => -10,
     ];
 
-    $element['uri'] = [
-      '#type' => 'url',
-      '#title' => $this->t('URL'),
-      '#default_value' => $items[$delta]->uri,
-      '#maxlength' => 2048,
-      '#link_type' => $this->getFieldSetting('link_type'),
-      '#description' => $this->t('This must be an external URL such as %url.', ['%url' => 'http://example.com']),
-      '#weight' => 20,
-      '#states' => [
-        'visible' => [
-          ':input[name="' . $state_name . '"]' => ['value' => 'Publicly Available'],
-        ],
-      ],
-    ];
-
-    $element['title'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Link text'),
-      '#default_value' => $items[$delta]->title,
-      '#maxlength' => 255,
-      '#weight' => 21,
-      '#states' => [
-        'visible' => [
-          ':input[name="' . $state_name . '"]' => ['value' => 'Publicly Available'],
-        ],
-      ],
-    ];
-
     $element['instructions'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Instructions'),
@@ -95,10 +112,30 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
       ],
       '#states' => [
         'visible' => [
-          ':input[name="' . $state_name . '"]' => ['value' => 'Available on Request'],
+          [':input[name="' . $state_name . '"]' => ['value' => 'Available on Request']],
+          [':input[name="' . $state_name . '"]' => ['value' => 'Publicly Available']],
         ],
       ],
     ];
+
+    $element['file'] = [
+      '#type' => 'file',
+      '#title' => $this->t('File'),
+      '#default_value' => $items[$delta]->filename,
+      '#maxlength' => 255,
+      '#weight' => 22,
+      '#states' => [
+        'visible' => [
+          ':input[name="' . $state_name . '"]' => ['value' => 'Publicly Available'],
+        ],
+      ],
+    ];
+
+    if ($items[$delta]->media_uuid) {
+      $element['file']['#description'] = $this->t('Current file: @filename', [
+        '@filename' => $items[$delta]->filename,
+      ]);
+    }
 
     return $element;
   }
@@ -107,30 +144,46 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
    * {@inheritdoc}
    */
   public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
-    $new_values = [];
-    foreach ($values as &$value) {
-      $value['fids'] = $value['document']['fids'];
-      $value['display'] = $value['document']['display'];
-      $value['description'] = $value['document']['description'];
-      unset($value['document']);
-
-      if (empty($value['fids'])) {
-        $new_value = $value;
-        $new_value['target_id'] = 0;
-        unset($new_value['fids']);
-        $new_values[] = $new_value;
+    // phpcs:ignore
+    $all_files = \Drupal::request()->files->get('files', []);
+    foreach ($all_files as $file_info) {
+      if (!is_object($file_info)) {
+        continue;
       }
-      else {
-        foreach ($value['fids'] as $fid) {
-          $new_value = $value;
-          $new_value['target_id'] = $fid;
-          unset($new_value['fids']);
-          $new_values[] = $new_value;
+
+      // Move file if it's rally uploaded.
+      if (is_uploaded_file($file_info->getRealPath())) {
+        $contents = file_get_contents($file_info->getRealPath());
+        $filename = trim($file_info->getClientOriginalName(), '.');
+
+        // phpcs:ignore
+        $response = \Drupal::httpClient()->request(
+          'POST',
+          ocha_docstore_files_get_endpoint_base($this->getSetting('endpoint')),
+          [
+            'body' => json_encode([
+              'filename' => $filename,
+              'data' => base64_encode($contents),
+              'private' => FALSE,
+            ]),
+            'headers' => [
+              'API-KEY' => ocha_docstore_files_get_endpoint_apikey($this->getSetting('api-key')),
+            ],
+          ]
+        );
+
+        $body = $response->getBody() . '';
+        $body = json_decode($body);
+
+        // @todo Check return value.
+        if ($body->uuid) {
+          $uuids[] = $body->media_uuid;
+          $field_state['existing_files'][] = $body->media_uuid;
         }
       }
     }
 
-    return $new_values;
+    return $values;
   }
 
   /**
@@ -142,35 +195,6 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
    * This method is assigned as a #process callback in formElement() method.
    */
   public static function process($element, FormStateInterface $form_state, $form) {
-    $state_name = $element['#field_name'] . '[' . $element['#delta'] . '][accessibility]';
-
-    foreach ([
-      'upload',
-      'description',
-      'upload_button',
-      'remove_button',
-    ] as $key) {
-      if (isset($element[$key])) {
-        $element[$key]['#states'] = [
-          'visible' => [
-            ':input[name="' . $state_name . '"]' => ['value' => 'Publicly Available'],
-          ],
-        ];
-      }
-    }
-
-    // Add to rendered file.
-    if (isset($element['#value']['target_id'])) {
-      if (isset($element['file_' . $element['#value']['target_id']])) {
-        $element['file_' . $element['#value']['target_id']]['filename']['#type'] = 'container';
-        $element['file_' . $element['#value']['target_id']]['filename']['#states'] = [
-          'visible' => [
-            ':input[name="' . $state_name . '"]' => ['value' => 'Publicly Available'],
-          ],
-        ];
-      }
-    }
-
     return $element;
   }
 
@@ -254,7 +278,6 @@ class OchaAssessmentDocumentWidget extends WidgetBase {
       ];
       $element = $this->formSingleElement($items, $delta, $element, $form, $form_state);
       if ($element) {
-        $element['document']['#required'] = ($element['document']['#required'] && $delta == 0);
         $elements[$delta] = $element;
       }
     }

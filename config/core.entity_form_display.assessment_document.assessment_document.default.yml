@@ -1,0 +1,56 @@
+uuid: 2be34da1-890d-4263-a70f-ef55f570c6c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.assessment_document.assessment_document.field_accessibility
+    - field.field.assessment_document.assessment_document.field_author
+    - field.field.assessment_document.assessment_document.field_files
+    - field.field.assessment_document.assessment_document.field_instructions
+  module:
+    - external_entities
+    - ocha_docstore_files
+id: assessment_document.assessment_document.default
+targetEntityType: assessment_document
+bundle: assessment_document
+mode: default
+content:
+  field_accessibility:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_author:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_files:
+    weight: 3
+    settings:
+      endpoint: 'http://docstore.local.docksal/api/v1/files'
+      api-key: abcd
+    third_party_settings: {  }
+    type: ocha_doc_store_file_widget
+    region: content
+  field_instructions:
+    weight: 4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

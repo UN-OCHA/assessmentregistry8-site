@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.assessment.assessment.field_assessment_data
+    - field.field.assessment.assessment.field_assessment_questionnaire
     - field.field.assessment.assessment.field_assessment_report
     - field.field.assessment.assessment.field_asst_organizations
     - field.field.assessment.assessment.field_author
@@ -29,7 +30,6 @@ dependencies:
     - datetime_range
     - external_entities
     - link
-    - ocha_docstore_files
     - options
 id: assessment.assessment.default
 targetEntityType: assessment
@@ -37,24 +37,31 @@ bundle: assessment
 mode: default
 content:
   field_assessment_data:
-    type: ocha_doc_store_assessment_document_default
-    weight: 19
+    weight: 23
+    label: above
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
     region: content
+  field_assessment_questionnaire:
+    weight: 24
     label: above
     settings:
-      display_accessibility: false
-      display_file: true
-      display_link: true
+      link: true
+      view_mode: default
     third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
   field_assessment_report:
-    weight: 18
+    weight: 22
     label: above
     settings:
-      display_accessibility: '1'
-      display_file: '1'
-      display_link: '1'
+      view_mode: default
+      link: false
     third_party_settings: {  }
-    type: ocha_doc_store_assessment_document_default
+    type: entity_reference_entity_view
     region: content
   field_asst_organizations:
     weight: 7

@@ -68,6 +68,11 @@ class OchaAssessmentDocument extends FieldItemBase {
     $properties['media_uuid'] = DataDefinition::create('string')
       ->setLabel(t('Media uuid'));
 
+    $properties['filename'] = DataDefinition::create('string')
+      ->setLabel(t('File name'))
+      ->setSetting('case_sensitive', TRUE)
+      ->setRequired(FALSE);
+
     $properties['uri'] = DataDefinition::create('string')
       ->setLabel(t('URI'));
 
@@ -97,6 +102,11 @@ class OchaAssessmentDocument extends FieldItemBase {
       'description' => 'Media uuid.',
       'type' => 'varchar',
       'length' => 255,
+    ];
+
+    $schema['columns']['filename'] = [
+      'type' => 'varchar',
+      'binary' => TRUE,
     ];
 
     $schema['columns']['uri'] = [
