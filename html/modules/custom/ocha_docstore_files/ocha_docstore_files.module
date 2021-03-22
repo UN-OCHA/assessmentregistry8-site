@@ -5,6 +5,8 @@
  * OCHA Document store connector.
  */
 
+use Drupal\Core\Form\FormStateInterface;
+
 /**
  * Alter base url of the endpoints.
  */
@@ -30,4 +32,15 @@ function ocha_docstore_files_get_endpoint_apikey($apikey) {
   }
 
   return $endpoint_apikey;
+}
+
+/**
+ * Implements hook_inline_entity_form_entity_form_alter().
+ *
+ * Ensure external entities created via an inline entity form are saved.
+ */
+function ocha_docstore_files_inline_entity_form_entity_form_alter(array &$entity_form, FormStateInterface &$form_state) {
+  if (isset($entity_form['#entity']) && is_a($entity_form['#entity'], '\Drupal\external_entities\Entity\ExternalEntity')) {
+    $entity_form['#save_entity'] = TRUE;
+  }
 }
