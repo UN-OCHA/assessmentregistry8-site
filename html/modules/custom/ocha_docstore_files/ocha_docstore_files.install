@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * OCHA Document store connector.
+ */
+
+use Drupal\Core\Url;
+
+/**
+ * Add webhooks in document store.
+ */
+function ocha_docstore_files_update_8001() {
+  $endpoint = 'http://docstore.local.docksal/api/v1/webhooks';
+  $api_key = 'abcd';
+
+  $payload_url = Url::fromRoute('ocha_docstore_files.webhook', [], [
+    'absolute' => TRUE,
+  ])->toString();
+
+  $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+  $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
+
+  // phpcs:ignore
+  $response = \Drupal::httpClient()->request(
+    'POST',
+    $endpoint,
+    [
+      'body' => json_encode([
+        'label' => 'Assessment Registry',
+        'payload_url' => $payload_url,
+        'secret' => $api_key,
+        'events' => [
+          'term:create' => 'term:create',
+          'term:update' => 'term:update',
+          'term:delete' => 'term:delete',
+          'assessment:create' => 'assessment:create',
+          'assessment:update' => 'assessment:update',
+          'assessment:delete' => 'assessment:delete',
+          'assessment_document:create' => 'assessment_document:create',
+          'assessment_document:update' => 'assessment_document:update',
+          'assessment_document:delete' => 'assessment_document:delete',
+          'knowledge_management:create' => 'knowledge_management:create',
+          'knowledge_management:update' => 'knowledge_management:update',
+          'knowledge_management:delete' => 'knowledge_management:delete',
+        ],
+      ]),
+      'headers' => [
+        'API-KEY' => $api_key,
+      ],
+    ]
+  );
+
+  $body = $response->getBody() . '';
+  $body = json_decode($body);
+}
