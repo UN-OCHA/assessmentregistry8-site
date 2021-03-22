@@ -4,7 +4,6 @@ namespace Drupal\ocha_docstore_files\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
-use Drupal\external_entities\Entity\ExternalEntity;
 use Drupal\search_api\Entity\Index;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -87,19 +86,24 @@ class WebhookController extends ControllerBase {
     // Trigger action.
     switch ($action) {
       case 'create':
+        // phpcs:ignore
         \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache([$uuid]);
+        // phpcs:ignore
         $entity = \Drupal::entityTypeManager()->getStorage($external_entity_type)->load($uuid);
         search_api_entity_insert($entity);
         break;
 
       case 'update':
+        // phpcs:ignore
         \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache([$uuid]);
+        // phpcs:ignore
         $entity = \Drupal::entityTypeManager()->getStorage($external_entity_type)->load($uuid);
         search_api_entity_update($entity);
         break;
 
       case 'delete':
         $index->trackItemsDeleted($datasource_id, [$uuid]);
+        // phpcs:ignore
         \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache([$uuid]);
         break;
 
