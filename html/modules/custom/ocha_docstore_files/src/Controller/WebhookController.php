@@ -4,6 +4,7 @@ namespace Drupal\ocha_docstore_files\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
+use Drupal\external_entities\Entity\ExternalEntity;
 use Drupal\search_api\Entity\Index;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,28 +43,64 @@ class WebhookController extends ControllerBase {
       throw new BadRequestHttpException('Illegal payload');
     }
 
-    switch ($params['event']) {
-      case 'knowledge_management:create':
+    $parts = explode(':', $params['event']);
+    $entity_type = $parts[0];
+    $action = $parts[1];
+
+    $uuid = $params['payload']['uuid'];
+    $index = FALSE;
+    $datasource_id = FALSE;
+    $external_entity_type = FALSE;
+
+    // Get index and data source.
+    switch ($entity_type) {
+      case 'knowledge_management':
         $index = Index::load('km');
-        $uuid = $params['payload']['uuid'];
         $datasource_id = 'entity:km';
-        $index->trackItemsInserted($datasource_id, [$uuid]);
+        $external_entity_type = 'km';
         break;
 
-      case 'knowledge_management:update':
-        // Trigger re-index for 1 item.
-        $index = Index::load('km');
-        $uuid = $params['payload']['uuid'];
-        $datasource_id = 'entity:km';
-        $index->trackItemsUpdated($datasource_id, [$uuid]);
+      case 'assessment':
+        $index = Index::load('assessments');
+        $datasource_id = 'entity:assessment';
+        $external_entity_type = 'assessment';
         break;
 
-      case 'knowledge_management:delete':
-        // Remove from tracking and index.
-        $index = Index::load('km');
-        $uuid = $params['payload']['uuid'];
-        $datasource_id = 'entity:km';
+      case 'assessment_document':
+        $index = Index::load('assessments');
+        $datasource_id = 'entity:assessment';
+        $external_entity_type = 'assessment_document';
+        break;
+
+      case 'term':
+        $datasource_id = 'organization';
+        $external_entity_type = 'organization';
+        break;
+
+    }
+
+    if (!$datasource_id) {
+      $response = new JsonResponse('Ignored');
+      return $response;
+    }
+
+    // Trigger action.
+    switch ($action) {
+      case 'create':
+        \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache([$uuid]);
+        $entity = \Drupal::entityTypeManager()->getStorage($external_entity_type)->load($uuid);
+        search_api_entity_insert($entity);
+        break;
+
+      case 'update':
+        \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache([$uuid]);
+        $entity = \Drupal::entityTypeManager()->getStorage($external_entity_type)->load($uuid);
+        search_api_entity_update($entity);
+        break;
+
+      case 'delete':
         $index->trackItemsDeleted($datasource_id, [$uuid]);
+        \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache([$uuid]);
         break;
 
     }
