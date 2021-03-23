@@ -7,7 +7,7 @@ dependencies:
 id: km
 label: 'Knowledge Management'
 type: 'canonical_entities:km'
-pattern: 'content/[km:title]'
+pattern: 'km/[km:title]'
 selection_criteria: {  }
 selection_logic: and
 weight: 0

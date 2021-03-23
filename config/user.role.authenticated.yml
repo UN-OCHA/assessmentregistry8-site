@@ -17,6 +17,7 @@ permissions:
   - 'skip comment approval'
   - 'use text format basic_html'
   - 'view assessment external entity'
+  - 'view assessment_document external entity'
   - 'view assessment_status external entity'
   - 'view context external entity'
   - 'view country external entity'

@@ -7,7 +7,7 @@ dependencies:
 id: assessments
 label: Assessments
 type: 'canonical_entities:assessment'
-pattern: 'content/[assessment:title]'
+pattern: 'assessment/[assessment:title]'
 selection_criteria: {  }
 selection_logic: and
 weight: 0

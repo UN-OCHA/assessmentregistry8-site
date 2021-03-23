@@ -1,16 +1,16 @@
-uuid: 59dfb67d-40ca-49a1-8dab-5d4ffe1f4e72
+uuid: 1bac6433-b7d1-4945-969d-cc9324f91ca8
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.km.field_files
+    - field.storage.assessment_document.field_files
   module:
     - external_entities
     - ocha_docstore_files
-id: km.km.field_files
+id: assessment_document.assessment_document.field_files
 field_name: field_files
-entity_type: km
-bundle: km
+entity_type: assessment_document
+bundle: assessment_document
 label: Files
 description: ''
 required: false
