@@ -1,0 +1,17 @@
+uuid: b09332b8-0e3d-4bd0-af8d-6c6ec6d2744c
+langcode: en
+status: true
+dependencies: {  }
+id: administer_users
+label: 'Administer users'
+weight: 8
+is_admin: null
+permissions:
+  - 'access user profiles'
+  - 'administer users'
+  - 'assign administer_users role'
+  - 'assign assessment_editor role'
+  - 'assign assessment_global_editor role'
+  - 'assign content_editor role'
+  - 'assign knowledge_management_editor role'
+  - 'assign knowledge_management_global_editor role'
