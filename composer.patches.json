@@ -9,7 +9,8 @@
     "drupal/external_entities": {
       "https://www.drupal.org/project/external_entities/issues/3202811": "https://www.drupal.org/files/issues/2021-03-10/i3202811-support-geofield.patch",
       "https://www.drupal.org/project/external_entities/issues/3202814": "https://www.drupal.org/files/issues/2021-03-10/i3202814-allow-array-of.patch",
-      "Dateranges": "./PATCHES/external_entities-daterange.patch"
+      "Dateranges": "./PATCHES/external_entities-daterange.patch",
+      "Create new entity": "./PATCHES/external_entity_edit.patch"
     },
     "drupal/select2": {
       "https://www.drupal.org/project/select2/issues/3078085": "https://www.drupal.org/files/issues/2020-02-27/hierarchical-facet-widget-3078085-2.patch"
