@@ -24,6 +24,7 @@ permissions:
   - 'view hpc_document_repository external entity'
   - 'view km external entity'
   - 'view life_cycle_step external entity'
+  - 'view local_group external entity'
   - 'view location external entity'
   - 'view media'
   - 'view operation external entity'
