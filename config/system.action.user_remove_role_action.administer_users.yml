@@ -1,0 +1,14 @@
+uuid: ad7add84-0c61-4e55-9630-0cc75883046a
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.administer_users
+  module:
+    - user
+id: user_remove_role_action.administer_users
+label: 'Remove the Administer users role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: administer_users

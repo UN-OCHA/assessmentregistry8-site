@@ -15,6 +15,7 @@ dependencies:
     - field.field.assessment.assessment.field_frequency
     - field.field.assessment.assessment.field_key_findings
     - field.field.assessment.assessment.field_level_of_representation
+    - field.field.assessment.assessment.field_local_coordination_groups
     - field.field.assessment.assessment.field_locations
     - field.field.assessment.assessment.field_methodology
     - field.field.assessment.assessment.field_operations
@@ -37,7 +38,7 @@ bundle: assessment
 mode: default
 content:
   field_assessment_data:
-    weight: 23
+    weight: 22
     label: above
     settings:
       link: true
@@ -46,7 +47,7 @@ content:
     type: entity_reference_entity_view
     region: content
   field_assessment_questionnaire:
-    weight: 24
+    weight: 23
     label: above
     settings:
       link: true
@@ -55,7 +56,7 @@ content:
     type: entity_reference_entity_view
     region: content
   field_assessment_report:
-    weight: 22
+    weight: 21
     label: above
     settings:
       view_mode: default
@@ -96,7 +97,7 @@ content:
     type: daterange_default
     region: content
   field_disaster:
-    weight: 20
+    weight: 18
     label: above
     settings:
       link: false
@@ -124,6 +125,14 @@ content:
     third_party_settings: {  }
     type: list_default
     region: content
+  field_local_coordination_groups:
+    weight: 20
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_locations:
     weight: 17
     label: above
@@ -140,7 +149,7 @@ content:
     type: basic_string
     region: content
   field_operations:
-    weight: 21
+    weight: 19
     label: above
     settings:
       link: false

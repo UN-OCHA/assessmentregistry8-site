@@ -16,6 +16,7 @@ dependencies:
     - field.field.assessment.assessment.field_frequency
     - field.field.assessment.assessment.field_key_findings
     - field.field.assessment.assessment.field_level_of_representation
+    - field.field.assessment.assessment.field_local_coordination_groups
     - field.field.assessment.assessment.field_locations
     - field.field.assessment.assessment.field_methodology
     - field.field.assessment.assessment.field_operations
@@ -88,6 +89,7 @@ hidden:
   field_frequency: true
   field_key_findings: true
   field_level_of_representation: true
+  field_local_coordination_groups: true
   field_locations: true
   field_methodology: true
   field_operations: true
