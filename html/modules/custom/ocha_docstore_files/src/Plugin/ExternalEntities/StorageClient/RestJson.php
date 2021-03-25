@@ -61,15 +61,32 @@ class RestJson extends Rest implements PluginFormInterface {
    * {@inheritdoc}
    */
   public function loadMultiple(array $ids = NULL) {
-    $data = [];
+    if (empty($ids) || !is_array($ids)) {
+      return [];
+    }
 
-    if (!empty($ids) && is_array($ids)) {
-      foreach ($ids as $id) {
-        $data[$id] = $this->load($id);
+    $chunk_size = $this->configuration['pager']['default_limit'];
+
+    $entities = [];
+    foreach (array_chunk($ids, $chunk_size) as $chunk) {
+      // The docstore returns the full data for each resource, so it's much
+      // faster to perform a single request (or a few if the number of ids
+      // is larger that the maximum number of items the docstore can return).
+      $results = $this->query([
+        [
+          'field' => 'uuid',
+          'value' => $chunk,
+          'operator' => 'IN',
+        ],
+      ]);
+      foreach ($results as $result) {
+        if (!empty($result['uuid'])) {
+          $entities[$result['uuid']] = $result;
+        }
       }
     }
 
-    return $data;
+    return $entities;
   }
 
   /**
@@ -143,9 +160,24 @@ class RestJson extends Rest implements PluginFormInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Query the docstore and return the raw result.
+   *
+   * @param array $parameters
+   *   Query parameters.
+   * @param array $sorts
+   *   Sort options for the query.
+   * @param int|null $start
+   *   Starting offset.
+   * @param int|null $length
+   *   Maximum number of items to return.
+   *
+   * @return array
+   *   Query results. When querying multiple items, it will be an associative
+   *   array with the `_count` (total number of items), `_start` (starting
+   *   offset) and `results` (list of resources). Otherwise if will an array
+   *   with the resource's data.
    */
-  public function query(array $parameters = [], array $sorts = [], $start = NULL, $length = NULL) {
+  public function queryRaw(array $parameters = [], array $sorts = [], $start = NULL, $length = NULL) {
     $response = $this->httpClient->request(
       'GET',
       ocha_docstore_files_get_endpoint_base($this->configuration['endpoint']),
@@ -160,11 +192,20 @@ class RestJson extends Rest implements PluginFormInterface {
       ->getResponseDecoderFactory()
       ->getDecoder($this->configuration['response_format'])
       ->decode($body);
-      // Return only items for lists.
-      if (isset($results['_count']) && isset($results['results'])) {
-        $results = $results['results'];
-      }
 
+    return $results;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function query(array $parameters = [], array $sorts = [], $start = NULL, $length = NULL) {
+    $results = $this->queryRaw($parameters, $sorts, $start, $length);
+
+    // Return only items for lists.
+    if (isset($results['_count']) && isset($results['results'])) {
+      $results = $results['results'];
+    }
     return $results;
   }
 

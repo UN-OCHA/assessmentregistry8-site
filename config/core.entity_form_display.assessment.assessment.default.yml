@@ -15,6 +15,7 @@ dependencies:
     - field.field.assessment.assessment.field_frequency
     - field.field.assessment.assessment.field_key_findings
     - field.field.assessment.assessment.field_level_of_representation
+    - field.field.assessment.assessment.field_local_coordination_groups
     - field.field.assessment.assessment.field_locations
     - field.field.assessment.assessment.field_methodology
     - field.field.assessment.assessment.field_operations
@@ -157,6 +158,16 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_local_coordination_groups:
+    weight: 24
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_locations:
     weight: 18
     settings:
@@ -261,7 +272,7 @@ content:
     region: content
   path:
     type: path
-    weight: 24
+    weight: 25
     region: content
     settings: {  }
     third_party_settings: {  }
