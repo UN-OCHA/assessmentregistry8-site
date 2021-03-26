@@ -44,7 +44,8 @@ class WebhookController extends ControllerBase {
 
     $parts = explode(':', $params['event']);
     $entity_type = $parts[0];
-    $action = $parts[1];
+    $bundle = $parts[1];
+    $action = $parts[2];
 
     $uuid = $params['payload']['uuid'];
     $index = FALSE;
@@ -53,25 +54,30 @@ class WebhookController extends ControllerBase {
 
     // Get index and data source.
     switch ($entity_type) {
-      case 'knowledge_management':
-        $index = Index::load('km');
-        $datasource_id = 'entity:km';
-        $external_entity_type = 'km';
-        break;
+      case 'document':
+        switch ($bundle) {
+          case 'knowledge_management':
+            $index = Index::load('km');
+            $datasource_id = 'entity:km';
+            $external_entity_type = 'km';
+            break;
 
-      case 'assessment':
-        $index = Index::load('assessments');
-        $datasource_id = 'entity:assessment';
-        $external_entity_type = 'assessment';
-        break;
+          case 'assessment':
+            $index = Index::load('assessments');
+            $datasource_id = 'entity:assessment';
+            $external_entity_type = 'assessment';
+            break;
 
-      case 'assessment_document':
-        $index = Index::load('assessments');
-        $datasource_id = 'entity:assessment';
-        $external_entity_type = 'assessment_document';
-        break;
+          case 'assessment_document':
+            $index = Index::load('assessments');
+            $datasource_id = 'entity:assessment';
+            $external_entity_type = 'assessment_document';
+            break;
+
+        }
 
       case 'term':
+        // @todo map bundle to external entity type.
         $datasource_id = 'organization';
         $external_entity_type = 'organization';
         break;
