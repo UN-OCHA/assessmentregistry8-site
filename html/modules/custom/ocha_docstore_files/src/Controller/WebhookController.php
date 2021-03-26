@@ -16,23 +16,25 @@ class WebhookController extends ControllerBase {
 
   /**
    * Mapping info.
+   *
+   * @var array
    */
-  protected $entity_type_mapping = [
+  protected $entityTypeMapping = [
     'knowledge_management' => [
       'external_entity_type' => 'km',
-      'datasource_id' => 'entity:km',
+      'datasource' => 'km',
       'index_name' => 'km',
       'field_names' => [],
     ],
     'assessment' => [
       'external_entity_type' => 'assessment',
-      'datasource_id' => 'entity:assessment',
+      'datasource' => 'assessment',
       'index_name' => 'assessments',
       'field_names' => [],
     ],
     'assessment_document' => [
       'external_entity_type' => 'assessment_document',
-      'datasource_id' => 'entity:assessment',
+      'datasource' => 'assessment',
       'index_name' => 'assessments',
       'field_names' => [
         'field_assessment_data',
@@ -42,7 +44,7 @@ class WebhookController extends ControllerBase {
     ],
     'ar_assessment_status' => [
       'external_entity_type' => 'assessment_status',
-      'datasource_id' => 'entity:assessment',
+      'datasource' => 'assessment',
       'index_name' => 'assessments',
       'field_names' => [
         'field_status',
@@ -124,14 +126,15 @@ class WebhookController extends ControllerBase {
    * Handle document change.
    */
   protected function handleDocument($bundle, $action, $uuid) {
-    if (!isset($this->entity_type_mapping[$bundle])) {
+    if (!isset($this->entityTypeMapping[$bundle])) {
       throw new BadRequestHttpException('Unknown document type');
     }
 
-    $index_name = $this->entity_type_mapping[$bundle]['index_name'];
-    $datasource_id = $this->entity_type_mapping[$bundle]['datasource_id'];
-    $external_entity_type = $this->entity_type_mapping[$bundle]['external_entity_type'];
-    $field_names = $this->entity_type_mapping[$bundle]['field_names'];
+    $index_name = $this->entityTypeMapping[$bundle]['index_name'];
+    $datasource = $this->entityTypeMapping[$bundle]['datasource'];
+    $datasource_id = 'entity:' . $datasource;
+    $external_entity_type = $this->entityTypeMapping[$bundle]['external_entity_type'];
+    $field_names = $this->entityTypeMapping[$bundle]['field_names'];
 
     $uuids = [];
 
@@ -171,8 +174,11 @@ class WebhookController extends ControllerBase {
     if (!empty($uuids)) {
       $uuids = array_unique($uuids);
       $solr_ids = [];
-      foreach ($uuids as $u) {
-        $solr_ids[] = $u . ':und';
+      $tags = [];
+
+      foreach ($uuids as $id) {
+        $solr_ids[] = $id . ':und';
+        $tags[] = $datasource . ':' . $id;
       }
 
       $index = Index::load($index_name);
@@ -180,6 +186,9 @@ class WebhookController extends ControllerBase {
 
       // phpcs:ignore
       \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache($uuids);
+
+      // phpcs:ignore
+      \Drupal::service('cache_tags.invalidator')->invalidateTags($tags);
     }
 
     if ($action === 'delete') {
@@ -187,7 +196,6 @@ class WebhookController extends ControllerBase {
       $index->trackItemsDeleted($datasource_id, [$uuid . ':und']);
     }
 
-    // @todo Clear render cache.
     $response = new JsonResponse('OK');
     return $response;
   }
@@ -196,7 +204,7 @@ class WebhookController extends ControllerBase {
    * Handle term change.
    */
   protected function handleTerm($bundle, $action, $uuid) {
-    if (!isset($this->entity_type_mapping[$bundle])) {
+    if (!isset($this->entityTypeMapping[$bundle])) {
       throw new BadRequestHttpException('Unknown term type');
     }
 
@@ -205,10 +213,11 @@ class WebhookController extends ControllerBase {
       return $response;
     }
 
-    $index_name = $this->entity_type_mapping[$bundle]['index_name'];
-    $datasource_id = $this->entity_type_mapping[$bundle]['datasource_id'];
-    $external_entity_type = $this->entity_type_mapping[$bundle]['external_entity_type'];
-    $field_names = $this->entity_type_mapping[$bundle]['field_names'];
+    $index_name = $this->entityTypeMapping[$bundle]['index_name'];
+    $datasource = $this->entityTypeMapping[$bundle]['datasource'];
+    $datasource_id = 'entity:' . $datasource;
+    $external_entity_type = $this->entityTypeMapping[$bundle]['external_entity_type'];
+    $field_names = $this->entityTypeMapping[$bundle]['field_names'];
 
     $uuids = [];
 
@@ -228,8 +237,11 @@ class WebhookController extends ControllerBase {
     if (!empty($uuids)) {
       $uuids = array_unique($uuids);
       $solr_ids = [];
-      foreach ($uuids as $u) {
-        $solr_ids[] = $u . ':und';
+      $tags = [];
+
+      foreach ($uuids as $id) {
+        $solr_ids[] = $id . ':und';
+        $tags[] = $datasource . ':' . $id;
       }
 
       $index = Index::load($index_name);
@@ -237,9 +249,11 @@ class WebhookController extends ControllerBase {
 
       // phpcs:ignore
       \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache($uuids);
+
+      // phpcs:ignore
+      \Drupal::service('cache_tags.invalidator')->invalidateTags($tags);
     }
 
-    // @todo Clear render cache.
     $response = new JsonResponse('OK');
     return $response;
   }
