@@ -15,6 +15,42 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class WebhookController extends ControllerBase {
 
   /**
+   * Mapping info.
+   */
+  protected $entity_type_mapping = [
+    'knowledge_management' => [
+      'external_entity_type' => 'km',
+      'datasource_id' => 'entity:km',
+      'index_name' => 'km',
+      'field_names' => [],
+    ],
+    'assessment' => [
+      'external_entity_type' => 'assessment',
+      'datasource_id' => 'entity:assessment',
+      'index_name' => 'assessments',
+      'field_names' => [],
+    ],
+    'assessment_document' => [
+      'external_entity_type' => 'assessment_document',
+      'datasource_id' => 'entity:assessment',
+      'index_name' => 'assessments',
+      'field_names' => [
+        'field_assessment_data',
+        'field_assessment_questionnaire',
+        'field_assessment_report',
+      ],
+    ],
+    'ar_assessment_status' => [
+      'external_entity_type' => 'assessment_status',
+      'datasource_id' => 'entity:assessment',
+      'index_name' => 'assessments',
+      'field_names' => [
+        'field_status',
+      ],
+    ],
+  ];
+
+  /**
    * The logger factory.
    *
    * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
@@ -43,76 +79,21 @@ class WebhookController extends ControllerBase {
     }
 
     $parts = explode(':', $params['event']);
+    if (count($parts) !== 3) {
+      throw new BadRequestHttpException('Bad event');
+    }
+
     $entity_type = $parts[0];
     $bundle = $parts[1];
     $action = $parts[2];
-
     $uuid = $params['payload']['uuid'];
-    $index = FALSE;
-    $datasource_id = FALSE;
-    $external_entity_type = FALSE;
 
-    // Get index and data source.
-    switch ($entity_type) {
-      case 'document':
-        switch ($bundle) {
-          case 'knowledge_management':
-            $index = Index::load('km');
-            $datasource_id = 'entity:km';
-            $external_entity_type = 'km';
-            break;
-
-          case 'assessment':
-            $index = Index::load('assessments');
-            $datasource_id = 'entity:assessment';
-            $external_entity_type = 'assessment';
-            break;
-
-          case 'assessment_document':
-            $index = Index::load('assessments');
-            $datasource_id = 'entity:assessment';
-            $external_entity_type = 'assessment_document';
-            break;
-
-        }
-
-      case 'term':
-        // @todo map bundle to external entity type.
-        $datasource_id = 'organization';
-        $external_entity_type = 'organization';
-        break;
-
+    if ($entity_type === 'document') {
+      return $this->handleDocument($bundle, $action, $uuid);
     }
 
-    if (!$datasource_id) {
-      $response = new JsonResponse('Ignored');
-      return $response;
-    }
-
-    // Trigger action.
-    switch ($action) {
-      case 'create':
-        // phpcs:ignore
-        \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache([$uuid]);
-        // phpcs:ignore
-        $entity = \Drupal::entityTypeManager()->getStorage($external_entity_type)->load($uuid);
-        search_api_entity_insert($entity);
-        break;
-
-      case 'update':
-        // phpcs:ignore
-        \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache([$uuid]);
-        // phpcs:ignore
-        $entity = \Drupal::entityTypeManager()->getStorage($external_entity_type)->load($uuid);
-        search_api_entity_update($entity);
-        break;
-
-      case 'delete':
-        $index->trackItemsDeleted($datasource_id, [$uuid]);
-        // phpcs:ignore
-        \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache([$uuid]);
-        break;
-
+    if ($entity_type === 'term') {
+      return $this->handleTerm($bundle, $action, $uuid);
     }
 
     $response = new JsonResponse('OK');
@@ -137,6 +118,130 @@ class WebhookController extends ControllerBase {
       throw new BadRequestHttpException('You have to pass a JSON object');
     }
     return $content;
+  }
+
+  /**
+   * Handle document change.
+   */
+  protected function handleDocument($bundle, $action, $uuid) {
+    if (!isset($this->entity_type_mapping[$bundle])) {
+      throw new BadRequestHttpException('Unknown document type');
+    }
+
+    $index_name = $this->entity_type_mapping[$bundle]['index_name'];
+    $datasource_id = $this->entity_type_mapping[$bundle]['datasource_id'];
+    $external_entity_type = $this->entity_type_mapping[$bundle]['external_entity_type'];
+    $field_names = $this->entity_type_mapping[$bundle]['field_names'];
+
+    $uuids = [];
+
+    // Add new item to index.
+    if ($action === 'create') {
+      // Ignore assessment documents.
+      if ($bundle === 'assessment_document') {
+        $response = new JsonResponse('OK');
+        return $response;
+      }
+
+      $index = Index::load($index_name);
+      $index->trackItemsInserted($datasource_id, [$uuid . ':und']);
+
+      $response = new JsonResponse('OK');
+      return $response;
+    }
+
+    // Track self for updates.
+    if ($action === 'update') {
+      $uuids[] = $uuid;
+    }
+
+    // Find references.
+    if (!empty($field_names)) {
+      foreach ($field_names as $field_name) {
+        $index = Index::load($index_name);
+        $query = $index->query();
+        $query->addCondition($field_name, $uuid);
+        $results = $query->execute();
+        foreach ($results as $item) {
+          $uuids = array_merge($uuids, $item->getField('uuid')->getValues());
+        }
+      }
+    }
+
+    if (!empty($uuids)) {
+      $uuids = array_unique($uuids);
+      $solr_ids = [];
+      foreach ($uuids as $u) {
+        $solr_ids[] = $u . ':und';
+      }
+
+      $index = Index::load($index_name);
+      $index->trackItemsUpdated($datasource_id, $solr_ids);
+
+      // phpcs:ignore
+      \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache($uuids);
+    }
+
+    if ($action === 'delete') {
+      $index = Index::load($index_name);
+      $index->trackItemsDeleted($datasource_id, [$uuid . ':und']);
+    }
+
+    // @todo Clear render cache.
+    $response = new JsonResponse('OK');
+    return $response;
+  }
+
+  /**
+   * Handle term change.
+   */
+  protected function handleTerm($bundle, $action, $uuid) {
+    if (!isset($this->entity_type_mapping[$bundle])) {
+      throw new BadRequestHttpException('Unknown term type');
+    }
+
+    if ($action !== 'update' && $action !== 'delete') {
+      $response = new JsonResponse('OK');
+      return $response;
+    }
+
+    $index_name = $this->entity_type_mapping[$bundle]['index_name'];
+    $datasource_id = $this->entity_type_mapping[$bundle]['datasource_id'];
+    $external_entity_type = $this->entity_type_mapping[$bundle]['external_entity_type'];
+    $field_names = $this->entity_type_mapping[$bundle]['field_names'];
+
+    $uuids = [];
+
+    // Track referenced items.
+    if (!empty($field_names)) {
+      foreach ($field_names as $field_name) {
+        $index = Index::load($index_name);
+        $query = $index->query();
+        $query->addCondition($field_name, $uuid);
+        $results = $query->execute();
+        foreach ($results as $item) {
+          $uuids = array_merge($uuids, $item->getField('uuid')->getValues());
+        }
+      }
+    }
+
+    if (!empty($uuids)) {
+      $uuids = array_unique($uuids);
+      $solr_ids = [];
+      foreach ($uuids as $u) {
+        $solr_ids[] = $u . ':und';
+      }
+
+      $index = Index::load($index_name);
+      $index->trackItemsUpdated($datasource_id, $solr_ids);
+
+      // phpcs:ignore
+      \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache($uuids);
+    }
+
+    // @todo Clear render cache.
+    $response = new JsonResponse('OK');
+    return $response;
   }
 
 }
