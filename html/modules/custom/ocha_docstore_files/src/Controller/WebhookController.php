@@ -50,6 +50,105 @@ class WebhookController extends ControllerBase {
         'field_status',
       ],
     ],
+    'organizations' => [
+      'external_entity_type' => 'organization',
+      'datasource' => 'assessment',
+      'index_name' => 'assessments',
+      'field_names' => [
+        'field_organizations',
+        'field_asst_organizations',
+        'field_population_types',
+      ],
+    ],
+    'local_coordination_groups' => [
+      'external_entity_type' => 'local_group',
+      'datasource' => 'assessment',
+      'index_name' => 'assessments',
+      'field_names' => [
+        'field_local_coordination_groups',
+      ],
+    ],
+    'locations' => [
+      'external_entity_type' => 'location',
+      'datasource' => 'assessment',
+      'index_name' => 'assessments',
+      'field_names' => [
+        'field_locations',
+      ],
+    ],
+    'operations' => [
+      'external_entity_type' => 'operation',
+      'datasource' => 'assessment',
+      'index_name' => 'assessments',
+      'field_names' => [
+        'field_operations',
+      ],
+    ],
+    // @todo this also exists on km.
+    'population_types' => [
+      'external_entity_type' => 'population_type',
+      'datasource' => 'assessment',
+      'index_name' => 'assessments',
+      'field_names' => [
+        'field_population_types',
+      ],
+    ],
+    'themes' => [
+      'external_entity_type' => 'theme',
+      'datasource' => 'assessment',
+      'index_name' => 'assessments',
+      'field_names' => [
+        'field_themes',
+      ],
+    ],
+    'ar_context' => [
+      'external_entity_type' => 'context',
+      'datasource' => 'km',
+      'index_name' => 'km',
+      'field_names' => [
+        'field_context',
+      ],
+    ],
+    'countries' => [
+      'external_entity_type' => 'country',
+      'datasource' => 'km',
+      'index_name' => 'km',
+      'field_names' => [
+        'field_countries',
+      ],
+    ],
+    'ar_document_type' => [
+      'external_entity_type' => 'document_type',
+      'datasource' => 'km',
+      'index_name' => 'km',
+      'field_names' => [
+        'field_document_type',
+      ],
+    ],
+    'global_coordination_groups' => [
+      'external_entity_type' => 'global_cluster',
+      'datasource' => 'km',
+      'index_name' => 'km',
+      'field_names' => [
+        'field_global_clusters',
+      ],
+    ],
+    'ar_hpc_document_repository' => [
+      'external_entity_type' => 'hpc_document_repository',
+      'datasource' => 'km',
+      'index_name' => 'km',
+      'field_names' => [
+        'field_hpc_document_repository',
+      ],
+    ],
+    'ar_life_cycle_steps' => [
+      'external_entity_type' => 'life_cycle_step',
+      'datasource' => 'km',
+      'index_name' => 'km',
+      'field_names' => [
+        'field_life_cycle_steps',
+      ],
+    ],
   ];
 
   /**
