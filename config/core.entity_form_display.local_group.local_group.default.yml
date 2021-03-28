@@ -1,0 +1,30 @@
+
+uuid: 4939a516-2beb-4486-b499-9d8b0ace7cba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.local_group.local_group.field_hrinfo_id
+  module:
+    - external_entities
+id: local_group.local_group.default
+targetEntityType: local_group
+bundle: local_group
+mode: default
+content:
+  field_hrinfo_id:
+    weight: -4
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }
