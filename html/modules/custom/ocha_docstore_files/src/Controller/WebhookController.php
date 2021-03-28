@@ -21,132 +21,171 @@ class WebhookController extends ControllerBase {
    */
   protected $entityTypeMapping = [
     'knowledge_management' => [
-      'external_entity_type' => 'km',
-      'datasource' => 'km',
-      'index_name' => 'km',
-      'field_names' => [],
+      [
+        'external_entity_type' => 'km',
+        'datasource' => 'km',
+        'index_name' => 'km',
+        'field_names' => [],
+      ],
     ],
     'assessment' => [
-      'external_entity_type' => 'assessment',
-      'datasource' => 'assessment',
-      'index_name' => 'assessments',
-      'field_names' => [],
+      [
+        'external_entity_type' => 'assessment',
+        'datasource' => 'assessment',
+        'index_name' => 'assessments',
+        'field_names' => [],
+      ],
     ],
     'assessment_document' => [
-      'external_entity_type' => 'assessment_document',
-      'datasource' => 'assessment',
-      'index_name' => 'assessments',
-      'field_names' => [
-        'field_assessment_data',
-        'field_assessment_questionnaire',
-        'field_assessment_report',
+      [
+        'external_entity_type' => 'assessment_document',
+        'datasource' => 'assessment',
+        'index_name' => 'assessments',
+        'field_names' => [
+          'field_assessment_data',
+          'field_assessment_questionnaire',
+          'field_assessment_report',
+        ],
       ],
     ],
     'ar_assessment_status' => [
-      'external_entity_type' => 'assessment_status',
-      'datasource' => 'assessment',
-      'index_name' => 'assessments',
-      'field_names' => [
-        'field_status',
+      [
+        'external_entity_type' => 'assessment_status',
+        'datasource' => 'assessment',
+        'index_name' => 'assessments',
+        'field_names' => [
+          'field_status',
+        ],
       ],
     ],
     'organizations' => [
-      'external_entity_type' => 'organization',
-      'datasource' => 'assessment',
-      'index_name' => 'assessments',
-      'field_names' => [
-        'field_organizations',
-        'field_asst_organizations',
-        'field_population_types',
+      [
+        'external_entity_type' => 'organization',
+        'datasource' => 'assessment',
+        'index_name' => 'assessments',
+        'field_names' => [
+          'field_organizations',
+          'field_asst_organizations',
+          'field_population_types',
+        ],
       ],
     ],
     'local_coordination_groups' => [
-      'external_entity_type' => 'local_group',
-      'datasource' => 'assessment',
-      'index_name' => 'assessments',
-      'field_names' => [
-        'field_local_coordination_groups',
+      [
+        'external_entity_type' => 'local_group',
+        'datasource' => 'assessment',
+        'index_name' => 'assessments',
+        'field_names' => [
+          'field_local_coordination_groups',
+        ],
       ],
     ],
     'locations' => [
-      'external_entity_type' => 'location',
-      'datasource' => 'assessment',
-      'index_name' => 'assessments',
-      'field_names' => [
-        'field_locations',
+      [
+        'external_entity_type' => 'location',
+        'datasource' => 'assessment',
+        'index_name' => 'assessments',
+        'field_names' => [
+          'field_locations',
+        ],
       ],
     ],
     'operations' => [
-      'external_entity_type' => 'operation',
-      'datasource' => 'assessment',
-      'index_name' => 'assessments',
-      'field_names' => [
-        'field_operations',
+      [
+        'external_entity_type' => 'operation',
+        'datasource' => 'assessment',
+        'index_name' => 'assessments',
+        'field_names' => [
+          'field_operations',
+        ],
       ],
     ],
-    // @todo this also exists on km.
     'population_types' => [
-      'external_entity_type' => 'population_type',
-      'datasource' => 'assessment',
-      'index_name' => 'assessments',
-      'field_names' => [
-        'field_population_types',
+      [
+        'external_entity_type' => 'population_type',
+        'datasource' => 'assessment',
+        'index_name' => 'assessments',
+        'field_names' => [
+          'field_population_types',
+        ],
+      ],
+      [
+        'external_entity_type' => 'population_type',
+        'datasource' => 'km',
+        'index_name' => 'km',
+        'field_names' => [
+          'field_population_types',
+        ],
       ],
     ],
     'themes' => [
-      'external_entity_type' => 'theme',
-      'datasource' => 'assessment',
-      'index_name' => 'assessments',
-      'field_names' => [
-        'field_themes',
+      [
+        'external_entity_type' => 'theme',
+        'datasource' => 'assessment',
+        'index_name' => 'assessments',
+        'field_names' => [
+          'field_themes',
+        ],
       ],
     ],
     'ar_context' => [
-      'external_entity_type' => 'context',
-      'datasource' => 'km',
-      'index_name' => 'km',
-      'field_names' => [
-        'field_context',
+      [
+        'external_entity_type' => 'context',
+        'datasource' => 'km',
+        'index_name' => 'km',
+        'field_names' => [
+          'field_context',
+        ],
       ],
     ],
     'countries' => [
-      'external_entity_type' => 'country',
-      'datasource' => 'km',
-      'index_name' => 'km',
-      'field_names' => [
-        'field_countries',
+      [
+        'external_entity_type' => 'country',
+        'datasource' => 'km',
+        'index_name' => 'km',
+        'field_names' => [
+          'field_countries',
+        ],
       ],
     ],
     'ar_document_type' => [
-      'external_entity_type' => 'document_type',
-      'datasource' => 'km',
-      'index_name' => 'km',
-      'field_names' => [
-        'field_document_type',
+      [
+        'external_entity_type' => 'document_type',
+        'datasource' => 'km',
+        'index_name' => 'km',
+        'field_names' => [
+          'field_document_type',
+        ],
       ],
     ],
     'global_coordination_groups' => [
-      'external_entity_type' => 'global_cluster',
-      'datasource' => 'km',
-      'index_name' => 'km',
-      'field_names' => [
-        'field_global_clusters',
+      [
+        'external_entity_type' => 'global_cluster',
+        'datasource' => 'km',
+        'index_name' => 'km',
+        'field_names' => [
+          'field_global_clusters',
+        ],
       ],
     ],
     'ar_hpc_document_repository' => [
-      'external_entity_type' => 'hpc_document_repository',
-      'datasource' => 'km',
-      'index_name' => 'km',
-      'field_names' => [
-        'field_hpc_document_repository',
+      [
+        'external_entity_type' => 'hpc_document_repository',
+        'datasource' => 'km',
+        'index_name' => 'km',
+        'field_names' => [
+          'field_hpc_document_repository',
+        ],
       ],
     ],
     'ar_life_cycle_steps' => [
-      'external_entity_type' => 'life_cycle_step',
-      'datasource' => 'km',
-      'index_name' => 'km',
-      'field_names' => [
-        'field_life_cycle_steps',
+      [
+        'external_entity_type' => 'life_cycle_step',
+        'datasource' => 'km',
+        'index_name' => 'km',
+        'field_names' => [
+          'field_life_cycle_steps',
+        ],
       ],
     ],
   ];
@@ -180,14 +219,27 @@ class WebhookController extends ControllerBase {
     }
 
     $parts = explode(':', $params['event']);
-    if (count($parts) !== 3) {
+
+    if (count($parts) === 3) {
+      $entity_type = $parts[0];
+      $bundle = $parts[1];
+      $action = $parts[2];
+    }
+    elseif (count($parts) === 2) {
+      $entity_type = $parts[0];
+      $action = $parts[1];
+      $bundle = $params['payload']['type'];
+    }
+    else {
       throw new BadRequestHttpException('Bad event');
     }
 
-    $entity_type = $parts[0];
-    $bundle = $parts[1];
-    $action = $parts[2];
-    $uuid = $params['payload']['uuid'];
+    if (is_array($params['payload'])) {
+      $uuid = $params['payload']['uuid'];
+    }
+    else {
+      $uuid = $params['payload'];
+    }
 
     if ($entity_type === 'document') {
       return $this->handleDocument($bundle, $action, $uuid);
@@ -229,70 +281,76 @@ class WebhookController extends ControllerBase {
       throw new BadRequestHttpException('Unknown document type');
     }
 
-    $index_name = $this->entityTypeMapping[$bundle]['index_name'];
-    $datasource = $this->entityTypeMapping[$bundle]['datasource'];
-    $datasource_id = 'entity:' . $datasource;
-    $external_entity_type = $this->entityTypeMapping[$bundle]['external_entity_type'];
-    $field_names = $this->entityTypeMapping[$bundle]['field_names'];
+    foreach ($this->entityTypeMapping[$bundle] as $mapping_info) {
+      $index_name = $mapping_info['index_name'];
+      $datasource = $mapping_info['datasource'];
+      $datasource_id = 'entity:' . $datasource;
+      $external_entity_type = $mapping_info['external_entity_type'];
+      $field_names = $mapping_info['field_names'];
 
-    $uuids = [];
+      $uuids = [];
 
-    // Add new item to index.
-    if ($action === 'create') {
-      // Ignore assessment documents.
-      if ($bundle === 'assessment_document') {
+      // Add new item to index.
+      if ($action === 'create') {
+        // Ignore assessment documents.
+        if ($bundle === 'assessment_document') {
+          $response = new JsonResponse('OK');
+          return $response;
+        }
+
+        $index = Index::load($index_name);
+        $index->trackItemsInserted($datasource_id, [$uuid . ':und']);
+
         $response = new JsonResponse('OK');
         return $response;
       }
 
-      $index = Index::load($index_name);
-      $index->trackItemsInserted($datasource_id, [$uuid . ':und']);
+      // Track self for updates.
+      if ($action === 'update') {
+        $uuids[] = $uuid;
+      }
 
-      $response = new JsonResponse('OK');
-      return $response;
-    }
-
-    // Track self for updates.
-    if ($action === 'update') {
-      $uuids[] = $uuid;
-    }
-
-    // Find references.
-    if (!empty($field_names)) {
-      foreach ($field_names as $field_name) {
-        $index = Index::load($index_name);
-        $query = $index->query();
-        $query->addCondition($field_name, $uuid);
-        $results = $query->execute();
-        foreach ($results as $item) {
-          $uuids = array_merge($uuids, $item->getField('uuid')->getValues());
+      // Find references.
+      if (!empty($field_names)) {
+        foreach ($field_names as $field_name) {
+          $index = Index::load($index_name);
+          $query = $index->query();
+          $query->addCondition($field_name, $uuid);
+          $query->range(0, 999);
+          $results = $query->execute();
+          foreach ($results as $item) {
+            $uuids = array_merge($uuids, $item->getField('uuid')->getValues());
+          }
         }
       }
-    }
 
-    if (!empty($uuids)) {
-      $uuids = array_unique($uuids);
-      $solr_ids = [];
-      $tags = [];
+      if (!empty($uuids)) {
+        $uuids = array_unique($uuids);
+        $solr_ids = [];
+        $tags = [];
 
-      foreach ($uuids as $id) {
-        $solr_ids[] = $id . ':und';
-        $tags[] = $datasource . ':' . $id;
+        foreach ($uuids as $id) {
+          $solr_ids[] = $id . ':und';
+          $tags[] = $datasource . ':' . $id;
+        }
+
+        $index = Index::load($index_name);
+        $index->trackItemsUpdated($datasource_id, $solr_ids);
+
+        // phpcs:ignore
+        \Drupal::entityTypeManager()->getStorage($datasource)->resetCache($uuids);
+
+        // phpcs:ignore
+        \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache([$uuid]);
+
+        // phpcs:ignore
+        \Drupal::service('cache_tags.invalidator')->invalidateTags($tags);
       }
 
-      $index = Index::load($index_name);
-      $index->trackItemsUpdated($datasource_id, $solr_ids);
-
-      // phpcs:ignore
-      \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache($uuids);
-
-      // phpcs:ignore
-      \Drupal::service('cache_tags.invalidator')->invalidateTags($tags);
-    }
-
-    if ($action === 'delete') {
-      $index = Index::load($index_name);
-      $index->trackItemsDeleted($datasource_id, [$uuid . ':und']);
+      if ($action === 'delete') {
+        $index = Index::load($index_name);
+        $index->trackItemsDeleted($datasource_id, [$uuid . ':und']);
+      }
     }
 
     $response = new JsonResponse('OK');
@@ -312,45 +370,51 @@ class WebhookController extends ControllerBase {
       return $response;
     }
 
-    $index_name = $this->entityTypeMapping[$bundle]['index_name'];
-    $datasource = $this->entityTypeMapping[$bundle]['datasource'];
-    $datasource_id = 'entity:' . $datasource;
-    $external_entity_type = $this->entityTypeMapping[$bundle]['external_entity_type'];
-    $field_names = $this->entityTypeMapping[$bundle]['field_names'];
+    foreach ($this->entityTypeMapping[$bundle] as $mapping_info) {
+      $index_name = $mapping_info['index_name'];
+      $datasource = $mapping_info['datasource'];
+      $datasource_id = 'entity:' . $datasource;
+      $external_entity_type = $mapping_info['external_entity_type'];
+      $field_names = $mapping_info['field_names'];
 
-    $uuids = [];
+      $uuids = [];
 
-    // Track referenced items.
-    if (!empty($field_names)) {
-      foreach ($field_names as $field_name) {
-        $index = Index::load($index_name);
-        $query = $index->query();
-        $query->addCondition($field_name, $uuid);
-        $results = $query->execute();
-        foreach ($results as $item) {
-          $uuids = array_merge($uuids, $item->getField('uuid')->getValues());
+      // Track referenced items.
+      if (!empty($field_names)) {
+        foreach ($field_names as $field_name) {
+          $index = Index::load($index_name);
+          $query = $index->query();
+          $query->addCondition($field_name, $uuid);
+          $query->range(0, 999);
+          $results = $query->execute();
+          foreach ($results as $item) {
+            $uuids = array_merge($uuids, $item->getField('uuid')->getValues());
+          }
         }
       }
-    }
 
-    if (!empty($uuids)) {
-      $uuids = array_unique($uuids);
-      $solr_ids = [];
-      $tags = [];
+      if (!empty($uuids)) {
+        $uuids = array_unique($uuids);
+        $solr_ids = [];
+        $tags = [];
 
-      foreach ($uuids as $id) {
-        $solr_ids[] = $id . ':und';
-        $tags[] = $datasource . ':' . $id;
+        foreach ($uuids as $id) {
+          $solr_ids[] = $id . ':und';
+          $tags[] = $datasource . ':' . $id;
+        }
+
+        $index = Index::load($index_name);
+        $index->trackItemsUpdated($datasource_id, $solr_ids);
+
+        // phpcs:ignore
+        \Drupal::entityTypeManager()->getStorage($datasource)->resetCache($uuids);
+
+        // phpcs:ignore
+        \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache([$uuid]);
+
+        // phpcs:ignore
+        \Drupal::service('cache_tags.invalidator')->invalidateTags($tags);
       }
-
-      $index = Index::load($index_name);
-      $index->trackItemsUpdated($datasource_id, $solr_ids);
-
-      // phpcs:ignore
-      \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache($uuids);
-
-      // phpcs:ignore
-      \Drupal::service('cache_tags.invalidator')->invalidateTags($tags);
     }
 
     $response = new JsonResponse('OK');
