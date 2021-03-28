@@ -39,6 +39,8 @@ function ocha_docstore_files_update_8001() {
           'document:knowledge_management:create' => 'document:knowledge_management:create',
           'document:knowledge_management:update' => 'document:knowledge_management:update',
           'document:knowledge_management:delete' => 'document:knowledge_management:delete',
+          'term:ar_assessment_status:delete' => 'term:ar_assessment_status:delete',
+          'term:ar_assessment_status:update' => 'term:ar_assessment_status:update',
           'term:ar_context:delete' => 'term:ar_context:delete',
           'term:ar_context:update' => 'term:ar_context:update',
           'term:ar_document_type:delete' => 'term:ar_document_type:delete',
