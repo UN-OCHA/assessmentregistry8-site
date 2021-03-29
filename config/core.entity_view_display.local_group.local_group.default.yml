@@ -1,0 +1,32 @@
+uuid: 1e48004e-e600-4f62-9e1e-f69960945bfe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.local_group.local_group.field_hrinfo_id
+  module:
+    - external_entities
+id: local_group.local_group.default
+targetEntityType: local_group
+bundle: local_group
+mode: default
+content:
+  field_hrinfo_id:
+    weight: 1
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  title:
+    type: string
+    label: hidden
+    region: content
+    weight: 0
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  search_api_excerpt: true

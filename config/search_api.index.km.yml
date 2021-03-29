@@ -7,10 +7,10 @@ dependencies:
     - external_entities
     - search_api
   config:
+    - field.storage.km.field_context
     - field.storage.km.field_countries
     - field.storage.km.field_document_type
     - field.storage.km.field_hpc_document_repository
-    - field.storage.km.field_context
     - field.storage.km.field_life_cycle_steps
     - field.storage.km.field_original_publication_date
     - field.storage.km.field_population_types
@@ -135,6 +135,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.km.field_population_types
+      module:
+        - external_entities
+  uuid:
+    label: UUID
+    datasource_id: 'entity:km'
+    property_path: uuid
+    type: string
+    dependencies:
       module:
         - external_entities
 datasource_settings:
