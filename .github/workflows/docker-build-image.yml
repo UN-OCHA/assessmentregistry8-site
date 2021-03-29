@@ -17,8 +17,6 @@ jobs:
       uses: actions/checkout@v1
     - name: Determine environment type
       uses: docker://unocha/actions:determine-environment-main
-      with:
-        - branch_production: main
     - name: Build docker image
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
