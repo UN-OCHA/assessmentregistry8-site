@@ -17,6 +17,9 @@
     },
     "drupal/redis": {
       "https://www.drupal.org/project/redis/issues/3192255": "https://git.drupalcode.org/project/redis/-/merge_requests/3.diff"
+    },
+    "drupal/social_auth_hid": {
+      "https://www.drupal.org/project/social_auth_hid/issues/3188805": "https://git.drupalcode.org/project/social_auth_hid/-/merge_requests/2.diff"
     }
   }
 }
