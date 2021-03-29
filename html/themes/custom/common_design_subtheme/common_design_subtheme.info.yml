@@ -10,6 +10,8 @@ logo: 'img/logos/logo.svg'
 libraries:
 - common_design_subtheme/global-styling
 - common_design/cd-facets
+- common_design/cd-table
+- common_design/cd-toc
 
 # Regions
 regions:
