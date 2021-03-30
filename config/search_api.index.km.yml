@@ -14,6 +14,7 @@ dependencies:
     - field.storage.km.field_life_cycle_steps
     - field.storage.km.field_original_publication_date
     - field.storage.km.field_population_types
+    - field.storage.km.field_published
     - search_api.server.solr
 third_party_settings:
   search_api_solr:
@@ -127,6 +128,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.km.field_population_types
+  field_published:
+    label: Published
+    datasource_id: 'entity:km'
+    property_path: field_published
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.km.field_published
   title_1:
     label: 'Population types » Population Type » Title'
     datasource_id: 'entity:km'

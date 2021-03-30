@@ -1,0 +1,24 @@
+uuid: d982d741-3e2b-4b2d-bea5-640142f251a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.km.field_published
+  module:
+    - external_entities
+id: km.km.field_published
+field_name: field_published
+entity_type: km
+bundle: km
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

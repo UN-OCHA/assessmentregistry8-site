@@ -14,6 +14,7 @@ dependencies:
     - field.field.km.km.field_life_cycle_steps
     - field.field.km.km.field_original_publication_date
     - field.field.km.km.field_population_types
+    - field.field.km.km.field_published
   module:
     - external_entities
     - ocha_docstore_files
@@ -113,4 +114,5 @@ content:
     third_party_settings: {  }
 hidden:
   field_author: true
+  field_published: true
   search_api_excerpt: true

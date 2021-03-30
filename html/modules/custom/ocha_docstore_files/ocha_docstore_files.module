@@ -43,4 +43,90 @@ function ocha_docstore_files_inline_entity_form_entity_form_alter(array &$entity
   if (isset($entity_form['#entity']) && is_a($entity_form['#entity'], '\Drupal\external_entities\Entity\ExternalEntity')) {
     $entity_form['#save_entity'] = TRUE;
   }
+
+  if (isset($entity_form['field_author'])) {
+    if (empty($entity_form['field_author']['widget'][0]['value']['#default_value'])) {
+      /** @var Drupal\Core\Session\AccountProxy $account */
+      $account = \Drupal::currentUser();
+
+      $entity_form['field_author']['widget'][0]['value']['#default_value'] = $account->getDisplayName();
+    }
+
+    $entity_form['field_author']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
+    $entity_form['field_author']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+    $entity_form['title']['widget'][0]['value']['#title'] = t('Internal label');
+  }
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function ocha_docstore_files_entity_type_alter(array &$entity_types) {
+  if (!empty($entity_types['external_entity_type'])) {
+    $external_entity_type_config = $entity_types['external_entity_type'];
+
+    // Get the existing external entity type configurations.
+    $external_entity_types = \Drupal::entityTypeManager()->createHandlerInstance(
+      $external_entity_type_config->getHandlerClass('storage'),
+      $external_entity_type_config
+    )->loadMultiple();
+
+    foreach ($external_entity_types as $external_entity_type) {
+      $entity_types[$external_entity_type->id()]->setHandlerClass('access', 'Drupal\ocha_docstore_files\OchaExternalEntityAccessControlHandler');
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function ocha_docstore_files_form_assessment_edit_form_alter(&$form, $form_state, $form_id) {
+  if (isset($form['field_author'])) {
+    $form['field_author']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
+    $form['field_author']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function ocha_docstore_files_form_assessment_form_alter(&$form, $form_state, $form_id) {
+  if (isset($form['field_author'])) {
+    if (empty($form['field_author']['widget'][0]['value']['#default_value'])) {
+      /** @var Drupal\Core\Session\AccountProxy $account */
+      $account = \Drupal::currentUser();
+
+      $form['field_author']['widget'][0]['value']['#default_value'] = $account->getDisplayName();
+    }
+
+    $form['field_author']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
+    $form['field_author']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function ocha_docstore_files_form_km_edit_form_alter(&$form, $form_state, $form_id) {
+  if (isset($form['field_author'])) {
+    $form['field_author']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
+    $form['field_author']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function ocha_docstore_files_form_km_form_alter(&$form, $form_state, $form_id) {
+  if (isset($form['field_author'])) {
+    if (empty($form['field_author']['widget'][0]['value']['#default_value'])) {
+      /** @var Drupal\Core\Session\AccountProxy $account */
+      $account = \Drupal::currentUser();
+
+      $form['field_author']['widget'][0]['value']['#default_value'] = $account->getDisplayName();
+    }
+
+    $form['field_author']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
+    $form['field_author']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+  }
 }

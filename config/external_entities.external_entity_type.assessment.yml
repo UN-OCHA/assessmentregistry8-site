@@ -49,6 +49,8 @@ field_mappings:
     target_id: 'organizations/*/uuid'
   field_population_types:
     entity: 'population_types/*/uuid'
+  field_published:
+    value: published
   field_sample_size:
     value: sample_size
   field_status:
