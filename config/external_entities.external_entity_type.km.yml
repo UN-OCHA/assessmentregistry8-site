@@ -39,6 +39,8 @@ field_mappings:
     value: original_publication_date
   field_population_types:
     target_id: 'population_types/*/uuid'
+  field_published:
+    value: published
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/documents/knowledge-managements'

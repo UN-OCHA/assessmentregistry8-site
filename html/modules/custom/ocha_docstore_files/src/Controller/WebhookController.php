@@ -351,6 +351,8 @@ class WebhookController extends ControllerBase {
         $index = Index::load($index_name);
         $index->trackItemsDeleted($datasource_id, [$uuid . ':und']);
       }
+
+      $index->indexItems(count($uuids) + 1);
     }
 
     $response = new JsonResponse('OK');
@@ -415,6 +417,8 @@ class WebhookController extends ControllerBase {
         // phpcs:ignore
         \Drupal::service('cache_tags.invalidator')->invalidateTags($tags);
       }
+
+      $index->indexItems(count($uuids) + 1);
     }
 
     $response = new JsonResponse('OK');
