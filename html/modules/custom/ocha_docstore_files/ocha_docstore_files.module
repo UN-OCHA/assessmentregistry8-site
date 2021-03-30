@@ -53,7 +53,6 @@ function ocha_docstore_files_entity_type_alter(array &$entity_types) {
     $external_entity_type_config = $entity_types['external_entity_type'];
 
     // Get the existing external entity type configurations.
-    /* @var \Drupal\external_entities\ExternalEntityTypeInterface[] $external_entity_types */
     $external_entity_types = \Drupal::entityTypeManager()->createHandlerInstance(
       $external_entity_type_config->getHandlerClass('storage'),
       $external_entity_type_config
