@@ -22,6 +22,7 @@ dependencies:
     - field.field.assessment.assessment.field_operations
     - field.field.assessment.assessment.field_organizations
     - field.field.assessment.assessment.field_population_types
+    - field.field.assessment.assessment.field_published
     - field.field.assessment.assessment.field_related_content
     - field.field.assessment.assessment.field_sample_size
     - field.field.assessment.assessment.field_sources
@@ -94,6 +95,7 @@ hidden:
   field_methodology: true
   field_operations: true
   field_population_types: true
+  field_published: true
   field_related_content: true
   field_sample_size: true
   field_sources: true

@@ -14,6 +14,7 @@ dependencies:
     - field.field.km.km.field_life_cycle_steps
     - field.field.km.km.field_original_publication_date
     - field.field.km.km.field_population_types
+    - field.field.km.km.field_published
   module:
     - external_entities
     - ocha_docstore_files
@@ -94,6 +95,13 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_select
+    region: content
+  field_published:
+    weight: 32
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   path:
     type: path
