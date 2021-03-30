@@ -44,3 +44,22 @@ function ocha_docstore_files_inline_entity_form_entity_form_alter(array &$entity
     $entity_form['#save_entity'] = TRUE;
   }
 }
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function ocha_docstore_files_entity_type_alter(array &$entity_types) {
+  if (!empty($entity_types['external_entity_type'])) {
+    $external_entity_type_config = $entity_types['external_entity_type'];
+
+    // Get the existing external entity type configurations.
+    $external_entity_types = \Drupal::entityTypeManager()->createHandlerInstance(
+      $external_entity_type_config->getHandlerClass('storage'),
+      $external_entity_type_config
+    )->loadMultiple();
+
+    foreach ($external_entity_types as $external_entity_type) {
+      $entity_types[$external_entity_type->id()]->setHandlerClass('access', 'Drupal\ocha_docstore_files\OchaExternalEntityAccessControlHandler');
+    }
+  }
+}
