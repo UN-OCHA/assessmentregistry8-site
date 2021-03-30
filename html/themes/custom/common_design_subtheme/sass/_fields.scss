@@ -169,7 +169,7 @@
 }
 
 .cd-article .field--name-body {
-  :not(table):not(hr):not(.cd-toc) {
+  :not(table):not(hr):not(.cd-toc):not(.cd-grid) {
     max-width: var(--cd-max-content-width);
   }
 }
