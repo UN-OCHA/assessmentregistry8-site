@@ -128,6 +128,16 @@ class WebhookController extends ControllerBase {
         ],
       ],
     ],
+    'ar_units_of_measurement' => [
+      [
+        'external_entity_type' => 'unit_of_measurement',
+        'datasource' => 'assessment',
+        'index_name' => 'assessments',
+        'field_names' => [
+          'field_units_of_measurement',
+        ],
+      ],
+    ],
     'ar_context' => [
       [
         'external_entity_type' => 'context',
@@ -351,6 +361,8 @@ class WebhookController extends ControllerBase {
         $index = Index::load($index_name);
         $index->trackItemsDeleted($datasource_id, [$uuid . ':und']);
       }
+
+      $index->indexItems(count($uuids) + 1);
     }
 
     $response = new JsonResponse('OK');
@@ -415,6 +427,8 @@ class WebhookController extends ControllerBase {
         // phpcs:ignore
         \Drupal::service('cache_tags.invalidator')->invalidateTags($tags);
       }
+
+      $index->indexItems(count($uuids) + 1);
     }
 
     $response = new JsonResponse('OK');

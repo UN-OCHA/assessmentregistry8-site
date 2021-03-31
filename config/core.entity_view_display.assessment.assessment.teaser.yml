@@ -21,13 +21,16 @@ dependencies:
     - field.field.assessment.assessment.field_methodology
     - field.field.assessment.assessment.field_operations
     - field.field.assessment.assessment.field_organizations
+    - field.field.assessment.assessment.field_other_location
     - field.field.assessment.assessment.field_population_types
+    - field.field.assessment.assessment.field_published
     - field.field.assessment.assessment.field_related_content
     - field.field.assessment.assessment.field_sample_size
     - field.field.assessment.assessment.field_sources
     - field.field.assessment.assessment.field_status
     - field.field.assessment.assessment.field_subject_objective
     - field.field.assessment.assessment.field_themes
+    - field.field.assessment.assessment.field_units_of_measurement
   module:
     - datetime_range
     - external_entities
@@ -93,10 +96,13 @@ hidden:
   field_locations: true
   field_methodology: true
   field_operations: true
+  field_other_location: true
   field_population_types: true
+  field_published: true
   field_related_content: true
   field_sample_size: true
   field_sources: true
   field_subject_objective: true
   field_themes: true
+  field_units_of_measurement: true
   search_api_excerpt: true

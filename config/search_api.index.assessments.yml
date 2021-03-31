@@ -19,6 +19,7 @@ dependencies:
     - field.storage.operation.field_hrinfo_id
     - field.storage.assessment.field_asst_organizations
     - field.storage.assessment.field_population_types
+    - field.storage.assessment.field_published
     - field.storage.assessment.field_status
     - field.storage.assessment.field_themes
     - search_api.server.solr
@@ -170,6 +171,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.assessment.field_population_types
+  field_published:
+    label: Published
+    datasource_id: 'entity:assessment'
+    property_path: field_published
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.assessment.field_published
   field_status:
     label: Status
     datasource_id: 'entity:assessment'

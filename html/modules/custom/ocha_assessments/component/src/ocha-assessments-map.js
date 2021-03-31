@@ -36,7 +36,8 @@ class OchaAssessmentsMap extends OchaAssessmentsBase {
 
       ${this.renderDropdowns()}
 
-      <div id="map">
+      <div id="loading-message">Loading...</div>
+      <div id="map" style="display:none;">
         <slot></slot>
       </div>
     `;
@@ -68,6 +69,10 @@ class OchaAssessmentsMap extends OchaAssessmentsBase {
         }
       }
     });
+
+    this.shadowRoot.getElementById('loading-message').style.display = 'none';
+    this.shadowRoot.getElementById('map').style.display = 'block';
+    this.map.invalidateSize();
 
     this.map.addLayer(this.cluster);
     if (this.cluster.getLayers().length > 0) {

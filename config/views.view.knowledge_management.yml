@@ -5,8 +5,12 @@ dependencies:
   config:
     - field.storage.km.field_description
     - search_api.index.km
+    - user.role.administrator
+    - user.role.knowledge_management_editor
+    - user.role.knowledge_management_global_editor
   module:
     - search_api
+    - user
 id: knowledge_management
 label: 'Knowledge Management'
 module: views
@@ -429,7 +433,45 @@ display:
             multi_type: separator
             multi_separator: ', '
           plugin_id: search_api_field
-      filters: {  }
+      filters:
+        field_published:
+          id: field_published
+          table: search_api_index_km
+          field: field_published
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
       sorts:
         field_original_publication_date:
           id: field_original_publication_date
@@ -477,6 +519,84 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
+      tags:
+        - 'config:field.storage.km.field_description'
+        - 'config:search_api.index.km'
+  page_2:
+    display_plugin: page
+    id: page_2
+    display_title: Unpublished
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: knowledge-management-unpublished
+      cache:
+        type: none
+      defaults:
+        cache: false
+        filters: false
+        filter_groups: false
+        access: false
+        title: false
+      filters:
+        field_published:
+          id: field_published
+          table: search_api_index_km
+          field: field_published
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '0'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: search_api_boolean
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      access:
+        type: role
+        options:
+          role:
+            administrator: administrator
+            knowledge_management_global_editor: knowledge_management_global_editor
+            knowledge_management_editor: knowledge_management_editor
+      display_description: ''
+      title: 'Knowledge Management - Unpublished'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url.query_args
+        - user.roles
       tags:
         - 'config:field.storage.km.field_description'
         - 'config:search_api.index.km'
