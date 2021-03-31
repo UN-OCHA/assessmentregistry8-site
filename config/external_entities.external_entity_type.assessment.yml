@@ -47,6 +47,8 @@ field_mappings:
     target_id: 'operations/*/uuid'
   field_organizations:
     target_id: 'organizations/*/uuid'
+  field_other_location:
+    value: other_location
   field_population_types:
     entity: 'population_types/*/uuid'
   field_published:
@@ -59,6 +61,8 @@ field_mappings:
     value: subject
   field_themes:
     target_id: 'themes/*/uuid'
+  field_units_of_measurement:
+    target_id: 'units_of_measurement/*/uuid'
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/documents/assessments'

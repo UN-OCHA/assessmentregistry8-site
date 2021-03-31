@@ -128,6 +128,16 @@ class WebhookController extends ControllerBase {
         ],
       ],
     ],
+    'ar_units_of_measurement' => [
+      [
+        'external_entity_type' => 'unit_of_measurement',
+        'datasource' => 'assessment',
+        'index_name' => 'assessments',
+        'field_names' => [
+          'field_units_of_measurement',
+        ],
+      ],
+    ],
     'ar_context' => [
       [
         'external_entity_type' => 'context',

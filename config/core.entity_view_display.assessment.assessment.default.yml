@@ -20,6 +20,7 @@ dependencies:
     - field.field.assessment.assessment.field_methodology
     - field.field.assessment.assessment.field_operations
     - field.field.assessment.assessment.field_organizations
+    - field.field.assessment.assessment.field_other_location
     - field.field.assessment.assessment.field_population_types
     - field.field.assessment.assessment.field_published
     - field.field.assessment.assessment.field_related_content
@@ -28,6 +29,7 @@ dependencies:
     - field.field.assessment.assessment.field_status
     - field.field.assessment.assessment.field_subject_objective
     - field.field.assessment.assessment.field_themes
+    - field.field.assessment.assessment.field_units_of_measurement
   module:
     - datetime_range
     - external_entities
@@ -165,6 +167,14 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_other_location:
+    weight: 25
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_population_types:
     weight: 10
     label: above
@@ -221,6 +231,14 @@ content:
     label: above
     settings:
       link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_units_of_measurement:
+    weight: 24
+    label: above
+    settings:
+      link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
