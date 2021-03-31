@@ -6,6 +6,8 @@ use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
 
 /**
  * Plugin implementation of the 'ocha_doc_store_file_formatter' formatter.
@@ -25,7 +27,7 @@ class OchaDocStoreFileFormatter extends FormatterBase {
    */
   public static function defaultSettings() {
     return [
-      // Implement default settings.
+      'raw_url_only' => FALSE,
     ] + parent::defaultSettings();
   }
 
@@ -33,9 +35,15 @@ class OchaDocStoreFileFormatter extends FormatterBase {
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
-    return [
-      // Implement settings form.
-    ] + parent::settingsForm($form, $form_state);
+    $form = parent::settingsForm($form, $form_state);
+
+    $form['raw_url_only'] = [
+      '#title' => $this->t('Display the raw URL only'),
+      '#type' => 'checkbox',
+      '#default_value' => $this->getSetting('raw_url_only'),
+    ];
+
+    return $form;
   }
 
   /**
@@ -76,9 +84,21 @@ class OchaDocStoreFileFormatter extends FormatterBase {
       $output = $item->filename . ' (Private)';
     }
     else {
-      $output = '<a target="_blank" rel="noopener noreferrer" href="/attachments/' . $item->media_uuid . '/' . $item->filename . '">' . $item->filename . '</a>';
-    }
+      $url = Url::fromUserInput('/attachments/' . $item->media_uuid . '/' . $item->filename, [
+        'absolute' => $this->getSetting('raw_url_only'),
+        'attributes' => [
+          'target' => '_blank',
+          'rel' => 'noopener noreferrer',
+        ],
+      ]);
 
+      if ($this->getSetting('raw_url_only')) {
+        $output = $url->toString();
+      }
+      else {
+        $output = Link::fromTextAndUrl($item->filename, $url)->toString();
+      }
+    }
     return $output;
   }
 
