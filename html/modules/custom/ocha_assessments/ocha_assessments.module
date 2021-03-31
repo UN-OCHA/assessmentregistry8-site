@@ -8,7 +8,6 @@
 use Drupal\node\Entity\Node;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\ocha_persons\Entity\PersonEntity;
-use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_theme().
@@ -513,34 +512,4 @@ function ocha_assessments_create_person($hid_id) {
   $person->save();
 
   return $person->id();
-}
-
-/**
- * Implements hook_views_pre_render().
- */
-function ocha_assessments_views_pre_render(ViewExecutable $view) {
-  if ($view->id() !== 'assessments') {
-    return;
-  }
-
-  if ($view->current_display !== 'data_export_1') {
-    return;
-  }
-
-  $output = [];
-  foreach ($view->result as $result) {
-    if (is_array($result->{'entity:node/field_locations:label'}) && count($result->{'entity:node/field_locations:label'}) > 1) {
-      $locations = $result->{'entity:node/field_locations:label'};
-      foreach ($locations as $location) {
-        $result->{'entity:node/field_locations:label'} = [];
-        $result->{'entity:node/field_locations:label'}[] = $location;
-        $output[] = clone $result;
-      }
-    }
-    else {
-      $output[] = $result;
-    }
-  }
-
-  $view->result = $output;
 }
