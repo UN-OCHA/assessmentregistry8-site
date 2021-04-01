@@ -6,6 +6,7 @@ dependencies:
     - search_api_solr
     - external_entities
     - search_api
+    - ocha_docstore_files
   config:
     - field.storage.assessment.field_date
     - field.storage.assessment.field_disaster
@@ -66,6 +67,10 @@ name: Assessments
 description: ''
 read_only: false
 field_settings:
+  _stored_entity:
+    label: 'Stored entity'
+    property_path: _stored_entity
+    type: solr_string_storage
   field_asst_organizations:
     label: 'Participating Organization(s)'
     datasource_id: 'entity:assessment'
@@ -74,16 +79,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.assessment.field_asst_organizations
-  field_asst_organizations_label:
-    label: 'Participating Organization(s) » Organization » Title'
+  field_asst_organizations__facet:
+    label: 'Participating Organization(s) - Facet'
     datasource_id: 'entity:assessment'
-    property_path: 'field_asst_organizations:entity:title'
+    property_path: field_asst_organizations
     type: string
     dependencies:
       config:
         - field.storage.assessment.field_asst_organizations
-      module:
-        - external_entities
   field_date:
     label: Date
     datasource_id: 'entity:assessment'
@@ -94,6 +97,14 @@ field_settings:
         - field.storage.assessment.field_date
   field_disaster:
     label: Disaster
+    datasource_id: 'entity:assessment'
+    property_path: field_disaster
+    type: string
+    dependencies:
+      config:
+        - field.storage.assessment.field_disaster
+  field_disaster__facet:
+    label: 'Disaster - Facet'
     datasource_id: 'entity:assessment'
     property_path: field_disaster
     type: string
@@ -116,18 +127,24 @@ field_settings:
     dependencies:
       config:
         - field.storage.assessment.field_locations
-  field_locations_label:
-    label: 'Location(s) » Location » Title'
+  field_locations__facet:
+    label: 'Location(s) - Facet'
     datasource_id: 'entity:assessment'
-    property_path: 'field_locations:entity:title'
+    property_path: field_locations
     type: string
     dependencies:
       config:
         - field.storage.assessment.field_locations
-      module:
-        - external_entities
   field_operations:
     label: Operations
+    datasource_id: 'entity:assessment'
+    property_path: field_operations
+    type: string
+    dependencies:
+      config:
+        - field.storage.assessment.field_operations
+  field_operations__facet:
+    label: 'Operations - Facet'
     datasource_id: 'entity:assessment'
     property_path: field_operations
     type: string
@@ -142,18 +159,24 @@ field_settings:
     dependencies:
       config:
         - field.storage.assessment.field_organizations
-  field_organizations_label:
-    label: 'Leading/Coordinating Organization(s) » Organization » Title'
+  field_organizations__facet:
+    label: 'Leading/Coordinating Organization(s) - Facet'
     datasource_id: 'entity:assessment'
-    property_path: 'field_organizations:entity:title'
+    property_path: field_organizations
     type: string
     dependencies:
       config:
         - field.storage.assessment.field_organizations
-      module:
-        - external_entities
   field_population_types:
     label: 'Population Type(s)'
+    datasource_id: 'entity:assessment'
+    property_path: field_population_types
+    type: string
+    dependencies:
+      config:
+        - field.storage.assessment.field_population_types
+  field_population_types__facet:
+    label: 'Population Type(s) - Facet'
     datasource_id: 'entity:assessment'
     property_path: field_population_types
     type: string
@@ -168,18 +191,24 @@ field_settings:
     dependencies:
       config:
         - field.storage.assessment.field_status
-  field_status_label:
-    label: 'Status » Assessment status » Title'
+  field_status__facet:
+    label: 'Status - Facet'
     datasource_id: 'entity:assessment'
-    property_path: 'field_status:entity:title'
+    property_path: field_status
     type: string
     dependencies:
       config:
         - field.storage.assessment.field_status
-      module:
-        - external_entities
   field_themes:
     label: Theme(s)
+    datasource_id: 'entity:assessment'
+    property_path: field_themes
+    type: string
+    dependencies:
+      config:
+        - field.storage.assessment.field_themes
+  field_themes__facet:
+    label: 'Theme(s) - Facet'
     datasource_id: 'entity:assessment'
     property_path: field_themes
     type: string
@@ -229,6 +258,8 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  ar_entity_reference_facet: {  }
+  ar_store_entity: {  }
   language_with_fallback: {  }
   rendered_item: {  }
   solr_date_range: {  }
