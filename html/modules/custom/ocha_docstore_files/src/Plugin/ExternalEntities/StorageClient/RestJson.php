@@ -218,8 +218,16 @@ class RestJson extends Rest implements PluginFormInterface {
     foreach ($parameters as $parameter) {
       // Map field names.
       $external_field_name = $this->externalEntityType->getFieldMapping($parameter['field'], 'value');
+
       if (!$external_field_name) {
-        $external_field_name = $parameter['field'];
+        $external_field_name = $this->externalEntityType->getFieldMapping($parameter['field'], 'target_id');
+        if (!$external_field_name) {
+          $external_field_name = $parameter['field'];
+        }
+        else {
+          // We only need the property name, a bit ugly.
+          $external_field_name = reset(explode('/', $external_field_name));
+        }
       }
 
       if (isset($parameter['operator'])) {

@@ -15,6 +15,7 @@ dependencies:
     - field.storage.km.field_life_cycle_steps
     - field.storage.km.field_original_publication_date
     - field.storage.km.field_population_types
+    - field.storage.km.field_published
     - search_api.server.solr
 third_party_settings:
   search_api_solr:
@@ -172,6 +173,30 @@ field_settings:
     dependencies:
       config:
         - field.storage.km.field_population_types
+  field_published:
+    label: Published
+    datasource_id: 'entity:km'
+    property_path: field_published
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.km.field_published
+  title:
+    label: Title
+    datasource_id: 'entity:km'
+    property_path: title
+    type: string
+    dependencies:
+      module:
+        - external_entities
+  uuid:
+    label: UUID
+    datasource_id: 'entity:km'
+    property_path: uuid
+    type: string
+    dependencies:
+      module:
+        - external_entities
 datasource_settings:
   'entity:km': {  }
 processor_settings:
@@ -186,6 +211,6 @@ tracker_settings:
   default:
     indexing_order: fifo
 options:
-  index_directly: false
+  index_directly: true
   cron_limit: 50
 server: solr

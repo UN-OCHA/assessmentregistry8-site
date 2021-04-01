@@ -1,4 +1,7 @@
 services:
+  ocha_docstore_files.webhook_controller:
+    class: \Drupal\ocha_docstore_files\Controller\WebhookController
+    arguments: ['@logger.factory']
   ocha_docstore_files.search_api_subscriber:
     class: Drupal\ocha_docstore_files\EventSubscriber\SearchApiSubscriber
     arguments: []

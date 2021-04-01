@@ -133,7 +133,7 @@
     margin-bottom: 1rem;
   }
 
-  div[class*="form-item-field-related-content"] {
+  div[class*='form-item-field-related-content'] {
     margin-bottom: 1rem;
   }
 
@@ -165,5 +165,11 @@
     .cd-form__item {
       margin-bottom: 1rem;
     }
+  }
+}
+
+.cd-article .field--name-body {
+  :not(table):not(hr):not(.cd-toc):not(.cd-grid) {
+    max-width: var(--cd-max-content-width);
   }
 }

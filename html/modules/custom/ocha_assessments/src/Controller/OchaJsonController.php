@@ -137,6 +137,9 @@ class OchaJsonController extends ControllerBase {
       $query->range($request->query->get('page') * $limit, $limit);
     }
 
+    // Only published content.
+    $query->addCondition('field_published', TRUE);
+
     // Add filters.
     if ($request->query->has('f')) {
       $filters = $request->query->get('f');
