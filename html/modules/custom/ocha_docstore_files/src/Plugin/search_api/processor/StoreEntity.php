@@ -96,9 +96,6 @@ class StoreEntity extends ProcessorPluginBase {
     // Extract the referenced entites for each item to index.
     /** @var \Drupal\search_api\Item\ItemInterface $item */
     foreach ($items as $item) {
-      /** @var \Drupal\search_api\Item\FieldInterface $storage_field */
-      $storage_field = clone $index_storage_field;
-
       /** @var \Drupal\Core\Entity\EntityInterface $entity */
       $entity = $item->getOriginalObject()->getEntity();
       $entity_type_id = $entity->getEntityTypeId();
@@ -173,7 +170,7 @@ class StoreEntity extends ProcessorPluginBase {
         }
       }
 
-      // Seraliaze the data. We also need to encode it to avoid some characters
+      // Serialize the data. We also need to encode it to avoid some characters
       // breaking the xml passed to Solr.
       $data = base64_encode(serialize($extracted));
 
@@ -183,6 +180,8 @@ class StoreEntity extends ProcessorPluginBase {
       // previously set data and also to avoid passing the data through the
       // the string data type plugin to prevent any unforseen modifications to
       // the data by other processors that affect the string data type.
+      /** @var \Drupal\search_api\Item\FieldInterface $storage_field */
+      $storage_field = clone $index_storage_field;
       $storage_field->setValues([$data]);
       $item['item']->setField('_stored_entity', $storage_field);
     }
