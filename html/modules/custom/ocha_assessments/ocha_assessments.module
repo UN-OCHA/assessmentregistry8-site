@@ -7,6 +7,7 @@
 
 use Drupal\node\Entity\Node;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\ocha_persons\Entity\PersonEntity;
 
 /**
@@ -512,4 +513,40 @@ function ocha_assessments_create_person($hid_id) {
   $person->save();
 
   return $person->id();
+}
+
+/**
+ * Implements hook_token_info().
+ *
+ * Provide a token for the facets query route parmater (facets_pretty_path).
+ */
+function ocha_assessments_token_info() {
+  $info = [];
+  $info['tokens']['view']['facets_query'] = [
+    'name' => t('Facets query'),
+    'description' => t('Facets pretty paths from route parameter'),
+  ];
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ *
+ * Replace the the facets:query token with the route query parameter.
+ */
+function ocha_assessments_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+  if ($type === 'view') {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'facets_query':
+          $facets_query = \Drupal::routeMatch()->getParameter('facets_query');
+          if (!is_null($facets_query)) {
+            $replacements[$original] = $facets_query;
+          }
+          break;
+      }
+    }
+  }
+  return $replacements;
 }
