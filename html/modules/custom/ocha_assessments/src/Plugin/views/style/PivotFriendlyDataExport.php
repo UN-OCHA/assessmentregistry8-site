@@ -109,6 +109,10 @@ class PivotFriendlyDataExport extends DataExport {
           'views_data_export/views_data_export',
         ],
       ],
+      '#cache' => [
+        'contexts' => ['user'],
+      ],
+      '#access' => $this->view->access([$this->view->current_display]),
     ];
 
     // Attach a link to the CSV feed, which is an alternate representation.
@@ -118,6 +122,9 @@ class PivotFriendlyDataExport extends DataExport {
       'title' => $title,
       'href' => $url,
     ];
+
+    // Add the cache context to the build as well, just in case...
+    $build['#cache']['contexts'][] = 'user';
   }
 
   /**
