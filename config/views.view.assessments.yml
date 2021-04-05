@@ -60,7 +60,7 @@ display:
         type: none
         options: {  }
       cache:
-        type: tag
+        type: none
         options: {  }
       query:
         type: views_query
@@ -483,12 +483,12 @@ display:
     position: 3
     display_options:
       display_extenders: {  }
-      path: export/assessments/list
+      path: export/assessments-list
       filename: 'assessments-[date:html_date]T[date:html_time].csv'
       automatic_download: false
       store_in_public_file_directory: true
       redirect_to_display: none
-      custom_redirect_path: false
+      custom_redirect_path: true
       include_query_params: true
       style:
         type: ar_pivot_friendly_data_export
@@ -504,8 +504,7 @@ display:
             encoding: utf8
             utf8_bom: 0
             use_serializer_encode_only: 0
-          pivot_friendly: 0
-          pivot_friendly_separator: ''
+            pivot_friendly: 0
       export_method: batch
       export_batch_size: 100
       facet_settings: 'search_api:views_page__assessments__assessments_list'
@@ -722,7 +721,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -797,7 +796,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -1230,7 +1229,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api
@@ -1511,7 +1510,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -1656,7 +1655,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -1730,7 +1729,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -1804,7 +1803,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -1948,7 +1947,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -2022,7 +2021,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -2096,7 +2095,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -3105,6 +3104,7 @@ display:
         options:
           role:
             authenticated: authenticated
+      redirect_path: '/assessments/list/[view:facets_query]'
     cache_metadata:
       max-age: -1
       contexts:
@@ -3143,12 +3143,12 @@ display:
     position: 3
     display_options:
       display_extenders: {  }
-      path: export/assessments/list/disaggregated
+      path: export/assessments-list-disaggregated
       filename: 'assessments-disaggregated-[date:html_date]T[date:html_time].csv'
       automatic_download: false
       store_in_public_file_directory: true
       redirect_to_display: none
-      custom_redirect_path: false
+      custom_redirect_path: true
       include_query_params: true
       style:
         type: ar_pivot_friendly_data_export
@@ -3164,8 +3164,7 @@ display:
             encoding: utf8
             utf8_bom: 0
             use_serializer_encode_only: 0
-          pivot_friendly: 1
-          pivot_friendly_separator: '||'
+            pivot_friendly: 1
       export_method: batch
       export_batch_size: 100
       facet_settings: 'search_api:views_page__assessments__assessments_list'
@@ -3382,7 +3381,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -3457,7 +3456,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -3890,7 +3889,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api
@@ -4171,7 +4170,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -4316,7 +4315,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -4390,7 +4389,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -4464,7 +4463,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -4608,7 +4607,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -4682,7 +4681,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -4756,7 +4755,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -5765,6 +5764,7 @@ display:
         options:
           role:
             authenticated: authenticated
+      redirect_path: '/assessments/list/[view:facets_query]'
     cache_metadata:
       max-age: -1
       contexts:
@@ -5803,12 +5803,12 @@ display:
     position: 3
     display_options:
       display_extenders: {  }
-      path: export/assessments/table
+      path: export/assessments-table
       filename: 'assessments-[date:html_date]T[date:html_time].csv'
       automatic_download: false
       store_in_public_file_directory: true
       redirect_to_display: none
-      custom_redirect_path: false
+      custom_redirect_path: true
       include_query_params: true
       style:
         type: ar_pivot_friendly_data_export
@@ -5824,8 +5824,7 @@ display:
             encoding: utf8
             utf8_bom: 0
             use_serializer_encode_only: 0
-          pivot_friendly: 0
-          pivot_friendly_separator: ''
+            pivot_friendly: 0
       export_method: batch
       export_batch_size: 100
       facet_settings: 'search_api:views_page__assessments__assessments_table'
@@ -6043,7 +6042,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -6118,7 +6117,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -6551,7 +6550,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api
@@ -6832,7 +6831,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -6977,7 +6976,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -7051,7 +7050,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -7125,7 +7124,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -7269,7 +7268,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -7343,7 +7342,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -7417,7 +7416,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -7429,6 +7428,7 @@ display:
             display_methods:
               local_group:
                 display_method: label
+                view_mode: default
           entity_type: assessment
           plugin_id: search_api_field
         title:
@@ -8426,6 +8426,7 @@ display:
         options:
           role:
             authenticated: authenticated
+      redirect_path: '/assessments/table/[view:facets_query]'
     cache_metadata:
       max-age: -1
       contexts:
@@ -8464,12 +8465,12 @@ display:
     position: 3
     display_options:
       display_extenders: {  }
-      path: export/assessments/table/disaggregated
+      path: export/assessments-table-disaggregated
       filename: 'assessments-disaggregated-[date:html_date]T[date:html_time].csv'
       automatic_download: false
       store_in_public_file_directory: true
       redirect_to_display: none
-      custom_redirect_path: false
+      custom_redirect_path: true
       include_query_params: true
       style:
         type: ar_pivot_friendly_data_export
@@ -8485,8 +8486,7 @@ display:
             encoding: utf8
             utf8_bom: 0
             use_serializer_encode_only: 0
-          pivot_friendly: 1
-          pivot_friendly_separator: '||'
+            pivot_friendly: 1
       export_method: batch
       export_batch_size: 100
       facet_settings: 'search_api:views_page__assessments__assessments_table'
@@ -8704,7 +8704,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -8779,7 +8779,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -9212,7 +9212,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api
@@ -9493,7 +9493,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -9638,7 +9638,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -9712,7 +9712,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -9786,7 +9786,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -9930,7 +9930,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -10004,7 +10004,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -10078,7 +10078,7 @@ display:
           delta_reversed: false
           delta_first_last: false
           multi_type: separator
-          separator: '||'
+          separator: ', '
           field_api_classes: false
           field_rendering: true
           fallback_handler: search_api_entity
@@ -11087,6 +11087,7 @@ display:
         options:
           role:
             authenticated: authenticated
+      redirect_path: '/assessments/table/[view:facets_query]'
     cache_metadata:
       max-age: -1
       contexts:
