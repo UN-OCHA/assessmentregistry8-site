@@ -1,0 +1,94 @@
+diff --git a/src/Plugin/views/display/DataExport.php b/src/Plugin/views/display/DataExport.php
+index d6a02b4..9cdb583 100644
+--- a/src/Plugin/views/display/DataExport.php
++++ b/src/Plugin/views/display/DataExport.php
+@@ -74,7 +74,7 @@ class DataExport extends RestExport {
+     $view->build();
+ 
+     if ($view->getQuery() instanceof SearchApiQuery) {
+-      $total_rows = $view->query->getSearchApiQuery()->range(NULL, 1)->execute()->getResultCount();
++      $total_rows = $view->query->getSearchApiQuery()->range(0, 0)->execute()->getResultCount();
+     }
+     else {
+       $count_query_results = $view->query->query()->countQuery()->execute();
+@@ -674,11 +674,11 @@ class DataExport extends RestExport {
+     $view->setArguments($args);
+     $view->setExposedInput($exposed_input);
+ 
+-    if (isset($context['sandbox']['progress'])) {
+-      $view->setOffset($context['sandbox']['progress']);
+-    }
++    // Current progress (number of processed items).
++    $progress = $context['sandbox']['progress'] ?? 0;
+ 
+-    $export_limit = $view->display_handler->getOption('export_limit');
++    // Set the progress as offset for the query.
++    $view->setOffset($progress);
+ 
+     $view->preExecute($args);
+     // Build the View so the query parameters and offset get applied. so our
+@@ -772,13 +772,12 @@ class DataExport extends RestExport {
+     // output file we write to each batch iteration.
+     // Make sure that if limit is set the last batch will output the remaining
+     // amount of rows and not more.
+-    $items_this_batch = $view->display_handler->getOption('export_batch_size');
+-    if ($export_limit && $context['sandbox']['progress'] + $items_this_batch > $export_limit) {
+-      $items_this_batch = $export_limit - $context['sandbox']['progress'];
+-    }
++    $items_this_batch = (int) $view->display_handler->getOption('export_batch_size');
++    $limit = min($total_rows - $progress, $items_this_batch);
+ 
+     // Set the limit directly on the query.
+-    $view->query->setLimit((int) $items_this_batch);
++    $view->query->setOffset($progress);
++    $view->query->setLimit($limit);
+     $view->execute($display_id);
+ 
+     // Check to see if the build failed.
+@@ -799,23 +798,24 @@ class DataExport extends RestExport {
+       $string = preg_replace('/^[^\n]+/', '', $string);
+     }
+ 
++    $export_limit = $view->display_handler->getOption('export_limit');
++
+     // Workaround for XML.
+     $output_format = reset($view->getStyle()->options['formats']);
+     if ($output_format == 'xml') {
+-      $maximum = $export_limit ? $export_limit : $total_rows;
+       // Remove xml declaration and response opening tag.
+-      if ($context['sandbox']['progress'] != 0) {
++      if ($progress != 0) {
+         $string = str_replace('<?xml version="1.0"?>', '', $string);
+         $string = str_replace('<response>', '', $string);
+       }
+       // Remove response closing tag.
+-      if ($context['sandbox']['progress'] + $items_this_batch < $maximum) {
++      if ($progress + $items_this_batch < $total_rows) {
+         $string = str_replace('</response>', '', $string);
+       }
+     }
+ 
+     // Workaround for XLS/XLSX.
+-    if ($context['sandbox']['progress'] != 0 && ($output_format == 'xls' || $output_format == 'xlsx')) {
++    if ($progress != 0 && ($output_format == 'xls' || $output_format == 'xlsx')) {
+       $vdeFileRealPath = \Drupal::service('file_system')->realpath($context['sandbox']['vde_file']);
+       $previousExcel = IOFactory::load($vdeFileRealPath);
+       file_put_contents($vdeFileRealPath, $string);
+@@ -851,13 +851,14 @@ class DataExport extends RestExport {
+     // items we've processed). Note can exceed the number of total rows we're
+     // processing, but that's considered in the if/else to determine when we're
+     // finished below.
+-    $context['sandbox']['progress'] += $items_this_batch;
++    $progress += min(count($view->result), $items_this_batch);
++    $context['sandbox']['progress'] = $progress;
+ 
+     // If our progress is less than the total number of items we expect to
+     // process, we updated the "finished" variable to show the user how much
+     // progress we've made via the progress bar.
+-    if ($context['sandbox']['progress'] < $total_rows) {
+-      $context['finished'] = $context['sandbox']['progress'] / $total_rows;
++    if ($progress < $total_rows) {
++      $context['finished'] = $progress / $total_rows;
+     }
+     else {
+       // We're finished processing, set progress bar to 100%.
