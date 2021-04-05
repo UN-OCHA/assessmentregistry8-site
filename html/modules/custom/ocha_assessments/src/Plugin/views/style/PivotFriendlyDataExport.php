@@ -210,7 +210,7 @@ class PivotFriendlyDataExport extends DataExport {
     // Insert the row for each search result.
     static::processResults($csv, $field_definitions, $base_row, $view->result, $pivot_friendly);
 
-    return $csv->toString();
+    return $csv->getContent();
   }
 
   /**
