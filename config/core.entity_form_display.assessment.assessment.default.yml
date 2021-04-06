@@ -96,10 +96,10 @@ content:
   field_asst_organizations:
     weight: 8
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      autocomplete: false
       width: 100%
+      autocomplete: true
+      match_operator: CONTAINS
+      match_limit: 60
     third_party_settings: {  }
     type: select2_entity_reference
     region: content
@@ -174,12 +174,12 @@ content:
   field_locations:
     weight: 18
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      match_limit: 50
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     region: content
   field_methodology:
     weight: 10
@@ -202,10 +202,10 @@ content:
   field_organizations:
     weight: 7
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      autocomplete: false
       width: 100%
+      autocomplete: true
+      match_operator: STARTS_WITH
+      match_limit: 50
     third_party_settings: {  }
     type: select2_entity_reference
     region: content
@@ -253,10 +253,10 @@ content:
   field_sources:
     weight: 14
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
-      autocomplete: false
-      width: 100%
     third_party_settings: {  }
     type: select2_entity_reference
     region: content
