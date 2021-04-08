@@ -6,6 +6,7 @@ dependencies:
     - search_api_solr
     - external_entities
     - search_api
+    - ocha_docstore_files
   config:
     - field.storage.km.field_context
     - field.storage.km.field_countries
@@ -62,8 +63,36 @@ name: km
 description: ''
 read_only: false
 field_settings:
+  _stored_entity:
+    label: 'Stored entity'
+    property_path: _stored_entity
+    type: solr_string_storage
+  field_context:
+    label: Context
+    datasource_id: 'entity:km'
+    property_path: field_context
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_context
+  field_context__facet:
+    label: 'Context - Facet'
+    datasource_id: 'entity:km'
+    property_path: field_context
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_context
   field_countries:
     label: Countries
+    datasource_id: 'entity:km'
+    property_path: field_countries
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_countries
+  field_countries__facet:
+    label: 'Countries - Facet'
     datasource_id: 'entity:km'
     property_path: field_countries
     type: string
@@ -78,6 +107,16 @@ field_settings:
     dependencies:
       config:
         - field.storage.km.field_document_type
+  field_document_type__facet:
+    label: 'Document type - Facet'
+    datasource_id: 'entity:km'
+    property_path: field_document_type
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_document_type
+      module:
+        - external_entities
   field_hpc_document_repository:
     label: 'HPC document repository'
     datasource_id: 'entity:km'
@@ -86,26 +125,24 @@ field_settings:
     dependencies:
       config:
         - field.storage.km.field_hpc_document_repository
-  field_km_context:
-    label: Context
+  field_hpc_document_repository__facet:
+    label: 'HPC document repository - Facet'
     datasource_id: 'entity:km'
-    property_path: field_context
+    property_path: field_hpc_document_repository
     type: string
     dependencies:
       config:
-        - field.storage.km.field_context
-  field_km_life_cycle_steps_label:
-    label: 'Life cycle steps » Life cycle step » Title'
+        - field.storage.km.field_hpc_document_repository
+  field_life_cycle_steps:
+    label: 'Life cycle steps'
     datasource_id: 'entity:km'
-    property_path: 'field_life_cycle_steps:entity:title'
+    property_path: field_life_cycle_steps
     type: string
     dependencies:
       config:
         - field.storage.km.field_life_cycle_steps
-      module:
-        - external_entities
-  field_life_cycle_steps:
-    label: 'Life cycle steps'
+  field_life_cycle_steps__facet:
+    label: 'Life cycle steps - Facet'
     datasource_id: 'entity:km'
     property_path: field_life_cycle_steps
     type: string
@@ -128,6 +165,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.km.field_population_types
+  field_population_types__facet:
+    label: 'Population types - Facet'
+    datasource_id: 'entity:km'
+    property_path: field_population_types
+    type: string
+    dependencies:
+      config:
+        - field.storage.km.field_population_types
   field_published:
     label: Published
     datasource_id: 'entity:km'
@@ -136,14 +181,12 @@ field_settings:
     dependencies:
       config:
         - field.storage.km.field_published
-  title_1:
-    label: 'Population types » Population Type » Title'
+  title:
+    label: Title
     datasource_id: 'entity:km'
-    property_path: 'field_population_types:entity:title'
+    property_path: title
     type: string
     dependencies:
-      config:
-        - field.storage.km.field_population_types
       module:
         - external_entities
   uuid:
@@ -159,6 +202,8 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  ar_entity_reference_facet: {  }
+  ar_store_entity: {  }
   language_with_fallback: {  }
   rendered_item: {  }
   solr_date_range: {  }
@@ -166,6 +211,6 @@ tracker_settings:
   default:
     indexing_order: fifo
 options:
-  index_directly: false
+  index_directly: true
   cron_limit: 50
 server: solr

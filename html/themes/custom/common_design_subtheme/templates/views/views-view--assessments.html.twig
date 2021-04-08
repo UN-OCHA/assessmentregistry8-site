@@ -41,6 +41,10 @@
   ]
 %}
 
+<div class="cd-export-button--wrapper">
+  {{ feed_icons }}
+</div>
+
 <div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if title %}
@@ -89,6 +93,4 @@
       {{ footer }}
     </div>
   {% endif %}
-
-  {{ feed_icons }}
 </div>
