@@ -544,3 +544,13 @@ function ocha_assessments_views_pre_render(ViewExecutable $view) {
 
   $view->result = $output;
 }
+
+/**
+ * Implements hook_toolbar_alter().
+ */
+function ocha_assessments_toolbar_alter(&$items) {
+  $account = Drupal::currentUser();
+  if (!in_array('administrator', $account->getRoles())) {
+    $items['administration']['tab']['#access'] = FALSE;
+  }
+}
