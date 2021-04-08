@@ -222,7 +222,7 @@ class OchaJsonController extends ControllerBase {
         'field_asst_organizations_label' => array_map(function ($item) {
           return $item->entity->label();
         }, iterator_to_array($entity->field_asst_organizations->filterEmptyItems())),
-        'field_status' => $entity->field_status->entity->label(),
+        'field_status' => $entity->field_status->entity ? $entity->field_status->entity->label() : '',
         'field_ass_date' => $date,
       ];
     }
@@ -237,7 +237,7 @@ class OchaJsonController extends ControllerBase {
 
       $options = [];
       foreach ($facet_values as $facet_value) {
-        // The `xxx__facet` facets contain data in the from `uuid:label`.
+        // The `xxx__facet` facets contain data in the form `uuid:label`.
         // The `xxx` version which contains only uuids is used for filtering.
         // @see \Drupal\ocha_docstore_files\Plugin\search_api\processor\EntityReferenceFacet.
         list($uuid, $label) = explode(':', trim($facet_value['filter'], '"'), 2);
