@@ -43,6 +43,7 @@ permissions:
   - 'edit own remote_video media'
   - 'edit own video media'
   - 'ocha assessments bulk import'
+  - 'ocha docstore files edit author'
   - 'revert assessment revisions'
   - 'update any media'
   - 'update assessment external entity'

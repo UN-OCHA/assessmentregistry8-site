@@ -84,8 +84,17 @@ function ocha_docstore_files_entity_type_alter(array &$entity_types) {
  */
 function ocha_docstore_files_form_assessment_edit_form_alter(&$form, $form_state, $form_id) {
   if (isset($form['field_author'])) {
-    $form['field_author']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
-    $form['field_author']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+    /** @var Drupal\Core\Session\AccountProxy $account */
+    $account = \Drupal::currentUser();
+
+    if ($form['field_author']['widget'][0]['value']['#default_value'] === 'AR') {
+      $form['field_author']['widget'][0]['value']['#default_value'] = $account->getDisplayName();
+    }
+
+    if (!$account->hasPermission('ocha docstore files edit author')) {
+      $form['field_author']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
+      $form['field_author']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+    }
   }
 }
 
@@ -94,15 +103,17 @@ function ocha_docstore_files_form_assessment_edit_form_alter(&$form, $form_state
  */
 function ocha_docstore_files_form_assessment_form_alter(&$form, $form_state, $form_id) {
   if (isset($form['field_author'])) {
-    if (empty($form['field_author']['widget'][0]['value']['#default_value'])) {
-      /** @var Drupal\Core\Session\AccountProxy $account */
-      $account = \Drupal::currentUser();
+    /** @var Drupal\Core\Session\AccountProxy $account */
+    $account = \Drupal::currentUser();
 
+    if (empty($form['field_author']['widget'][0]['value']['#default_value']) || $form['field_author']['widget'][0]['value']['#default_value'] === 'AR') {
       $form['field_author']['widget'][0]['value']['#default_value'] = $account->getDisplayName();
     }
 
-    $form['field_author']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
-    $form['field_author']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+    if (!$account->hasPermission('ocha docstore files edit author')) {
+      $form['field_author']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
+      $form['field_author']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+    }
   }
 }
 
@@ -111,8 +122,17 @@ function ocha_docstore_files_form_assessment_form_alter(&$form, $form_state, $fo
  */
 function ocha_docstore_files_form_km_edit_form_alter(&$form, $form_state, $form_id) {
   if (isset($form['field_author'])) {
-    $form['field_author']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
-    $form['field_author']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+    /** @var Drupal\Core\Session\AccountProxy $account */
+    $account = \Drupal::currentUser();
+
+    if ($form['field_author']['widget'][0]['value']['#default_value'] === 'AR') {
+      $form['field_author']['widget'][0]['value']['#default_value'] = $account->getDisplayName();
+    }
+
+    if (!$account->hasPermission('ocha docstore files edit author')) {
+      $form['field_author']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
+      $form['field_author']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+    }
   }
 }
 
@@ -121,15 +141,17 @@ function ocha_docstore_files_form_km_edit_form_alter(&$form, $form_state, $form_
  */
 function ocha_docstore_files_form_km_form_alter(&$form, $form_state, $form_id) {
   if (isset($form['field_author'])) {
-    if (empty($form['field_author']['widget'][0]['value']['#default_value'])) {
-      /** @var Drupal\Core\Session\AccountProxy $account */
-      $account = \Drupal::currentUser();
+    /** @var Drupal\Core\Session\AccountProxy $account */
+    $account = \Drupal::currentUser();
 
+    if (empty($form['field_author']['widget'][0]['value']['#default_value']) || $form['field_author']['widget'][0]['value']['#default_value'] === 'AR') {
       $form['field_author']['widget'][0]['value']['#default_value'] = $account->getDisplayName();
     }
 
-    $form['field_author']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
-    $form['field_author']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+    if (!$account->hasPermission('ocha docstore files edit author')) {
+      $form['field_author']['widget'][0]['value']['#attributes']['readonly'] = TRUE;
+      $form['field_author']['widget'][0]['value']['#attributes']['disabled'] = TRUE;
+    }
   }
 }
 

@@ -41,6 +41,7 @@ permissions:
   - 'edit own knowledge_management content'
   - 'edit own remote_video media'
   - 'edit own video media'
+  - 'ocha docstore files edit author'
   - 'revert knowledge_management revisions'
   - 'update any media'
   - 'update km external entity'
