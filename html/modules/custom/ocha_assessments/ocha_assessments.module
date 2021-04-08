@@ -546,7 +546,7 @@ function ocha_assessments_views_pre_render(ViewExecutable $view) {
 }
 
 /**
- * Implements hook_toolbar_alter()
+ * Implements hook_toolbar_alter().
  */
 function ocha_assessments_toolbar_alter(&$items) {
   $account = Drupal::currentUser();
