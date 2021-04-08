@@ -15,8 +15,6 @@
 
 {{ attach_library('common_design/cd-button') }}
 
-<div class="cd-export-button--wrapper">
-  <a href="{{ url }}"{{ attributes.addClass(['cd-button', 'cd-button--export', 'cd-button--small']) }}>
-    {{ 'Export @format'|t({'@format': format}) }}
-  </a>
-</div>
+<a href="{{ url }}"{{ attributes.addClass(['cd-button', 'cd-button--export', 'cd-button--small']) }}>
+  {{ 'Export @format'|t({'@format': format}) }}
+</a>
