@@ -22,6 +22,7 @@
   {% if logged_in %}
     {{ entity }}
   {% else %}
+    {# See field--assessment--field-contacts.html.twig #}
     {{ entity|without('field_contacts') }}
   {% endif %}
 </article>
