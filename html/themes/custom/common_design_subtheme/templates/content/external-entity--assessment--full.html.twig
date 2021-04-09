@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display an external entity.
+ *
+ * Available variables:
+ * - entity: The external entity.
+*/
+#}
+{%
+  set classes = [
+  'node',
+  'cd-article',
+  '[ cd-flow ]'
+]
+%}
+{{ attach_library('common_design/cd-article') }}
+{{ attach_library('common_design/cd-flow') }}
+{{ attach_library('common_design/cd-typography') }}
+
+<article{{ attributes.addClass(classes) }}>
+  {% if logged_in %}
+    {{ entity }}
+  {% else %}
+    {{ entity|without('field_contacts') }}
+  {% endif %}
+</article>
