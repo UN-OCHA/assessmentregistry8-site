@@ -96,10 +96,10 @@ content:
   field_asst_organizations:
     weight: 8
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      autocomplete: false
       width: 100%
+      autocomplete: true
+      match_operator: CONTAINS
+      match_limit: 60
     third_party_settings: {  }
     type: select2_entity_reference
     region: content
@@ -113,9 +113,10 @@ content:
     region: content
   field_collection_methods:
     weight: 5
-    settings: {  }
+    settings:
+      width: 100%
     third_party_settings: {  }
-    type: options_select
+    type: select2
     region: content
   field_contacts:
     weight: 2
@@ -134,18 +135,19 @@ content:
   field_disaster:
     weight: 20
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      match_limit: 50
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     region: content
   field_frequency:
     weight: 4
-    settings: {  }
+    settings:
+      width: 100%
     third_party_settings: {  }
-    type: options_select
+    type: select2
     region: content
   field_key_findings:
     weight: 6
@@ -157,29 +159,30 @@ content:
     region: content
   field_level_of_representation:
     weight: 9
-    settings: {  }
+    settings:
+      width: 100%
     third_party_settings: {  }
-    type: options_select
+    type: select2
     region: content
   field_local_coordination_groups:
     weight: 23
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      match_limit: 50
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     region: content
   field_locations:
     weight: 18
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      match_limit: 50
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     region: content
   field_methodology:
     weight: 10
@@ -192,20 +195,20 @@ content:
   field_operations:
     weight: 21
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+      match_limit: 50
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: select2_entity_reference
     region: content
   field_organizations:
     weight: 7
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      autocomplete: false
       width: 100%
+      autocomplete: true
+      match_operator: CONTAINS
+      match_limit: 50
     third_party_settings: {  }
     type: select2_entity_reference
     region: content
@@ -253,10 +256,10 @@ content:
   field_sources:
     weight: 14
     settings:
+      width: 100%
+      autocomplete: true
       match_operator: CONTAINS
       match_limit: 10
-      autocomplete: false
-      width: 100%
     third_party_settings: {  }
     type: select2_entity_reference
     region: content

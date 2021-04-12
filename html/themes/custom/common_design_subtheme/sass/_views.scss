@@ -1,3 +1,8 @@
 .views-field-field-local-groups-label {
   max-width: 7rem;
 }
+
+// Line up the buttons horizontally.
+.cd-export-button--wrapper .views-data-export-feed + .views-data-export-feed {
+  margin-left: 0.5rem;
+}

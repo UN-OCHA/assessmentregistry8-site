@@ -98,32 +98,32 @@ class OchaJsonController extends ControllerBase {
     $facet_to_entity = [
       'organizations' => [
         'entity' => 'organization',
-        'field' => 'field_organizations',
+        'field' => 'field_organizations__facet',
         'title' => 'Organization',
       ],
       'participating_organizations' => [
         'entity' => 'organization',
-        'field' => 'field_asst_organizations',
+        'field' => 'field_asst_organizations__facet',
         'title' => 'Participating Organization(s)',
       ],
       'status' => [
         'entity' => 'assessment_status',
-        'field' => 'field_status',
+        'field' => 'field_status__facet',
         'title' => 'Status',
       ],
       'locations' => [
         'entity' => 'location',
-        'field' => 'field_locations',
+        'field' => 'field_locations__facet',
         'title' => 'Location(s)',
       ],
       'population_types' => [
         'entity' => 'population_type',
-        'field' => 'field_population_types',
+        'field' => 'field_population_types__facet',
         'title' => 'Population type(s)',
       ],
       'disaster' => [
         'entity' => 'disaster',
-        'field' => 'field_disaster',
+        'field' => 'field_disaster__facet',
         'title' => 'Disaster',
       ],
     ];
@@ -141,11 +141,13 @@ class OchaJsonController extends ControllerBase {
     $query->addCondition('field_published', TRUE);
 
     // Add filters.
+    $active_filters = [];
     if ($request->query->has('f')) {
       $filters = $request->query->get('f');
       foreach ($filters as $filter) {
         $parts = explode(':', $filter);
         $query->addCondition($parts[0], $parts[1]);
+        $active_filters[$parts[0]][$parts[1]] = TRUE;
       }
     }
 
@@ -190,22 +192,37 @@ class OchaJsonController extends ControllerBase {
     // Prepare results.
     $data['search_results'] = [];
     foreach ($results as $item) {
+      // There shouldn't be any extra load there because the entity data is
+      // returned by Solr and cached.
+      // @see \Drupal\ocha_docstore_files\Plugin\search_api\processor\StoreEntity
+      $entity = $item->getOriginalObject(TRUE)->getEntity();
+
       $date = '';
-      if (!empty($item->getField('field_date')->getValues())) {
-        $date = $item->getField('field_date')->getValues();
-        $date = reset($date);
-        $date = date('d.m.Y', $date);
+      if (!empty($entity->field_date->value)) {
+        $date = date('d.m.Y', strtotime($entity->field_date->value));
       }
 
+      // As mentioned above, normally the data of all the entities below
+      // was retrieved from Solr and there shouldn't be any extra load.
       $data['search_results'][] = [
-        'uuid' => $item->getField('uuid')->getValues(),
-        'title' => $item->getField('title')->getValues(),
-        'field_organizations' => $item->getField('field_organizations')->getValues(),
-        'field_locations_lat_lon' => $item->getField('latlon')->getValues(),
-        'field_locations_label' => $item->getField('field_locations_label')->getValues(),
-        'field_organizations_label' => $item->getField('field_organizations_label')->getValues(),
-        'field_asst_organizations_label' => $item->getField('field_asst_organizations_label')->getValues(),
-        'field_status' => $item->getField('field_status_label')->getValues(),
+        'uuid' => $entity->id(),
+        'title' => $entity->label(),
+        'field_organizations' => array_map(function ($item) {
+          return $item->entity->uuid();
+        }, iterator_to_array($entity->field_organizations->filterEmptyItems())),
+        'field_locations_lat_lon' => array_map(function ($item) {
+          return $item->entity->field_geolocation->lat . ',' . $item->entity->field_geolocation->lon;
+        }, iterator_to_array($entity->field_locations->filterEmptyItems())),
+        'field_locations_label' => array_map(function ($item) {
+          return $item->entity->label();
+        }, iterator_to_array($entity->field_locations->filterEmptyItems())),
+        'field_organizations_label' => array_map(function ($item) {
+          return $item->entity->label();
+        }, iterator_to_array($entity->field_organizations->filterEmptyItems())),
+        'field_asst_organizations_label' => array_map(function ($item) {
+          return $item->entity->label();
+        }, iterator_to_array($entity->field_asst_organizations->filterEmptyItems())),
+        'field_status' => $entity->field_status->entity ? $entity->field_status->entity->label() : '',
         'field_ass_date' => $date,
       ];
     }
@@ -216,28 +233,19 @@ class OchaJsonController extends ControllerBase {
         continue;
       }
 
-      $uuids = [];
-      foreach ($facet_values as $facet_value) {
-        $uuid = trim($facet_value['filter'], '"');
-        $uuids[] = $uuid;
-      }
-
-      // phpcs:ignore
-      $entities = \Drupal::entityTypeManager()
-        ->getListBuilder($facet_to_entity[$key]['entity'])
-        ->getStorage()
-        ->loadMultiple($uuids);
+      $field = str_replace('__facet', '', $facet_to_entity[$key]['field']);
 
       $options = [];
       foreach ($facet_values as $facet_value) {
-        $uuid = trim($facet_value['filter'], '"');
-        if (isset($entities[$uuid])) {
-          $options[] = [
-            'key' => $facet_to_entity[$key]['field'] . ':' . $uuid,
-            'label' => $entities[$uuid]->label() . ' (' . $facet_value['count'] . ')',
-            'active' => FALSE,
-          ];
-        }
+        // The `xxx__facet` facets contain data in the form `uuid:label`.
+        // The `xxx` version which contains only uuids is used for filtering.
+        // @see \Drupal\ocha_docstore_files\Plugin\search_api\processor\EntityReferenceFacet.
+        list($uuid, $label) = explode(':', trim($facet_value['filter'], '"'), 2);
+        $options[] = [
+          'key' => $field . ':' . $uuid,
+          'label' => $label . ' (' . $facet_value['count'] . ')',
+          'active' => isset($active_filters[$field][$uuid]),
+        ];
       }
 
       uasort($options, function ($a, $b) {
@@ -245,7 +253,7 @@ class OchaJsonController extends ControllerBase {
       });
 
       $data['facets'][$key]['label'] = $facet_to_entity[$key]['title'];
-      $data['facets'][$key]['name'] = $facet_to_entity[$key]['field'];
+      $data['facets'][$key]['name'] = $field;
       $data['facets'][$key]['options'] = array_values($options);
     }
 

@@ -21,6 +21,9 @@
     },
     "drupal/social_auth_hid": {
       "https://www.drupal.org/project/social_auth_hid/issues/3188805": "https://git.drupalcode.org/project/social_auth_hid/-/merge_requests/2.diff"
+    },
+    "drupal/views_data_export": {
+      "Ensure the proper number of items is processed in batch export": "PATCHES/views_data_export-fix-number-of-processed-items.patch"
     }
   }
 }
