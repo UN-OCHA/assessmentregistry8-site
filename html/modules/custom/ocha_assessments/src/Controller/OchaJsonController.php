@@ -99,7 +99,7 @@ class OchaJsonController extends ControllerBase {
       'organizations' => [
         'entity' => 'organization',
         'field' => 'field_organizations__facet',
-        'title' => 'Organization',
+        'title' => 'Leading/Coordinating Organization',
       ],
       'participating_organizations' => [
         'entity' => 'organization',

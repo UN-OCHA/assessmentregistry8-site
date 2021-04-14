@@ -3691,11 +3691,10 @@ class OchaAssessmentsBase extends LitElement {
         options: []
       };
 
-      const self = this;
-      child.options.forEach(function (option) {
+      child.options.forEach(option => {
         if (typeof option.active !== 'undefined' && option.active) {
           dropdown.selected = option.key;
-          self.activeFilters.push(option.key);
+          this.activeFilters.push(option.key);
         }
 
         dropdown.options.push({
@@ -3961,7 +3960,7 @@ class OchaAssessmentsTable extends OchaAssessmentsBase {
           <tr>
             <th>Title</th>
             <th>Location(s)</th>
-            <th>Managed by</th>
+            <th>Leading/Coordinating Organization</th>
             <th>Participating Organization(s)</th>
             <th>Clusters/Sectors</th>
             <th>Status</th>
