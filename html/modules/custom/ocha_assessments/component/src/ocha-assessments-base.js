@@ -130,7 +130,7 @@ export class OchaAssessmentsBase extends LitElement {
         options: []
       };
 
-      child.options.forEach(function (option) {
+      child.options.forEach(option => {
         if (typeof option.active !== 'undefined' && option.active) {
           dropdown.selected = option.key;
           this.activeFilters.push(option.key);
