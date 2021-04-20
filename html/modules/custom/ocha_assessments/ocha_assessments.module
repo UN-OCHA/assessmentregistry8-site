@@ -9,6 +9,7 @@ use Drupal\node\Entity\Node;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\ocha_persons\Entity\PersonEntity;
+use Drupal\search_api\Entity\Index;
 
 /**
  * Implements hook_theme().
@@ -559,4 +560,57 @@ function ocha_assessments_toolbar_alter(&$items) {
   if (!in_array('administrator', $account->getRoles())) {
     $items['administration']['tab']['#access'] = FALSE;
   }
+}
+
+function ocha_assessments_get_export_filters() {
+  $data = [];
+
+  $index = Index::load('assessments');
+  $query = $index->query();
+  $query->range(0);
+
+  $facet_to_entity = [
+    'locations' => [
+      'field' => 'field_locations__facet',
+    ],
+    'operations' => [
+      'field' => 'field_operations__facet',
+    ],
+    'countries' => [
+      'field' => '_stored_country',
+    ],
+  ];
+
+  $facet_options = [];
+  foreach ($facet_to_entity as $key => $info) {
+    $facet_options[$key] = [
+      'field' => $info['field'],
+      'limit' => 0,
+      'operator' => 'AND',
+      'min_count' => 1,
+      'missing' => FALSE,
+    ];
+  }
+  $query->setOption('search_api_facets', $facet_options);
+
+  $results = $query->execute();
+  $facets = $results->getExtraData('search_api_facets', []);
+
+  // Handle facets.
+  foreach ($facets as $key => $facet_values) {
+    if (!isset($facet_to_entity[$key])) {
+      continue;
+    }
+
+    $options = [];
+    foreach ($facet_values as $facet_value) {
+      list($uuid, $label) = explode(':', trim($facet_value['filter'], '"'), 2);
+      $options[$uuid] = $label;
+    }
+
+    asort($options);
+    $data[$key] = $options;
+  }
+
+  return $data;
 }

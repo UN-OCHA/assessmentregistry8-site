@@ -23,7 +23,7 @@ use Drupal\ocha_docstore_files\Plugin\ExternalEntities\StorageClient\RestJson;
  *     "postprocess_query" = -10,
  *   },
  *   locked = true,
- *   hidden = true,
+ *   hidden = false,
  * )
  */
 class StoreEntity extends ProcessorPluginBase {

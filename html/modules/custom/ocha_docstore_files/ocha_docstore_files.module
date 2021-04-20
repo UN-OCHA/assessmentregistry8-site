@@ -171,6 +171,11 @@ function ocha_docstore_files_search_api_solr_query_alter(SolariumQueryInterface 
   if (!empty($solr_field_names['_stored_entity'])) {
     $solarium_query->addField($solr_field_names['_stored_entity']);
   }
+
+  // Tell solr to return the stored country.
+  if (!empty($solr_field_names['_stored_country'])) {
+    $solarium_query->addField($solr_field_names['_stored_country']);
+  }
 }
 
 /**

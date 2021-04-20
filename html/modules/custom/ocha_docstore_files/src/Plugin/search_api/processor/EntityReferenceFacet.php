@@ -20,7 +20,7 @@ use Drupal\search_api\Processor\ProcessorPluginBase;
  *     "preprocess_index" = 20,
  *   },
  *   locked = true,
- *   hidden = true,
+ *   hidden = false,
  * )
  */
 class EntityReferenceFacet extends ProcessorPluginBase {
@@ -48,6 +48,12 @@ class EntityReferenceFacet extends ProcessorPluginBase {
               if (!empty($field_entity)) {
                 $values[] = $field_entity->id() . ':' . $field_entity->label();
               }
+
+              if (isset($field_entity->field_parent)) {
+                foreach ($field_entity->field_parent->referencedEntities() as $parent) {
+                  $values = array_merge($values, $this->getParentValues($parent));
+                }
+              }
             }
             $field->setValues($values);
           }
@@ -56,4 +62,17 @@ class EntityReferenceFacet extends ProcessorPluginBase {
     }
   }
 
+  protected function getParentValues($child) {
+    $parents = [
+      $child->id() . ':' . $child->label(),
+    ];
+
+    if (isset($child->field_parent)) {
+      foreach ($child->field_parent->referencedEntities() as $parent) {
+        $parents = array_merge($parents, $this->getParentValues($parent));
+      }
+    }
+
+    return $parents;
+  }
 }

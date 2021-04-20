@@ -55,9 +55,11 @@ class OchaAssessmentsCreateTemplate extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $export_filters = ocha_assessments_get_export_filters();
+
     $form['country'] = [
       '#type' => 'select',
-      '#options' => ocha_locations_allowed_values_top_level(),
+      '#options' => $export_filters['countries'],
       '#title' => $this->t('Country'),
       '#description' => $this->t('Country'),
       '#required' => TRUE,
@@ -65,7 +67,7 @@ class OchaAssessmentsCreateTemplate extends FormBase {
 
     $form['operation'] = [
       '#type' => 'select',
-      '#options' => ocha_local_groups_get_operations(),
+      '#options' => $export_filters['operations'],
       '#title' => $this->t('Limit local cluster by operation'),
       '#required' => FALSE,
       '#empty_option' => $this->t('- None -'),
