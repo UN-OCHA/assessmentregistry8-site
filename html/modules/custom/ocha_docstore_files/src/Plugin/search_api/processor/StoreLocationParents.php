@@ -3,7 +3,6 @@
 namespace Drupal\ocha_docstore_files\Plugin\search_api\processor;
 
 use Drupal\search_api\Processor\ProcessorPluginBase;
-use PhpParser\Node\Stmt\Continue_;
 
 /**
  * Store location parents.
@@ -48,6 +47,9 @@ class StoreLocationParents extends ProcessorPluginBase {
     }
   }
 
+  /**
+   * Get all parents.
+   */
   protected function getParentValues($location) {
     $parents = [
       $location->uuid(),
@@ -61,4 +63,5 @@ class StoreLocationParents extends ProcessorPluginBase {
 
     return $parents;
   }
+
 }

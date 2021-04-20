@@ -5,10 +5,7 @@ namespace Drupal\ocha_docstore_files\Plugin\search_api\processor;
 use Drupal\search_api\Datasource\DatasourceInterface;
 use Drupal\search_api\Processor\ProcessorPluginBase;
 use Drupal\search_api\Processor\ProcessorProperty;
-use Drupal\search_api\Query\ResultSetInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
-use Drupal\ocha_docstore_files\Plugin\ExternalEntities\StorageClient\RestJson;
 
 /**
  * Store an entity and the entities it references.
@@ -112,6 +109,9 @@ class StoreCountry extends ProcessorPluginBase {
     }
   }
 
+  /**
+   * Find admin level 0 parents.
+   */
   protected function getParentValues($location) {
     $parents = [];
     if ($location->hasField('field_admin_level')) {

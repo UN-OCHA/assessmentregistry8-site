@@ -62,6 +62,9 @@ class EntityReferenceFacet extends ProcessorPluginBase {
     }
   }
 
+  /**
+   * Get all parents.
+   */
   protected function getParentValues($child) {
     $parents = [
       $child->id() . ':' . $child->label(),
@@ -75,4 +78,5 @@ class EntityReferenceFacet extends ProcessorPluginBase {
 
     return $parents;
   }
+
 }
