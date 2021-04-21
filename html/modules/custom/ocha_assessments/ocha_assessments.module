@@ -617,3 +617,55 @@ function ocha_assessments_get_export_filters() {
 
   return $data;
 }
+
+function ocha_assessments_load_all_reference_data() {
+  $options = [];
+  $entity_types = [
+    'local_group',
+    'organization',
+  ];
+
+  foreach ($entity_types as $entity_type) {
+    $options[$entity_type] = ocha_assessments_load_reference_data($entity_type);
+  }
+
+  return $options;
+}
+
+function ocha_assessments_load_reference_data($entity_type) {
+  $options = [];
+
+  // Get the count.
+  $query = \Drupal::entityQuery($entity_type);
+  $num_rows = $query->count()->execute();
+
+  $page = 0;
+  $page_size = 100;
+
+  // Fetch all items.
+  while ($num_rows > 0) {
+    $num_rows = $num_rows - $page_size;
+
+    $query = \Drupal::entityQuery($entity_type);
+    $query->range($page * $page_size, $page_size);
+    $entity_ids = $query->execute();
+    $entities = \Drupal::entityTypeManager()->getStorage($entity_type)->loadMultiple($entity_ids);
+    foreach ($entities as $entity) {
+      $options[$entity->uuid()] = trim($entity->label());
+
+      // Add operation name for local groups.
+      if ($entity_type === 'local_group') {
+        if ($entity->field_operations->referencedEntities()) {
+          $options[$entity->uuid()] .= ' (' . $entity->field_operations->referencedEntities()[0]->label() . ')';
+        }
+      }
+    }
+
+    $page++;
+  }
+
+  // Sort.
+  asort($options);
+
+  return $options;
+}
