@@ -4,22 +4,9 @@
   }
 
   .cd-grid--2-col .cd-grid-item {
-    background-color: transparent;
     margin-bottom: 1rem;
     padding: 2rem;
-
-    @include mobile {
-      display: block;
-    }
-
-    @include tablet {
-      margin-bottom: 0;
-
-      // FOR IE11.
-      @media all and (-ms-high-contrast: none) {
-        max-width: 48%;
-      }
-    }
+    background-color: transparent;
 
     > h2,
     > h3 {
@@ -32,8 +19,21 @@
 
     &:nth-child(1),
     &:nth-child(2) {
-      background-color: $cd-grey--light;
       border-bottom: 3px solid $implementation-highlight;
+      background-color: $cd-grey--light;
+    }
+
+    @include mobile {
+      display: block;
+    }
+
+    @include tablet {
+      margin-bottom: 0;
+
+      // FOR IE11.
+      @media all and (-ms-high-contrast: none) {
+        max-width: 48%;
+      }
     }
   }
 }
