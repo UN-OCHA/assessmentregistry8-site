@@ -35,7 +35,7 @@ class StoreLocationParents extends ProcessorPluginBase {
       $fields = $item->getFields(FALSE);
       $values = $fields['field_locations']->getValues();
 
-      foreach ($entity->referencedEntities() as $location) {
+      foreach ($entity->field_locations->referencedEntities() as $location) {
         $values = array_merge($values, $this->getParentValues($location));
       }
 
