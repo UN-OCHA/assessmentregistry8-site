@@ -562,6 +562,9 @@ function ocha_assessments_toolbar_alter(&$items) {
   }
 }
 
+/**
+ * Get a list of export filters.
+ */
 function ocha_assessments_get_export_filters() {
   $data = [];
 
