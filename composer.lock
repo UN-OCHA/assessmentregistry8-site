@@ -3594,6 +3594,9 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "Ensure the proper number of items is processed in batch export": "PATCHES/views_data_export-fix-number-of-processed-items.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -7798,16 +7801,16 @@
         },
         {
             "name": "unocha/common_design",
-            "version": "v3.0.6",
+            "version": "v3.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/common_design.git",
-                "reference": "662fb828737e1feb019874a29e6d504b2b1f6df4"
+                "reference": "65c2fc09ece417113dd8915d11c63d004de4ad32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/662fb828737e1feb019874a29e6d504b2b1f6df4",
-                "reference": "662fb828737e1feb019874a29e6d504b2b1f6df4",
+                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/65c2fc09ece417113dd8915d11c63d004de4ad32",
+                "reference": "65c2fc09ece417113dd8915d11c63d004de4ad32",
                 "shasum": ""
             },
             "require": {
@@ -7819,10 +7822,10 @@
             ],
             "description": "OCHA Common Design base theme for Drupal 8",
             "support": {
-                "source": "https://github.com/UN-OCHA/common_design/tree/v3.0.6",
+                "source": "https://github.com/UN-OCHA/common_design/tree/v3.1.3",
                 "issues": "https://github.com/UN-OCHA/common_design/issues"
             },
-            "time": "2021-04-12T06:19:41+00:00"
+            "time": "2021-04-20T15:35:55+00:00"
         },
         {
             "name": "unocha/ocha_integrations",
