@@ -2,6 +2,7 @@
 
 namespace Drupal\ocha_assessments\Form;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\File\FileSystem;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -24,9 +25,16 @@ class OchaAssessmentsCreateTemplate extends FormBase {
   /**
    * File system.
    *
-   * @var Drupal\Core\File\FileSystem
+   * @var \Drupal\Core\File\FileSystem
    */
   protected $fileSystem;
+
+  /**
+   * Entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
 
   /**
    * {@inheritdoc}
@@ -38,8 +46,9 @@ class OchaAssessmentsCreateTemplate extends FormBase {
   /**
    * Class constructor.
    */
-  public function __construct(FileSystem $fileSystem) {
+  public function __construct(FileSystem $fileSystem, EntityTypeManagerInterface $entityTypeManager) {
     $this->fileSystem = $fileSystem;
+    $this->entityTypeManager = $entityTypeManager;
   }
 
   /**
@@ -47,7 +56,8 @@ class OchaAssessmentsCreateTemplate extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('file_system')
+      $container->get('file_system'),
+      $container->get('entity_type.manager')
     );
   }
 
@@ -89,8 +99,8 @@ class OchaAssessmentsCreateTemplate extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $country = entity_load('location', $form_state->getValue('country'));
-    $operation = entity_load('operation', $form_state->getValue('operation'));
+    $country = $this->entityTypeManager->getStorage('location')->load($form_state->getValue('country'));
+    $operation = $this->entityTypeManager->getStorage('operation')->load($form_state->getValue('operation'));
     $export_filters = ocha_assessments_load_all_reference_data();
 
     // Set paths.
@@ -381,7 +391,7 @@ class OchaAssessmentsCreateTemplate extends FormBase {
 
     // Set title.
     $worksheet = $spreadsheet->getSheetByName('Assessments');
-    $worksheet->getCell('C2')->setValue('Assessment Registry – ' . $country->name);
+    $worksheet->getCell('C2')->setValue('Assessment Registry – ' . $country->label());
 
     // Protect headers.
     $spreadsheet->getDefaultStyle()->getProtection()->setLocked(TRUE);
@@ -404,11 +414,11 @@ class OchaAssessmentsCreateTemplate extends FormBase {
     $spreadsheet->getProperties()
       ->setCreator('OCHA')
       ->setLastModifiedBy('OCHA')
-      ->setTitle('Assessment Registry – ' . $country->name)
-      ->setSubject('Assessment Registry – ' . $country->name)
-      ->setKeywords('OCHA AR ' . $country->iso3)
-      ->setCustomProperty('Country', $country->name)
-      ->setCustomProperty('CountryId', $country->id);
+      ->setTitle('Assessment Registry – ' . $country->label())
+      ->setSubject('Assessment Registry – ' . $country->label())
+      ->setKeywords('OCHA AR')
+      ->setCustomProperty('Country', $country->label())
+      ->setCustomProperty('CountryId', $country->uuid());
 
     // Stream to browser.
     ob_start();

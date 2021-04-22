@@ -618,6 +618,9 @@ function ocha_assessments_get_export_filters() {
   return $data;
 }
 
+/**
+ * Fetch all reference data.
+ */
 function ocha_assessments_load_all_reference_data() {
   $options = [];
   $entity_types = [
@@ -629,44 +632,6 @@ function ocha_assessments_load_all_reference_data() {
   foreach ($entity_types as $entity_type) {
     $options[$entity_type] = ocha_assessments_load_reference_data_from_docstore($entity_type);
   }
-
-  return $options;
-}
-
-function ocha_assessments_load_reference_data($entity_type) {
-  $options = [];
-
-  // Get the count.
-  $query = \Drupal::entityQuery($entity_type);
-  $num_rows = $query->count()->execute();
-
-  $page = 0;
-  $page_size = 100;
-
-  // Fetch all items.
-  while ($num_rows > 0) {
-    $num_rows = $num_rows - $page_size;
-
-    $query = \Drupal::entityQuery($entity_type);
-    $query->range($page * $page_size, $page_size);
-    $entity_ids = $query->execute();
-    $entities = \Drupal::entityTypeManager()->getStorage($entity_type)->loadMultiple($entity_ids);
-    foreach ($entities as $entity) {
-      $options[$entity->uuid()] = trim($entity->label());
-
-      // Add operation name for local groups.
-      if ($entity_type === 'local_group') {
-        if ($entity->field_operations->referencedEntities()) {
-          $options[$entity->uuid()] .= ' (' . $entity->field_operations->referencedEntities()[0]->label() . ')';
-        }
-      }
-    }
-
-    $page++;
-  }
-
-  // Sort.
-  asort($options);
 
   return $options;
 }
@@ -743,6 +708,10 @@ function ocha_assessments_load_country_childs_from_docstore($country_uuid) {
 
   $options = [];
   foreach ($body->results as $result) {
+    if (empty($result->uuid) || empty($result->label)) {
+      continue;
+    }
+
     $parent = reset($result->parent);
     if ($result->admin_level == 1) {
       $options[$result->uuid] = [
@@ -754,13 +723,15 @@ function ocha_assessments_load_country_childs_from_docstore($country_uuid) {
       ];
     }
     elseif ($result->admin_level == 2) {
-      $options[$parent->uuid]['children'][$result->uuid] = [
-        'uuid' => $result->uuid,
-        'label' => $result->label,
-        'parent' => $parent->uuid,
-        'admin_level' => $result->admin_level,
-        'children' => [],
-      ];
+      if (isset($options[$parent->uuid]['children'])) {
+        $options[$parent->uuid]['children'][$result->uuid] = [
+          'uuid' => $result->uuid,
+          'label' => $result->label,
+          'parent' => $parent->uuid,
+          'admin_level' => $result->admin_level,
+          'children' => [],
+        ];
+      }
     }
     else {
       $parent = reset($result->parent);
@@ -771,12 +742,14 @@ function ocha_assessments_load_country_childs_from_docstore($country_uuid) {
         }
       }
 
-      $options[$grand_parent]['children'][$parent->uuid]['children'][$result->uuid] = [
-        'uuid' => $result->uuid,
-        'label' => $result->label,
-        'admin_level' => $result->admin_level,
-        'parent' => $parent->uuid,
-      ];
+      if (isset($options[$grand_parent]['children'][$parent->uuid]['children'])) {
+        $options[$grand_parent]['children'][$parent->uuid]['children'][$result->uuid] = [
+          'uuid' => $result->uuid,
+          'label' => $result->label,
+          'admin_level' => $result->admin_level,
+          'parent' => $parent->uuid,
+        ];
+      }
     }
   }
 
