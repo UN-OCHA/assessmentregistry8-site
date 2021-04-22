@@ -12,7 +12,9 @@
           location = location.replace('/assessments/list', '/export/assessments');
           location = location.replace('/assessments/table', '/export/assessments');
           window.location = location;
-          e.preventDefault;
+          if (e) {
+            e.preventDefault();
+          }
         });
       }
     }

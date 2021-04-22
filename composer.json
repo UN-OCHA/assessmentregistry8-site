@@ -29,7 +29,7 @@
         "cweagans/composer-patches": "^1.6.5",
         "drupal-composer/drupal-scaffold": "^2.5",
         "drupal/admin_denied": "^1.0",
-        "drupal/components": "^1.1",
+        "drupal/components": "^2.4",
         "drupal/config_split": "^1.4",
         "drupal/core": "^8.8.8",
         "drupal/custom_widgets": "^2.0",

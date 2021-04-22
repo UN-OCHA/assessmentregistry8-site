@@ -1,7 +1,7 @@
 {
   "root": true,
   "parserOptions": {
-    "ecmaVersion": 5,
+    "ecmaVersion": 2017,
     "ecmaFeatures": {
       "experimentalObjectRestSpread": false,
       "globalReturn": false,
@@ -13,7 +13,7 @@
 
   "env": {
     "browser": true,
-    "es6": false,
+    "es6": true,
     "jquery": true,
     "node": false
  },
@@ -78,7 +78,7 @@
     "no-sequences": "error",
     "no-throw-literal": "off",
     "no-unmodified-loop-condition": "error",
-    "no-unused-expressions": "off",
+    "no-unused-expressions": "error",
     "no-unused-labels": "error",
     "no-useless-call": "error",
     "no-useless-concat": "error",

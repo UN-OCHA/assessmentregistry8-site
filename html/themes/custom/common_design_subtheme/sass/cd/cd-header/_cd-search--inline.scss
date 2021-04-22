@@ -24,7 +24,7 @@
     }
   }
 
-  &[aria-expanded='true'] {
+  &[aria-expanded="true"] {
     color: $implementation-highlight;
 
     svg {
@@ -50,10 +50,10 @@
     flex: 0 1 340px;
   }
 
-  .cd-search--inline__input[type='search'],
-  .cd-search--inline__input[type='text'] {
-    min-width: 160px;
+  .cd-search--inline__input[type="search"],
+  .cd-search--inline__input[type="text"] {
     width: 100%;
+    min-width: 160px;
 
     &:focus {
       border-bottom: 6px solid $implementation-highlight;
