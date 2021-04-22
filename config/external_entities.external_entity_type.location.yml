@@ -14,10 +14,14 @@ field_mappings:
     value: uuid
   title:
     value: label
+  field_admin_level:
+    value: admin_level
   field_geolocation:
     geo_type: +Point
     lat: geolocation/lat
     lon: geolocation/lon
+  field_parent:
+    target_id: 'parent/*/uuid'
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/locations/terms'

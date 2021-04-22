@@ -16,6 +16,8 @@ field_mappings:
     value: label
   field_hrinfo_id:
     value: id
+  field_operations:
+    target_id: 'operations/*/uuid'
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/local_coordination_groups/terms'

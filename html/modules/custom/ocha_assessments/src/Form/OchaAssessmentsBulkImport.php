@@ -77,8 +77,7 @@ class OchaAssessmentsBulkImport extends FormBase {
       '#required' => TRUE,
     ];
 
-    $controller = ocha_countries_get_controller();
-    $countries = $controller->getAllowedValues();
+    $countries = ocha_assessments_country_list();
     $form['country'] = [
       '#type' => 'select',
       '#options' => $countries,
