@@ -621,12 +621,13 @@ function ocha_assessments_get_export_filters() {
 function ocha_assessments_load_all_reference_data() {
   $options = [];
   $entity_types = [
-    'local_group',
-    'organization',
+    'local_coordination_groups',
+    'organizations',
+    'population_types',
   ];
 
   foreach ($entity_types as $entity_type) {
-    $options[$entity_type] = ocha_assessments_load_reference_data($entity_type);
+    $options[$entity_type] = ocha_assessments_load_reference_data_from_docstore($entity_type);
   }
 
   return $options;
@@ -666,6 +667,118 @@ function ocha_assessments_load_reference_data($entity_type) {
 
   // Sort.
   asort($options);
+
+  return $options;
+}
+
+/**
+ * Fetch reference data from the docstore.
+ */
+function ocha_assessments_load_reference_data_from_docstore($entity_type) {
+  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/' . $entity_type . '/terms/options';
+  $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+
+  // phpcs:ignore
+  $response = \Drupal::httpClient()->request(
+    'GET',
+    $endpoint
+  );
+
+  $body = $response->getBody() . '';
+  $body = json_decode($body);
+
+  foreach ($body->results as $result) {
+    $options[$result->uuid] = trim($result->label);
+    if (isset($result->display_name) && !empty($result->display_name)) {
+      $options[$result->uuid] = trim($result->display_name);
+    }
+  }
+
+  return $options;
+}
+
+/**
+ * Load countries from docstore.
+ *
+ * Countries are locations of admin level 0.
+ */
+function ocha_assessments_load_countries_from_docstore() {
+  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/locations/terms/options?filter[admin_level]=0';
+  $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+
+  // phpcs:ignore
+  $response = \Drupal::httpClient()->request(
+    'GET',
+    $endpoint
+  );
+
+  $body = $response->getBody() . '';
+  $body = json_decode($body);
+
+  foreach ($body->results as $result) {
+    $options[$result->uuid] = trim($result->label);
+    if (isset($result->display_name) && !empty($result->display_name)) {
+      $options[$result->uuid] = trim($result->display_name);
+    }
+  }
+
+  return $options;
+}
+
+/**
+ * Load all childs of a country.
+ */
+function ocha_assessments_load_country_childs_from_docstore($country_uuid) {
+  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/locations/terms?filter[parents]=' . $country_uuid . '&sort=admin_level';
+  $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+
+  // phpcs:ignore
+  $response = \Drupal::httpClient()->request(
+    'GET',
+    $endpoint
+  );
+
+  $body = $response->getBody() . '';
+  $body = json_decode($body);
+
+  $options = [];
+  foreach ($body->results as $result) {
+    $parent = reset($result->parent);
+    if ($result->admin_level == 1) {
+      $options[$result->uuid] = [
+        'uuid' => $result->uuid,
+        'label' => $result->label,
+        'parent' => $parent->uuid,
+        'admin_level' => $result->admin_level,
+        'children' => [],
+      ];
+    }
+    elseif ($result->admin_level == 2) {
+      $options[$parent->uuid]['children'][$result->uuid] = [
+        'uuid' => $result->uuid,
+        'label' => $result->label,
+        'parent' => $parent->uuid,
+        'admin_level' => $result->admin_level,
+        'children' => [],
+      ];
+    }
+    else {
+      $parent = reset($result->parent);
+      foreach ($options as $uuid => $option) {
+        if (array_key_exists($parent->uuid, $option['children'])) {
+          $grand_parent = $uuid;
+          break;
+        }
+      }
+
+      $options[$grand_parent]['children'][$parent->uuid]['children'][$result->uuid] = [
+        'uuid' => $result->uuid,
+        'label' => $result->label,
+        'admin_level' => $result->admin_level,
+        'parent' => $parent->uuid,
+      ];
+    }
+  }
 
   return $options;
 }
