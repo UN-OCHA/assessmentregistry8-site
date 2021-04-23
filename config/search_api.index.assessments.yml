@@ -73,11 +73,11 @@ field_settings:
   _stored_country:
     label: 'Stored country'
     property_path: _stored_country
-    type: string
+    type: solr_string_storage
   _stored_entity:
     label: 'Stored entity'
     property_path: _stored_entity
-    type: string
+    type: solr_string_storage
   field_asst_organizations:
     label: 'Participating Organization(s)'
     datasource_id: 'entity:assessment'

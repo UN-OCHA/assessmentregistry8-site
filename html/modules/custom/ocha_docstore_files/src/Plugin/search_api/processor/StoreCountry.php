@@ -62,7 +62,7 @@ class StoreCountry extends ProcessorPluginBase {
       $definition = [
         'label' => $this->t('Stored country'),
         'description' => $this->t('Stores the country.'),
-        'type' => 'string',
+        'type' => 'solr_string_storage',
         'processor_id' => $this->getPluginId(),
         'is_list' => TRUE,
       ];
