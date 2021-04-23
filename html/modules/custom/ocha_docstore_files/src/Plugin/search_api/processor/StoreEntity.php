@@ -66,7 +66,7 @@ class StoreEntity extends ProcessorPluginBase {
       $definition = [
         'label' => $this->t('Stored entity'),
         'description' => $this->t('Stores the entity and the entities it references.'),
-        'type' => 'string',
+        'type' => 'solr_string_storage',
         'processor_id' => $this->getPluginId(),
         'is_list' => FALSE,
       ];
