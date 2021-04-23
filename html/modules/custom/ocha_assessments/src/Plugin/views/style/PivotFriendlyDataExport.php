@@ -319,6 +319,7 @@ class PivotFriendlyDataExport extends DataExport {
                 'Start' => substr($field_item->value, 0, 10),
                 'End' => substr($field_item->end_value ?? '', 0, 10),
               ];
+              break;
           }
         }
 

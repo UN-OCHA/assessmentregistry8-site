@@ -1,17 +1,48 @@
 diff --git a/src/Plugin/views/display/DataExport.php b/src/Plugin/views/display/DataExport.php
-index d6a02b4..9cdb583 100644
+index d6a02b4..1515af2 100644
 --- a/src/Plugin/views/display/DataExport.php
 +++ b/src/Plugin/views/display/DataExport.php
-@@ -74,7 +74,7 @@ class DataExport extends RestExport {
+@@ -73,8 +73,12 @@ class DataExport extends RestExport {
+     $view->preExecute($args);
      $view->build();
  
++    $query_conditions = NULL;
      if ($view->getQuery() instanceof SearchApiQuery) {
 -      $total_rows = $view->query->getSearchApiQuery()->range(NULL, 1)->execute()->getResultCount();
 +      $total_rows = $view->query->getSearchApiQuery()->range(0, 0)->execute()->getResultCount();
++      // Store the query conditions which may come from facets to ensure the
++      // query executed in processBatch has the same conditions.
++      $query_conditions = $view->query->getSearchApiQuery()->getConditionGroup()->getConditions();
      }
      else {
        $count_query_results = $view->query->query()->countQuery()->execute();
-@@ -674,11 +674,11 @@ class DataExport extends RestExport {
+@@ -142,6 +146,7 @@ class DataExport extends RestExport {
+             $view->getExposedInput(),
+             $total_rows,
+             $query_parameters,
++            $query_conditions,
+             $redirect_url->toString(),
+           ],
+         ],
+@@ -651,6 +656,8 @@ class DataExport extends RestExport {
+    *   Total rows.
+    * @param array $query_parameters
+    *   Query string parameters.
++   * @param array|null $query_conditions
++   *   Query conditions.
+    * @param string $redirect_url
+    *   Redirect URL.
+    * @param mixed $context
+@@ -661,7 +668,7 @@ class DataExport extends RestExport {
+    * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
+    * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+    */
+-  public static function processBatch($view_id, $display_id, array $args, array $exposed_input, $total_rows, array $query_parameters, $redirect_url, &$context) {
++  public static function processBatch($view_id, $display_id, array $args, array $exposed_input, $total_rows, array $query_parameters, $query_conditions, $redirect_url, &$context) {
+     // Add query string back to the URL for processing.
+     if ($query_parameters) {
+       \Drupal::request()->query->add($query_parameters);
+@@ -674,11 +681,11 @@ class DataExport extends RestExport {
      $view->setArguments($args);
      $view->setExposedInput($exposed_input);
  
@@ -27,7 +58,23 @@ index d6a02b4..9cdb583 100644
  
      $view->preExecute($args);
      // Build the View so the query parameters and offset get applied. so our
-@@ -772,13 +772,12 @@ class DataExport extends RestExport {
+@@ -688,6 +695,15 @@ class DataExport extends RestExport {
+     // items per page, over and over).
+     $view->build();
+ 
++    // Ensure the original query's conditions are preserved.
++    // This is notably for compatibility with search facets that may be lost
++    // between batch runs for example if the original conditions came from
++    // "pretty" path facets.
++    if ($view->getQuery() instanceof SearchApiQuery && !is_null($query_conditions)) {
++      $conditions = &$view->query->getSearchApiQuery()->getConditionGroup()->getConditions();
++      $conditions = $query_conditions;
++    }
++
+     // First time through - create an output file to write to, set our
+     // current item to zero and our total number of items we'll be processing.
+     if (empty($context['sandbox'])) {
+@@ -772,13 +788,12 @@ class DataExport extends RestExport {
      // output file we write to each batch iteration.
      // Make sure that if limit is set the last batch will output the remaining
      // amount of rows and not more.
@@ -45,8 +92,12 @@ index d6a02b4..9cdb583 100644
      $view->execute($display_id);
  
      // Check to see if the build failed.
-@@ -799,23 +798,24 @@ class DataExport extends RestExport {
-       $string = preg_replace('/^[^\n]+/', '', $string);
+@@ -796,26 +811,27 @@ class DataExport extends RestExport {
+ 
+     // Workaround for CSV headers, remove the first line.
+     if ($context['sandbox']['progress'] != 0 && reset($view->getStyle()->options['formats']) == 'csv') {
+-      $string = preg_replace('/^[^\n]+/', '', $string);
++      $string = preg_replace('/^[^\n]+\n/', '', $string);
      }
  
 +    $export_limit = $view->display_handler->getOption('export_limit');
@@ -74,7 +125,7 @@ index d6a02b4..9cdb583 100644
        $vdeFileRealPath = \Drupal::service('file_system')->realpath($context['sandbox']['vde_file']);
        $previousExcel = IOFactory::load($vdeFileRealPath);
        file_put_contents($vdeFileRealPath, $string);
-@@ -851,13 +851,14 @@ class DataExport extends RestExport {
+@@ -851,13 +867,14 @@ class DataExport extends RestExport {
      // items we've processed). Note can exceed the number of total rows we're
      // processing, but that's considered in the if/else to determine when we're
      // finished below.
