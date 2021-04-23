@@ -668,8 +668,9 @@ function ocha_assessments_load_reference_data_from_docstore($entity_type) {
  * Countries are locations of admin level 0.
  */
 function ocha_assessments_load_countries_from_docstore() {
-  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/locations/terms/options?filter[admin_level]=0';
+  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/locations/terms/options';
   $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+  $endpoint .= '?filter[admin_level]=0';
 
   // phpcs:ignore
   $response = \Drupal::httpClient()->request(
@@ -694,8 +695,9 @@ function ocha_assessments_load_countries_from_docstore() {
  * Load all childs of a country.
  */
 function ocha_assessments_load_country_childs_from_docstore($country_uuid) {
-  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/locations/terms?filter[parents]=' . $country_uuid . '&sort=admin_level';
+  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/locations/terms';
   $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+  $endpoint .= '?filter[parents]=' . $country_uuid . '&sort=admin_level';
 
   // phpcs:ignore
   $response = \Drupal::httpClient()->request(
