@@ -2,6 +2,7 @@
 
 namespace Drupal\ocha_assessments\Form;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\File\FileSystem;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -24,9 +25,16 @@ class OchaAssessmentsCreateTemplate extends FormBase {
   /**
    * File system.
    *
-   * @var Drupal\Core\File\FileSystem
+   * @var \Drupal\Core\File\FileSystem
    */
   protected $fileSystem;
+
+  /**
+   * Entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
 
   /**
    * {@inheritdoc}
@@ -38,8 +46,9 @@ class OchaAssessmentsCreateTemplate extends FormBase {
   /**
    * Class constructor.
    */
-  public function __construct(FileSystem $fileSystem) {
+  public function __construct(FileSystem $fileSystem, EntityTypeManagerInterface $entityTypeManager) {
     $this->fileSystem = $fileSystem;
+    $this->entityTypeManager = $entityTypeManager;
   }
 
   /**
@@ -47,7 +56,8 @@ class OchaAssessmentsCreateTemplate extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('file_system')
+      $container->get('file_system'),
+      $container->get('entity_type.manager')
     );
   }
 
@@ -57,7 +67,7 @@ class OchaAssessmentsCreateTemplate extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['country'] = [
       '#type' => 'select',
-      '#options' => ocha_locations_allowed_values_top_level(),
+      '#options' => ocha_assessments_load_countries_from_docstore(),
       '#title' => $this->t('Country'),
       '#description' => $this->t('Country'),
       '#required' => TRUE,
@@ -65,7 +75,7 @@ class OchaAssessmentsCreateTemplate extends FormBase {
 
     $form['operation'] = [
       '#type' => 'select',
-      '#options' => ocha_local_groups_get_operations(),
+      '#options' => ocha_assessments_load_reference_data_from_docstore('operations'),
       '#title' => $this->t('Limit local cluster by operation'),
       '#required' => FALSE,
       '#empty_option' => $this->t('- None -'),
@@ -89,11 +99,12 @@ class OchaAssessmentsCreateTemplate extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $country = ocha_locations_get_item($form_state->getValue('country'));
-    $operation = $form_state->getValue('operation');
+    $country = $this->entityTypeManager->getStorage('location')->load($form_state->getValue('country'));
+    $operation = $this->entityTypeManager->getStorage('operation')->load($form_state->getValue('operation'));
+    $export_filters = ocha_assessments_load_all_reference_data();
 
     // Set paths.
-    $destination_name = 'template_' . $country->iso3 . '_' . date('Ymdhni') . '.xlsx';
+    $destination_name = 'template_' . str_replace(' ', '_', $country->label()) . '_' . date('Ymdhni') . '.xlsx';
     $source = drupal_get_path('module', 'ocha_assessments') . '/bulk_template.xlsx';
     $filename = $this->fileSystem->realpath($source);
 
@@ -123,18 +134,17 @@ class OchaAssessmentsCreateTemplate extends FormBase {
 
     // Add local clusters.
     $worksheet = $spreadsheet->getSheetByName('Clusters');
-    $controller = ocha_local_groups_get_controller();
-    $options = $controller->getAllowedValues();
+    $options = $export_filters['local_coordination_groups'];
 
     // Limit by operation.
     if (!empty($operation)) {
       foreach ($options as $key => $value) {
-        if (!strpos($value, '(' . $operation . ')')) {
+        if (!strpos($value, '(' . $operation->label() . ')')) {
           unset($options[$key]);
         }
         else {
           // Remove operation name.
-          $options[$key] = str_replace(' (' . $operation . ')', '', $value);
+          $options[$key] = str_replace(' (' . $operation->label() . ')', '', $value);
         }
       }
     }
@@ -144,8 +154,7 @@ class OchaAssessmentsCreateTemplate extends FormBase {
 
     // Organizations.
     $worksheet = $spreadsheet->getSheetByName('Organizations');
-    $controller = ocha_organizations_get_controller();
-    $options = $controller->getAllowedValues();
+    $options = $export_filters['organizations'];
     $worksheet->fromArray($this->optionsToXlsArray($options), NULL, 'A1');
     $worksheet->setSheetState(Worksheet::SHEETSTATE_HIDDEN);
     $worksheet->getProtection()->setSheet(TRUE);
@@ -154,20 +163,22 @@ class OchaAssessmentsCreateTemplate extends FormBase {
     $admin_levels1 = [];
     $admin_levels2 = [];
     $admin_levels3 = [];
-    foreach ($country->children as $l1) {
-      $admin_levels1[] = [$this->makeLabel($l1->name, $l1->id)];
-      if (!empty($l1->children)) {
-        foreach ($l1->children as $l2) {
+
+    $children = ocha_assessments_load_country_childs_from_docstore($country->uuid());
+    foreach ($children as $l1) {
+      $admin_levels1[] = [$this->makeLabel($l1['label'], $l1['uuid'])];
+      if (!empty($l1['children'])) {
+        foreach ($l1['children'] as $l2) {
           $admin_levels2[] = [
-            $this->makeLabel($l1->name, $l1->id),
-            $this->makeLabel($l2->name, $l2->id),
+            $this->makeLabel($l1['label'], $l1['uuid']),
+            $this->makeLabel($l2['label'], $l2['uuid']),
           ];
-          if (!empty($l2->children)) {
-            foreach ($l2->children as $l3) {
+          if (!empty($l2['children'])) {
+            foreach ($l2['children'] as $l3) {
               $admin_levels3[] = [
-                $this->makeLabel($l1->name, $l1->id),
-                $this->makeLabel($l2->name, $l2->id),
-                $this->makeLabel($l3->name, $l3->id),
+                $this->makeLabel($l1['label'], $l1['uuid']),
+                $this->makeLabel($l2['label'], $l2['uuid']),
+                $this->makeLabel($l3['label'], $l3['uuid']),
               ];
             }
           }
@@ -191,8 +202,7 @@ class OchaAssessmentsCreateTemplate extends FormBase {
 
     // Add population type.
     $worksheet = $spreadsheet->getSheetByName('PopulationTypes');
-    $controller = ocha_population_type_get_controller();
-    $options = $controller->getAllowedValues();
+    $options = $export_filters['population_types'];
     $worksheet->fromArray($this->optionsToXlsArray($options), NULL, 'A1');
     $worksheet->setSheetState(Worksheet::SHEETSTATE_HIDDEN);
     $worksheet->getProtection()->setSheet(TRUE);
@@ -381,7 +391,7 @@ class OchaAssessmentsCreateTemplate extends FormBase {
 
     // Set title.
     $worksheet = $spreadsheet->getSheetByName('Assessments');
-    $worksheet->getCell('C2')->setValue('Assessment Registry – ' . $country->name);
+    $worksheet->getCell('C2')->setValue('Assessment Registry – ' . $country->label());
 
     // Protect headers.
     $spreadsheet->getDefaultStyle()->getProtection()->setLocked(TRUE);
@@ -404,11 +414,11 @@ class OchaAssessmentsCreateTemplate extends FormBase {
     $spreadsheet->getProperties()
       ->setCreator('OCHA')
       ->setLastModifiedBy('OCHA')
-      ->setTitle('Assessment Registry – ' . $country->name)
-      ->setSubject('Assessment Registry – ' . $country->name)
-      ->setKeywords('OCHA AR ' . $country->iso3)
-      ->setCustomProperty('Country', $country->name)
-      ->setCustomProperty('CountryId', $country->id);
+      ->setTitle('Assessment Registry – ' . $country->label())
+      ->setSubject('Assessment Registry – ' . $country->label())
+      ->setKeywords('OCHA AR')
+      ->setCustomProperty('Country', $country->label())
+      ->setCustomProperty('CountryId', $country->uuid());
 
     // Stream to browser.
     ob_start();

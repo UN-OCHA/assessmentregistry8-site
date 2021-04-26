@@ -70,6 +70,10 @@ name: Assessments
 description: ''
 read_only: false
 field_settings:
+  _stored_country:
+    label: 'Stored country'
+    property_path: _stored_country
+    type: solr_string_storage
   _stored_entity:
     label: 'Stored entity'
     property_path: _stored_entity
@@ -296,11 +300,23 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
-  ar_entity_reference_facet: {  }
-  ar_store_entity: {  }
+  ar_entity_reference_facet:
+    weights:
+      preprocess_index: 20
+  ar_location_parent:
+    weights:
+      preprocess_index: 10
+  ar_store_country:
+    weights:
+      postprocess_query: -10
+  ar_store_entity:
+    weights:
+      postprocess_query: -10
   language_with_fallback: {  }
   rendered_item: {  }
-  solr_date_range: {  }
+  solr_date_range:
+    weights:
+      preprocess_index: 0
 tracker_settings:
   default:
     indexing_order: fifo

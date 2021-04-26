@@ -3,7 +3,9 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.location.location.field_admin_level
     - field.field.location.location.field_geolocation
+    - field.field.location.location.field_parent
   module:
     - external_entities
     - geofield
@@ -12,12 +14,29 @@ targetEntityType: location
 bundle: location
 mode: default
 content:
+  field_admin_level:
+    weight: -2
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
   field_geolocation:
     weight: -4
     settings:
       html5_geolocation: false
     third_party_settings: {  }
     type: geofield_latlon
+    region: content
+  field_parent:
+    weight: -3
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   title:
     type: string_textfield
