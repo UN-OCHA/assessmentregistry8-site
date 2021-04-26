@@ -188,52 +188,28 @@ class OchaAssessmentsBulkImport extends FormBase {
 
     // Local group aka Cluster(s)/Sector(s).
     if (isset($item['clusters']) && !empty($item['clusters'])) {
-      // Split and trim.
-      $values = array_map('trim', explode(',', $item['clusters']));
-      foreach ($values as $input) {
-        $data['local_groups'][] = $this->extractIdFromInput($input);
-      }
+      $data['local_groups'][] = $this->extractIdFromInput($item['clusters']);
     }
 
     // Leading/Coordinating Organization(s).
     if (isset($item['agency']) && !empty($item['agency'])) {
-      // Split and trim.
-      $values = array_map('trim', explode(',', $item['agency']));
-      foreach ($values as $input) {
-        $data['organizations'][] = $this->extractIdFromInput($input);
-      }
+      $data['organizations'][] = $this->extractIdFromInput($item['agency']);
     }
 
     // Participating Organization(s).
     if (isset($item['partners']) && !empty($item['partners'])) {
-      // Split and trim.
-      $values = array_map('trim', explode(',', $item['partners']));
-      foreach ($values as $input) {
-        $data['asst_organizations'][] = $this->extractIdFromInput($input);
-      }
+      $data['asst_organizations'][] = $this->extractIdFromInput($item['partners']);
     }
 
     // Location(s).
     if (isset($item['admin 3']) && !empty($item['admin 3'])) {
-      // Split and trim.
-      $values = array_map('trim', explode(',', $item['admin 3']));
-      foreach ($values as $input) {
-        $data['locations'][] = $this->extractIdFromInput($input);
-      }
+      $data['locations'][] = $this->extractIdFromInput($item['admin 3']);
     }
     elseif (isset($item['admin 2']) && !empty($item['admin 2'])) {
-      // Split and trim.
-      $values = array_map('trim', explode(',', $item['admin 2']));
-      foreach ($values as $input) {
-        $data['locations'][] = $this->extractIdFromInput($input);
-      }
+      $data['locations'][] = $this->extractIdFromInput($item['admin 2']);
     }
     elseif (isset($item['admin 1']) && !empty($item['admin 1'])) {
-      // Split and trim.
-      $values = array_map('trim', explode(',', $item['admin 1']));
-      foreach ($values as $input) {
-        $data['locations'][] = $this->extractIdFromInput($input);
-      }
+      $data['locations'][] = $this->extractIdFromInput($item['admin 1']);
     }
 
     // Other location.
@@ -243,11 +219,7 @@ class OchaAssessmentsBulkImport extends FormBase {
 
     // Population Type(s).
     if (isset($item['types']) && !empty($item['types'])) {
-      // Split and trim.
-      $values = array_map('trim', explode(',', $item['types']));
-      foreach ($values as $input) {
-        $data['population_types'][] = $this->extractIdFromInput($input);
-      }
+      $data['population_types'][] = $this->extractIdFromInput($item['types']);
     }
 
     // Unit(s) of Measurement.
@@ -286,7 +258,12 @@ class OchaAssessmentsBulkImport extends FormBase {
     if (isset($item['start']) && !empty($item['start'])) {
       if (strpos($item['start'], '-')) {
         $data['ar_date'][0] = [
-          'value' => $item['start'],
+          'value' => date('Y-m-d', strtotime($item['start'])),
+        ];
+      }
+      elseif (strpos($item['start'], '/')) {
+        $data['ar_date'][0] = [
+          'value' => date('Y-m-d', strtotime(str_replace('/', '-', $item['start']))),
         ];
       }
       else {
@@ -298,7 +275,10 @@ class OchaAssessmentsBulkImport extends FormBase {
       // End date.
       if (isset($item['end']) && !empty($item['end'])) {
         if (strpos($item['end'], '-')) {
-          $data['ar_date'][0]['end_value'] = $item['end'];
+          $data['ar_date'][0]['end_value'] = date('Y-m-d', strtotime($item['end']));
+        }
+        elseif (strpos($item['end'], '/')) {
+          $data['ar_date'][0]['end_value'] = date('Y-m-d', strtotime(str_replace('/', '-', $item['end'])));
         }
         else {
           $data['ar_date'][0]['end_value'] = date('Y-m-d', Date::excelToTimestamp($item['end']));
@@ -308,15 +288,24 @@ class OchaAssessmentsBulkImport extends FormBase {
 
     $instructions = isset($item['instructions']) ? $item['instructions'] : '';
     if (isset($item['data availability']) && !empty($item['data availability'])) {
-      $data['assessment_data'][] = $this->createAssessmentDocument($item['data availability'], $item['data url'], $instructions);
+      $assessment_document = $this->createAssessmentDocument($item['data availability'], $item['data url'], $instructions);
+      if ($assessment_document) {
+        $data['assessment_data'][] = $assessment_document;
+      }
     }
 
     if (isset($item['report availability']) && !empty($item['report availability'])) {
-      $data['assessment_report'][] = $this->createAssessmentDocument($item['report availability'], $item['report url'], $instructions);
+      $assessment_document = $this->createAssessmentDocument($item['report availability'], $item['report url'], $instructions);
+      if ($assessment_document) {
+        $data['assessment_report'][] = $assessment_document;
+      }
     }
 
     if (isset($item['questionnaire availability']) && !empty($item['questionnaire availability'])) {
-      $data['assessment_questionnaire'][] = $this->createAssessmentDocument($item['questionnaire availability'], $item['questionnaire url'], $instructions);
+      $assessment_document = $this->createAssessmentDocument($item['questionnaire availability'], $item['questionnaire url'], $instructions);
+      if ($assessment_document) {
+        $data['assessment_questionnaire'][] = $assessment_document;
+      }
     }
 
     // Contact.
