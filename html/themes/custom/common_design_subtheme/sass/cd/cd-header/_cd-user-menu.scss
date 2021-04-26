@@ -11,7 +11,6 @@
     li:last-child button {
       padding-right: 0;
 
-      // sass-lint:disable nesting-depth
       &::after {
         content: none;
       }

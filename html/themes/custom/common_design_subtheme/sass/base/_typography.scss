@@ -19,17 +19,17 @@ a {
 }
 
 .cd-heading-2 {
-  font-size: 1.5rem;
-  font-weight: 400;
-  padding-bottom: 0.5rem;
   margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
   color: $implementation-primary;
   border-bottom: 3px solid $cd-blue-grey;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 
 .cd-heading-3 {
-  font-size: 1.125rem;
-  font-weight: 600;
   margin-bottom: 0.5rem;
   color: $implementation-primary;
+  font-size: 1.125rem;
+  font-weight: 600;
 }

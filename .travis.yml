@@ -67,6 +67,9 @@ script:
   - test ! -d ./html/themes/custom || ./vendor/bin/phpcs -p --report=full ./html/themes/custom
   - set +e
 
+  # Theme build.
+  - composer run sass
+
 after_success:
   - cd $TRAVIS_BUILD_DIR
   - killall -9 php
