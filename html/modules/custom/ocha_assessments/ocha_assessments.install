@@ -41,34 +41,41 @@ function ocha_assessments_update_8002() {
  * Fix life cycle steps.
  */
 function ocha_assessments_update_8003() {
+  // Re-trigger update.
+}
+
+/**
+ * Fix life cycle steps.
+ */
+function ocha_assessments_update_8004() {
   $steps = [
     'Setting-up Coordination' => [
-      'Understanding of context and enabling factors',
-      'Establishing coordination to support coordinated assessments',
-      'Determining current state of needs assessment',
+      'Understanding of context and enabling factors' => 'Understanding of context and enabling factors',
+      'Establishing coordination to support coordinated assessments' => 'Establishing coordination to support coordinated assessments',
+      'Determining current state of needs assessment' => 'Determining current state of needs assessment',
     ],
     'Planning' => [
-      'Establishing context specific baseline',
-      'Availability of needs & response data and information gaps',
-      'Localize coordinated assessment strategy',
+      'Establishing context specific baseline' => 'Establishing context specific baseline',
+      'Availability of needs & response data and information gaps' => 'Availability of needs & response data and information gaps',
+      'Localise coordinated assessment strategy' => 'Localize coordinated assessment strategy',
     ],
     'Design of Data Collection' => [
-      'Designing Secondary Data Review (SDR) methods',
-      'Designing Primary Data Collection methods',
-      'Estimation of Humanitarian Population figures',
+      'Designing Secondary Data Review (SDR) methods' => 'Designing Secondary Data Review (SDR) methods',
+      'Designing Primary Data Collection methods' => 'Designing Primary Data Collection methods',
+      'Estimation of Humanitarian Population figures' => 'Estimation of Humanitarian Population figures',
     ],
     'Data Collection' => [
-      'Secondary data collection and analysis',
-      'Primary data collection',
+      'Secondary data collection and analysis' => 'Secondary data collection and analysis',
+      'Primary data collection' => 'Primary Data Collection',
     ],
     'Data Processing & Basic Analysis' => [
-      'Data Processing and summary outputs',
-      'Basic data analysis',
+      'Data Processing and summary outputs' => 'Data Processing and summary outputs',
+      'Basic data analysis' => 'Basic data analysis',
     ],
     'Joint Analysis' => [
-      'Process and coordination of joint analysis',
-      'Summarizing and interpretation of inter-sectoral analysis',
-      'Prioritizing and informing decisions',
+      'Process and coordination of joint analysis' => 'Process and coordination of joint analysis',
+      'Summarising and interpretation of inter-sectoral analysis' => 'Summarizing and interpretation of inter-sectoral analysis',
+      'Prioritising and informing decisions' => 'Prioritizing and informing decisions',
     ],
   ];
 
@@ -121,11 +128,11 @@ function ocha_assessments_update_8003() {
     }
 
     // Loop children.
-    foreach ($children as $child_name) {
+    foreach ($children as $old_name => $new_name) {
       // Check if terms exists.
       $existing = FALSE;
       foreach ($terms as $uuid => $name) {
-        if ($child_name == $name) {
+        if ($old_name == $name) {
           $existing = $uuid;
           break;
         }
@@ -134,6 +141,7 @@ function ocha_assessments_update_8003() {
       if ($existing) {
         $data = [
           'parent' => $parents[$parent_name],
+          'label' => $new_name,
         ];
 
         // Post to docstore.
@@ -158,7 +166,7 @@ function ocha_assessments_update_8003() {
       else {
         $data = [
           'author' => 'AR',
-          'label' => $child_name,
+          'label' => $new_name,
           'parent' => $parents[$parent_name],
         ];
 
