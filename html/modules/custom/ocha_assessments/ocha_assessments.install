@@ -48,6 +48,13 @@ function ocha_assessments_update_8003() {
  * Fix life cycle steps.
  */
 function ocha_assessments_update_8004() {
+  // Re-trigger update.
+}
+
+/**
+ * Fix life cycle steps.
+ */
+function ocha_assessments_update_8005() {
   $steps = [
     'Setting-up Coordination' => [
       'Understanding of context and enabling factors' => 'Understanding of context and enabling factors',
@@ -66,7 +73,7 @@ function ocha_assessments_update_8004() {
     ],
     'Data Collection' => [
       'Secondary data collection and analysis' => 'Secondary data collection and analysis',
-      'Primary data collection' => 'Primary Data Collection',
+      'Primary Data Collection' => 'Primary data collection',
     ],
     'Data Processing & Basic Analysis' => [
       'Data Processing and summary outputs' => 'Data Processing and summary outputs',
@@ -77,10 +84,12 @@ function ocha_assessments_update_8004() {
       'Summarising and interpretation of inter-sectoral analysis' => 'Summarizing and interpretation of inter-sectoral analysis',
       'Prioritising and informing decisions' => 'Prioritizing and informing decisions',
     ],
+    'Lessons learned' => [],
   ];
 
   $terms = ocha_assessments_load_reference_data_from_docstore('ar_life_cycle_steps');
   $parents = [];
+  $weight = 1;
 
   foreach ($steps as $parent_name => $children) {
     // Check if terms exists.
@@ -93,13 +102,40 @@ function ocha_assessments_update_8004() {
     }
 
     if ($existing) {
-      $parents[$name] = $existing;
+      $parents[$parent_name] = $existing;
+
+      // Set weight and display name.
+      $data = [
+        'display_name' => $parent_name,
+        'weight' => $weight++,
+      ];
+
+      // Post to docstore.
+      $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_life_cycle_steps/terms/' . $existing;
+      $api_key = 'abcd';
+
+      $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+      $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
+
+      // phpcs:ignore
+      $response = \Drupal::httpClient()->request(
+        'PATCH',
+        $endpoint,
+        [
+          'body' => json_encode($data),
+          'headers' => [
+            'API-KEY' => $api_key,
+          ],
+        ]
+      );
     }
     else {
       $data = [
         'author' => 'AR',
         'label' => $parent_name,
+        'weight' => $weight++,
       ];
+
       // Post to docstore.
       $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_life_cycle_steps/terms';
       $api_key = 'abcd';
@@ -119,11 +155,11 @@ function ocha_assessments_update_8004() {
         ]
       );
 
-      if ($response->getStatusCode() !== 201) {
+      if ($response->getStatusCode() === 201) {
         $body = $response->getBody() . '';
         $body = json_decode($body);
 
-        $parents[$parent_name] = $uuid;
+        $parents[$parent_name] = $body->uuid;
       }
     }
 
@@ -142,6 +178,8 @@ function ocha_assessments_update_8004() {
         $data = [
           'parent' => $parents[$parent_name],
           'label' => $new_name,
+          'display_name' => $parent_name . ' > ' . $new_name,
+          'weight' => $weight++,
         ];
 
         // Post to docstore.
@@ -167,7 +205,9 @@ function ocha_assessments_update_8004() {
         $data = [
           'author' => 'AR',
           'label' => $new_name,
+          'display_name' => $parent_name . ' > ' . $new_name,
           'parent' => $parents[$parent_name],
+          'weight' => $weight++,
         ];
 
         // Post to docstore.
@@ -188,13 +228,6 @@ function ocha_assessments_update_8004() {
             ],
           ]
         );
-
-        if ($response->getStatusCode() !== 201) {
-          $body = $response->getBody() . '';
-          $body = json_decode($body);
-
-          $parents[$name] = $uuid;
-        }
       }
     }
   }
