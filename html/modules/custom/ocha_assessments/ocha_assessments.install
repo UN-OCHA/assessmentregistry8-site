@@ -36,3 +36,158 @@ function ocha_assessments_update_8002() {
   $node = Node::create($data);
   $node->save();
 }
+
+/**
+ * Fix life cycle steps.
+ */
+function ocha_assessments_update_8003() {
+  $steps = [
+    'Setting-up Coordination' => [
+      'Understanding of context and enabling factors',
+      'Establishing coordination to support coordinated assessments',
+      'Determining current state of needs assessment',
+    ],
+    'Planning' => [
+      'Establishing context specific baseline',
+      'Availability of needs & response data and information gaps',
+      'Localize coordinated assessment strategy',
+    ],
+    'Design of Data Collection' => [
+      'Designing Secondary Data Review (SDR) methods',
+      'Designing Primary Data Collection methods',
+      'Estimation of Humanitarian Population figures',
+    ],
+    'Data Collection' => [
+      'Secondary data collection and analysis',
+      'Primary data collection',
+    ],
+    'Data Processing & Basic Analysis' => [
+      'Data Processing and summary outputs',
+      'Basic data analysis',
+    ],
+    'Joint Analysis' => [
+      'Process and coordination of joint analysis',
+      'Summarizing and interpretation of inter-sectoral analysis',
+      'Prioritizing and informing decisions',
+    ],
+  ];
+
+  $terms = ocha_assessments_load_reference_data_from_docstore('ar_life_cycle_steps');
+  $parents = [];
+
+  foreach ($steps as $parent_name => $children) {
+    // Check if terms exists.
+    $existing = FALSE;
+    foreach ($terms as $uuid => $name) {
+      if ($parent_name == $name) {
+        $existing = $uuid;
+        break;
+      }
+    }
+
+    if ($existing) {
+      $parents[$name] = $existing;
+    }
+    else {
+      $data = [
+        'author' => 'AR',
+        'label' => $parent_name,
+      ];
+      // Post to docstore.
+      $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_life_cycle_steps/terms';
+      $api_key = 'abcd';
+
+      $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+      $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
+
+      // phpcs:ignore
+      $response = \Drupal::httpClient()->request(
+        'POST',
+        $endpoint,
+        [
+          'body' => json_encode($data),
+          'headers' => [
+            'API-KEY' => $api_key,
+          ],
+        ]
+      );
+
+      if ($response->getStatusCode() !== 201) {
+        $body = $response->getBody() . '';
+        $body = json_decode($body);
+
+        $parents[$parent_name] = $uuid;
+      }
+    }
+
+    // Loop children.
+    foreach ($children as $child_name) {
+      // Check if terms exists.
+      $existing = FALSE;
+      foreach ($terms as $uuid => $name) {
+        if ($child_name == $name) {
+          $existing = $uuid;
+          break;
+        }
+      }
+
+      if ($existing) {
+        $data = [
+          'parent' => $parents[$parent_name],
+        ];
+
+        // Post to docstore.
+        $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_life_cycle_steps/terms/' . $existing;
+        $api_key = 'abcd';
+
+        $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+        $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
+
+        // phpcs:ignore
+        $response = \Drupal::httpClient()->request(
+          'PATCH',
+          $endpoint,
+          [
+            'body' => json_encode($data),
+            'headers' => [
+              'API-KEY' => $api_key,
+            ],
+          ]
+        );
+      }
+      else {
+        $data = [
+          'author' => 'AR',
+          'label' => $child_name,
+          'parent' => $parents[$parent_name],
+        ];
+
+        // Post to docstore.
+        $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_life_cycle_steps/terms';
+        $api_key = 'abcd';
+
+        $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+        $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
+
+        // phpcs:ignore
+        $response = \Drupal::httpClient()->request(
+          'POST',
+          $endpoint,
+          [
+            'body' => json_encode($data),
+            'headers' => [
+              'API-KEY' => $api_key,
+            ],
+          ]
+        );
+
+        if ($response->getStatusCode() !== 201) {
+          $body = $response->getBody() . '';
+          $body = json_decode($body);
+
+          $parents[$name] = $uuid;
+        }
+      }
+    }
+  }
+}
