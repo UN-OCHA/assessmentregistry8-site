@@ -72,13 +72,6 @@ function ocha_assessments_update_8003() {
     ],
   ];
 
-  $missing = [
-    'Localise coordinated assessment strategy',
-    'Primary Data Collection',
-    'Prioritising and informing decisions',
-    'Summarising and interpretation of inter-sectoral analysis',
-  ];
-
   $terms = ocha_assessments_load_reference_data_from_docstore('ar_life_cycle_steps');
   $parents = [];
 
