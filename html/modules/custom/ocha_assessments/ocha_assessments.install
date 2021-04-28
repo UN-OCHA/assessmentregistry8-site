@@ -173,5 +173,5 @@ function ocha_assessments_update_8006() {
 
   print_r($existing_terms);
 
-  ocha_assessments_create_or_update_docstore_terms($hpc, $existing_terms, $endpoint, FALSE);
+  ocha_assessments_create_or_update_docstore_terms($hpc, $existing_terms, $endpoint, TRUE);
 }
