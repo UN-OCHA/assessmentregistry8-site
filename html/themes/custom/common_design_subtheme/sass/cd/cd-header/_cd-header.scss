@@ -23,9 +23,8 @@
   }
 }
 
-
 .cd-site-header__inner {
-  @supports(display: grid) {
+  @supports (display: grid) {
     grid-template-columns: 52px 1fr;
 
     @include tablet {

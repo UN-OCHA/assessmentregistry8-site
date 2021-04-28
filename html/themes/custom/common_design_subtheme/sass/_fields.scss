@@ -7,7 +7,6 @@
   margin-top: 1rem;
 }
 
-
 // Classy field.css styles.
 .field__label {
   font-weight: bold;
@@ -24,14 +23,14 @@
   padding-right: 0.5em;
 }
 
-[dir='rtl'] .field--label-inline .field__label,
-[dir='rtl'] .field--label-inline .field__items {
+[dir="rtl"] .field--label-inline .field__label,
+[dir="rtl"] .field--label-inline .field__items {
   padding-right: 0;
   padding-left: 0.5em;
 }
 
 .field--label-inline .field__label::after {
-  content: ':';
+  content: ":";
 }
 
 // Document Store External entity.
@@ -68,8 +67,8 @@
       flex: 1 0 100%;
 
       @include tablet {
-        margin-right: 0.5rem;
         flex: 0 1 15%;
+        margin-right: 0.5rem;
       }
     }
 
@@ -94,9 +93,9 @@
   h4,
   legend {
     text-align: left;
+    color: $cd-default-text-color;
     font-size: 1rem;
     font-weight: 700;
-    color: $cd-default-text-color;
   }
 
   h4 {
@@ -133,7 +132,7 @@
     margin-bottom: 1rem;
   }
 
-  div[class*='form-item-field-related-content'] {
+  div[class*="form-item-field-related-content"] {
     margin-bottom: 1rem;
   }
 

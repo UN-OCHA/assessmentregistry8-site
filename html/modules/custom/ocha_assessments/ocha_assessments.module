@@ -9,6 +9,7 @@ use Drupal\node\Entity\Node;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\ocha_persons\Entity\PersonEntity;
+use Drupal\search_api\Entity\Index;
 
 /**
  * Implements hook_theme().
@@ -559,4 +560,344 @@ function ocha_assessments_toolbar_alter(&$items) {
   if (!in_array('administrator', $account->getRoles())) {
     $items['administration']['tab']['#access'] = FALSE;
   }
+}
+
+/**
+ * Get a list of export filters.
+ */
+function ocha_assessments_get_export_filters() {
+  $data = [];
+
+  $index = Index::load('assessments');
+  $query = $index->query();
+  $query->range(0);
+
+  $facet_to_entity = [
+    'locations' => [
+      'field' => 'field_locations__facet',
+    ],
+    'operations' => [
+      'field' => 'field_operations__facet',
+    ],
+    'countries' => [
+      'field' => '_stored_country',
+    ],
+  ];
+
+  $facet_options = [];
+  foreach ($facet_to_entity as $key => $info) {
+    $facet_options[$key] = [
+      'field' => $info['field'],
+      'limit' => 0,
+      'operator' => 'AND',
+      'min_count' => 1,
+      'missing' => FALSE,
+    ];
+  }
+  $query->setOption('search_api_facets', $facet_options);
+
+  $results = $query->execute();
+  $facets = $results->getExtraData('search_api_facets', []);
+
+  // Handle facets.
+  foreach ($facets as $key => $facet_values) {
+    if (!isset($facet_to_entity[$key])) {
+      continue;
+    }
+
+    $options = [];
+    foreach ($facet_values as $facet_value) {
+      list($uuid, $label) = explode(':', trim($facet_value['filter'], '"'), 2);
+      $options[$uuid] = $label;
+    }
+
+    asort($options);
+    $data[$key] = $options;
+  }
+
+  return $data;
+}
+
+/**
+ * Fetch all reference data.
+ */
+function ocha_assessments_load_all_reference_data() {
+  $options = [];
+  $entity_types = [
+    'local_coordination_groups',
+    'organizations',
+    'population_types',
+  ];
+
+  foreach ($entity_types as $entity_type) {
+    $options[$entity_type] = ocha_assessments_load_reference_data_from_docstore($entity_type);
+  }
+
+  return $options;
+}
+
+/**
+ * Fetch reference data from the docstore.
+ */
+function ocha_assessments_load_reference_data_from_docstore($entity_type) {
+  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/' . $entity_type . '/terms/options';
+  $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+
+  // phpcs:ignore
+  $response = \Drupal::httpClient()->request(
+    'GET',
+    $endpoint
+  );
+
+  $body = $response->getBody() . '';
+  $body = json_decode($body);
+  $options = [];
+
+  foreach ($body->results as $result) {
+    $options[$result->uuid] = trim($result->label);
+    if (isset($result->display_name) && !empty($result->display_name)) {
+      $options[$result->uuid] = trim($result->display_name);
+    }
+  }
+
+  return $options;
+}
+
+/**
+ * Load countries from docstore.
+ *
+ * Countries are locations of admin level 0.
+ */
+function ocha_assessments_load_countries_from_docstore() {
+  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/locations/terms/options';
+  $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+  $endpoint .= '?page[limit]=5000&filter[admin_level]=0';
+
+  // phpcs:ignore
+  $response = \Drupal::httpClient()->request(
+    'GET',
+    $endpoint
+  );
+
+  $body = $response->getBody() . '';
+  $body = json_decode($body);
+
+  foreach ($body->results as $result) {
+    $options[$result->uuid] = trim($result->label);
+    if (isset($result->display_name) && !empty($result->display_name)) {
+      $options[$result->uuid] = trim($result->display_name);
+    }
+  }
+
+  return $options;
+}
+
+/**
+ * Load all childs of a country.
+ */
+function ocha_assessments_load_country_childs_from_docstore($country_uuid) {
+  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/locations/terms';
+  $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+  $endpoint .= '?page[limit]=5000&filter[parents]=' . $country_uuid . '&sort=admin_level';
+
+  // phpcs:ignore
+  $response = \Drupal::httpClient()->request(
+    'GET',
+    $endpoint
+  );
+
+  $body = $response->getBody() . '';
+  $body = json_decode($body);
+
+  $options = [];
+  foreach ($body->results as $result) {
+    if (empty($result->uuid) || empty($result->label)) {
+      continue;
+    }
+
+    $parent = reset($result->parent);
+    if ($result->admin_level == 1) {
+      $options[$result->uuid] = [
+        'uuid' => $result->uuid,
+        'label' => $result->label,
+        'parent' => $parent->uuid,
+        'admin_level' => $result->admin_level,
+        'children' => [],
+      ];
+    }
+    elseif ($result->admin_level == 2) {
+      if (isset($options[$parent->uuid]['children'])) {
+        $options[$parent->uuid]['children'][$result->uuid] = [
+          'uuid' => $result->uuid,
+          'label' => $result->label,
+          'parent' => $parent->uuid,
+          'admin_level' => $result->admin_level,
+          'children' => [],
+        ];
+      }
+    }
+    else {
+      $parent = reset($result->parent);
+      foreach ($options as $uuid => $option) {
+        if (array_key_exists($parent->uuid, $option['children'])) {
+          $grand_parent = $uuid;
+          break;
+        }
+      }
+
+      if (isset($options[$grand_parent]['children'][$parent->uuid]['children'])) {
+        $options[$grand_parent]['children'][$parent->uuid]['children'][$result->uuid] = [
+          'uuid' => $result->uuid,
+          'label' => $result->label,
+          'admin_level' => $result->admin_level,
+          'parent' => $parent->uuid,
+        ];
+      }
+    }
+  }
+
+  return $options;
+}
+
+/**
+ * Create term in docstore.
+ */
+function ocha_assessments_create_docstore_term($endpoint, $data) {
+  \Drupal::logger('ocha_assessments')->notice('Creating ' . $data['label']);
+  $api_key = 'abcd';
+
+  $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+  $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
+
+  // phpcs:ignore
+  $response = \Drupal::httpClient()->request(
+    'POST',
+    $endpoint,
+    [
+      'body' => json_encode($data),
+      'headers' => [
+        'API-KEY' => $api_key,
+      ],
+    ]
+  );
+
+  if ($response->getStatusCode() === 201) {
+    $body = $response->getBody() . '';
+    $body = json_decode($body);
+
+    // Let solr catch up.
+    sleep(1);
+
+    return $body->uuid;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Update term in docstore.
+ */
+function ocha_assessments_update_docstore_term($endpoint, $data) {
+  \Drupal::logger('ocha_assessments')->notice('Updating ' . $data['label']);
+
+  $api_key = 'abcd';
+
+  $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+  $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
+
+  // phpcs:ignore
+  \Drupal::httpClient()->request(
+    'PATCH',
+    $endpoint,
+    [
+      'body' => json_encode($data),
+      'headers' => [
+        'API-KEY' => $api_key,
+      ],
+    ]
+  );
+}
+
+/**
+ * Create or update term in docstore.
+ */
+function ocha_assessments_create_or_update_docstore_terms($steps, $existing_terms, $endpoint, $allow_create, $parent = []) {
+  static $parents = [];
+  static $weight = 1;
+
+  if (empty($existing_terms)) {
+    die('No existing terms specified');
+  }
+
+  foreach ($steps as $parent_name => $children) {
+    \Drupal::logger('ocha_assessments')->notice('Pocessing ' . $parent_name);
+
+    $new_name = $parent_name;
+    if (is_string($children) && !empty($children)) {
+      $new_name = $children;
+    }
+
+    // Check if terms exists.
+    $existing = FALSE;
+    foreach ($existing_terms as $uuid => $name) {
+      if ($parent_name == $name) {
+        $existing = $uuid;
+        \Drupal::logger('ocha_assessments')->notice('Found ' . $uuid);
+        break;
+      }
+    }
+
+    if ($existing) {
+      $parents[$parent_name] = $existing;
+
+      // Set weight and display name.
+      $data = [
+        'label' => $new_name,
+        'display_name' => $new_name,
+        'weight' => $weight++,
+      ];
+
+      if (!empty($parent)) {
+        $data['parent'] = $parent['uuid'];
+        $data['display_name'] = $parent['name'] . ' > ' . $new_name;
+      }
+
+      // Post to docstore.
+      ocha_assessments_update_docstore_term($endpoint . '/' . $existing, $data);
+    }
+    else {
+      if (!$allow_create) {
+        \Drupal::logger('ocha_assessments')->warning('Term creation is not allowed: ' . $new_name);
+        continue;
+      }
+
+      $data = [
+        'author' => 'AR',
+        'label' => $new_name,
+        'display_name' => $new_name,
+        'weight' => $weight++,
+      ];
+
+      if (!empty($parent)) {
+        $data['parent'] = $parent['uuid'];
+        $data['display_name'] = $parent['name'] . ' > ' . $new_name;
+      }
+
+      // Post to docstore.
+      $parents[$parent_name] = ocha_assessments_create_docstore_term($endpoint, $data);
+      if (!$parents[$parent_name]) {
+        \Drupal::logger('ocha_assessments')->warning('Term not created:' . $new_name);
+        die();
+      }
+    }
+
+    // Loop children.
+    if (is_array($children)) {
+      ocha_assessments_create_or_update_docstore_terms($children, $existing_terms, $endpoint, $allow_create, [
+        'uuid' => $parents[$parent_name],
+        'name' => $data['display_name'],
+      ]);
+    }
+  }
+
 }

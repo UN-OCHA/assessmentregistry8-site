@@ -1,15 +1,16 @@
-uuid: 34df6b9f-b957-409c-895a-6c1d35a79235
+uuid: 28d99e72-87d4-40ce-9c5e-d584278607d6
 langcode: en
 status: true
 dependencies:
   module:
     - external_entities
-id: life_cycle_step.field_parent
-field_name: field_parent
-entity_type: life_cycle_step
-type: entity_reference
+id: location.field_admin_level
+field_name: field_admin_level
+entity_type: location
+type: integer
 settings:
-  target_type: life_cycle_step
+  unsigned: false
+  size: normal
 module: core
 locked: false
 cardinality: 1

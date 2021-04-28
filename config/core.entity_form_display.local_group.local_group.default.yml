@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.local_group.local_group.field_hrinfo_id
+    - field.field.local_group.local_group.field_operations
   module:
     - external_entities
 id: local_group.local_group.default
@@ -17,6 +18,16 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: number
+    region: content
+  field_operations:
+    weight: -3
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   title:
     type: string_textfield

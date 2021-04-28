@@ -1,4 +1,4 @@
-dist: trusty
+dist: bionic
 language: php
 cache:
   directories:
@@ -66,6 +66,9 @@ script:
   - test ! -d ./html/modules/custom || ./vendor/bin/phpcs -p --report=full ./html/modules/custom
   - test ! -d ./html/themes/custom || ./vendor/bin/phpcs -p --report=full ./html/themes/custom
   - set +e
+
+  # Theme build.
+  - composer run sass
 
 after_success:
   - cd $TRAVIS_BUILD_DIR

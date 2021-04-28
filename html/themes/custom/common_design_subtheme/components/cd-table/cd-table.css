@@ -31,20 +31,20 @@
   }
 
   .cd-table--responsive tr {
-    border-bottom: 1px solid var(--cd-grey--light);
     padding: 0 !important;
+    border-bottom: 1px solid var(--cd-grey--light);
   }
 
   .cd-table--responsive td {
+    position: relative;
+    min-height: 2rem; /* label should wrap */
+    padding: 0.5rem;
+    padding-left: 40% !important;
+    text-align: left;
+    white-space: normal !important;
     /* Behave  like a "row" */
     border: none;
     border-bottom: 1px solid var(--cd-blue-grey);
-    position: relative;
-    padding: 0.5rem;
-    padding-left: 40% !important;
-    min-height: 2rem; /* label should wrap */
-    white-space: normal !important;
-    text-align: left;
   }
 
   .cd-table--responsive td:before {
@@ -52,12 +52,12 @@
     top: 0.5rem;
     left: 0.5rem;
     padding-right: 1rem;
-    text-align: left;
-    font-weight: bold;
-    font-size: 0.85rem;
-    color: var(--cd-ocha-blue);
     /* Label the data */
     content: attr(data-content);
+    text-align: left;
+    color: var(--cd-ocha-blue);
+    font-size: 0.85rem;
+    font-weight: bold;
   }
 
   .cd-table--responsive tfoot td {
@@ -69,7 +69,7 @@
   }
 
   .cd-table--row-numbers tbody tr td.cd-table--row-num::before {
-    font-weight: bold;
     font-size: 1.5rem;
+    font-weight: bold;
   }
 }

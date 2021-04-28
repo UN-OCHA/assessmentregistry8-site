@@ -36,3 +36,140 @@ function ocha_assessments_update_8002() {
   $node = Node::create($data);
   $node->save();
 }
+
+/**
+ * Fix life cycle steps.
+ */
+function ocha_assessments_update_8003() {
+  // Re-trigger update.
+}
+
+/**
+ * Fix life cycle steps.
+ */
+function ocha_assessments_update_8004() {
+  // Re-trigger update.
+}
+
+/**
+ * Fix life cycle steps.
+ */
+function ocha_assessments_update_8005() {
+  $steps = [
+    'Setting-up Coordination' => [
+      'Understanding of context and enabling factors' => 'Understanding of context and enabling factors',
+      'Establishing coordination to support coordinated assessments' => 'Establishing coordination to support coordinated assessments',
+      'Determining current state of needs assessment' => 'Determining current state of needs assessment',
+    ],
+    'Planning' => [
+      'Establishing context specific baseline' => 'Establishing context specific baseline',
+      'Availability of needs & response data and information gaps' => 'Availability of needs & response data and information gaps',
+      'Localise coordinated assessment strategy' => 'Localize coordinated assessment strategy',
+    ],
+    'Design of Data Collection' => [
+      'Designing Secondary Data Review (SDR) methods' => 'Designing Secondary Data Review (SDR) methods',
+      'Designing Primary Data Collection methods' => 'Designing Primary Data Collection methods',
+      'Estimation of Humanitarian Population figures' => 'Estimation of Humanitarian Population figures',
+    ],
+    'Data Collection' => [
+      'Secondary data collection and analysis' => 'Secondary data collection and analysis',
+      'Primary Data Collection' => 'Primary data collection',
+    ],
+    'Data Processing & Basic Analysis' => [
+      'Data Processing and summary outputs' => 'Data Processing and summary outputs',
+      'Basic data analysis' => 'Basic data analysis',
+    ],
+    'Joint Analysis' => [
+      'Process and coordination of joint analysis' => 'Process and coordination of joint analysis',
+      'Summarising and interpretation of inter-sectoral analysis' => 'Summarizing and interpretation of inter-sectoral analysis',
+      'Prioritising and informing decisions' => 'Prioritizing and informing decisions',
+    ],
+    'Lessons learned' => [],
+  ];
+
+  $existing_terms = ocha_assessments_load_reference_data_from_docstore('ar_life_cycle_steps');
+  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_life_cycle_steps/terms';
+
+  ocha_assessments_create_or_update_docstore_terms($steps, $existing_terms, $endpoint, TRUE);
+}
+
+/**
+ * Fix HPC repository.
+ */
+function ocha_assessments_update_8006() {
+  $hpc = [
+    'Joint Inter-Sectoral Analysis Framework (JIAF)' => [
+      'Context' => [
+        'Political' => '',
+      ],
+      'Event/Shock' => '',
+      'Impact of Crisis' => '',
+      'Humanitarian Conditions' => [
+        'Living Standards' => '',
+        'Coping Mechanisms' => '',
+        'Well being & Human Rights Violations' => '',
+      ],
+      'Current and Forecasted Priority Needs / Concerns' => '',
+    ],
+    'Preparedness' => [
+      'ERP community of practice' => '',
+      'Early Action' => '',
+    ],
+    'Needs Assessment and Analysis' => [
+      'Humanitarian Needs Overview (HNO)' => '',
+      'Situational Analysis' => '',
+      'Predictive and Risk Analysis' => '',
+      'Multisectoral Needs Assessments' => '',
+      'Glossary HNO-HRP' => '',
+      'People Affected / People in Need' => '',
+    ],
+    'Response Analysis and Planning' => [
+      'Humanitarian Response Plan (HRP)' => '',
+      'Flash Appeal' => '',
+      'Defining response scope and targets' => '',
+      'Multi-year planning and nexus (joint-up planning and collective outcomes)' => '',
+      'Multi-sector response planning' => '',
+      'Costing methodology' => '',
+      'People Targeted' => '',
+    ],
+    'Monitoring' => [
+      'Situation Monitoring' => '',
+      'Needs Monitoring' => '',
+      'Response Monitoring' => '',
+      'People Reached' => '',
+    ],
+    'Financial Tracking' => [
+      'Donors' => '',
+      'Affected countries' => '',
+      'Response plans' => '',
+    ],
+    'HPC Tools' => [
+      'FTS website' => '',
+      'Response Planning and Monitoring Module (RPM)' => '',
+      'HPC Projects Module' => '',
+      'Humanitarian Insight' => '',
+    ],
+    'Operational Peer Review and Evaluation' => '',
+    'Coordination' => '',
+    'Information Management' => '',
+    'Humanitarian Development Nexus' => [
+      'How to identify and mobilize key actors, and make a road map' => '',
+      'Joint assessment and/or analysis' => '',
+      'Formulating collective outcomes' => '',
+      'Aligning humanitarian - development programming (macro & micro)' => '',
+      'Optimal resource allocation' => '',
+      'Comprehensive monitoring' => '',
+    ],
+    'Cross Cutting Issues' => [
+      'Disabilities' => '',
+      'Gender' => '',
+      'Market Analysis' => '',
+    ],
+    'Global Developments' => '',
+  ];
+
+  $existing_terms = ocha_assessments_load_reference_data_from_docstore('ar_hpc_document_repository');
+  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_hpc_document_repository/terms';
+
+  ocha_assessments_create_or_update_docstore_terms($hpc, $existing_terms, $endpoint, TRUE);
+}
