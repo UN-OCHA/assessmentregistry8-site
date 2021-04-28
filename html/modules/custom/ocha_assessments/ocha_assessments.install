@@ -87,148 +87,91 @@ function ocha_assessments_update_8005() {
     'Lessons learned' => [],
   ];
 
-  $terms = ocha_assessments_load_reference_data_from_docstore('ar_life_cycle_steps');
-  $parents = [];
-  $weight = 1;
+  $existing_terms = ocha_assessments_load_reference_data_from_docstore('ar_life_cycle_steps');
+  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_life_cycle_steps/terms';
 
-  foreach ($steps as $parent_name => $children) {
-    // Check if terms exists.
-    $existing = FALSE;
-    foreach ($terms as $uuid => $name) {
-      if ($parent_name == $name) {
-        $existing = $uuid;
-        break;
-      }
-    }
+  ocha_assessments_create_or_update_docstore_terms($steps, $existing_terms, $endpoint, TRUE);
+}
 
-    if ($existing) {
-      $parents[$parent_name] = $existing;
+/**
+ * Fix HPC repository.
+ */
+function ocha_assessments_update_8006() {
+  $hpc = [
+    'Joint Inter-Sectoral Analysis Framework (JIAF)' => [
+      'Context' => [
+        'Political' => '',
+      ],
+      'Event/Shock' => '',
+      'Impact of Crisis' => '',
+      'Humanitarian Conditions' => [
+        'Living Standards' => '',
+        'Coping Mechanisms' => '',
+        'Well being & Human Rights Violations' => '',
+      ],
+      'Current and Forecasted Priority Needs / Concerns' => '',
+    ],
+    'Preparedness' => [
+      'ERP community of practice' => '',
+      'Early Action' => '',
+    ],
+    'Needs Assessment and Analysis' => [
+      'Humanitarian Needs Overview (HNO)' => '',
+      'Situational Analysis' => '',
+      'Predictive and Risk Analysis' => '',
+      'Multisectoral Needs Assessments' => '',
+      'Glossary HNO-HRP' => '',
+      'People Affected / People in Need' => '',
+    ],
+    'Response Analysis and Planning' => [
+      'Humanitarian Response Plan (HRP)' => '',
+      'Flash Appeal' => '',
+      'Defining response scope and targets' => '',
+      'Multi-year planning and nexus (joint-up planning and collective outcomes)' => '',
+      'Multi-sector response planning' => '',
+      'Costing methodology' => '',
+      'People Targeted' => '',
+    ],
+    'Monitoring' => [
+      'Situation Monitoring' => '',
+      'Needs Monitoring' => '',
+      'Response Monitoring' => '',
+      'People Reached' => '',
+    ],
+    'Financial Tracking' => [
+      'Donors' => '',
+      'Affected countries' => '',
+      'Response plans' => '',
+    ],
+    'HPC Tools' => [
+      'FTS website' => '',
+      'Response Planning and Monitoring Module (RPM)' => '',
+      'HPC Projects Module' => '',
+      'Humanitarian Insight' => '',
+    ],
+    'Operational Peer Review and Evaluation' => '',
+    'Coordination' => '',
+    'Information Management' => '',
+    'Humanitarian Development Nexus' => [
+      'How to identify and mobilize key actors, and make a road map' => '',
+      'Joint assessment and/or analysis' => '',
+      'Formulating collective outcomes' => '',
+      'Aligning humanitarian - development programming (macro & micro)' => '',
+      'Optimal resource allocation' => '',
+      'Comprehensive monitoring' => '',
+    ],
+    'Cross Cutting Issues' => [
+      'Disabilities' => '',
+      'Gender' => '',
+      'Market Analysis' => '',
+    ],
+    'Global Developments' => '',
+  ];
 
-      // Set weight and display name.
-      $data = [
-        'display_name' => $parent_name,
-        'weight' => $weight++,
-      ];
+  $existing_terms = ocha_assessments_load_reference_data_from_docstore('ar_hpc_document_repository');
+  $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_hpc_document_repository/terms';
 
-      // Post to docstore.
-      $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_life_cycle_steps/terms/' . $existing;
-      $api_key = 'abcd';
+  print_r($existing_terms);
 
-      $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
-      $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
-
-      // phpcs:ignore
-      $response = \Drupal::httpClient()->request(
-        'PATCH',
-        $endpoint,
-        [
-          'body' => json_encode($data),
-          'headers' => [
-            'API-KEY' => $api_key,
-          ],
-        ]
-      );
-    }
-    else {
-      $data = [
-        'author' => 'AR',
-        'label' => $parent_name,
-        'weight' => $weight++,
-      ];
-
-      // Post to docstore.
-      $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_life_cycle_steps/terms';
-      $api_key = 'abcd';
-
-      $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
-      $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
-
-      // phpcs:ignore
-      $response = \Drupal::httpClient()->request(
-        'POST',
-        $endpoint,
-        [
-          'body' => json_encode($data),
-          'headers' => [
-            'API-KEY' => $api_key,
-          ],
-        ]
-      );
-
-      if ($response->getStatusCode() === 201) {
-        $body = $response->getBody() . '';
-        $body = json_decode($body);
-
-        $parents[$parent_name] = $body->uuid;
-      }
-    }
-
-    // Loop children.
-    foreach ($children as $old_name => $new_name) {
-      // Check if terms exists.
-      $existing = FALSE;
-      foreach ($terms as $uuid => $name) {
-        if ($old_name == $name) {
-          $existing = $uuid;
-          break;
-        }
-      }
-
-      if ($existing) {
-        $data = [
-          'parent' => $parents[$parent_name],
-          'label' => $new_name,
-          'display_name' => $parent_name . ' > ' . $new_name,
-          'weight' => $weight++,
-        ];
-
-        // Post to docstore.
-        $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_life_cycle_steps/terms/' . $existing;
-        $api_key = 'abcd';
-
-        $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
-        $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
-
-        // phpcs:ignore
-        $response = \Drupal::httpClient()->request(
-          'PATCH',
-          $endpoint,
-          [
-            'body' => json_encode($data),
-            'headers' => [
-              'API-KEY' => $api_key,
-            ],
-          ]
-        );
-      }
-      else {
-        $data = [
-          'author' => 'AR',
-          'label' => $new_name,
-          'display_name' => $parent_name . ' > ' . $new_name,
-          'parent' => $parents[$parent_name],
-          'weight' => $weight++,
-        ];
-
-        // Post to docstore.
-        $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_life_cycle_steps/terms';
-        $api_key = 'abcd';
-
-        $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
-        $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
-
-        // phpcs:ignore
-        $response = \Drupal::httpClient()->request(
-          'POST',
-          $endpoint,
-          [
-            'body' => json_encode($data),
-            'headers' => [
-              'API-KEY' => $api_key,
-            ],
-          ]
-        );
-      }
-    }
-  }
+  ocha_assessments_create_or_update_docstore_terms($hpc, $existing_terms, $endpoint, FALSE);
 }

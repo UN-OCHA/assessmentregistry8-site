@@ -13,7 +13,7 @@ field_mappings:
   uuid:
     value: uuid
   title:
-    value: label
+    value: display_name
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/ar_hpc_document_repository/terms'
