@@ -171,7 +171,5 @@ function ocha_assessments_update_8006() {
   $existing_terms = ocha_assessments_load_reference_data_from_docstore('ar_hpc_document_repository');
   $endpoint = 'http://docstore.local.docksal/api/v1/vocabularies/ar_hpc_document_repository/terms';
 
-  print_r($existing_terms);
-
   ocha_assessments_create_or_update_docstore_terms($hpc, $existing_terms, $endpoint, TRUE);
 }
