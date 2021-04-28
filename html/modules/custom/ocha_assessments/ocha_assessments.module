@@ -651,6 +651,7 @@ function ocha_assessments_load_reference_data_from_docstore($entity_type) {
 
   $body = $response->getBody() . '';
   $body = json_decode($body);
+  $options = [];
 
   foreach ($body->results as $result) {
     $options[$result->uuid] = trim($result->label);
@@ -756,4 +757,147 @@ function ocha_assessments_load_country_childs_from_docstore($country_uuid) {
   }
 
   return $options;
+}
+
+/**
+ * Create term in docstore.
+ */
+function ocha_assessments_create_docstore_term($endpoint, $data) {
+  \Drupal::logger('ocha_assessments')->notice('Creating ' . $data['label']);
+  $api_key = 'abcd';
+
+  $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+  $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
+
+  // phpcs:ignore
+  $response = \Drupal::httpClient()->request(
+    'POST',
+    $endpoint,
+    [
+      'body' => json_encode($data),
+      'headers' => [
+        'API-KEY' => $api_key,
+      ],
+    ]
+  );
+
+  if ($response->getStatusCode() === 201) {
+    $body = $response->getBody() . '';
+    $body = json_decode($body);
+
+    // Let solr catch up.
+    sleep(1);
+
+    return $body->uuid;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Update term in docstore.
+ */
+function ocha_assessments_update_docstore_term($endpoint, $data) {
+  \Drupal::logger('ocha_assessments')->notice('Updating ' . $data['label']);
+
+  $api_key = 'abcd';
+
+  $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+  $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
+
+  // phpcs:ignore
+  \Drupal::httpClient()->request(
+    'PATCH',
+    $endpoint,
+    [
+      'body' => json_encode($data),
+      'headers' => [
+        'API-KEY' => $api_key,
+      ],
+    ]
+  );
+}
+
+/**
+ * Create or update term in docstore.
+ */
+function ocha_assessments_create_or_update_docstore_terms($steps, $existing_terms, $endpoint, $allow_create, $parent = []) {
+  static $parents = [];
+  static $weight = 1;
+
+  if (empty($existing_terms)) {
+    die('No existing terms specified');
+  }
+
+  foreach ($steps as $parent_name => $children) {
+    \Drupal::logger('ocha_assessments')->notice('Pocessing ' . $parent_name);
+
+    $new_name = $parent_name;
+    if (is_string($children) && !empty($children)) {
+      $new_name = $children;
+    }
+
+    // Check if terms exists.
+    $existing = FALSE;
+    foreach ($existing_terms as $uuid => $name) {
+      if ($parent_name == $name) {
+        $existing = $uuid;
+        \Drupal::logger('ocha_assessments')->notice('Found ' . $uuid);
+        break;
+      }
+    }
+
+    if ($existing) {
+      $parents[$parent_name] = $existing;
+
+      // Set weight and display name.
+      $data = [
+        'label' => $new_name,
+        'display_name' => $new_name,
+        'weight' => $weight++,
+      ];
+
+      if (!empty($parent)) {
+        $data['parent'] = $parent['uuid'];
+        $data['display_name'] = $parent['name'] . ' > ' . $new_name;
+      }
+
+      // Post to docstore.
+      ocha_assessments_update_docstore_term($endpoint . '/' . $existing, $data);
+    }
+    else {
+      if (!$allow_create) {
+        \Drupal::logger('ocha_assessments')->warning('Term creation is not allowed: ' . $new_name);
+        continue;
+      }
+
+      $data = [
+        'author' => 'AR',
+        'label' => $new_name,
+        'display_name' => $new_name,
+        'weight' => $weight++,
+      ];
+
+      if (!empty($parent)) {
+        $data['parent'] = $parent['uuid'];
+        $data['display_name'] = $parent['name'] . ' > ' . $new_name;
+      }
+
+      // Post to docstore.
+      $parents[$parent_name] = ocha_assessments_create_docstore_term($endpoint, $data);
+      if (!$parents[$parent_name]) {
+        \Drupal::logger('ocha_assessments')->warning('Term not created:' . $new_name);
+        die();
+      }
+    }
+
+    // Loop children.
+    if (is_array($children)) {
+      ocha_assessments_create_or_update_docstore_terms($children, $existing_terms, $endpoint, $allow_create, [
+        'uuid' => $parents[$parent_name],
+        'name' => $data['display_name'],
+      ]);
+    }
+  }
+
 }
