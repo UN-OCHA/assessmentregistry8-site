@@ -13,7 +13,7 @@ field_mappings:
   uuid:
     value: uuid
   title:
-    value: label
+    value: display_name
   field_hrinfo_id:
     value: id
   field_operations:
