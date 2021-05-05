@@ -165,14 +165,10 @@ content:
     type: select2
     region: content
   field_local_coordination_groups:
-    weight: 23
-    settings:
-      width: 100%
-      autocomplete: true
-      match_operator: CONTAINS
-      match_limit: 50
+    weight: 29
+    settings: {  }
     third_party_settings: {  }
-    type: select2_entity_reference
+    type: options_select
     region: content
   field_locations:
     weight: 18

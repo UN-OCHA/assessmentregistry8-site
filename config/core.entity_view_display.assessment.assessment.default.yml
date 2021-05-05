@@ -129,12 +129,11 @@ content:
     type: list_default
     region: content
   field_local_coordination_groups:
-    weight: 20
+    weight: 26
     label: above
-    settings:
-      link: false
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_label
+    type: list_default
     region: content
   field_locations:
     weight: 17
