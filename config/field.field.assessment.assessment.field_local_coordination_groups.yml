@@ -1,4 +1,4 @@
-uuid: 34318cfd-a9bc-4114-bd1d-7f83e46d5156
+uuid: 036fdac1-85a6-4a42-a6f1-789ad0fee794
 langcode: en
 status: true
 dependencies:
@@ -6,6 +6,7 @@ dependencies:
     - field.storage.assessment.field_local_coordination_groups
   module:
     - external_entities
+    - options
 id: assessment.assessment.field_local_coordination_groups
 field_name: field_local_coordination_groups
 entity_type: assessment
@@ -16,11 +17,5 @@ required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
-settings:
-  handler: 'default:local_group'
-  handler_settings:
-    target_bundles: null
-    sort:
-      field: _none
-    auto_create: false
-field_type: entity_reference
+settings: {  }
+field_type: list_string

@@ -1,16 +1,18 @@
-uuid: ed030c6c-a033-4dba-a59b-611ef35e9bdb
+uuid: 403952d7-75f6-40d5-9dd6-a457516396be
 langcode: en
 status: true
 dependencies:
   module:
     - external_entities
+    - options
 id: assessment.field_local_coordination_groups
 field_name: field_local_coordination_groups
 entity_type: assessment
-type: entity_reference
+type: list_string
 settings:
-  target_type: local_group
-module: core
+  allowed_values: {  }
+  allowed_values_function: ocha_assessments_local_groups_allowed_values_function
+module: options
 locked: false
 cardinality: -1
 translatable: true
