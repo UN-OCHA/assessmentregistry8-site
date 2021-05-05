@@ -906,7 +906,7 @@ function ocha_assessments_create_or_update_docstore_terms($steps, $existing_term
  *
  * @see options_allowed_values()
  */
-function ocha_assessments_local_groups_allowed_values_function($definition, $entity = NULL, $cacheable) {
+function ocha_assessments_local_groups_allowed_values_function($definition, $entity = NULL, $cacheable = FALSE) {
   static $options;
 
   if (isset($options)) {
