@@ -899,5 +899,21 @@ function ocha_assessments_create_or_update_docstore_terms($steps, $existing_term
       ]);
     }
   }
+}
 
+/**
+ * Allowed values callback for local groups.
+ *
+ * @see options_allowed_values()
+ */
+function ocha_assessments_local_groups_allowed_values_function($definition, $entity = NULL, $cacheable) {
+  static $options;
+
+  if (isset($options)) {
+    return $options;
+  }
+
+  $options = ocha_assessments_load_reference_data_from_docstore('local_coordination_groups');
+  asort($options);
+  return $options;
 }
