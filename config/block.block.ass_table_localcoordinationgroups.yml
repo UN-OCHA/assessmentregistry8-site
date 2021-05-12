@@ -1,0 +1,29 @@
+uuid: f7786219-8ae0-40c7-b5cd-d67d6d063571
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.ass_table_local_coordination_groups
+  module:
+    - facets
+    - system
+  theme:
+    - common_design_subtheme
+id: ass_table_localcoordinationgroups
+theme: common_design_subtheme
+region: facets
+weight: 0
+provider: null
+plugin: 'facet_block:ass_table_local_coordination_groups'
+settings:
+  id: 'facet_block:ass_table_local_coordination_groups'
+  label: 'Local Coordination Group(s)'
+  provider: facets
+  label_display: visible
+  block_id: ass_table_localcoordinationgroups
+visibility:
+  request_path:
+    id: request_path
+    pages: "/assessments/table\r\n/assessments/table/*"
+    negate: false
+    context_mapping: {  }
