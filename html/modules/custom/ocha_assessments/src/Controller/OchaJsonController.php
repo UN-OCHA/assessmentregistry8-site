@@ -126,6 +126,11 @@ class OchaJsonController extends ControllerBase {
         'field' => 'field_disaster__facet',
         'title' => 'Disaster',
       ],
+      'local_group' => [
+        'entity' => 'local_group',
+        'field' => 'field_local_coordination_groups__facet',
+        'title' => 'Local coordination group(s)',
+      ],
     ];
 
     $index = Index::load('assessments');
