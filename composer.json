@@ -89,12 +89,21 @@
         ]
     },
     "scripts": {
+        "pre-install-cmd": [
+            "@required-files"
+        ],
+        "pre-update-cmd": [
+            "@required-files"
+        ],
         "post-install-cmd": [
+            "@required-files",
             "@git-hooks"
         ],
         "post-update-cmd": [
+            "@required-files",
             "@git-hooks"
         ],
+        "required-files": "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
         "git-hooks": "test -d .git && git config core.hooksPath git-hooks || exit 0",
         "sass-prepare": "cd html/themes/custom/common_design_subtheme && npm install",
         "sass-build": "cd html/themes/custom/common_design_subtheme && ./node_modules/.bin/sass sass:build",
