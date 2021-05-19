@@ -31,12 +31,13 @@
         "drupal/admin_denied": "^1.0",
         "drupal/components": "^2.4",
         "drupal/config_split": "^1.4",
-        "drupal/core": "^8.8.8",
+        "drupal/core": "8.9.15",
+        "drupal/ctools": "^3.6",
         "drupal/custom_widgets": "^2.0",
         "drupal/dream_block_manager": "^1.0",
         "drupal/external_entities": "^2.0@alpha",
         "drupal/external_media": "^1.0",
-        "drupal/facets": "^1.4",
+        "drupal/facets": "^1.8.0",
         "drupal/facets_pretty_paths": "^1.0",
         "drupal/field_group": "^3.0",
         "drupal/flysystem": "^2.0@alpha",
@@ -52,9 +53,11 @@
         "drupal/select2": "^1.7",
         "drupal/social_auth_hid": "^2.2",
         "drupal/views_data_export": "^1.0",
+        "drush/drush": "^9.0.0",
         "npm-asset/select2": "^4.0",
         "oomphinc/composer-installers-extender": "^1.1",
         "phpoffice/phpspreadsheet": "^1.11",
+        "symfony/flex": "^1.12",
         "unocha/common_design": "^4.0.0",
         "unocha/ocha_integrations": "^1.0",
         "webflo/drupal-finder": "^1.0.0",
@@ -67,7 +70,6 @@
         "drupal/devel_php": "^1.1",
         "drupal/upgrade_rector": "^1.0",
         "drupal/upgrade_status": "^2.0",
-        "drush/drush": "^9.0.0",
         "phpmd/phpmd": "^2.6",
         "weitzman/drupal-test-traits": "^1.2",
         "weitzman/logintrait": "^1.1"
@@ -78,7 +80,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-		"bin-dir": "vendor/bin/",
+    "bin-dir": "vendor/bin/",
         "sort-packages": true
     },
     "autoload": {
@@ -87,18 +89,16 @@
         ]
     },
     "scripts": {
-        "pre-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "pre-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
         "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+            "@required-files",
+            "@git-hooks"
         ],
         "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+            "@required-files",
+            "@git-hooks"
         ],
+        "required-files": "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
+        "git-hooks": "test -d .git && git config core.hooksPath git-hooks || exit 0",
         "sass-prepare": "cd html/themes/custom/common_design_subtheme && npm install",
         "sass-build": "cd html/themes/custom/common_design_subtheme && ./node_modules/.bin/sass sass:build",
         "sass-cleanup": "cd html/themes/custom/common_design_subtheme && rm -rf ./node_modules",
@@ -107,10 +107,9 @@
             "@sass-build",
             "@sass-cleanup"
         ]
-
     },
     "extra": {
-		"enable-patching": true,
+        "enable-patching": true,
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
             "drupal/core": "-p2"
@@ -131,9 +130,16 @@
         },
         "drupal-scaffold": {
             "initial": {
+                "sites/default/default.services.yml": "sites/default/services.yml",
+                "sites/default/default.settings.php": "sites/default/settings.php",
                 ".editorconfig": "../.editorconfig",
                 ".gitattributes": "../.gitattributes"
-            }
+            },
+            "locations": {
+                "web-root": "html/"
+            },
+            "omit-defaults": false
         }
+
     }
 }
