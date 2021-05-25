@@ -127,7 +127,7 @@ field_settings:
       config:
         - field.storage.assessment.field_level_of_representation
   field_local_coordination_groups:
-    label: 'Local Coordination Group(s)'
+    label: 'Clusters'
     datasource_id: 'entity:assessment'
     property_path: field_local_coordination_groups
     type: string
@@ -135,7 +135,7 @@ field_settings:
       config:
         - field.storage.assessment.field_local_coordination_groups
   field_local_coordination_groups__facet:
-    label: 'Local Coordination Group(s) - Facet'
+    label: 'Clusters - Facet'
     datasource_id: 'entity:assessment'
     property_path: field_local_coordination_groups
     type: string
@@ -258,7 +258,7 @@ field_settings:
       module:
         - external_entities
   local_group_id:
-    label: 'Local coordination groups » Local group » HRInfo Id'
+    label: 'Clusters » Cluster » HRInfo Id'
     datasource_id: 'entity:assessment'
     property_path: 'field_local_coordination_groups:entity:field_hrinfo_id'
     type: integer

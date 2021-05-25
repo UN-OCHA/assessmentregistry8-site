@@ -10,7 +10,7 @@ id: assessment.assessment.field_local_coordination_groups
 field_name: field_local_coordination_groups
 entity_type: assessment
 bundle: assessment
-label: 'Local coordination groups'
+label: 'Clusters'
 description: ''
 required: false
 translatable: false

@@ -129,7 +129,7 @@ class OchaJsonController extends ControllerBase {
       'local_group' => [
         'entity' => 'local_group',
         'field' => 'field_local_coordination_groups__facet',
-        'title' => 'Local coordination group(s)',
+        'title' => 'Cluster(s)',
       ],
     ];
 
