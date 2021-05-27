@@ -17,7 +17,7 @@ provider: null
 plugin: 'facet_block:ass_table_local_coordination_groups'
 settings:
   id: 'facet_block:ass_table_local_coordination_groups'
-  label: 'Local Coordination Group(s)'
+  label: 'Clusters'
   provider: facets
   label_display: visible
   block_id: ass_table_localcoordinationgroups
