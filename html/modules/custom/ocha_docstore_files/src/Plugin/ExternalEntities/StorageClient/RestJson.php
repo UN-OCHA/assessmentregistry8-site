@@ -185,6 +185,19 @@ class RestJson extends Rest implements PluginFormInterface {
   /**
    * {@inheritdoc}
    */
+  public function delete(ExternalEntityInterface $entity) {
+    $this->httpClient->request(
+      'DELETE',
+      $this->getDocstoreEndpoint() . '/' . $entity->id(),
+      [
+        'headers' => $this->getHttpHeaders(),
+      ]
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function query(array $parameters = [], array $sorts = [], $start = NULL, $length = NULL) {
     $parameters = $this->getListQueryParameters($parameters, $start, $length);
     $results = $this->getFromDocstore($this->getDocstoreEndpoint(), $parameters);
