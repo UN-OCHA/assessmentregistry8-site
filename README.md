@@ -38,7 +38,7 @@ Add new endpoint, change existing for the map and return all data.
 4. ~~Create base class~~
 5. ~~Move helpers to ocha_integrations~~
 6. Update existing assessments
-7. Use JSON callback for map
+7. ~~Use JSON callback for map~~
 8. Sidebar has max width for map filters
 9. Add content pages
 

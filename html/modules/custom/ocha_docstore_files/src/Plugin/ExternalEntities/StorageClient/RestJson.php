@@ -173,13 +173,24 @@ class RestJson extends Rest implements PluginFormInterface {
       $body = json_decode($body);
 
       if ($body->uuid) {
-        // Give time to the docstore to index the entity.
-        sleep(1);
         $result = $body->uuid;
       }
     }
 
     return $result;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function delete(ExternalEntityInterface $entity) {
+    $this->httpClient->request(
+      'DELETE',
+      $this->getDocstoreEndpoint() . '/' . $entity->id(),
+      [
+        'headers' => $this->getHttpHeaders(),
+      ]
+    );
   }
 
   /**
