@@ -11,7 +11,9 @@
       "https://www.drupal.org/project/external_entities/issues/3202814": "https://www.drupal.org/files/issues/2021-03-10/i3202814-allow-array-of.patch",
       "Dateranges": "./PATCHES/external_entities-daterange.patch",
       "Create new entity": "./PATCHES/external_entity_edit.patch",
-      "Always pass boolean fields": "./PATCHES/external_entity_boolean.patch"
+      "Always pass boolean fields": "./PATCHES/external_entity_boolean.patch",
+      "Cache max age": "https://www.drupal.org/files/issues/2020-05-20/external_entities-render-cache-max-age-3138256-2.patch",
+      "Cache tags": "https://www.drupal.org/files/issues/2020-10-20/external_entities_cache_tags_3176491_2.patch"
     },
     "drupal/select2": {
       "https://www.drupal.org/project/select2/issues/3078085": "https://www.drupal.org/files/issues/2020-02-27/hierarchical-facet-widget-3078085-2.patch"
