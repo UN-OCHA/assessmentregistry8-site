@@ -16,7 +16,16 @@
           var message = 'Please save the following first: ';
           for (var i = 0; i < buttons.length; i++) {
             buttons[i].style.backgroundColor = 'green';
-            var legend = buttons[i].parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.querySelector('.fieldset-legend').innerText
+
+            // Find parent.
+            var parent = buttons[i];
+            while ((parent = parent.parentElement) && !parent.classList.contains('field--widget-inline-entity-form-complex'));
+
+            if (!parent) {
+              continue;
+            }
+
+            var legend = parent.querySelector('.fieldset-legend').innerText;
             if (i > 0) {
               message = message + ', ';
             }
