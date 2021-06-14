@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies: {  }
 id: local_group
-label: 'Cluster'
-label_plural: 'Clusters'
+label: Cluster
+label_plural: Clusters
 description: ''
 read_only: false
 field_mappings:

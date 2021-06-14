@@ -87,6 +87,7 @@ class SearchApiString extends QueryTypePluginBase {
             $result = new Result($this->facet, $matches[1], $matches[2], $count);
           }
           else {
+            // This will generate facet with label uuid.
             $result = new Result($this->facet, $result_filter, $result_filter, $count);
           }
           $facet_results[] = $result;
