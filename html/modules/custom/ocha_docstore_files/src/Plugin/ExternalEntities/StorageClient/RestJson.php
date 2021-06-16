@@ -91,7 +91,10 @@ class RestJson extends Rest implements PluginFormInterface {
 
     // Call the individual resource endpoint if there is a single ID to load.
     if (count($ids) === 1) {
-      return $this->load(reset($ids));
+      // Return result as array.
+      $id = reset($ids);
+      $entities[$id] = $this->load($id);
+      return $entities;
     }
     // Otherwise perform batch requests.
     //
