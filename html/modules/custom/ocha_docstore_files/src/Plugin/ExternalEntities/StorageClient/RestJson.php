@@ -89,7 +89,17 @@ class RestJson extends Rest implements PluginFormInterface {
       }
     }
 
-    if (!empty($ids)) {
+    // Call the individual resource endpoint if there is a single ID to load.
+    if (count($ids) === 1) {
+      return $this->load(reset($ids));
+    }
+    // Otherwise perform batch requests.
+    //
+    // @todo we could perform parallel requests (ex: 5 or so) via a pool
+    // instead of sequential ones to improve performances.
+    //
+    // @see https://docs.guzzlephp.org/en/stable/quickstart.html#concurrent-requests
+    elseif (!empty($ids)) {
       // Limit to 50 to avoid issues with the query URL being too long.
       // We could probaly go up to 100 if we could use a simplified syntax for
       // the uuid filter like a comma separated list of uuids.
