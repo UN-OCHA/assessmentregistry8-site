@@ -32,7 +32,7 @@
         "drupal/components": "^2.4",
         "drupal/config_split": "^1.4",
         "drupal/core": "8.9.15",
-        "drupal/ctools": "^3.6",
+        "drupal/ctools": "^3.7",
         "drupal/custom_widgets": "^2.0",
         "drupal/dream_block_manager": "^1.0",
         "drupal/external_entities": "^2.0@alpha",
