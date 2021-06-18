@@ -2,6 +2,8 @@
 
 namespace Drupal\ocha_assessments\Controller;
 
+use Drupal\Core\Cache\CacheableJsonResponse;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\search_api\Entity\Index;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -64,7 +66,7 @@ class OchaJsonController extends ControllerBase {
    *   Docstore API request.
    */
   public function mapData(Request $request) {
-    return $this->fetchData($request, 0, 1000);
+    return $this->fetchData($request, 0, 9999);
   }
 
   /**
@@ -262,8 +264,21 @@ class OchaJsonController extends ControllerBase {
       $data['facets'][$key]['options'] = array_values($options);
     }
 
-    $response = new JsonResponse($data);
-    $response->setStatusCode(200);
+    // Set the default cache.
+    $cache = new CacheableMetadata();
+    $cache->addCacheTags([
+      'assessment',
+      'assessment_document',
+    ]);
+    $cache->addCacheableDependency($query);
+
+    // Add the cache contexts for the request parameters.
+    $cache->addCacheContexts([
+      'url.query_args',
+    ]);
+
+    $response = new CacheableJsonResponse($data, 200);
+    $response->addCacheableDependency($cache);
     return $response;
   }
 
