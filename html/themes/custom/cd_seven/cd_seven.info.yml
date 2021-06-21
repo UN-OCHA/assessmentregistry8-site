@@ -21,6 +21,7 @@ version: VERSION
 core: 8.x
 libraries:
  - seven/global-styling
+ - cd_seven/global-styling
 
 regions:
   header: 'Header'

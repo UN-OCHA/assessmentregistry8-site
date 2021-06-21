@@ -1,0 +1,5 @@
+services:
+  ocha_knowledge_management.route_subscriber:
+    class: Drupal\ocha_knowledge_management\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
