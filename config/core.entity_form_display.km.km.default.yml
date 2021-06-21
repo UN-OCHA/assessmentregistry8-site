@@ -19,6 +19,7 @@ dependencies:
     - external_entities
     - ocha_docstore_files
     - path
+    - select2
 id: km.km.default
 targetEntityType: km
 bundle: km
@@ -34,15 +35,23 @@ content:
     region: content
   field_context:
     weight: -2
-    settings: {  }
+    settings:
+      autocomplete: false
+      match_operator: CONTAINS
+      match_limit: 10
+      width: 100%
     third_party_settings: {  }
-    type: options_select
+    type: select2_entity_reference
     region: content
   field_countries:
     weight: 0
-    settings: {  }
+    settings:
+      autocomplete: false
+      match_operator: CONTAINS
+      match_limit: 10
+      width: 100%
     third_party_settings: {  }
-    type: options_select
+    type: select2_entity_reference
     region: content
   field_description:
     weight: -3
@@ -54,9 +63,13 @@ content:
     region: content
   field_document_type:
     weight: 1
-    settings: {  }
+    settings:
+      autocomplete: false
+      match_operator: CONTAINS
+      match_limit: 10
+      width: 100%
     third_party_settings: {  }
-    type: options_select
+    type: select2_entity_reference
     region: content
   field_files:
     weight: 5
@@ -68,21 +81,33 @@ content:
     region: content
   field_global_clusters:
     weight: 31
-    settings: {  }
+    settings:
+      width: 100%
+      match_operator: CONTAINS
+      match_limit: 10
+      autocomplete: false
     third_party_settings: {  }
-    type: options_select
+    type: select2_entity_reference
     region: content
   field_hpc_document_repository:
     weight: 2
-    settings: {  }
+    settings:
+      autocomplete: false
+      match_operator: CONTAINS
+      match_limit: 10
+      width: 100%
     third_party_settings: {  }
-    type: options_select
+    type: select2_entity_reference
     region: content
   field_life_cycle_steps:
     weight: -1
-    settings: {  }
+    settings:
+      autocomplete: false
+      match_operator: CONTAINS
+      match_limit: 10
+      width: 100%
     third_party_settings: {  }
-    type: options_select
+    type: select2_entity_reference
     region: content
   field_original_publication_date:
     weight: 3
@@ -92,9 +117,13 @@ content:
     region: content
   field_population_types:
     weight: 4
-    settings: {  }
+    settings:
+      autocomplete: false
+      match_operator: CONTAINS
+      match_limit: 10
+      width: 100%
     third_party_settings: {  }
-    type: options_select
+    type: select2_entity_reference
     region: content
   field_published:
     weight: 32
