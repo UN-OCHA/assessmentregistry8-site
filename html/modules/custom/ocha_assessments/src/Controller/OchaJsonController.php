@@ -2,6 +2,8 @@
 
 namespace Drupal\ocha_assessments\Controller;
 
+use Drupal\Core\Cache\CacheableJsonResponse;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\search_api\Entity\Index;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -64,7 +66,7 @@ class OchaJsonController extends ControllerBase {
    *   Docstore API request.
    */
   public function mapData(Request $request) {
-    return $this->fetchData($request, 0, 1000);
+    return $this->fetchData($request, 0, 9999, 'limited');
   }
 
   /**
@@ -94,7 +96,7 @@ class OchaJsonController extends ControllerBase {
     return $this->redirect('ocha_assessments.map');
   }
 
-  protected function fetchData($request, $offset = 0, $limit = 50) {
+  protected function fetchData($request, $offset = 0, $limit = 50, $set = 'full') {
     $facet_to_entity = [
       'organizations' => [
         'entity' => 'organization',
@@ -209,27 +211,32 @@ class OchaJsonController extends ControllerBase {
 
       // As mentioned above, normally the data of all the entities below
       // was retrieved from Solr and there shouldn't be any extra load.
-      $data['search_results'][] = [
+      $record = [
         'uuid' => $entity->id(),
         'title' => $entity->label(),
-        'field_organizations' => array_map(function ($item) {
-          return $item->entity->uuid();
-        }, iterator_to_array($entity->field_organizations->filterEmptyItems())),
         'field_locations_lat_lon' => array_map(function ($item) {
           return $item->entity->field_geolocation->lat . ',' . $item->entity->field_geolocation->lon;
         }, iterator_to_array($entity->field_locations->filterEmptyItems())),
-        'field_locations_label' => array_map(function ($item) {
-          return $item->entity->label();
-        }, iterator_to_array($entity->field_locations->filterEmptyItems())),
-        'field_organizations_label' => array_map(function ($item) {
-          return $item->entity->label();
-        }, iterator_to_array($entity->field_organizations->filterEmptyItems())),
-        'field_asst_organizations_label' => array_map(function ($item) {
-          return $item->entity->label();
-        }, iterator_to_array($entity->field_asst_organizations->filterEmptyItems())),
-        'field_status' => $entity->field_status->entity ? $entity->field_status->entity->label() : '',
-        'field_ass_date' => $date,
       ];
+
+      if ($set === 'full') {
+        $record['field_organizations'] = array_map(function ($item) {
+          return $item->entity->uuid();
+        }, iterator_to_array($entity->field_organizations->filterEmptyItems()));
+        $record['field_locations_label'] = array_map(function ($item) {
+          return $item->entity->label();
+        }, iterator_to_array($entity->field_locations->filterEmptyItems()));
+        $record['field_organizations_label'] = array_map(function ($item) {
+          return $item->entity->label();
+        }, iterator_to_array($entity->field_organizations->filterEmptyItems()));
+        $record['field_asst_organizations_label'] = array_map(function ($item) {
+          return $item->entity->label();
+        }, iterator_to_array($entity->field_asst_organizations->filterEmptyItems()));
+        $record['field_status'] = $entity->field_status->entity ? $entity->field_status->entity->label() : '';
+        $record['field_ass_date'] = $date;
+      }
+
+      $data['search_results'][] = $record;
     }
 
     // Handle facets.
@@ -262,8 +269,22 @@ class OchaJsonController extends ControllerBase {
       $data['facets'][$key]['options'] = array_values($options);
     }
 
-    $response = new JsonResponse($data);
-    $response->setStatusCode(200);
+    // Set the default cache.
+    $cache = new CacheableMetadata();
+    $cache->addCacheTags([
+      'assessment',
+      'assessment_document',
+    ]);
+    $cache->addCacheableDependency($query);
+
+    // Add the cache contexts for the request parameters.
+    $cache->addCacheContexts([
+      'url',
+      'url.query_args',
+    ]);
+
+    $response = new CacheableJsonResponse($data, 200);
+    $response->addCacheableDependency($cache);
     return $response;
   }
 

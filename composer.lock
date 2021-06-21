@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e603b59d1860297b05198e27e093ce9b",
+    "content-hash": "30f0c888d782c36473836c574270c63c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2504,6 +2504,9 @@
                         "[web-root]/profiles/README.txt": "assets/scaffold/files/profiles.README.txt",
                         "[web-root]/themes/README.txt": "assets/scaffold/files/themes.README.txt"
                     }
+                },
+                "patches_applied": {
+                    "https://www.drupal.org/project/drupal/issues/2859042#comment-12366507": "https://www.drupal.org/files/issues/entity-original_revision-2926483-17.patch"
                 }
             },
             "autoload": {
@@ -2581,17 +2584,17 @@
         },
         {
             "name": "drupal/ctools",
-            "version": "3.6.0",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/ctools.git",
-                "reference": "8.x-3.6"
+                "reference": "8.x-3.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ctools-8.x-3.6.zip",
-                "reference": "8.x-3.6",
-                "shasum": "9a849bb6ac9f4d02603d04b3265b35b7329e1ef5"
+                "url": "https://ftp.drupal.org/files/projects/ctools-8.x-3.7.zip",
+                "reference": "8.x-3.7",
+                "shasum": "b11c0981a1d2ab3cc9e8e614a337d8e2a2a70c0e"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9"
@@ -2599,8 +2602,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.6",
-                    "datestamp": "1620838181",
+                    "version": "8.x-3.7",
+                    "datestamp": "1623860918",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2792,7 +2795,9 @@
                     "https://www.drupal.org/project/external_entities/issues/3202814": "https://www.drupal.org/files/issues/2021-03-10/i3202814-allow-array-of.patch",
                     "Dateranges": "./PATCHES/external_entities-daterange.patch",
                     "Create new entity": "./PATCHES/external_entity_edit.patch",
-                    "Always pass boolean fields": "./PATCHES/external_entity_boolean.patch"
+                    "Always pass boolean fields": "./PATCHES/external_entity_boolean.patch",
+                    "Cache max age": "https://www.drupal.org/files/issues/2020-05-20/external_entities-render-cache-max-age-3138256-2.patch",
+                    "Cache tags": "https://www.drupal.org/files/issues/2020-10-20/external_entities_cache_tags_3176491_2.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
