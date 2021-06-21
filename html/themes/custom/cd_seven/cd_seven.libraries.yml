@@ -1,3 +1,7 @@
+global-styling:
+  js:
+    js/save_inline_first.js: {}
+
 node-form--assessment:
   version: VERSION
   css:
