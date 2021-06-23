@@ -483,10 +483,15 @@ class RestJson extends Rest implements PluginFormInterface {
       if (!empty($references)) {
         foreach ($references as $item) {
           if (isset($item['uuid']) && count(array_keys($item)) > 1) {
-            // Cater for the taxonomy term using 'name' instead of 'label' when
-            // retrieved as referenced items.
-            if (isset($item['name']) && !isset($item['label'])) {
-              $item['label'] = $item['name'];
+            // Cater for the taxonomy term using 'name' or 'display_name'
+            // instead of 'label' when retrieved as referenced items.
+            if (!isset($item['label'])) {
+              if (isset($item['display_name'])) {
+                $item['label'] = $item['display_name'];
+              }
+              elseif (isset($item['name'])) {
+                $item['label'] = $item['name'];
+              }
             }
             static::$resourceCache[$item['uuid']] = $item;
           }
