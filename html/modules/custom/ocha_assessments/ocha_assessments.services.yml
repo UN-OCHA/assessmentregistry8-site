@@ -4,3 +4,7 @@ services:
     arguments: []
     tags:
       - { name: event_subscriber }
+  ocha_assessments.route_subscriber:
+    class: Drupal\ocha_assessments\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
