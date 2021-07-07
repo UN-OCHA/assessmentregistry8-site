@@ -409,6 +409,7 @@ class WebhookController extends ControllerBase {
         $uuids = array_unique($uuids);
         $solr_ids = [];
         $tags = [];
+        $tags[] = $external_entity_type . ':' . $uuid;
 
         foreach ($uuids as $id) {
           $solr_ids[] = $id . ':und';
@@ -422,10 +423,15 @@ class WebhookController extends ControllerBase {
         \Drupal::entityTypeManager()->getStorage($datasource)->resetCache($uuids);
 
         // phpcs:ignore
-        \Drupal::entityTypeManager()->getStorage($external_entity_type)->resetCache([$uuid]);
+        $storage = \Drupal::entityTypeManager()->getStorage($external_entity_type);
+        $storage->resetCache([$uuid]);
 
         // phpcs:ignore
         \Drupal::service('cache_tags.invalidator')->invalidateTags($tags);
+
+        // Reset static cache from RestJson.
+        $storage->getStorageClient()::resetResourceCache();
+        $storage->getStorageClient()::resetResourceCountCache();
       }
 
       $index->indexItems(count($uuids) + 1);

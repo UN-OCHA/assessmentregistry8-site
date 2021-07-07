@@ -31,10 +31,10 @@ dependencies:
     - field.field.assessment.assessment.field_themes
     - field.field.assessment.assessment.field_units_of_measurement
   module:
-    - datetime_range
     - external_entities
     - inline_entity_form
     - link
+    - ocha_docstore_files
     - path
     - select2
 id: assessment.assessment.default
@@ -130,7 +130,7 @@ content:
     weight: 3
     settings: {  }
     third_party_settings: {  }
-    type: daterange_default
+    type: ocha_daterange_default
     region: content
   field_disaster:
     weight: 20
