@@ -41,7 +41,7 @@ class StoreLocationParents extends ProcessorPluginBase {
 
       if (!empty($values)) {
         $values = array_unique($values);
-        $fields = &$item->getFields(FALSE);
+        $fields = $item->getFields(FALSE);
         $fields['field_locations']->setValues($values);
       }
     }
