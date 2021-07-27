@@ -31,10 +31,13 @@ buildlog.txt
 /.eslintrc.json
 /.ht.router.php
 /.htaccess
-/INSTALL.txt
-/README.txt
+html/INSTALL.txt
+html/README.txt
 /autoload.php
-/example.gitignore
+html/example.gitignore
+html/modules/.gitignore
+html/profiles/.gitignore
+html/themes/.gitignore
 /index.php
 /robots.txt
 /update.php
