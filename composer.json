@@ -31,7 +31,7 @@
         "drupal/admin_denied": "^1.0",
         "drupal/components": "^2.4",
         "drupal/config_split": "^1.4",
-        "drupal/core": "^8.9.15",
+        "drupal/core": "^8.9.17",
         "drupal/core-composer-scaffold": "^8.9",
         "drupal/ctools": "^3.7",
         "drupal/custom_widgets": "^2.0",
