@@ -6,6 +6,7 @@ global-styling:
   js:
     js/cd-search--inline-action.js: {}
     js/login_destination.js: {}
+    js/save_inline_first.js: {}
 
 cd-export-button:
   js:
