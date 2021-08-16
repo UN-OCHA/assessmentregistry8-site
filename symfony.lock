@@ -727,9 +727,6 @@
     "weitzman/logintrait": {
         "version": "1.1.0"
     },
-    "zaporylie/composer-drupal-optimizations": {
-        "version": "1.2.0"
-    },
     "zoonman/pixabay-php-api": {
         "version": "1.0.3"
     }
