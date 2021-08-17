@@ -61,8 +61,7 @@
         "symfony/flex": "^1.12",
         "unocha/common_design": "^4.0.0",
         "unocha/ocha_integrations": "^1.0",
-        "webflo/drupal-finder": "^1.0.0",
-        "zaporylie/composer-drupal-optimizations": "^1.0"
+        "webflo/drupal-finder": "^1.0.0"
     },
     "require-dev": {
         "drupal/coder": "^8.3",
