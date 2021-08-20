@@ -210,9 +210,6 @@ class StoreEntity extends ProcessorPluginBase {
 
       $entity_type_id = $item->getDatasource()->getEntityTypeId();
 
-      // Remove the field to free some memory.
-      $item->setField('_stored_entity', NULL);
-
       // Unserialize the stored entity.
       $data = unserialize(base64_decode(reset($values)));
 
