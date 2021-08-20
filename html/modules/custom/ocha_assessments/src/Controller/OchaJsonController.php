@@ -188,6 +188,13 @@ class OchaJsonController extends ControllerBase {
     $query->setOption('search_api_facets', $facet_options);
 
     $results = $query->execute();
+
+    // Preload all entites at once.
+    if ($set === 'full') {
+      $results->preLoadResultItems();
+    }
+
+    // Extract facets.
     $facets = $results->getExtraData('search_api_facets', []);
 
     // Add pagers if needed.
