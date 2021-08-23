@@ -188,6 +188,13 @@ class OchaJsonController extends ControllerBase {
     $query->setOption('search_api_facets', $facet_options);
 
     $results = $query->execute();
+
+    // Preload all entites at once.
+    if ($set === 'full') {
+      $results->preLoadResultItems();
+    }
+
+    // Extract facets.
     $facets = $results->getExtraData('search_api_facets', []);
 
     // Add pagers if needed.
@@ -198,42 +205,69 @@ class OchaJsonController extends ControllerBase {
 
     // Prepare results.
     $data['search_results'] = [];
+    /** @var \Drupal\search_api\Item\ItemInterface $item */
     foreach ($results as $item) {
       // There shouldn't be any extra load there because the entity data is
       // returned by Solr and cached.
       // @see \Drupal\ocha_docstore_files\Plugin\search_api\processor\StoreEntity
-      $entity = $item->getOriginalObject(TRUE)->getEntity();
+      // Allow loading for full sets of fields.
+      $original_object = $item->getOriginalObject($set === 'full');
+      if ($original_object) {
+        $entity = $original_object->getEntity();
 
-      $date = '';
-      if (!empty($entity->field_date->value)) {
-        $date = date('d.m.Y', strtotime($entity->field_date->value));
+        $date = '';
+        if (!empty($entity->field_date->value)) {
+          $date = date('d.m.Y', strtotime($entity->field_date->value));
+        }
+
+        // As mentioned above, normally the data of all the entities below
+        // was retrieved from Solr and there shouldn't be any extra load.
+        $record = [
+          'uuid' => $entity->id(),
+          'title' => $entity->label(),
+          'field_locations_lat_lon' => array_map(function ($item) {
+            return $item->entity->field_geolocation->lat . ',' . $item->entity->field_geolocation->lon;
+          }, iterator_to_array($entity->field_locations->filterEmptyItems())),
+        ];
+
+        if ($set === 'full') {
+          $record['field_organizations'] = array_map(function ($item) {
+            return $item->entity->uuid();
+          }, iterator_to_array($entity->field_organizations->filterEmptyItems()));
+          $record['field_locations_label'] = array_map(function ($item) {
+            return $item->entity->label();
+          }, iterator_to_array($entity->field_locations->filterEmptyItems()));
+          $record['field_organizations_label'] = array_map(function ($item) {
+            return $item->entity->label();
+          }, iterator_to_array($entity->field_organizations->filterEmptyItems()));
+          $record['field_asst_organizations_label'] = array_map(function ($item) {
+            return $item->entity->label();
+          }, iterator_to_array($entity->field_asst_organizations->filterEmptyItems()));
+          $record['field_status'] = $entity->field_status->entity ? $entity->field_status->entity->label() : '';
+          $record['field_ass_date'] = $date;
+        }
       }
+      else {
+        $stored_entity = $item->getField('_stored_entity')->getValues();
+        $entity = unserialize(base64_decode(reset($stored_entity)));
 
-      // As mentioned above, normally the data of all the entities below
-      // was retrieved from Solr and there shouldn't be any extra load.
-      $record = [
-        'uuid' => $entity->id(),
-        'title' => $entity->label(),
-        'field_locations_lat_lon' => array_map(function ($item) {
-          return $item->entity->field_geolocation->lat . ',' . $item->entity->field_geolocation->lon;
-        }, iterator_to_array($entity->field_locations->filterEmptyItems())),
-      ];
+        $date = '';
+        if (!empty($entity['ar_date'])) {
+          $date = substr($entity['ar_date']['start'], 0, 10);
+        }
 
-      if ($set === 'full') {
-        $record['field_organizations'] = array_map(function ($item) {
-          return $item->entity->uuid();
-        }, iterator_to_array($entity->field_organizations->filterEmptyItems()));
-        $record['field_locations_label'] = array_map(function ($item) {
-          return $item->entity->label();
-        }, iterator_to_array($entity->field_locations->filterEmptyItems()));
-        $record['field_organizations_label'] = array_map(function ($item) {
-          return $item->entity->label();
-        }, iterator_to_array($entity->field_organizations->filterEmptyItems()));
-        $record['field_asst_organizations_label'] = array_map(function ($item) {
-          return $item->entity->label();
-        }, iterator_to_array($entity->field_asst_organizations->filterEmptyItems()));
-        $record['field_status'] = $entity->field_status->entity ? $entity->field_status->entity->label() : '';
-        $record['field_ass_date'] = $date;
+        $record = [
+          'uuid' => $entity['uuid'],
+          'title' => $entity['title'],
+        ];
+
+        if (isset($entity['locations'])) {
+          foreach ($entity['locations'] as $locaction) {
+            if (isset($locaction['geolocation'])) {
+              $record['field_locations_lat_lon'][] = $locaction['geolocation']['lat'] . ',' . $locaction['geolocation']['lon'];
+            }
+          }
+        }
       }
 
       $data['search_results'][] = $record;

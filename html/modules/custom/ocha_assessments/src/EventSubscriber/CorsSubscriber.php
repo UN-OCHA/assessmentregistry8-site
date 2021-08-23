@@ -49,21 +49,8 @@ class CorsSubscriber implements EventSubscriberInterface {
     }
 
     $response = $event->getResponse();
-    $host = '*';
 
-    $referer = $event->getRequest()->server->get('HTTP_REFERER');
-    if ($referer) {
-      $parts = parse_url($referer);
-      if (is_array($parts) && array_key_exists('scheme', $parts) && array_key_exists('host', $parts)) {
-        $host = $parts['scheme'] . '://' . $parts['host'];
-        if (isset($parts['port'])) {
-          $host .= ':' . $parts['port'];
-        }
-      }
-    }
-
-    $response->headers->set('Vary', 'Referer');
-    $response->headers->set('Access-Control-Allow-Origin', $host);
+    $response->headers->set('Access-Control-Allow-Origin', '*');
     $response->headers->set('Access-Control-Allow-Headers', 'Authorization, Accept, Accept-Language, Content-Language, Content-Type, Origin, X-Requested-With');
     $response->headers->set('Access-Control-Allow-Credentials', 'true');
     $response->headers->set('Access-Control-Expose-Headers', '');
