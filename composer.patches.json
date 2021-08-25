@@ -10,7 +10,7 @@
       "Avoid array_flip warning": "PATCHES/search-api-flip.patch"
     },
     "drupal/external_entities": {
-      "https://www.drupal.org/project/external_entities/issues/3202811": "https://www.drupal.org/files/issues/2021-03-10/i3202811-support-geofield.patch",
+      "https://www.drupal.org/project/external_entities/issues/3202811": "https://www.drupal.org/files/issues/2021-08-25/i3202811-support-geofield-4.patch",
       "https://www.drupal.org/project/external_entities/issues/3202814": "https://www.drupal.org/files/issues/2021-03-10/i3202814-allow-array-of.patch",
       "Dateranges": "./PATCHES/external_entities-daterange.patch",
       "Create new entity": "./PATCHES/external_entity_edit.patch",
