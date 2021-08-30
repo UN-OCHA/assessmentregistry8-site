@@ -1,8 +1,5 @@
-name: Flysystem for OCHA document store
-description: 'Provides a plugin for the OCHA documnent store for Flysystem.'
+name: OCHA document store integration
+description: OCHA document store integration
 type: module
 core: 8.x
 core_version_requirement: ^8 || ^9
-package: Flysystem
-dependencies:
- - flysystem:flysystem

@@ -25,7 +25,6 @@ module:
   field_ui: 0
   file: 0
   filter: 0
-  flysystem: 0
   geofield: 0
   help: 0
   image: 0
