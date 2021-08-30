@@ -16,12 +16,7 @@ use Drupal\taxonomy\Entity\Term;
  * Wrapper around log function.
  */
 function ocha_knowledge_management_log($message) {
-  if (function_exists('drush_log')) {
-    drush_log($message);
-  }
-  else {
-    \Drupal::logger('ocha_knowledge_management')->notice($message);
-  }
+  \Drupal::logger('ocha_knowledge_management')->notice($message);
 }
 
 /**
@@ -160,7 +155,7 @@ function ocha_knowledge_management_process_row_from_hrinfo($data) {
     }
 
     // Post date.
-    $created = REQUEST_TIME;
+    $created = time();
     if (isset($item->post_date) && $item->post_date) {
       $created = $item->post_date;
       $data['created'] = strtotime($created);
@@ -294,7 +289,7 @@ function ocha_knowledge_management_add_media_entity($url, $bundle, $created) {
     return $media_entity;
   }
   else {
-    ocha_assessments_log('Unable to fetch ' . $url);
+    ocha_knowledge_management_log('Unable to fetch ' . $url);
   }
 
   return FALSE;

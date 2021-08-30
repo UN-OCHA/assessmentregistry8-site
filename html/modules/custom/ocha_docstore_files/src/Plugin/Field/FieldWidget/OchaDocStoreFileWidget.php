@@ -10,6 +10,7 @@ use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\ElementInfoManagerInterface;
@@ -334,7 +335,7 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
         // Move file if it's rally uploaded.
         if (is_uploaded_file($file_info->getRealPath())) {
           $destination = 'temporary://' . microtime();
-          if (file_prepare_directory($destination, FILE_CREATE_DIRECTORY)) {
+          if (\Drupal::service('file_system')->prepareDirectory($destination, FileSystemInterface::CREATE_DIRECTORY)) {
             $destination .= '/' . trim($file_info->getClientOriginalName(), '.');
             if (move_uploaded_file($file_info->getRealPath(), $destination)) {
               $field_state['queued_files'][] = [
