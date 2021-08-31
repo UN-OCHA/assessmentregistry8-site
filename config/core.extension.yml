@@ -81,6 +81,8 @@ module:
   token: 0
   toolbar: 0
   update: 0
+  upgrade_rector: 0
+  upgrade_status: 0
   user: 0
   views_data_export: 0
   views_ui: 0
@@ -90,7 +92,6 @@ module:
   standard: 1000
 theme:
   stable: 0
-  classy: 0
   seven: 0
   common_design: 0
   common_design_subtheme: 0

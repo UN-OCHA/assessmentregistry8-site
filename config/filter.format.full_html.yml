@@ -41,7 +41,7 @@ filters:
     status: true
     weight: -10
     settings:
-      allowed_html: '<a class id href hreflang> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol id type start aria-labelledby class> <li> <dl> <dt> <dd> <h2 class id> <h3 class id> <h4 class id> <h5 class id> <h6 class id> <s> <sup> <sub> <img src alt data-entity-type data-entity-uuid data-align data-caption> <table class> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr> <p><pre><div class id><section class id><br> <iframe src width height>'
+      allowed_html: '<a class id href hreflang> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol id type start aria-labelledby class> <li> <dl> <dt> <dd> <h2 class id> <h3 class id> <h4 class id> <h5 class id> <h6 class id> <s> <sup> <sub> <img src alt data-entity-type data-entity-uuid data-align data-caption> <table class> <caption> <tbody> <thead> <tfoot> <th> <td> <tr> <hr> <p><pre><div class id><section class id><br>'
       filter_html_help: true
       filter_html_nofollow: false
   media_embed:
