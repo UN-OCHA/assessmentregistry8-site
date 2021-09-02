@@ -70,6 +70,8 @@
         "drupal/search_api_solr": "^4.2",
         "drupal/select2": "^1.13",
         "drupal/social_auth_hid": "^2.7",
+        "drupal/upgrade_rector": "^1.0@alpha",
+        "drupal/upgrade_status": "^3.10",
         "drupal/views_data_export": "^1.0",
         "drush/drush": "^10.4",
         "phpoffice/phpspreadsheet": "^1.18",
