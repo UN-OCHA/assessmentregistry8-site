@@ -213,7 +213,7 @@ class OchaDocStoreFileWidget extends WidgetBase implements ContainerFactoryPlugi
           'filelink' => [
             '#type' => 'link',
             '#title' => $item['filename'],
-            '#url' => Url::fromUri($item['uri']),
+            '#url' => Url::fromUserInput('/attachments/' . $item['media_uuid'] . '/' . $item['filename']),
           ],
           'remove' => [
             '#type' => 'submit',
