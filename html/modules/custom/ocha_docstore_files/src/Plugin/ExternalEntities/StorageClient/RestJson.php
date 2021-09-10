@@ -5,7 +5,9 @@ namespace Drupal\ocha_docstore_files\Plugin\ExternalEntities\StorageClient;
 use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\external_entities\ExternalEntityInterface;
 use Drupal\external_entities\Plugin\ExternalEntities\StorageClient\Rest;
+use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * External entities storage client based on a REST API.
@@ -349,14 +351,20 @@ class RestJson extends Rest implements PluginFormInterface {
   public function getFromDocstore($endpoint, array $parameters = [], $cache = TRUE) {
     $entity_type_id = $this->externalEntityType->id();
 
-    $response = $this->httpClient->request(
-      'GET',
-      $endpoint,
-      [
-        'headers' => $this->getHttpHeaders(),
-        'query' => $parameters,
-      ]
-    );
+    try {
+      $response = $this->httpClient->request(
+        'GET',
+        $endpoint,
+        [
+          'headers' => $this->getHttpHeaders(),
+          'query' => $parameters,
+        ]
+      );
+    } catch (RequestException $exception) {
+      if ($exception->getCode() === 404) {
+        throw new NotFoundHttpException();
+      }
+    }
 
     $body = $response->getBody() . '';
     $results = $this
