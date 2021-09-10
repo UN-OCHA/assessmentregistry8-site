@@ -322,14 +322,16 @@ class WebhookController extends ControllerBase {
 
       // Find references.
       if (!empty($field_names)) {
+        $index = Index::load($index_name);
         foreach ($field_names as $field_name) {
-          $index = Index::load($index_name);
-          $query = $index->query();
-          $query->addCondition($field_name, $uuid);
-          $query->range(0, 999);
-          $results = $query->execute();
-          foreach ($results as $item) {
-            $uuids = array_merge($uuids, $item->getField('uuid')->getValues());
+          if ($index->getField($field_name)) {
+            $query = $index->query();
+            $query->addCondition($field_name, $uuid);
+            $query->range(0, 999);
+            $results = $query->execute();
+            foreach ($results as $item) {
+              $uuids = array_merge($uuids, $item->getField('uuid')->getValues());
+            }
           }
         }
       }

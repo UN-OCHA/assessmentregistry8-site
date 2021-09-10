@@ -584,6 +584,11 @@ class RestJson extends Rest implements PluginFormInterface {
           continue;
         }
 
+        // Skip assessment documents.
+        if ($target_entity_type_id === 'assessment_document') {
+          continue;
+        }
+
         // Extract the name of the docstore resource field from the
         // property mapped to the `target_id` property of the entity
         // reference field.
@@ -596,6 +601,7 @@ class RestJson extends Rest implements PluginFormInterface {
       }
       $cache[$entity_type_id] = $fields;
     }
+
     return $cache[$entity_type_id];
   }
 
