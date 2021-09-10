@@ -185,6 +185,9 @@
     "drupal/geofield": {
         "version": "1.20.0"
     },
+    "drupal/google_tag": {
+        "version": "1.4.0"
+    },
     "drupal/inline_entity_form": {
         "version": "1.0.0-rc8"
     },
