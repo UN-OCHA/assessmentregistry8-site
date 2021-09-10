@@ -127,7 +127,7 @@ field_settings:
       config:
         - field.storage.assessment.field_level_of_representation
   field_local_coordination_groups:
-    label: 'Clusters'
+    label: Clusters
     datasource_id: 'entity:assessment'
     property_path: field_local_coordination_groups
     type: string
