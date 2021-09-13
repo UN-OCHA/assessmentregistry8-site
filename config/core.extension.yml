@@ -27,6 +27,7 @@ module:
   filter: 0
   flysystem: 0
   geofield: 0
+  google_tag: 0
   help: 0
   image: 0
   inline_entity_form: 0

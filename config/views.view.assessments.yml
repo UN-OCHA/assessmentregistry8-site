@@ -2042,7 +2042,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Clusters'
+          label: Clusters
           exclude: false
           alter:
             alter_text: false
@@ -4702,7 +4702,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Clusters'
+          label: Clusters
           exclude: false
           alter:
             alter_text: false
@@ -7363,7 +7363,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Clusters'
+          label: Clusters
           exclude: false
           alter:
             alter_text: false
@@ -10025,7 +10025,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Clusters'
+          label: Clusters
           exclude: false
           alter:
             alter_text: false
