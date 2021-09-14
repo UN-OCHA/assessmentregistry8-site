@@ -28,6 +28,7 @@ widget:
     match_operator: CONTAINS
 query_operator: or
 use_hierarchy: false
+keep_hierarchy_parents_active: false
 hierarchy:
   type: taxonomy
   config: {  }
