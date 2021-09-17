@@ -15,30 +15,8 @@
             "url": "https://packages.drupal.org/8"
         },
         {
-            "type": "package",
-            "package": {
-                "name": "reliefweb/simple-autocomplete",
-                "version": "v1.3.0",
-                "type":"drupal-library",
-                "source": {
-                    "url": "https://github.com/UN-OCHA/rwint-simple-autocomplete.git",
-                    "type": "git",
-                    "reference": "v1.3.0"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "reliefweb/simple-datepicker",
-                "version": "v1.3.1",
-                "type":"drupal-library",
-                "source": {
-                    "url": "https://github.com/UN-OCHA/rwint-simple-datepicker.git",
-                    "type": "git",
-                    "reference": "v1.3.1"
-                }
-            }
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
     ],
     "require": {
@@ -73,6 +51,8 @@
         "drupal/social_auth_hid": "^2.7",
         "drupal/views_data_export": "^1.0",
         "drush/drush": "^10.4",
+        "npm-asset/select2": "^4.0",
+        "oomphinc/composer-installers-extender": "^2.0",
         "phpoffice/phpspreadsheet": "^1.18",
         "unocha/common_design": "^4.0.0",
         "unocha/ocha_integrations": "^1.0",
@@ -88,86 +68,43 @@
         "phpunit/phpunit": "^9.5.4"
     },
     "conflict": {
-        "drupal/drupal": "*",
-        "symfony/symfony": "*"
+        "drupal/drupal": "*"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "platform": {
-            "php": "8.0"
-        },
         "bin-dir": "vendor/bin/",
         "sort-packages": true
     },
-    "autoload": {
-        "classmap": [
-            "scripts/composer/ScriptHandler.php"
-        ]
-    },
-    "scripts": {
-        "pre-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "pre-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-            "DrupalProject\\composer\\ScriptHandler::removeUnnecessaryFiles",
-            "@git-hooks"
-        ],
-        "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
-            "DrupalProject\\composer\\ScriptHandler::removeUnnecessaryFiles",
-            "@git-hooks"
-        ],
-        "git-hooks": "test -d .git && git config core.hooksPath git-hooks || exit 0",
-        "sass-prepare": "cd html/themes/custom/common_design_subtheme && npm install",
-        "sass-build": "cd html/themes/custom/common_design_subtheme && ./node_modules/.bin/sass sass:build",
-        "sass-cleanup": "cd html/themes/custom/common_design_subtheme && rm -rf ./node_modules",
-        "sass": [
-            "@sass-prepare",
-            "@sass-build",
-            "@sass-cleanup"
-        ]
-    },
     "extra": {
         "enable-patching": true,
-        "composer-exit-on-patch-failure": true,
-        "patches-file": "composer.patches.json",
         "patchLevel": {
             "drupal/core": "-p2"
         },
+        "installer-types": ["bower-asset", "npm-asset"],
         "installer-paths": {
             "html/core": ["type:drupal-core"],
-            "html/libraries/ckeditor/plugins/{$name}": ["vendor:ckeditor-plugin"],
-            "html/libraries/{$name}": ["type:drupal-library"],
+            "html/libraries/{$name}": [
+                "type:drupal-library",
+                "type:bower-asset",
+                "type:npm-asset"
+            ],
             "html/modules/contrib/{$name}": ["type:drupal-module"],
             "html/profiles/contrib/{$name}": ["type:drupal-profile"],
             "html/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/Commands/{$name}": ["type:drupal-drush"]
         },
-        "preserve-paths": [
-            "html/modules/custom",
-            "html/themes/custom"
-        ],
         "drupal-scaffold": {
-            "file-mapping": {
-                "[web-root]/sites/default/services.yml": {
-                    "mode": "replace",
-                    "path": "html/core/assets/scaffold/files/default.services.yml",
-                    "overwrite": false
-                },
-                "[web-root]/sites/default/settings.php": {
-                    "mode": "replace",
-                    "path": "html/core/assets/scaffold/files/default.settings.php",
-                    "overwrite": false
-                }
+            "initial": {
+                "sites/default/default.services.yml": "sites/default/services.yml",
+                "sites/default/default.settings.php": "sites/default/settings.php",
+                ".editorconfig": "../.editorconfig",
+                ".gitattributes": "../.gitattributes"
             },
             "locations": {
-                "web-root": "html/"
-            }
+              "web-root": "html/"
+            },
+            "omit-defaults": false
         },
         "merge-plugin": {
             "include": [
@@ -176,6 +113,30 @@
             "recurse": true,
             "replace": false,
             "merge-extra": false
-        }
+        },
+        "preserve-paths": [
+            "html/modules/custom",
+            "html/themes/custom",
+            "html/sites/default"
+        ],
+        "patches-file": "composer.patches.json",
+        "composer-exit-on-patch-failure": true
+    },
+    "scripts": {
+        "git-hooks": "git config core.hooksPath git-hooks",
+        "gulp-prepare": "test -f html/themes/custom/bootstrap_subtheme_sass/gulpfile.js && cd html/themes/custom/bootstrap_subtheme_sass && npm install || exit 0",
+        "gulp-build": "test -f html/themes/custom/bootstrap_subtheme_sass/gulpfile.js && cd html/themes/custom/bootstrap_subtheme_sass && ./node_modules/.bin/gulp build || exit 0",
+        "gulp-cleanup": "test -f html/themes/custom/bootstrap_subtheme_sass/gulpfile.js && cd html/themes/custom/bootstrap_subtheme_sass && rm -rf ./node_modules || exit 0",
+        "gulp": [
+            "@gulp-prepare",
+            "@gulp-build",
+            "@gulp-cleanup"
+        ],
+        "post-install-cmd": [
+            "@git-hooks"
+        ],
+        "post-update-cmd": [
+            "@git-hooks"
+        ]
     }
 }
