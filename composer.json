@@ -124,13 +124,13 @@
     },
     "scripts": {
         "git-hooks": "git config core.hooksPath git-hooks",
-        "gulp-prepare": "test -f html/themes/custom/bootstrap_subtheme_sass/gulpfile.js && cd html/themes/custom/bootstrap_subtheme_sass && npm install || exit 0",
-        "gulp-build": "test -f html/themes/custom/bootstrap_subtheme_sass/gulpfile.js && cd html/themes/custom/bootstrap_subtheme_sass && ./node_modules/.bin/gulp build || exit 0",
-        "gulp-cleanup": "test -f html/themes/custom/bootstrap_subtheme_sass/gulpfile.js && cd html/themes/custom/bootstrap_subtheme_sass && rm -rf ./node_modules || exit 0",
-        "gulp": [
-            "@gulp-prepare",
-            "@gulp-build",
-            "@gulp-cleanup"
+        "sass-prepare": "cd html/themes/custom/common_design_subtheme && npm install",
+        "sass-build": "cd html/themes/custom/common_design_subtheme && ./node_modules/.bin/sass sass:build",
+        "sass-cleanup": "cd html/themes/custom/common_design_subtheme && rm -rf ./node_modules",
+        "sass": [
+            "@sass-prepare",
+            "@sass-build",
+            "@sass-cleanup"
         ],
         "post-install-cmd": [
             "@git-hooks"
