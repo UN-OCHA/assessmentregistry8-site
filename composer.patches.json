@@ -6,26 +6,15 @@
     "drupal/facets": {
       "https://www.drupal.org/project/facets/issues/3005040": "https://www.drupal.org/files/issues/2021-05-13/facets-hierarchy-allow-different-types-3005040-13.patch"
     },
-    "drupal/search_api": {
-      "Avoid array_flip warning": "PATCHES/search-api-flip.patch"
-    },
     "drupal/external_entities": {
-      "https://www.drupal.org/project/external_entities/issues/3202811": "https://www.drupal.org/files/issues/2021-08-25/i3202811-support-geofield-4.patch",
-      "https://www.drupal.org/project/external_entities/issues/3202814": "https://www.drupal.org/files/issues/2021-03-10/i3202814-allow-array-of.patch",
-      "Dateranges": "./PATCHES/external_entities-daterange.patch",
-      "Create new entity": "./PATCHES/external_entity_edit.patch",
-      "Always pass boolean fields": "./PATCHES/external_entity_boolean.patch",
-      "Cache max age": "https://www.drupal.org/files/issues/2020-05-20/external_entities-render-cache-max-age-3138256-2.patch",
-      "Cache tags": "https://www.drupal.org/files/issues/2020-10-20/external_entities_cache_tags_3176491_2.patch"
+      "Dateranges - https://www.drupal.org/project/external_entities/issues/3230639": "https://www.drupal.org/files/issues/2021-08-31/external_entities-daterange.patch",
+      "Always pass boolean fields - https://www.drupal.org/project/external_entities/issues/3230638#comment-14205286": "https://www.drupal.org/files/issues/2021-08-31/external_entity_boolean_0.patch"
     },
     "drupal/select2": {
       "https://www.drupal.org/project/select2/issues/3078085": "https://www.drupal.org/files/issues/2020-02-27/hierarchical-facet-widget-3078085-2.patch"
     },
     "drupal/redis": {
       "https://www.drupal.org/project/redis/issues/3192255": "https://git.drupalcode.org/project/redis/-/merge_requests/3.diff"
-    },
-    "drupal/social_auth_hid": {
-      "https://www.drupal.org/project/social_auth_hid/issues/3188805": "https://git.drupalcode.org/project/social_auth_hid/-/merge_requests/2.diff"
     },
     "drupal/views_data_export": {
       "Ensure the proper number of items is processed in batch export": "PATCHES/views_data_export-fix-number-of-processed-items.patch"

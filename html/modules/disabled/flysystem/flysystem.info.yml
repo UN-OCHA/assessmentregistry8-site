@@ -1,0 +1,5 @@
+type: module
+name: Flysystem - disabled
+description: 'Avoid deployment errors.'
+package: unocha_disabled
+core_version_requirement: ^8.9 || ^9

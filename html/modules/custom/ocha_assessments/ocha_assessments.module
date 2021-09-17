@@ -86,12 +86,7 @@ function ocha_assessments_variable_set($key, $value) {
  * Wrapper around log function.
  */
 function ocha_assessments_log($message) {
-  if (function_exists('drush_log')) {
-    drush_log($message);
-  }
-  else {
-    \Drupal::logger('ocha_assessments')->notice($message);
-  }
+  \Drupal::logger('ocha_assessments')->notice($message);
 }
 
 /**
@@ -136,7 +131,7 @@ function ocha_assessments_from_hrinfo() {
   }
 
   ocha_assessments_variable_set('ocha_assessments_stop_processing_hrinfo', TRUE);
-  ocha_assessments_variable_set('ocha_assessments_most_recent_hrinfo', REQUEST_TIME);
+  ocha_assessments_variable_set('ocha_assessments_most_recent_hrinfo', time());
 };
 
 /**
@@ -347,7 +342,7 @@ function ocha_assessments_process_row_from_hrinfo($item) {
     }
 
     // Create date.
-    $created = REQUEST_TIME;
+    $created = time();
     if (isset($item->created) && $item->created) {
       $data['created'] = $item->created;
       $created = $item->created;
