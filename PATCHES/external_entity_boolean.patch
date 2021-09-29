@@ -1,5 +1,5 @@
 diff --git a/src/Entity/ExternalEntity.php b/src/Entity/ExternalEntity.php
-index 9c30268..cf190bc 100755
+index 60a0142..cded2e0 100755
 --- a/src/Entity/ExternalEntity.php
 +++ b/src/Entity/ExternalEntity.php
 @@ -140,6 +140,7 @@ class ExternalEntity extends ContentEntityBase implements ExternalEntityInterfac
@@ -8,15 +8,15 @@ index 9c30268..cf190bc 100755
          ->getCardinality();
 +      $is_boolean_field = $this->getFieldDefinition($field_name)->getFieldStorageDefinition()->getType() === 'boolean';
  
-       foreach ($field_values as $key => $field_value) {
-         foreach ($properties as $property_name => $mapped_key) {
-@@ -150,7 +151,8 @@ class ExternalEntity extends ContentEntityBase implements ExternalEntityInterfac
-             continue;
-           }
+       if (empty($field_values)) {
+         foreach ($properties as $property) {
+@@ -158,7 +159,8 @@ class ExternalEntity extends ContentEntityBase implements ExternalEntityInterfac
+               continue;
+             }
  
--          if (!empty($field_value[$property_name])) {
-+          // Always pass boolean fields.
-+          if (!empty($field_value[$property_name]) || $is_boolean_field) {
-             $exploded_mapped_key = explode('/', $mapped_key);
-             // If field cardinality is more than 1, we consider the field value
-             // to be a separate array.
+-            if (!empty($field_value[$property_name])) {
++            // Always pass boolean fields.
++            if (!empty($field_value[$property_name]) || $is_boolean_field) {
+               $exploded_mapped_key = explode('/', $mapped_key);
+               // If field cardinality is more than 1, we consider the field
+               // value to be a separate array.
