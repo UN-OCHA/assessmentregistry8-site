@@ -179,7 +179,7 @@ class OchaJsonController extends ControllerBase {
     foreach ($facet_to_entity as $key => $info) {
       $facet_options[$key] = [
         'field' => $info['field'],
-        'limit' => 20,
+        'limit' => 999,
         'operator' => 'AND',
         'min_count' => 1,
         'missing' => FALSE,
