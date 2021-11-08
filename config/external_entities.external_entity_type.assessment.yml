@@ -50,7 +50,7 @@ field_mappings:
   field_other_location:
     value: other_location
   field_population_types:
-    entity: 'population_types/*/uuid'
+    target_id: 'population_types/*/uuid'
   field_published:
     value: published
   field_sample_size:
