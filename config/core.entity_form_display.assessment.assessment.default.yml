@@ -284,10 +284,10 @@ content:
   field_themes:
     weight: 16
     settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      autocomplete: false
       width: 100%
+      autocomplete: true
+      match_operator: CONTAINS
+      match_limit: 50
     third_party_settings: {  }
     type: select2_entity_reference
     region: content
