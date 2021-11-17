@@ -128,7 +128,7 @@
         "composer-exit-on-patch-failure": true
     },
     "scripts": {
-        "git-hooks": "git config core.hooksPath git-hooks",
+        "git-hooks": "git config core.hooksPath git-hooks || exit 0",
         "sass-prepare": "cd html/themes/custom/common_design_subtheme && npm install",
         "sass-build": "cd html/themes/custom/common_design_subtheme && ./node_modules/.bin/sass sass:build",
         "sass-cleanup": "cd html/themes/custom/common_design_subtheme && rm -rf ./node_modules",
