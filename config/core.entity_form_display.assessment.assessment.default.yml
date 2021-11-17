@@ -25,7 +25,6 @@ dependencies:
     - field.field.assessment.assessment.field_published
     - field.field.assessment.assessment.field_related_content
     - field.field.assessment.assessment.field_sample_size
-    - field.field.assessment.assessment.field_sources
     - field.field.assessment.assessment.field_status
     - field.field.assessment.assessment.field_subject_objective
     - field.field.assessment.assessment.field_themes
@@ -252,16 +251,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
-    region: content
-  field_sources:
-    weight: 14
-    settings:
-      width: 100%
-      autocomplete: true
-      match_operator: CONTAINS
-      match_limit: 10
-    third_party_settings: {  }
-    type: select2_entity_reference
     region: content
   field_status:
     weight: 17

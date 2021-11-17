@@ -26,7 +26,6 @@ dependencies:
     - field.field.assessment.assessment.field_published
     - field.field.assessment.assessment.field_related_content
     - field.field.assessment.assessment.field_sample_size
-    - field.field.assessment.assessment.field_sources
     - field.field.assessment.assessment.field_status
     - field.field.assessment.assessment.field_subject_objective
     - field.field.assessment.assessment.field_themes
@@ -101,7 +100,6 @@ hidden:
   field_published: true
   field_related_content: true
   field_sample_size: true
-  field_sources: true
   field_subject_objective: true
   field_themes: true
   field_units_of_measurement: true
