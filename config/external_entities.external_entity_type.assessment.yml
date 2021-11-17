@@ -37,6 +37,8 @@ field_mappings:
     value: frequency
   field_key_findings:
     value: key_findings
+  field_level_of_representation:
+    value: level_of_representation
   field_local_coordination_groups:
     target_id: 'local_groups/*/uuid'
   field_locations:
