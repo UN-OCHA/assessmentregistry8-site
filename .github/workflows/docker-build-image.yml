@@ -17,39 +17,87 @@ jobs:
       id: aws
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-access-key-id: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
+
+    - name: Login to Public ECR
+      uses: docker/login-action@v1
+      with:
+        registry: public.ecr.aws
+        username: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+        password: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
+      env:
+        AWS_REGION: us-east-1
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+      env:
+        AWS_REGION: us-east-1
 
     - name: Checkout code
       id: checkout
       uses: actions/checkout@v1
+      with:
+        fetch-depth: 0
 
     - name: Determine environment type
       id: env
       uses: docker://ghcr.io/un-ocha/actions:determine-environment-main
 
-    - name: Build docker image
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Image Metadata
+      id: meta
       run: |
         export DOCKER_TAG="${GITHUB_REF#refs/*/}"
         export DOCKER_TAG=${DOCKER_TAG//[^[:alnum:].-]/-}
-        echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
-        docker build \
-            --build-arg BRANCH_ENVIRONMENT=${BRANCH_ENVIRONMENT} \
-            --build-arg VCS_REF=`git rev-parse --short HEAD` \
-            --build-arg VCS_URL=`git config --get remote.origin.url | sed 's#git@github.com:#https://github.com/#'` \
-            --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
-            --build-arg GITHUB_ACTOR=${GITHUB_ACTOR} \
-            --build-arg GITHUB_REPOSITORY=${GITHUB_REPOSITORY} \
-            --build-arg GITHUB_SHA=${GITHUB_SHA} \
-            --build-arg GITHUB_REF=${GITHUB_REF} \
-         . --file docker/Dockerfile --tag unocha/assessmentregistry8-site:${DOCKER_TAG}
-        docker push unocha/assessmentregistry8-site:${DOCKER_TAG}
+        echo ::set-output name=DOCKER_TAG::${DOCKER_TAG}
+        export VCS_REF=`git rev-parse --short HEAD`
+        echo ::set-output name=VCS_REF::${VCS_REF}
+        export VCS_URL=`git config --get remote.origin.url | sed 's#git@github.com:#https://github.com/#'`
+        echo ::set-output name=VCS_URL::${VCS_URL}
+        export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+        echo ::set-output name=BUILD_DATE::${BUILD_DATE}
+
+    - name: Build docker image
+      id: build
+      uses: docker/build-push-action@v2
+      with:
+        build-args: |
+          BRANCH_ENVIRONMENT=${BRANCH_ENVIRONMENT}
+          VCS_REF=${{ steps.meta.outputs.VCS_REF }}
+          VCS_URL=${{ steps.meta.outputs.VCS_URL }}
+          BUILD_DATE=${{ steps.meta.outputs.BUILD_DATE }}
+          GITHUB_ACTOR=${{ github.actor }}
+          GITHUB_REPOSITORY=${{ github.repository }}
+          GITHUB_SHA=${{ github.sha }}
+          GITHUB_REF=${{ github.ref }}
+        labels: |
+          info.humanitarianresponse.build.date=${{ steps.meta.outputs.BUILD_DATE }}
+          info.humanitarianresponse.build.person=${{ github.actor }}
+          info.humanitarianresponse.build.vcs-url=${{ steps.meta.outputs.VCS_URL }}
+          info.humanitarianresponse.build.vcs-ref=${{ steps.meta.outputs.VCS_REF }}
+        file: docker/Dockerfile
+        push: true
+        tags: unocha/assessmentregistry8-site:${{ steps.meta.outputs.DOCKER_TAG }}
+        secrets: |
+          "github_token=${{ secrets.ECR_GITHUB_TOKEN }}"
+
+    - name: Flowdock Failure
+      id: failure
+      if: failure()
+      uses: docker://ghcr.io/un-ocha/actions:flowdock-notify-main
+      env:
+        FLOWDOCK_TOKEN: ${{ secrets.FLOWDOCK_TOKEN }}
+        FLOWDOCK_ICON: 'boom'
+        FLOWDOCK_MESSAGE: 'Failed to build a new `assessmentregistry8-site` image from ${{ github.ref }}, please go check [GitHub](https://github.com/UN-OCHA/assessmentregistry8-site/actions/workflows/docker-build-image.yml).'
+        FLOWDOCK_TAGS: 'build,docker,${{ github.actor }}'
 
     - name: Flowdock Notify
+      id: success
+      if: success()
       uses: docker://ghcr.io/un-ocha/actions:flowdock-notify-main
       env:
         FLOWDOCK_TOKEN: ${{ secrets.FLOWDOCK_TOKEN }}
