@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - develop
-      - 'feature/**'
+      - feature/**
       - main
   release:
     types: [published]
@@ -13,94 +13,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Configure AWS Credentials
-      id: aws
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
-
-    - name: Login to Public ECR
-      uses: docker/login-action@v1
-      with:
-        registry: public.ecr.aws
-        username: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
-        password: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
-      env:
-        AWS_REGION: us-east-1
-
-    - name: Login to DockerHub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-      env:
-        AWS_REGION: us-east-1
-
     - name: Checkout code
       id: checkout
       uses: actions/checkout@v1
       with:
         fetch-depth: 0
-
-    - name: Determine environment type
-      id: env
-      uses: docker://ghcr.io/un-ocha/actions:determine-environment-main
-
-    - name: Image Metadata
-      id: meta
-      run: |
-        export DOCKER_TAG="${GITHUB_REF#refs/*/}"
-        export DOCKER_TAG=${DOCKER_TAG//[^[:alnum:].-]/-}
-        echo ::set-output name=DOCKER_TAG::${DOCKER_TAG}
-        export VCS_REF=`git rev-parse --short HEAD`
-        echo ::set-output name=VCS_REF::${VCS_REF}
-        export VCS_URL=`git config --get remote.origin.url | sed 's#git@github.com:#https://github.com/#'`
-        echo ::set-output name=VCS_URL::${VCS_URL}
-        export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
-        echo ::set-output name=BUILD_DATE::${BUILD_DATE}
-
-    - name: Build docker image
-      id: build
-      uses: docker/build-push-action@v2
+    - name: Build The Thing
+      id: build-action
+      uses: UN-OCHA/actions/drupal-docker-build@main
       with:
-        build-args: |
-          BRANCH_ENVIRONMENT=${BRANCH_ENVIRONMENT}
-          VCS_REF=${{ steps.meta.outputs.VCS_REF }}
-          VCS_URL=${{ steps.meta.outputs.VCS_URL }}
-          BUILD_DATE=${{ steps.meta.outputs.BUILD_DATE }}
-          GITHUB_ACTOR=${{ github.actor }}
-          GITHUB_REPOSITORY=${{ github.repository }}
-          GITHUB_SHA=${{ github.sha }}
-          GITHUB_REF=${{ github.ref }}
-        labels: |
-          info.humanitarianresponse.build.date=${{ steps.meta.outputs.BUILD_DATE }}
-          info.humanitarianresponse.build.person=${{ github.actor }}
-          info.humanitarianresponse.build.vcs-url=${{ steps.meta.outputs.VCS_URL }}
-          info.humanitarianresponse.build.vcs-ref=${{ steps.meta.outputs.VCS_REF }}
-        file: docker/Dockerfile
-        push: true
-        tags: unocha/assessmentregistry8-site:${{ steps.meta.outputs.DOCKER_TAG }}
-        secrets: |
-          "github_token=${{ secrets.ECR_GITHUB_TOKEN }}"
-
-    - name: Flowdock Failure
-      id: failure
-      if: failure()
-      uses: docker://ghcr.io/un-ocha/actions:flowdock-notify-main
-      env:
-        FLOWDOCK_TOKEN: ${{ secrets.FLOWDOCK_TOKEN }}
-        FLOWDOCK_ICON: 'boom'
-        FLOWDOCK_MESSAGE: 'Failed to build a new `assessmentregistry8-site` image from ${{ github.ref }}, please go check [GitHub](https://github.com/UN-OCHA/assessmentregistry8-site/actions/workflows/docker-build-image.yml).'
-        FLOWDOCK_TAGS: 'build,docker,${{ github.actor }}'
-
-    - name: Flowdock Notify
-      id: success
-      if: success()
-      uses: docker://ghcr.io/un-ocha/actions:flowdock-notify-main
-      env:
-        FLOWDOCK_TOKEN: ${{ secrets.FLOWDOCK_TOKEN }}
-        FLOWDOCK_ICON: 'package'
-        FLOWDOCK_MESSAGE: 'Built a new `unocha/assessmentregistry8-site` image from ${{ github.ref }} and pushed to [DockerHub](https://hub.docker.com/r/unocha/assessmentregistry8-site/tags).'
-        FLOWDOCK_TAGS: 'build,docker,${{ github.actor }}'
+        aws_access_key_id: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+        docker_registry_url: 'public.ecr.aws'
+        docker_registry_path: '/unocha/'
+        docker_image: 'assessmentregistry8-site'
+        docker_username: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+        docker_password: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
+        ecr_github_token: ${{ secrets.ECR_GITHUB_TOKEN }}
+        ecr_jenkins_token: ${{ secrets.JENKINS_ECR_TOKEN }}
+        flowdock_token: ${{ secrets.FLOWDOCK_TOKEN }}
+        flowdock_icon_failure: 'boom'
