@@ -26,6 +26,7 @@
         "drupal-composer/preserve-paths": "^0.1.6",
         "drupal/admin_denied": "^1.1",
         "drupal/components": "^2.4",
+        "drupal/config_split": "^2.0.0-beta4",
         "drupal/core-composer-scaffold": "^9.2.4",
         "drupal/core-dev": "^9.2.4",
         "drupal/core-recommended": "^9.2.4",
@@ -61,9 +62,12 @@
     },
     "require-dev": {
         "drupal/coder": "^8.3.12",
+        "drupal/config_filter": "^2.2",
         "drupal/console": "^1.9.7",
-        "drupal/devel": "^4.1.1",
+        "drupal/devel": "^4.1",
         "drupal/devel_php": "^1.3",
+        "drupal/stage_file_proxy": "^1.1",
+        "kint-php/kint": "^3.3",
         "phpcompatibility/php-compatibility": "^9.3.5",
         "phpmd/phpmd": "^2.9.1",
         "phpunit/phpunit": "^9.5.4"
@@ -124,7 +128,7 @@
         "composer-exit-on-patch-failure": true
     },
     "scripts": {
-        "git-hooks": "git config core.hooksPath git-hooks",
+        "git-hooks": "git config core.hooksPath git-hooks || exit 0",
         "sass-prepare": "cd html/themes/custom/common_design_subtheme && npm install",
         "sass-build": "cd html/themes/custom/common_design_subtheme && ./node_modules/.bin/sass sass:build",
         "sass-cleanup": "cd html/themes/custom/common_design_subtheme && rm -rf ./node_modules",
