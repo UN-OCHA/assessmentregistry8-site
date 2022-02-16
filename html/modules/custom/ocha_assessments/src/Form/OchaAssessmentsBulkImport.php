@@ -286,7 +286,7 @@ class OchaAssessmentsBulkImport extends FormBase {
       }
     }
 
-    $instructions = isset($item['instructions']) ? $item['instructions'] : '';
+    $instructions = $item['instructions'] ?? '';
     if (isset($item['data availability']) && !empty($item['data availability'])) {
       $assessment_document = $this->createAssessmentDocument($item['data availability'], $item['data url'], $instructions);
       if ($assessment_document) {
