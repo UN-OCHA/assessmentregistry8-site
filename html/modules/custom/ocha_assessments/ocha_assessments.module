@@ -378,7 +378,7 @@ function ocha_assessments_process_row_from_hrinfo($item) {
  */
 function ocha_assessments_parse_document($document, $created) {
   $data = [
-    'accessibility' => isset($document->accessibility) ? $document->accessibility : 'Publicly Available',
+    'accessibility' => $document->accessibility ?? 'Publicly Available',
     'uri' => '',
     'title' => '',
     'instructions' => '',
@@ -430,7 +430,7 @@ function ocha_assessments_node_presave($node) {
  */
 function ocha_assessments_create_document($accessibility, $document_url, $instructions = '') {
   $data = [
-    'accessibility' => isset($accessibility) ? $accessibility : 'Publicly Available',
+    'accessibility' => $accessibility ?? 'Publicly Available',
     'uri' => '',
     'title' => '',
     'instructions' => $instructions,
@@ -602,7 +602,7 @@ function ocha_assessments_get_export_filters() {
 
     $options = [];
     foreach ($facet_values as $facet_value) {
-      list($uuid, $label) = explode(':', trim($facet_value['filter'], '"'), 2);
+      [$uuid, $label] = explode(':', trim($facet_value['filter'], '"'), 2);
       $options[$uuid] = $label;
     }
 
