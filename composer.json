@@ -95,6 +95,11 @@
         }
     },
     "extra": {
+        "drush": {
+          "services": {
+            "drush.services.yml": "^10"
+          }
+        },
         "enable-patching": true,
         "patchLevel": {
             "drupal/core": "-p2"
