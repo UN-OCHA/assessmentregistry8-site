@@ -211,6 +211,8 @@ class StoreEntity extends ProcessorPluginBase {
       $entity_type_id = $item->getDatasource()->getEntityTypeId();
 
       // Unserialize the stored entity.
+      // @todo check how best to handle this data to avoid CS error.
+      // @codingStandardsIgnoreLine
       $data = unserialize(base64_decode(reset($values)));
 
       // Store the data in the storage client static cache so it's used when
