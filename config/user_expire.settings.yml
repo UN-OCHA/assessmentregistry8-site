@@ -1,0 +1,6 @@
+_core:
+  default_config_hash: PeDvVH4C3IZ7QFkvC1BUv3BZJVc7jLwQmJAEttVuVOw
+frequency: 1036800
+offset: 1209600
+user_expire_roles:
+  authenticated: 34128000
