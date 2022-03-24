@@ -1,4 +1,4 @@
-admin: cd_seven
-default: common_design_subtheme
 _core:
   default_config_hash: fOjer9hADYYnbCJVZMFZIIM1azTFWyg84ZkFDHfAbUg
+admin: cd_seven
+default: common_design_subtheme

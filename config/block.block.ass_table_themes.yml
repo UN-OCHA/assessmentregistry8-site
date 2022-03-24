@@ -18,12 +18,12 @@ plugin: 'facet_block:ass_table_themes'
 settings:
   id: 'facet_block:ass_table_themes'
   label: Theme(s)
-  provider: facets
   label_display: visible
+  provider: facets
   block_id: ass_table_themes
 visibility:
   request_path:
     id: request_path
-    pages: "/assessments/table\r\n/assessments/table/*"
     negate: false
     context_mapping: {  }
+    pages: "/assessments/table\r\n/assessments/table/*"

@@ -18,12 +18,12 @@ plugin: 'facet_block:ass_list_status'
 settings:
   id: 'facet_block:ass_list_status'
   label: Status
-  provider: facets
   label_display: visible
+  provider: facets
   block_id: ass_list_status
 visibility:
   request_path:
     id: request_path
-    pages: "/assessments/list\r\n/assessments/list/*"
     negate: false
     context_mapping: {  }
+    pages: "/assessments/list\r\n/assessments/list/*"

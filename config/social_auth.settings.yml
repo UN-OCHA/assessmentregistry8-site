@@ -1,8 +1,11 @@
+_core:
+  default_config_hash: 0E8z47ONguVcapiw1PGWDRs6g0NRDCzrym4mP_jcELU
 auth:
   social_auth_hid:
     route: social_auth_hid.redirect_to_hid
     img_path: modules/contrib/social_auth_hid/img/hid_logo.png
 post_login: /
+user_allowed: register
 redirect_user_form: false
 disable_admin_login: false
 disabled_roles:
@@ -12,6 +15,3 @@ disabled_roles:
   knowledge_management_global_editor: '0'
   knowledge_management_editor: '0'
   content_editor: '0'
-user_allowed: register
-_core:
-  default_config_hash: 0E8z47ONguVcapiw1PGWDRs6g0NRDCzrym4mP_jcELU

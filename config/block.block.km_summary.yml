@@ -18,11 +18,11 @@ plugin: 'facets_summary_block:km_summary'
 settings:
   id: 'facets_summary_block:km_summary'
   label: Summary
-  provider: facets_summary
   label_display: '0'
+  provider: facets_summary
 visibility:
   request_path:
     id: request_path
-    pages: "/knowledge-management\r\n/knowledge-management/*"
     negate: false
     context_mapping: {  }
+    pages: "/knowledge-management\r\n/knowledge-management/*"

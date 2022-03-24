@@ -2,11 +2,6 @@ uuid: 301ff482-95d6-4489-ae9b-e0467a53e8d8
 langcode: en
 status: true
 dependencies:
-  module:
-    - search_api_solr
-    - external_entities
-    - search_api
-    - ocha_docstore_files
   config:
     - field.storage.assessment.field_date
     - field.storage.assessment.field_disaster
@@ -24,24 +19,26 @@ dependencies:
     - field.storage.assessment.field_status
     - field.storage.assessment.field_themes
     - search_api.server.solr
+  module:
+    - search_api_solr
+    - external_entities
+    - search_api
+    - ocha_docstore_files
 third_party_settings:
   search_api_solr:
     finalize: false
     commit_before_finalize: false
     commit_after_finalize: false
-    multilingual:
-      limit_to_content_language: false
-      include_language_independent: true
     highlighter:
       maxAnalyzedChars: 51200
       fragmenter: gap
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
       regex:
         slop: 0.5
         pattern: blank
         maxAnalyzedChars: 10000
-      usePhraseHighlighter: true
-      highlightMultiTerm: true
-      preserveMulti: false
       highlight:
         mergeContiguous: false
         requireFieldMatch: false
@@ -65,6 +62,9 @@ third_party_settings:
       index_prefix: ''
       collection: ''
       timezone: ''
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
 id: assessments
 name: Assessments
 description: ''
@@ -321,6 +321,6 @@ tracker_settings:
   default:
     indexing_order: fifo
 options:
-  index_directly: true
   cron_limit: 50
+  index_directly: true
 server: solr

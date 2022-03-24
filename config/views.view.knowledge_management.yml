@@ -20,66 +20,12 @@ base_table: search_api_index_km
 base_field: search_api_id
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: none
-        options: {  }
-      cache:
-        type: tag
-        options: {  }
-      query:
-        type: views_query
-        options:
-          bypass_access: false
-          skip_access: false
-          preserve_facet_query_args: false
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: full
-        options:
-          items_per_page: 10
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 9
-      style:
-        type: default
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-      row:
-        type: search_api
-        options:
-          view_modes:
-            'entity:km':
-              km: teaser
+      title: 'Knowledge Management'
       fields:
         title_1:
           id: title_1
@@ -88,6 +34,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: Title
           exclude: false
           alter:
@@ -150,7 +97,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
         field_author:
           id: field_author
           table: search_api_index_km
@@ -158,6 +104,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: null
+          entity_field: null
+          plugin_id: search_api_field
           label: Author
           exclude: false
           alter:
@@ -220,9 +169,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: null
-          entity_field: null
-          plugin_id: search_api_field
         field_description:
           id: field_description
           table: search_api_datasource_km_entity_km
@@ -230,6 +176,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: km
+          plugin_id: search_api_field
           label: Description
           exclude: false
           alter:
@@ -291,8 +239,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: km
-          plugin_id: search_api_field
         title:
           id: title
           table: search_api_index_km
@@ -300,6 +246,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: Context
           exclude: false
           alter:
@@ -362,7 +309,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
         title_2:
           id: title_2
           table: search_api_index_km
@@ -370,6 +316,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_field
           label: 'Life cycle step'
           exclude: false
           alter:
@@ -432,7 +379,59 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          plugin_id: search_api_field
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 10
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: none
+        options: {  }
+      cache:
+        type: tag
+        options: {  }
+      empty: {  }
+      sorts:
+        field_original_publication_date:
+          id: field_original_publication_date
+          table: search_api_index_km
+          field: field_original_publication_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: field_original_publication_date
+          exposed: false
+      arguments: {  }
       filters:
         field_published:
           id: field_published
@@ -441,6 +440,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_boolean
           operator: '='
           value: '1'
           group: 1
@@ -471,27 +471,28 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: search_api_boolean
-      sorts:
-        field_original_publication_date:
-          id: field_original_publication_date
-          table: search_api_index_km
-          field: field_original_publication_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:km':
+              km: teaser
+      query:
+        type: views_query
+        options:
+          bypass_access: false
+          skip_access: false
+          preserve_facet_query_args: false
+      relationships: {  }
       header: {  }
       footer: {  }
-      empty: {  }
-      relationships: {  }
-      arguments: {  }
       display_extenders: {  }
-      title: 'Knowledge Management'
     cache_metadata:
       max-age: -1
       contexts:
@@ -502,17 +503,17 @@ display:
         - 'config:field.storage.km.field_description'
         - 'config:search_api.index.km'
   page_1:
-    display_plugin: page
     id: page_1
     display_title: Page
+    display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
-      path: knowledge-management
       cache:
         type: none
       defaults:
         cache: false
+      display_extenders: {  }
+      path: knowledge-management
     cache_metadata:
       max-age: -1
       contexts:
@@ -523,21 +524,21 @@ display:
         - 'config:field.storage.km.field_description'
         - 'config:search_api.index.km'
   page_2:
-    display_plugin: page
     id: page_2
     display_title: Unpublished
+    display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
-      path: knowledge-management-unpublished
+      title: 'Knowledge Management - Unpublished'
+      access:
+        type: role
+        options:
+          role:
+            administrator: administrator
+            knowledge_management_global_editor: knowledge_management_global_editor
+            knowledge_management_editor: knowledge_management_editor
       cache:
         type: none
-      defaults:
-        cache: false
-        filters: false
-        filter_groups: false
-        access: false
-        title: false
       filters:
         field_published:
           id: field_published
@@ -546,6 +547,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_boolean
           operator: '='
           value: '0'
           group: 1
@@ -576,20 +578,19 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: search_api_boolean
       filter_groups:
         operator: AND
         groups:
           1: AND
-      access:
-        type: role
-        options:
-          role:
-            administrator: administrator
-            knowledge_management_global_editor: knowledge_management_global_editor
-            knowledge_management_editor: knowledge_management_editor
+      defaults:
+        access: false
+        cache: false
+        title: false
+        filters: false
+        filter_groups: false
       display_description: ''
-      title: 'Knowledge Management - Unpublished'
+      display_extenders: {  }
+      path: knowledge-management-unpublished
     cache_metadata:
       max-age: -1
       contexts:
