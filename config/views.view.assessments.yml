@@ -51,83 +51,12 @@ base_table: search_api_index_assessments
 base_field: search_api_id
 display:
   default:
-    display_plugin: default
     id: default
     display_title: Master
+    display_plugin: default
     position: 0
     display_options:
-      access:
-        type: none
-        options: {  }
-      cache:
-        type: none
-        options: {  }
-      query:
-        type: views_query
-        options:
-          bypass_access: false
-          skip_access: false
-          preserve_facet_query_args: false
-      exposed_form:
-        type: basic
-        options:
-          submit_button: Apply
-          reset_button: false
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          expose_sort_order: true
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      pager:
-        type: full
-        options:
-          items_per_page: 25
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 9
-      style:
-        type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          override: true
-          sticky: false
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            field_organizations: field_organizations
-          info:
-            field_organizations:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: '-1'
-          empty_table: false
-      row:
-        type: search_api
-        options:
-          view_modes:
-            'entity:assessment':
-              assessment: teaser
+      title: Assessments
       fields:
         title:
           id: title
@@ -136,6 +65,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Title
           exclude: false
           alter:
@@ -198,8 +129,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_status:
           id: field_status
           table: search_api_datasource_assessments_entity_assessment
@@ -207,6 +136,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Status
           exclude: false
           alter:
@@ -272,8 +203,6 @@ display:
             display_methods:
               assessment_status:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_date:
           id: field_date
           table: search_api_datasource_assessments_entity_assessment
@@ -281,6 +210,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Date
           exclude: false
           alter:
@@ -345,8 +276,59 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 25
+          total_pages: null
+          id: 0
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      access:
+        type: none
+        options: {  }
+      cache:
+        type: none
+        options: {  }
+      empty: {  }
+      sorts:
+        field_date:
+          id: field_date
+          table: search_api_index_assessments
+          field: field_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: search_api
+          order: DESC
+          expose:
+            label: ''
+            field_identifier: field_date
+          exposed: false
+      arguments: {  }
       filters:
         field_published:
           id: field_published
@@ -355,6 +337,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_boolean
           operator: '='
           value: '1'
           group: 1
@@ -385,26 +368,44 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: search_api_boolean
-      sorts:
-        field_date:
-          id: field_date
-          table: search_api_index_assessments
-          field: field_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: DESC
-          exposed: false
-          expose:
-            label: ''
-          plugin_id: search_api
-      title: Assessments
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            field_organizations: field_organizations
+          default: '-1'
+          info:
+            field_organizations:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:assessment':
+              assessment: teaser
+      query:
+        type: views_query
+        options:
+          bypass_access: false
+          skip_access: false
+          preserve_facet_query_args: false
+      relationships: {  }
       header: {  }
       footer: {  }
-      empty: {  }
-      relationships: {  }
-      arguments: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1
@@ -417,32 +418,32 @@ display:
         - 'config:field.storage.assessment.field_status'
         - 'config:search_api.index.assessments'
   assessments_list:
-    display_plugin: page
     id: assessments_list
     display_title: List
+    display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
-      path: assessments/list
-      display_description: ''
+      cache:
+        type: none
       style:
         type: default
         options:
           row_class: ''
           default_row_class: true
           uses_fields: false
-      defaults:
-        style: false
-        row: false
-        cache: false
       row:
         type: search_api
         options:
           view_modes:
             'entity:assessment':
               assessment: teaser
-      cache:
-        type: none
+      defaults:
+        cache: false
+        style: false
+        row: false
+      display_description: ''
+      display_extenders: {  }
+      path: assessments/list
     cache_metadata:
       max-age: -1
       contexts:
@@ -454,18 +455,18 @@ display:
         - 'config:field.storage.assessment.field_status'
         - 'config:search_api.index.assessments'
   assessments_table:
-    display_plugin: page
     id: assessments_table
     display_title: Table
+    display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
-      path: assessments/table
-      display_description: ''
       cache:
         type: none
       defaults:
         cache: false
+      display_description: ''
+      display_extenders: {  }
+      path: assessments/table
     cache_metadata:
       max-age: -1
       contexts:
@@ -477,47 +478,11 @@ display:
         - 'config:field.storage.assessment.field_status'
         - 'config:search_api.index.assessments'
   data_export_1:
-    display_plugin: data_export
     id: data_export_1
     display_title: 'List: CSV export'
+    display_plugin: data_export
     position: 3
     display_options:
-      display_extenders: {  }
-      path: export/assessments-list
-      filename: 'assessments-[date:html_date]T[date:html_time].csv'
-      automatic_download: false
-      store_in_public_file_directory: true
-      redirect_to_display: none
-      custom_redirect_path: true
-      include_query_params: true
-      style:
-        type: ar_pivot_friendly_data_export
-        options:
-          formats:
-            csv: csv
-          csv_settings:
-            delimiter: ','
-            enclosure: '"'
-            escape_char: \
-            strip_tags: 1
-            trim: 1
-            encoding: utf8
-            utf8_bom: 0
-            use_serializer_encode_only: 0
-            pivot_friendly: 0
-      export_method: batch
-      export_batch_size: 100
-      facet_settings: 'search_api:views_page__assessments__assessments_list'
-      displays:
-        assessments_list: assessments_list
-        default: '0'
-        assessments_table: '0'
-      export_limit: 0
-      pager:
-        type: some
-        options:
-          items_per_page: 0
-          offset: 0
       fields:
         uuid:
           id: uuid
@@ -526,6 +491,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: UUID
           exclude: false
           alter:
@@ -588,8 +555,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         title_1:
           id: title_1
           table: search_api_datasource_assessments_entity_assessment
@@ -597,6 +562,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Title
           exclude: false
           alter:
@@ -659,8 +626,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_operations:
           id: field_operations
           table: search_api_datasource_assessments_entity_assessment
@@ -668,6 +633,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Operations
           exclude: false
           alter:
@@ -734,8 +701,6 @@ display:
               operation:
                 display_method: label
                 view_mode: default
-          entity_type: assessment
-          plugin_id: search_api_field
         field_locations:
           id: field_locations
           table: search_api_datasource_assessments_entity_assessment
@@ -743,6 +708,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Location(s)
           exclude: false
           alter:
@@ -809,8 +776,6 @@ display:
               location:
                 display_method: label
                 view_mode: default
-          entity_type: assessment
-          plugin_id: search_api_field
         field_other_location:
           id: field_other_location
           table: search_api_datasource_assessments_entity_assessment
@@ -818,6 +783,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Other location'
           exclude: false
           alter:
@@ -880,8 +847,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_date_1:
           id: field_date_1
           table: search_api_datasource_assessments_entity_assessment
@@ -889,6 +854,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Start date'
           exclude: false
           alter:
@@ -952,8 +919,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_date:
           id: field_date
           table: search_api_datasource_assessments_entity_assessment
@@ -961,6 +926,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'End date'
           exclude: false
           alter:
@@ -1024,8 +991,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_status_1:
           id: field_status_1
           table: search_api_datasource_assessments_entity_assessment
@@ -1033,6 +998,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Status
           exclude: false
           alter:
@@ -1098,8 +1065,6 @@ display:
             display_methods:
               assessment_status:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_subject_objective:
           id: field_subject_objective
           table: search_api_datasource_assessments_entity_assessment
@@ -1107,6 +1072,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Subject/Objective
           exclude: false
           alter:
@@ -1168,8 +1135,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_collection_methods:
           id: field_collection_methods
           table: search_api_datasource_assessments_entity_assessment
@@ -1177,6 +1142,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Collection Method(s)'
           exclude: false
           alter:
@@ -1238,8 +1205,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_frequency:
           id: field_frequency
           table: search_api_datasource_assessments_entity_assessment
@@ -1247,6 +1212,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Frequency
           exclude: false
           alter:
@@ -1308,8 +1275,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_methodology:
           id: field_methodology
           table: search_api_datasource_assessments_entity_assessment
@@ -1317,6 +1282,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Methodology
           exclude: false
           alter:
@@ -1378,8 +1345,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_level_of_representation:
           id: field_level_of_representation
           table: search_api_datasource_assessments_entity_assessment
@@ -1387,6 +1352,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Level of Representation'
           exclude: false
           alter:
@@ -1448,8 +1415,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_population_types:
           id: field_population_types
           table: search_api_datasource_assessments_entity_assessment
@@ -1457,6 +1422,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Population Type(s)'
           exclude: false
           alter:
@@ -1522,8 +1489,6 @@ display:
             display_methods:
               population_type:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_sample_size:
           id: field_sample_size
           table: search_api_datasource_assessments_entity_assessment
@@ -1531,6 +1496,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Sample size'
           exclude: false
           alter:
@@ -1593,8 +1560,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_units_of_measurement:
           id: field_units_of_measurement
           table: search_api_datasource_assessments_entity_assessment
@@ -1602,6 +1567,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Units of measurement'
           exclude: false
           alter:
@@ -1667,8 +1634,6 @@ display:
             display_methods:
               unit_of_measurement:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_themes:
           id: field_themes
           table: search_api_datasource_assessments_entity_assessment
@@ -1676,6 +1641,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Theme(s)
           exclude: false
           alter:
@@ -1741,8 +1708,6 @@ display:
             display_methods:
               theme:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_disaster:
           id: field_disaster
           table: search_api_datasource_assessments_entity_assessment
@@ -1750,6 +1715,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Disaster(s)
           exclude: false
           alter:
@@ -1815,8 +1782,6 @@ display:
             display_methods:
               disaster:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_key_findings:
           id: field_key_findings
           table: search_api_datasource_assessments_entity_assessment
@@ -1824,6 +1789,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Key findings'
           exclude: false
           alter:
@@ -1885,8 +1852,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_organizations:
           id: field_organizations
           table: search_api_datasource_assessments_entity_assessment
@@ -1894,6 +1859,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Leading/Coordinating Organization(s)'
           exclude: false
           alter:
@@ -1959,8 +1926,6 @@ display:
             display_methods:
               organization:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_asst_organizations:
           id: field_asst_organizations
           table: search_api_datasource_assessments_entity_assessment
@@ -1968,6 +1933,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Participating Organization(s)'
           exclude: false
           alter:
@@ -2033,8 +2000,6 @@ display:
             display_methods:
               organization:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_local_coordination_groups:
           id: field_local_coordination_groups
           table: search_api_datasource_assessments_entity_assessment
@@ -2042,6 +2007,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Clusters
           exclude: false
           alter:
@@ -2107,8 +2074,6 @@ display:
             display_methods:
               local_group:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         title:
           id: title
           table: search_api_entity_assessment_document
@@ -2116,6 +2081,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Title'
           exclude: false
           alter:
@@ -2178,8 +2145,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_accessibility:
           id: field_accessibility
           table: search_api_entity_assessment_document
@@ -2187,6 +2152,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Accessibility'
           exclude: false
           alter:
@@ -2248,8 +2215,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_instructions:
           id: field_instructions
           table: search_api_entity_assessment_document
@@ -2257,6 +2222,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Instructions'
           exclude: false
           alter:
@@ -2318,8 +2285,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_files:
           id: field_files
           table: search_api_entity_assessment_document
@@ -2327,6 +2292,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Files'
           exclude: false
           alter:
@@ -2389,8 +2356,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         title_2:
           id: title_2
           table: search_api_entity_assessment_document
@@ -2398,6 +2363,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Title'
           exclude: false
           alter:
@@ -2460,8 +2427,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_accessibility_1:
           id: field_accessibility_1
           table: search_api_entity_assessment_document
@@ -2469,6 +2434,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Accessibility'
           exclude: false
           alter:
@@ -2530,8 +2497,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_instructions_1:
           id: field_instructions_1
           table: search_api_entity_assessment_document
@@ -2539,6 +2504,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Instructions'
           exclude: false
           alter:
@@ -2600,8 +2567,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_files_1:
           id: field_files_1
           table: search_api_entity_assessment_document
@@ -2609,6 +2574,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Files'
           exclude: false
           alter:
@@ -2671,8 +2638,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         title_3:
           id: title_3
           table: search_api_entity_assessment_document
@@ -2680,6 +2645,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Title'
           exclude: false
           alter:
@@ -2742,8 +2709,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_accessibility_2:
           id: field_accessibility_2
           table: search_api_entity_assessment_document
@@ -2751,6 +2716,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Accessibility'
           exclude: false
           alter:
@@ -2812,8 +2779,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_instructions_2:
           id: field_instructions_2
           table: search_api_entity_assessment_document
@@ -2821,6 +2786,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Instructions'
           exclude: false
           alter:
@@ -2882,8 +2849,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_files_2:
           id: field_files_2
           table: search_api_entity_assessment_document
@@ -2891,6 +2856,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Files'
           exclude: false
           alter:
@@ -2953,46 +2920,31 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
-      defaults:
-        fields: false
-        relationships: false
-        access: false
-      relationships:
-        field_assessment_data:
-          id: field_assessment_data
-          table: search_api_datasource_assessments_entity_assessment
-          field: field_assessment_data
-          relationship: none
-          group_type: group
-          admin_label: 'Assessment data: Assessment document'
-          required: false
-          skip_access: false
-          entity_type: assessment
-          plugin_id: search_api
-        field_assessment_questionnaire:
-          id: field_assessment_questionnaire
-          table: search_api_datasource_assessments_entity_assessment
-          field: field_assessment_questionnaire
-          relationship: none
-          group_type: group
-          admin_label: 'Assessment questionnaire: Assessment document'
-          required: false
-          skip_access: false
-          entity_type: assessment
-          plugin_id: search_api
-        field_assessment_report:
-          id: field_assessment_report
-          table: search_api_datasource_assessments_entity_assessment
-          field: field_assessment_report
-          relationship: none
-          group_type: group
-          admin_label: 'Assessment report: Assessment document'
-          required: false
-          skip_access: false
-          entity_type: assessment
-          plugin_id: search_api
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 0
+      access:
+        type: role
+        options:
+          role:
+            authenticated: authenticated
+      style:
+        type: ar_pivot_friendly_data_export
+        options:
+          formats:
+            csv: csv
+          csv_settings:
+            delimiter: ','
+            enclosure: '"'
+            escape_char: \
+            strip_tags: 1
+            trim: 1
+            encoding: utf8
+            utf8_bom: 0
+            use_serializer_encode_only: 0
+            pivot_friendly: 0
       row:
         type: data_field
         options:
@@ -3096,15 +3048,64 @@ display:
             field_files_2:
               alias: ''
               raw_output: false
+      defaults:
+        access: false
+        relationships: false
+        fields: false
+      relationships:
+        field_assessment_data:
+          id: field_assessment_data
+          table: search_api_datasource_assessments_entity_assessment
+          field: field_assessment_data
+          relationship: none
+          group_type: group
+          admin_label: 'Assessment data: Assessment document'
+          entity_type: assessment
+          plugin_id: search_api
+          required: false
+          skip_access: false
+        field_assessment_questionnaire:
+          id: field_assessment_questionnaire
+          table: search_api_datasource_assessments_entity_assessment
+          field: field_assessment_questionnaire
+          relationship: none
+          group_type: group
+          admin_label: 'Assessment questionnaire: Assessment document'
+          entity_type: assessment
+          plugin_id: search_api
+          required: false
+          skip_access: false
+        field_assessment_report:
+          id: field_assessment_report
+          table: search_api_datasource_assessments_entity_assessment
+          field: field_assessment_report
+          relationship: none
+          group_type: group
+          admin_label: 'Assessment report: Assessment document'
+          entity_type: assessment
+          plugin_id: search_api
+          required: false
+          skip_access: false
       display_description: ''
+      display_extenders: {  }
+      path: export/assessments-list
       auth:
         - cookie
-      access:
-        type: role
-        options:
-          role:
-            authenticated: authenticated
+      displays:
+        assessments_list: assessments_list
+        default: '0'
+        assessments_table: '0'
+      filename: 'assessments-[date:html_date]T[date:html_time].csv'
+      automatic_download: false
       redirect_path: '/assessments/list/[view:facets_query]'
+      export_method: batch
+      export_batch_size: 100
+      export_limit: 0
+      facet_settings: 'search_api:views_page__assessments__assessments_list'
+      store_in_public_file_directory: true
+      custom_redirect_path: true
+      redirect_to_display: none
+      include_query_params: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -3137,47 +3138,11 @@ display:
         - 'config:field.storage.assessment_document.field_instructions'
         - 'config:search_api.index.assessments'
   data_export_2:
-    display_plugin: data_export
     id: data_export_2
     display_title: 'List: CSV export - disaggregated'
+    display_plugin: data_export
     position: 3
     display_options:
-      display_extenders: {  }
-      path: export/assessments-list-disaggregated
-      filename: 'assessments-disaggregated-[date:html_date]T[date:html_time].csv'
-      automatic_download: false
-      store_in_public_file_directory: true
-      redirect_to_display: none
-      custom_redirect_path: true
-      include_query_params: true
-      style:
-        type: ar_pivot_friendly_data_export
-        options:
-          formats:
-            csv: csv
-          csv_settings:
-            delimiter: ','
-            enclosure: '"'
-            escape_char: \
-            strip_tags: 1
-            trim: 1
-            encoding: utf8
-            utf8_bom: 0
-            use_serializer_encode_only: 0
-            pivot_friendly: 1
-      export_method: batch
-      export_batch_size: 100
-      facet_settings: 'search_api:views_page__assessments__assessments_list'
-      displays:
-        assessments_list: assessments_list
-        default: '0'
-        assessments_table: '0'
-      export_limit: 0
-      pager:
-        type: some
-        options:
-          items_per_page: 0
-          offset: 0
       fields:
         uuid:
           id: uuid
@@ -3186,6 +3151,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: UUID
           exclude: false
           alter:
@@ -3248,8 +3215,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         title_1:
           id: title_1
           table: search_api_datasource_assessments_entity_assessment
@@ -3257,6 +3222,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Title
           exclude: false
           alter:
@@ -3319,8 +3286,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_operations:
           id: field_operations
           table: search_api_datasource_assessments_entity_assessment
@@ -3328,6 +3293,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Operations
           exclude: false
           alter:
@@ -3394,8 +3361,6 @@ display:
               operation:
                 display_method: label
                 view_mode: default
-          entity_type: assessment
-          plugin_id: search_api_field
         field_locations:
           id: field_locations
           table: search_api_datasource_assessments_entity_assessment
@@ -3403,6 +3368,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Location(s)
           exclude: false
           alter:
@@ -3469,8 +3436,6 @@ display:
               location:
                 display_method: label
                 view_mode: default
-          entity_type: assessment
-          plugin_id: search_api_field
         field_other_location:
           id: field_other_location
           table: search_api_datasource_assessments_entity_assessment
@@ -3478,6 +3443,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Other location'
           exclude: false
           alter:
@@ -3540,8 +3507,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_date_1:
           id: field_date_1
           table: search_api_datasource_assessments_entity_assessment
@@ -3549,6 +3514,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Start date'
           exclude: false
           alter:
@@ -3612,8 +3579,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_date:
           id: field_date
           table: search_api_datasource_assessments_entity_assessment
@@ -3621,6 +3586,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'End date'
           exclude: false
           alter:
@@ -3684,8 +3651,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_status_1:
           id: field_status_1
           table: search_api_datasource_assessments_entity_assessment
@@ -3693,6 +3658,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Status
           exclude: false
           alter:
@@ -3758,8 +3725,6 @@ display:
             display_methods:
               assessment_status:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_subject_objective:
           id: field_subject_objective
           table: search_api_datasource_assessments_entity_assessment
@@ -3767,6 +3732,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Subject/Objective
           exclude: false
           alter:
@@ -3828,8 +3795,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_collection_methods:
           id: field_collection_methods
           table: search_api_datasource_assessments_entity_assessment
@@ -3837,6 +3802,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Collection Method(s)'
           exclude: false
           alter:
@@ -3898,8 +3865,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_frequency:
           id: field_frequency
           table: search_api_datasource_assessments_entity_assessment
@@ -3907,6 +3872,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Frequency
           exclude: false
           alter:
@@ -3968,8 +3935,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_methodology:
           id: field_methodology
           table: search_api_datasource_assessments_entity_assessment
@@ -3977,6 +3942,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Methodology
           exclude: false
           alter:
@@ -4038,8 +4005,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_level_of_representation:
           id: field_level_of_representation
           table: search_api_datasource_assessments_entity_assessment
@@ -4047,6 +4012,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Level of Representation'
           exclude: false
           alter:
@@ -4108,8 +4075,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_population_types:
           id: field_population_types
           table: search_api_datasource_assessments_entity_assessment
@@ -4117,6 +4082,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Population Type(s)'
           exclude: false
           alter:
@@ -4182,8 +4149,6 @@ display:
             display_methods:
               population_type:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_sample_size:
           id: field_sample_size
           table: search_api_datasource_assessments_entity_assessment
@@ -4191,6 +4156,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Sample size'
           exclude: false
           alter:
@@ -4253,8 +4220,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_units_of_measurement:
           id: field_units_of_measurement
           table: search_api_datasource_assessments_entity_assessment
@@ -4262,6 +4227,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Units of measurement'
           exclude: false
           alter:
@@ -4327,8 +4294,6 @@ display:
             display_methods:
               unit_of_measurement:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_themes:
           id: field_themes
           table: search_api_datasource_assessments_entity_assessment
@@ -4336,6 +4301,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Theme(s)
           exclude: false
           alter:
@@ -4401,8 +4368,6 @@ display:
             display_methods:
               theme:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_disaster:
           id: field_disaster
           table: search_api_datasource_assessments_entity_assessment
@@ -4410,6 +4375,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Disaster(s)
           exclude: false
           alter:
@@ -4475,8 +4442,6 @@ display:
             display_methods:
               disaster:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_key_findings:
           id: field_key_findings
           table: search_api_datasource_assessments_entity_assessment
@@ -4484,6 +4449,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Key findings'
           exclude: false
           alter:
@@ -4545,8 +4512,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_organizations:
           id: field_organizations
           table: search_api_datasource_assessments_entity_assessment
@@ -4554,6 +4519,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Leading/Coordinating Organization(s)'
           exclude: false
           alter:
@@ -4619,8 +4586,6 @@ display:
             display_methods:
               organization:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_asst_organizations:
           id: field_asst_organizations
           table: search_api_datasource_assessments_entity_assessment
@@ -4628,6 +4593,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Participating Organization(s)'
           exclude: false
           alter:
@@ -4693,8 +4660,6 @@ display:
             display_methods:
               organization:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_local_coordination_groups:
           id: field_local_coordination_groups
           table: search_api_datasource_assessments_entity_assessment
@@ -4702,6 +4667,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Clusters
           exclude: false
           alter:
@@ -4767,8 +4734,6 @@ display:
             display_methods:
               local_group:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         title:
           id: title
           table: search_api_entity_assessment_document
@@ -4776,6 +4741,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Title'
           exclude: false
           alter:
@@ -4838,8 +4805,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_accessibility:
           id: field_accessibility
           table: search_api_entity_assessment_document
@@ -4847,6 +4812,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Accessibility'
           exclude: false
           alter:
@@ -4908,8 +4875,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_instructions:
           id: field_instructions
           table: search_api_entity_assessment_document
@@ -4917,6 +4882,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Instructions'
           exclude: false
           alter:
@@ -4978,8 +4945,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_files:
           id: field_files
           table: search_api_entity_assessment_document
@@ -4987,6 +4952,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Files'
           exclude: false
           alter:
@@ -5049,8 +5016,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         title_2:
           id: title_2
           table: search_api_entity_assessment_document
@@ -5058,6 +5023,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Title'
           exclude: false
           alter:
@@ -5120,8 +5087,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_accessibility_1:
           id: field_accessibility_1
           table: search_api_entity_assessment_document
@@ -5129,6 +5094,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Accessibility'
           exclude: false
           alter:
@@ -5190,8 +5157,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_instructions_1:
           id: field_instructions_1
           table: search_api_entity_assessment_document
@@ -5199,6 +5164,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Instructions'
           exclude: false
           alter:
@@ -5260,8 +5227,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_files_1:
           id: field_files_1
           table: search_api_entity_assessment_document
@@ -5269,6 +5234,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Files'
           exclude: false
           alter:
@@ -5331,8 +5298,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         title_3:
           id: title_3
           table: search_api_entity_assessment_document
@@ -5340,6 +5305,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Title'
           exclude: false
           alter:
@@ -5402,8 +5369,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_accessibility_2:
           id: field_accessibility_2
           table: search_api_entity_assessment_document
@@ -5411,6 +5376,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Accessibility'
           exclude: false
           alter:
@@ -5472,8 +5439,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_instructions_2:
           id: field_instructions_2
           table: search_api_entity_assessment_document
@@ -5481,6 +5446,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Instructions'
           exclude: false
           alter:
@@ -5542,8 +5509,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_files_2:
           id: field_files_2
           table: search_api_entity_assessment_document
@@ -5551,6 +5516,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Files'
           exclude: false
           alter:
@@ -5613,46 +5580,31 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
-      defaults:
-        fields: false
-        relationships: false
-        access: false
-      relationships:
-        field_assessment_data:
-          id: field_assessment_data
-          table: search_api_datasource_assessments_entity_assessment
-          field: field_assessment_data
-          relationship: none
-          group_type: group
-          admin_label: 'Assessment data: Assessment document'
-          required: false
-          skip_access: false
-          entity_type: assessment
-          plugin_id: search_api
-        field_assessment_questionnaire:
-          id: field_assessment_questionnaire
-          table: search_api_datasource_assessments_entity_assessment
-          field: field_assessment_questionnaire
-          relationship: none
-          group_type: group
-          admin_label: 'Assessment questionnaire: Assessment document'
-          required: false
-          skip_access: false
-          entity_type: assessment
-          plugin_id: search_api
-        field_assessment_report:
-          id: field_assessment_report
-          table: search_api_datasource_assessments_entity_assessment
-          field: field_assessment_report
-          relationship: none
-          group_type: group
-          admin_label: 'Assessment report: Assessment document'
-          required: false
-          skip_access: false
-          entity_type: assessment
-          plugin_id: search_api
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 0
+      access:
+        type: role
+        options:
+          role:
+            authenticated: authenticated
+      style:
+        type: ar_pivot_friendly_data_export
+        options:
+          formats:
+            csv: csv
+          csv_settings:
+            delimiter: ','
+            enclosure: '"'
+            escape_char: \
+            strip_tags: 1
+            trim: 1
+            encoding: utf8
+            utf8_bom: 0
+            use_serializer_encode_only: 0
+            pivot_friendly: 1
       row:
         type: data_field
         options:
@@ -5756,15 +5708,64 @@ display:
             field_files_2:
               alias: ''
               raw_output: false
+      defaults:
+        access: false
+        relationships: false
+        fields: false
+      relationships:
+        field_assessment_data:
+          id: field_assessment_data
+          table: search_api_datasource_assessments_entity_assessment
+          field: field_assessment_data
+          relationship: none
+          group_type: group
+          admin_label: 'Assessment data: Assessment document'
+          entity_type: assessment
+          plugin_id: search_api
+          required: false
+          skip_access: false
+        field_assessment_questionnaire:
+          id: field_assessment_questionnaire
+          table: search_api_datasource_assessments_entity_assessment
+          field: field_assessment_questionnaire
+          relationship: none
+          group_type: group
+          admin_label: 'Assessment questionnaire: Assessment document'
+          entity_type: assessment
+          plugin_id: search_api
+          required: false
+          skip_access: false
+        field_assessment_report:
+          id: field_assessment_report
+          table: search_api_datasource_assessments_entity_assessment
+          field: field_assessment_report
+          relationship: none
+          group_type: group
+          admin_label: 'Assessment report: Assessment document'
+          entity_type: assessment
+          plugin_id: search_api
+          required: false
+          skip_access: false
       display_description: ''
+      display_extenders: {  }
+      path: export/assessments-list-disaggregated
       auth:
         - cookie
-      access:
-        type: role
-        options:
-          role:
-            authenticated: authenticated
+      displays:
+        assessments_list: assessments_list
+        default: '0'
+        assessments_table: '0'
+      filename: 'assessments-disaggregated-[date:html_date]T[date:html_time].csv'
+      automatic_download: false
       redirect_path: '/assessments/list/[view:facets_query]'
+      export_method: batch
+      export_batch_size: 100
+      export_limit: 0
+      facet_settings: 'search_api:views_page__assessments__assessments_list'
+      store_in_public_file_directory: true
+      custom_redirect_path: true
+      redirect_to_display: none
+      include_query_params: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -5797,48 +5798,11 @@ display:
         - 'config:field.storage.assessment_document.field_instructions'
         - 'config:search_api.index.assessments'
   data_export_3:
-    display_plugin: data_export
     id: data_export_3
     display_title: 'Table: CSV export'
+    display_plugin: data_export
     position: 3
     display_options:
-      display_extenders: {  }
-      path: export/assessments-table
-      filename: 'assessments-[date:html_date]T[date:html_time].csv'
-      automatic_download: false
-      store_in_public_file_directory: true
-      redirect_to_display: none
-      custom_redirect_path: true
-      include_query_params: true
-      style:
-        type: ar_pivot_friendly_data_export
-        options:
-          formats:
-            csv: csv
-          csv_settings:
-            delimiter: ','
-            enclosure: '"'
-            escape_char: \
-            strip_tags: 1
-            trim: 1
-            encoding: utf8
-            utf8_bom: 0
-            use_serializer_encode_only: 0
-            pivot_friendly: 0
-      export_method: batch
-      export_batch_size: 100
-      facet_settings: 'search_api:views_page__assessments__assessments_table'
-      displays:
-        assessments_table: assessments_table
-        default: '0'
-        assessments_list: '0'
-        page_1: '0'
-      export_limit: 0
-      pager:
-        type: some
-        options:
-          items_per_page: 0
-          offset: 0
       fields:
         uuid:
           id: uuid
@@ -5847,6 +5811,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: UUID
           exclude: false
           alter:
@@ -5909,8 +5875,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         title_1:
           id: title_1
           table: search_api_datasource_assessments_entity_assessment
@@ -5918,6 +5882,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Title
           exclude: false
           alter:
@@ -5980,8 +5946,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_operations:
           id: field_operations
           table: search_api_datasource_assessments_entity_assessment
@@ -5989,6 +5953,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Operations
           exclude: false
           alter:
@@ -6055,8 +6021,6 @@ display:
               operation:
                 display_method: label
                 view_mode: default
-          entity_type: assessment
-          plugin_id: search_api_field
         field_locations:
           id: field_locations
           table: search_api_datasource_assessments_entity_assessment
@@ -6064,6 +6028,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Location(s)
           exclude: false
           alter:
@@ -6130,8 +6096,6 @@ display:
               location:
                 display_method: label
                 view_mode: default
-          entity_type: assessment
-          plugin_id: search_api_field
         field_other_location:
           id: field_other_location
           table: search_api_datasource_assessments_entity_assessment
@@ -6139,6 +6103,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Other location'
           exclude: false
           alter:
@@ -6201,8 +6167,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_date_1:
           id: field_date_1
           table: search_api_datasource_assessments_entity_assessment
@@ -6210,6 +6174,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Start date'
           exclude: false
           alter:
@@ -6273,8 +6239,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_date:
           id: field_date
           table: search_api_datasource_assessments_entity_assessment
@@ -6282,6 +6246,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'End date'
           exclude: false
           alter:
@@ -6345,8 +6311,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_status_1:
           id: field_status_1
           table: search_api_datasource_assessments_entity_assessment
@@ -6354,6 +6318,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Status
           exclude: false
           alter:
@@ -6419,8 +6385,6 @@ display:
             display_methods:
               assessment_status:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_subject_objective:
           id: field_subject_objective
           table: search_api_datasource_assessments_entity_assessment
@@ -6428,6 +6392,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Subject/Objective
           exclude: false
           alter:
@@ -6489,8 +6455,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_collection_methods:
           id: field_collection_methods
           table: search_api_datasource_assessments_entity_assessment
@@ -6498,6 +6462,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Collection Method(s)'
           exclude: false
           alter:
@@ -6559,8 +6525,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_frequency:
           id: field_frequency
           table: search_api_datasource_assessments_entity_assessment
@@ -6568,6 +6532,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Frequency
           exclude: false
           alter:
@@ -6629,8 +6595,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_methodology:
           id: field_methodology
           table: search_api_datasource_assessments_entity_assessment
@@ -6638,6 +6602,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Methodology
           exclude: false
           alter:
@@ -6699,8 +6665,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_level_of_representation:
           id: field_level_of_representation
           table: search_api_datasource_assessments_entity_assessment
@@ -6708,6 +6672,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Level of Representation'
           exclude: false
           alter:
@@ -6769,8 +6735,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_population_types:
           id: field_population_types
           table: search_api_datasource_assessments_entity_assessment
@@ -6778,6 +6742,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Population Type(s)'
           exclude: false
           alter:
@@ -6843,8 +6809,6 @@ display:
             display_methods:
               population_type:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_sample_size:
           id: field_sample_size
           table: search_api_datasource_assessments_entity_assessment
@@ -6852,6 +6816,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Sample size'
           exclude: false
           alter:
@@ -6914,8 +6880,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_units_of_measurement:
           id: field_units_of_measurement
           table: search_api_datasource_assessments_entity_assessment
@@ -6923,6 +6887,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Units of measurement'
           exclude: false
           alter:
@@ -6988,8 +6954,6 @@ display:
             display_methods:
               unit_of_measurement:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_themes:
           id: field_themes
           table: search_api_datasource_assessments_entity_assessment
@@ -6997,6 +6961,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Theme(s)
           exclude: false
           alter:
@@ -7062,8 +7028,6 @@ display:
             display_methods:
               theme:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_disaster:
           id: field_disaster
           table: search_api_datasource_assessments_entity_assessment
@@ -7071,6 +7035,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Disaster(s)
           exclude: false
           alter:
@@ -7136,8 +7102,6 @@ display:
             display_methods:
               disaster:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_key_findings:
           id: field_key_findings
           table: search_api_datasource_assessments_entity_assessment
@@ -7145,6 +7109,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Key findings'
           exclude: false
           alter:
@@ -7206,8 +7172,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_organizations:
           id: field_organizations
           table: search_api_datasource_assessments_entity_assessment
@@ -7215,6 +7179,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Leading/Coordinating Organization(s)'
           exclude: false
           alter:
@@ -7280,8 +7246,6 @@ display:
             display_methods:
               organization:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_asst_organizations:
           id: field_asst_organizations
           table: search_api_datasource_assessments_entity_assessment
@@ -7289,6 +7253,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Participating Organization(s)'
           exclude: false
           alter:
@@ -7354,8 +7320,6 @@ display:
             display_methods:
               organization:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_local_coordination_groups:
           id: field_local_coordination_groups
           table: search_api_datasource_assessments_entity_assessment
@@ -7363,6 +7327,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Clusters
           exclude: false
           alter:
@@ -7429,8 +7395,6 @@ display:
               local_group:
                 display_method: label
                 view_mode: default
-          entity_type: assessment
-          plugin_id: search_api_field
         title:
           id: title
           table: search_api_entity_assessment_document
@@ -7438,6 +7402,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Title'
           exclude: false
           alter:
@@ -7500,8 +7466,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_accessibility:
           id: field_accessibility
           table: search_api_entity_assessment_document
@@ -7509,6 +7473,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Accessibility'
           exclude: false
           alter:
@@ -7570,8 +7536,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_instructions:
           id: field_instructions
           table: search_api_entity_assessment_document
@@ -7579,6 +7543,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Instructions'
           exclude: false
           alter:
@@ -7640,8 +7606,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_files:
           id: field_files
           table: search_api_entity_assessment_document
@@ -7649,6 +7613,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Files'
           exclude: false
           alter:
@@ -7711,8 +7677,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         title_2:
           id: title_2
           table: search_api_entity_assessment_document
@@ -7720,6 +7684,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Title'
           exclude: false
           alter:
@@ -7782,8 +7748,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_accessibility_1:
           id: field_accessibility_1
           table: search_api_entity_assessment_document
@@ -7791,6 +7755,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Accessibility'
           exclude: false
           alter:
@@ -7852,8 +7818,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_instructions_1:
           id: field_instructions_1
           table: search_api_entity_assessment_document
@@ -7861,6 +7825,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Instructions'
           exclude: false
           alter:
@@ -7922,8 +7888,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_files_1:
           id: field_files_1
           table: search_api_entity_assessment_document
@@ -7931,6 +7895,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Files'
           exclude: false
           alter:
@@ -7993,8 +7959,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         title_3:
           id: title_3
           table: search_api_entity_assessment_document
@@ -8002,6 +7966,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Title'
           exclude: false
           alter:
@@ -8064,8 +8030,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_accessibility_2:
           id: field_accessibility_2
           table: search_api_entity_assessment_document
@@ -8073,6 +8037,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Accessibility'
           exclude: false
           alter:
@@ -8134,8 +8100,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_instructions_2:
           id: field_instructions_2
           table: search_api_entity_assessment_document
@@ -8143,6 +8107,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Instructions'
           exclude: false
           alter:
@@ -8204,8 +8170,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_files_2:
           id: field_files_2
           table: search_api_entity_assessment_document
@@ -8213,6 +8177,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Files'
           exclude: false
           alter:
@@ -8275,46 +8241,31 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
-      defaults:
-        fields: false
-        relationships: false
-        access: false
-      relationships:
-        field_assessment_data:
-          id: field_assessment_data
-          table: search_api_datasource_assessments_entity_assessment
-          field: field_assessment_data
-          relationship: none
-          group_type: group
-          admin_label: 'Assessment data: Assessment document'
-          required: false
-          skip_access: false
-          entity_type: assessment
-          plugin_id: search_api
-        field_assessment_questionnaire:
-          id: field_assessment_questionnaire
-          table: search_api_datasource_assessments_entity_assessment
-          field: field_assessment_questionnaire
-          relationship: none
-          group_type: group
-          admin_label: 'Assessment questionnaire: Assessment document'
-          required: false
-          skip_access: false
-          entity_type: assessment
-          plugin_id: search_api
-        field_assessment_report:
-          id: field_assessment_report
-          table: search_api_datasource_assessments_entity_assessment
-          field: field_assessment_report
-          relationship: none
-          group_type: group
-          admin_label: 'Assessment report: Assessment document'
-          required: false
-          skip_access: false
-          entity_type: assessment
-          plugin_id: search_api
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 0
+      access:
+        type: role
+        options:
+          role:
+            authenticated: authenticated
+      style:
+        type: ar_pivot_friendly_data_export
+        options:
+          formats:
+            csv: csv
+          csv_settings:
+            delimiter: ','
+            enclosure: '"'
+            escape_char: \
+            strip_tags: 1
+            trim: 1
+            encoding: utf8
+            utf8_bom: 0
+            use_serializer_encode_only: 0
+            pivot_friendly: 0
       row:
         type: data_field
         options:
@@ -8418,15 +8369,65 @@ display:
             field_files_2:
               alias: ''
               raw_output: false
+      defaults:
+        access: false
+        relationships: false
+        fields: false
+      relationships:
+        field_assessment_data:
+          id: field_assessment_data
+          table: search_api_datasource_assessments_entity_assessment
+          field: field_assessment_data
+          relationship: none
+          group_type: group
+          admin_label: 'Assessment data: Assessment document'
+          entity_type: assessment
+          plugin_id: search_api
+          required: false
+          skip_access: false
+        field_assessment_questionnaire:
+          id: field_assessment_questionnaire
+          table: search_api_datasource_assessments_entity_assessment
+          field: field_assessment_questionnaire
+          relationship: none
+          group_type: group
+          admin_label: 'Assessment questionnaire: Assessment document'
+          entity_type: assessment
+          plugin_id: search_api
+          required: false
+          skip_access: false
+        field_assessment_report:
+          id: field_assessment_report
+          table: search_api_datasource_assessments_entity_assessment
+          field: field_assessment_report
+          relationship: none
+          group_type: group
+          admin_label: 'Assessment report: Assessment document'
+          entity_type: assessment
+          plugin_id: search_api
+          required: false
+          skip_access: false
       display_description: ''
+      display_extenders: {  }
+      path: export/assessments-table
       auth:
         - cookie
-      access:
-        type: role
-        options:
-          role:
-            authenticated: authenticated
+      displays:
+        assessments_table: assessments_table
+        default: '0'
+        assessments_list: '0'
+        page_1: '0'
+      filename: 'assessments-[date:html_date]T[date:html_time].csv'
+      automatic_download: false
       redirect_path: '/assessments/table/[view:facets_query]'
+      export_method: batch
+      export_batch_size: 100
+      export_limit: 0
+      facet_settings: 'search_api:views_page__assessments__assessments_table'
+      store_in_public_file_directory: true
+      custom_redirect_path: true
+      redirect_to_display: none
+      include_query_params: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -8459,48 +8460,11 @@ display:
         - 'config:field.storage.assessment_document.field_instructions'
         - 'config:search_api.index.assessments'
   data_export_4:
-    display_plugin: data_export
     id: data_export_4
     display_title: 'Table: CSV export - disaggregated'
+    display_plugin: data_export
     position: 3
     display_options:
-      display_extenders: {  }
-      path: export/assessments-table-disaggregated
-      filename: 'assessments-disaggregated-[date:html_date]T[date:html_time].csv'
-      automatic_download: false
-      store_in_public_file_directory: true
-      redirect_to_display: none
-      custom_redirect_path: true
-      include_query_params: true
-      style:
-        type: ar_pivot_friendly_data_export
-        options:
-          formats:
-            csv: csv
-          csv_settings:
-            delimiter: ','
-            enclosure: '"'
-            escape_char: \
-            strip_tags: 1
-            trim: 1
-            encoding: utf8
-            utf8_bom: 0
-            use_serializer_encode_only: 0
-            pivot_friendly: 1
-      export_method: batch
-      export_batch_size: 100
-      facet_settings: 'search_api:views_page__assessments__assessments_table'
-      displays:
-        assessments_table: assessments_table
-        default: '0'
-        assessments_list: '0'
-        page_1: '0'
-      export_limit: 0
-      pager:
-        type: some
-        options:
-          items_per_page: 0
-          offset: 0
       fields:
         uuid:
           id: uuid
@@ -8509,6 +8473,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: UUID
           exclude: false
           alter:
@@ -8571,8 +8537,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         title_1:
           id: title_1
           table: search_api_datasource_assessments_entity_assessment
@@ -8580,6 +8544,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Title
           exclude: false
           alter:
@@ -8642,8 +8608,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_operations:
           id: field_operations
           table: search_api_datasource_assessments_entity_assessment
@@ -8651,6 +8615,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Operations
           exclude: false
           alter:
@@ -8717,8 +8683,6 @@ display:
               operation:
                 display_method: label
                 view_mode: default
-          entity_type: assessment
-          plugin_id: search_api_field
         field_locations:
           id: field_locations
           table: search_api_datasource_assessments_entity_assessment
@@ -8726,6 +8690,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Location(s)
           exclude: false
           alter:
@@ -8792,8 +8758,6 @@ display:
               location:
                 display_method: label
                 view_mode: default
-          entity_type: assessment
-          plugin_id: search_api_field
         field_other_location:
           id: field_other_location
           table: search_api_datasource_assessments_entity_assessment
@@ -8801,6 +8765,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Other location'
           exclude: false
           alter:
@@ -8863,8 +8829,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_date_1:
           id: field_date_1
           table: search_api_datasource_assessments_entity_assessment
@@ -8872,6 +8836,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Start date'
           exclude: false
           alter:
@@ -8935,8 +8901,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_date:
           id: field_date
           table: search_api_datasource_assessments_entity_assessment
@@ -8944,6 +8908,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'End date'
           exclude: false
           alter:
@@ -9007,8 +8973,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_status_1:
           id: field_status_1
           table: search_api_datasource_assessments_entity_assessment
@@ -9016,6 +8980,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Status
           exclude: false
           alter:
@@ -9081,8 +9047,6 @@ display:
             display_methods:
               assessment_status:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_subject_objective:
           id: field_subject_objective
           table: search_api_datasource_assessments_entity_assessment
@@ -9090,6 +9054,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Subject/Objective
           exclude: false
           alter:
@@ -9151,8 +9117,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_collection_methods:
           id: field_collection_methods
           table: search_api_datasource_assessments_entity_assessment
@@ -9160,6 +9124,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Collection Method(s)'
           exclude: false
           alter:
@@ -9221,8 +9187,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_frequency:
           id: field_frequency
           table: search_api_datasource_assessments_entity_assessment
@@ -9230,6 +9194,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Frequency
           exclude: false
           alter:
@@ -9291,8 +9257,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_methodology:
           id: field_methodology
           table: search_api_datasource_assessments_entity_assessment
@@ -9300,6 +9264,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Methodology
           exclude: false
           alter:
@@ -9361,8 +9327,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_level_of_representation:
           id: field_level_of_representation
           table: search_api_datasource_assessments_entity_assessment
@@ -9370,6 +9334,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Level of Representation'
           exclude: false
           alter:
@@ -9431,8 +9397,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_population_types:
           id: field_population_types
           table: search_api_datasource_assessments_entity_assessment
@@ -9440,6 +9404,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Population Type(s)'
           exclude: false
           alter:
@@ -9505,8 +9471,6 @@ display:
             display_methods:
               population_type:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_sample_size:
           id: field_sample_size
           table: search_api_datasource_assessments_entity_assessment
@@ -9514,6 +9478,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Sample size'
           exclude: false
           alter:
@@ -9576,8 +9542,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_units_of_measurement:
           id: field_units_of_measurement
           table: search_api_datasource_assessments_entity_assessment
@@ -9585,6 +9549,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Units of measurement'
           exclude: false
           alter:
@@ -9650,8 +9616,6 @@ display:
             display_methods:
               unit_of_measurement:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_themes:
           id: field_themes
           table: search_api_datasource_assessments_entity_assessment
@@ -9659,6 +9623,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Theme(s)
           exclude: false
           alter:
@@ -9724,8 +9690,6 @@ display:
             display_methods:
               theme:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_disaster:
           id: field_disaster
           table: search_api_datasource_assessments_entity_assessment
@@ -9733,6 +9697,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Disaster(s)
           exclude: false
           alter:
@@ -9798,8 +9764,6 @@ display:
             display_methods:
               disaster:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_key_findings:
           id: field_key_findings
           table: search_api_datasource_assessments_entity_assessment
@@ -9807,6 +9771,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Key findings'
           exclude: false
           alter:
@@ -9868,8 +9834,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment
-          plugin_id: search_api_field
         field_organizations:
           id: field_organizations
           table: search_api_datasource_assessments_entity_assessment
@@ -9877,6 +9841,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Leading/Coordinating Organization(s)'
           exclude: false
           alter:
@@ -9942,8 +9908,6 @@ display:
             display_methods:
               organization:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_asst_organizations:
           id: field_asst_organizations
           table: search_api_datasource_assessments_entity_assessment
@@ -9951,6 +9915,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: 'Participating Organization(s)'
           exclude: false
           alter:
@@ -10016,8 +9982,6 @@ display:
             display_methods:
               organization:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         field_local_coordination_groups:
           id: field_local_coordination_groups
           table: search_api_datasource_assessments_entity_assessment
@@ -10025,6 +9989,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: assessment
+          plugin_id: search_api_field
           label: Clusters
           exclude: false
           alter:
@@ -10090,8 +10056,6 @@ display:
             display_methods:
               local_group:
                 display_method: label
-          entity_type: assessment
-          plugin_id: search_api_field
         title:
           id: title
           table: search_api_entity_assessment_document
@@ -10099,6 +10063,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Title'
           exclude: false
           alter:
@@ -10161,8 +10127,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_accessibility:
           id: field_accessibility
           table: search_api_entity_assessment_document
@@ -10170,6 +10134,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Accessibility'
           exclude: false
           alter:
@@ -10231,8 +10197,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_instructions:
           id: field_instructions
           table: search_api_entity_assessment_document
@@ -10240,6 +10204,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Instructions'
           exclude: false
           alter:
@@ -10301,8 +10267,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_files:
           id: field_files
           table: search_api_entity_assessment_document
@@ -10310,6 +10274,8 @@ display:
           relationship: field_assessment_data
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Data - Files'
           exclude: false
           alter:
@@ -10372,8 +10338,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         title_2:
           id: title_2
           table: search_api_entity_assessment_document
@@ -10381,6 +10345,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Title'
           exclude: false
           alter:
@@ -10443,8 +10409,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_accessibility_1:
           id: field_accessibility_1
           table: search_api_entity_assessment_document
@@ -10452,6 +10416,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Accessibility'
           exclude: false
           alter:
@@ -10513,8 +10479,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_instructions_1:
           id: field_instructions_1
           table: search_api_entity_assessment_document
@@ -10522,6 +10486,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Instructions'
           exclude: false
           alter:
@@ -10583,8 +10549,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_files_1:
           id: field_files_1
           table: search_api_entity_assessment_document
@@ -10592,6 +10556,8 @@ display:
           relationship: field_assessment_questionnaire
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Questionnaire - Files'
           exclude: false
           alter:
@@ -10654,8 +10620,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         title_3:
           id: title_3
           table: search_api_entity_assessment_document
@@ -10663,6 +10627,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Title'
           exclude: false
           alter:
@@ -10725,8 +10691,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_accessibility_2:
           id: field_accessibility_2
           table: search_api_entity_assessment_document
@@ -10734,6 +10698,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Accessibility'
           exclude: false
           alter:
@@ -10795,8 +10761,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_instructions_2:
           id: field_instructions_2
           table: search_api_entity_assessment_document
@@ -10804,6 +10768,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Instructions'
           exclude: false
           alter:
@@ -10865,8 +10831,6 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
         field_files_2:
           id: field_files_2
           table: search_api_entity_assessment_document
@@ -10874,6 +10838,8 @@ display:
           relationship: field_assessment_report
           group_type: group
           admin_label: ''
+          entity_type: assessment_document
+          plugin_id: search_api_field
           label: 'Report - Files'
           exclude: false
           alter:
@@ -10936,46 +10902,31 @@ display:
             use_highlighting: false
             multi_type: separator
             multi_separator: ', '
-          entity_type: assessment_document
-          plugin_id: search_api_field
-      defaults:
-        fields: false
-        relationships: false
-        access: false
-      relationships:
-        field_assessment_data:
-          id: field_assessment_data
-          table: search_api_datasource_assessments_entity_assessment
-          field: field_assessment_data
-          relationship: none
-          group_type: group
-          admin_label: 'Assessment data: Assessment document'
-          required: false
-          skip_access: false
-          entity_type: assessment
-          plugin_id: search_api
-        field_assessment_questionnaire:
-          id: field_assessment_questionnaire
-          table: search_api_datasource_assessments_entity_assessment
-          field: field_assessment_questionnaire
-          relationship: none
-          group_type: group
-          admin_label: 'Assessment questionnaire: Assessment document'
-          required: false
-          skip_access: false
-          entity_type: assessment
-          plugin_id: search_api
-        field_assessment_report:
-          id: field_assessment_report
-          table: search_api_datasource_assessments_entity_assessment
-          field: field_assessment_report
-          relationship: none
-          group_type: group
-          admin_label: 'Assessment report: Assessment document'
-          required: false
-          skip_access: false
-          entity_type: assessment
-          plugin_id: search_api
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 0
+      access:
+        type: role
+        options:
+          role:
+            authenticated: authenticated
+      style:
+        type: ar_pivot_friendly_data_export
+        options:
+          formats:
+            csv: csv
+          csv_settings:
+            delimiter: ','
+            enclosure: '"'
+            escape_char: \
+            strip_tags: 1
+            trim: 1
+            encoding: utf8
+            utf8_bom: 0
+            use_serializer_encode_only: 0
+            pivot_friendly: 1
       row:
         type: data_field
         options:
@@ -11079,15 +11030,65 @@ display:
             field_files_2:
               alias: ''
               raw_output: false
+      defaults:
+        access: false
+        relationships: false
+        fields: false
+      relationships:
+        field_assessment_data:
+          id: field_assessment_data
+          table: search_api_datasource_assessments_entity_assessment
+          field: field_assessment_data
+          relationship: none
+          group_type: group
+          admin_label: 'Assessment data: Assessment document'
+          entity_type: assessment
+          plugin_id: search_api
+          required: false
+          skip_access: false
+        field_assessment_questionnaire:
+          id: field_assessment_questionnaire
+          table: search_api_datasource_assessments_entity_assessment
+          field: field_assessment_questionnaire
+          relationship: none
+          group_type: group
+          admin_label: 'Assessment questionnaire: Assessment document'
+          entity_type: assessment
+          plugin_id: search_api
+          required: false
+          skip_access: false
+        field_assessment_report:
+          id: field_assessment_report
+          table: search_api_datasource_assessments_entity_assessment
+          field: field_assessment_report
+          relationship: none
+          group_type: group
+          admin_label: 'Assessment report: Assessment document'
+          entity_type: assessment
+          plugin_id: search_api
+          required: false
+          skip_access: false
       display_description: ''
+      display_extenders: {  }
+      path: export/assessments-table-disaggregated
       auth:
         - cookie
-      access:
-        type: role
-        options:
-          role:
-            authenticated: authenticated
+      displays:
+        assessments_table: assessments_table
+        default: '0'
+        assessments_list: '0'
+        page_1: '0'
+      filename: 'assessments-disaggregated-[date:html_date]T[date:html_time].csv'
+      automatic_download: false
       redirect_path: '/assessments/table/[view:facets_query]'
+      export_method: batch
+      export_batch_size: 100
+      export_limit: 0
+      facet_settings: 'search_api:views_page__assessments__assessments_table'
+      store_in_public_file_directory: true
+      custom_redirect_path: true
+      redirect_to_display: none
+      include_query_params: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -11120,36 +11121,12 @@ display:
         - 'config:field.storage.assessment_document.field_instructions'
         - 'config:search_api.index.assessments'
   page_1:
-    display_plugin: page
     id: page_1
     display_title: Unpublished
+    display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
-      path: assessments-unpublished
-      display_description: ''
-      style:
-        type: default
-        options:
-          row_class: ''
-          default_row_class: true
-          uses_fields: false
-      defaults:
-        style: false
-        row: false
-        cache: false
-        access: false
-        filters: false
-        filter_groups: false
-        title: false
-      row:
-        type: search_api
-        options:
-          view_modes:
-            'entity:assessment':
-              assessment: teaser
-      cache:
-        type: none
+      title: 'Assessments - Unpublished'
       access:
         type: role
         options:
@@ -11157,6 +11134,8 @@ display:
             administrator: administrator
             assessment_editor: assessment_editor
             assessment_global_editor: assessment_global_editor
+      cache:
+        type: none
       filters:
         field_published:
           id: field_published
@@ -11165,6 +11144,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          plugin_id: search_api_boolean
           operator: '='
           value: '0'
           group: 1
@@ -11195,12 +11175,33 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          plugin_id: search_api_boolean
       filter_groups:
         operator: AND
         groups:
           1: AND
-      title: 'Assessments - Unpublished'
+      style:
+        type: default
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+      row:
+        type: search_api
+        options:
+          view_modes:
+            'entity:assessment':
+              assessment: teaser
+      defaults:
+        access: false
+        cache: false
+        title: false
+        style: false
+        row: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders: {  }
+      path: assessments-unpublished
     cache_metadata:
       max-age: -1
       contexts:

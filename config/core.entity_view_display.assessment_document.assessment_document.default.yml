@@ -17,25 +17,25 @@ bundle: assessment_document
 mode: default
 content:
   field_accessibility:
-    weight: 0
+    type: list_default
     label: visually_hidden
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    weight: 0
     region: content
   field_files:
-    weight: 1
+    type: ocha_doc_store_file_formatter
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: ocha_doc_store_file_formatter
+    weight: 1
     region: content
   field_instructions:
-    weight: 2
+    type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    weight: 2
     region: content
 hidden:
   field_author: true

@@ -18,14 +18,14 @@ bundle: person_entity
 mode: default
 content:
   field_email:
-    weight: 1
+    type: basic_string
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: basic_string
+    weight: 1
     region: content
   field_hid:
-    weight: 4
+    type: ocha_hid_contacts_default
     label: above
     settings:
       output: label
@@ -35,31 +35,31 @@ content:
       output_activation_document: 0
       output_operations: 0
     third_party_settings: {  }
-    type: ocha_hid_contacts_default
+    weight: 4
     region: content
   field_organization:
-    weight: 3
+    type: ocha_integrations_default
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: ocha_integrations_default
+    weight: 3
     region: content
   field_phone:
-    weight: 2
+    type: telephone_link
     label: hidden
     settings:
       title: ''
     third_party_settings: {  }
-    type: telephone_link
+    weight: 2
     region: content
   name:
-    label: hidden
     type: string
-    weight: 0
-    region: content
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    weight: 0
+    region: content
 hidden:
   langcode: true
   search_api_excerpt: true

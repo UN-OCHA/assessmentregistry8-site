@@ -18,12 +18,12 @@ plugin: 'facet_block:ass_list_level_of_representation'
 settings:
   id: 'facet_block:ass_list_level_of_representation'
   label: 'Level of Representation'
-  provider: facets
   label_display: visible
+  provider: facets
   block_id: ass_list_levelofrepresentation
 visibility:
   request_path:
     id: request_path
-    pages: "/assessments/list\r\n/assessments/list/*"
     negate: false
     context_mapping: {  }
+    pages: "/assessments/list\r\n/assessments/list/*"

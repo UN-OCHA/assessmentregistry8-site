@@ -9,37 +9,6 @@ dependencies:
     - search_api
 id: ass_list_summary
 name: Summary
-facets:
-  ass_list_leading_coordinating_organization:
-    checked: true
-    label: 'Leading/Coordinating Organization(s)'
-    separator: ', '
-    weight: 0
-    show_count: false
-  ass_list_disaster:
-    checked: true
-    label: Disaster
-    separator: ', '
-    weight: 0
-    show_count: false
-  ass_list_participating_organizations:
-    checked: true
-    label: 'Participating Organization(s)'
-    separator: ', '
-    weight: 0
-    show_count: false
-  ass_list_population_types:
-    checked: true
-    label: 'Population Type(s)'
-    separator: ', '
-    weight: 0
-    show_count: false
-  ass_list_status:
-    checked: true
-    label: Status
-    separator: ', '
-    weight: 0
-    show_count: false
 facet_source_id: 'search_api:views_page__assessments__assessments_list'
 processor_configs:
   hide_when_not_rendered:
@@ -64,3 +33,34 @@ processor_configs:
     weights:
       build: '5'
     settings: {  }
+facets:
+  ass_list_leading_coordinating_organization:
+    checked: true
+    label: 'Leading/Coordinating Organization(s)'
+    separator: ', '
+    show_count: false
+    weight: 0
+  ass_list_disaster:
+    checked: true
+    label: Disaster
+    separator: ', '
+    show_count: false
+    weight: 0
+  ass_list_participating_organizations:
+    checked: true
+    label: 'Participating Organization(s)'
+    separator: ', '
+    show_count: false
+    weight: 0
+  ass_list_population_types:
+    checked: true
+    label: 'Population Type(s)'
+    separator: ', '
+    show_count: false
+    weight: 0
+  ass_list_status:
+    checked: true
+    label: Status
+    separator: ', '
+    show_count: false
+    weight: 0
