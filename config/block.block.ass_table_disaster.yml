@@ -18,12 +18,12 @@ plugin: 'facet_block:ass_table_disaster'
 settings:
   id: 'facet_block:ass_table_disaster'
   label: Disaster
-  provider: facets
   label_display: visible
+  provider: facets
   block_id: ass_table_disaster
 visibility:
   request_path:
     id: request_path
-    pages: "/assessments/table\r\n/assessments/table/*"
     negate: false
     context_mapping: {  }
+    pages: "/assessments/table\r\n/assessments/table/*"

@@ -18,12 +18,12 @@ plugin: 'facet_block:ass_table_participating_organizations'
 settings:
   id: 'facet_block:ass_table_participating_organizations'
   label: 'Participating Organization(s)'
-  provider: facets
   label_display: visible
+  provider: facets
   block_id: ass_table_participatingorganizations
 visibility:
   request_path:
     id: request_path
-    pages: "/assessments/table\r\n/assessments/table/*"
     negate: false
     context_mapping: {  }
+    pages: "/assessments/table\r\n/assessments/table/*"

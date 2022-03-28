@@ -18,12 +18,12 @@ plugin: 'facet_block:ass_table_population_types'
 settings:
   id: 'facet_block:ass_table_population_types'
   label: 'Population Type(s)'
-  provider: facets
   label_display: visible
+  provider: facets
   block_id: ass_table_populationtypes
 visibility:
   request_path:
     id: request_path
-    pages: "/assessments/table\r\n/assessments/table/*"
     negate: false
     context_mapping: {  }
+    pages: "/assessments/table\r\n/assessments/table/*"
