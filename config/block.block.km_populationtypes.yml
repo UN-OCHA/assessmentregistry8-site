@@ -18,12 +18,12 @@ plugin: 'facet_block:km_population_types'
 settings:
   id: 'facet_block:km_population_types'
   label: 'Population types'
-  provider: facets
   label_display: visible
+  provider: facets
   block_id: km_populationtypes
 visibility:
   request_path:
     id: request_path
-    pages: "/knowledge-management\r\n/knowledge-management/*"
     negate: false
     context_mapping: {  }
+    pages: "/knowledge-management\r\n/knowledge-management/*"

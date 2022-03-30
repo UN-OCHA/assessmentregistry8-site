@@ -18,12 +18,12 @@ plugin: 'facet_block:ass_table_local_coordination_groups'
 settings:
   id: 'facet_block:ass_table_local_coordination_groups'
   label: Clusters
-  provider: facets
   label_display: visible
+  provider: facets
   block_id: ass_table_localcoordinationgroups
 visibility:
   request_path:
     id: request_path
-    pages: "/assessments/table\r\n/assessments/table/*"
     negate: false
     context_mapping: {  }
+    pages: "/assessments/table\r\n/assessments/table/*"

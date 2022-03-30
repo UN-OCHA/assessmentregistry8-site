@@ -9,43 +9,6 @@ dependencies:
     - search_api
 id: km_summary
 name: km_summary
-facets:
-  km_context:
-    checked: true
-    label: Context
-    separator: ', '
-    weight: 0
-    show_count: false
-  km_countries:
-    checked: true
-    label: Countries
-    separator: ', '
-    weight: 0
-    show_count: false
-  km_document_type:
-    checked: true
-    label: 'Document type'
-    separator: ', '
-    weight: 0
-    show_count: false
-  km_hpc_document_repository:
-    checked: true
-    label: 'HPC document repository'
-    separator: ', '
-    weight: 0
-    show_count: false
-  km_life_cycle_steps:
-    checked: true
-    label: 'Life cycle steps'
-    separator: ', '
-    weight: 0
-    show_count: false
-  km_population_types:
-    checked: true
-    label: 'Population types'
-    separator: ', '
-    weight: 0
-    show_count: false
 facet_source_id: 'search_api:views_page__knowledge_management__page_1'
 processor_configs:
   hide_when_not_rendered:
@@ -70,3 +33,40 @@ processor_configs:
     weights:
       build: '5'
     settings: {  }
+facets:
+  km_context:
+    checked: true
+    label: Context
+    separator: ', '
+    show_count: false
+    weight: 0
+  km_countries:
+    checked: true
+    label: Countries
+    separator: ', '
+    show_count: false
+    weight: 0
+  km_document_type:
+    checked: true
+    label: 'Document type'
+    separator: ', '
+    show_count: false
+    weight: 0
+  km_hpc_document_repository:
+    checked: true
+    label: 'HPC document repository'
+    separator: ', '
+    show_count: false
+    weight: 0
+  km_life_cycle_steps:
+    checked: true
+    label: 'Life cycle steps'
+    separator: ', '
+    show_count: false
+    weight: 0
+  km_population_types:
+    checked: true
+    label: 'Population types'
+    separator: ', '
+    show_count: false
+    weight: 0
