@@ -18,5 +18,10 @@ default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:operation'
-  handler_settings: {  }
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
 field_type: entity_reference
