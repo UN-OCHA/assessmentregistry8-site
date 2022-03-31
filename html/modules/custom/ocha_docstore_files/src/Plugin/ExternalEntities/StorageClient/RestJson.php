@@ -213,7 +213,7 @@ class RestJson extends Rest implements PluginFormInterface {
    */
   public function query(array $parameters = [], array $sorts = [], $start = NULL, $length = NULL) {
     $parameters = $this->getListQueryParameters($parameters, $start, $length);
-    $results = $this->getFromDocstore($this->getDocstoreEndpoint(), $parameters);
+    $results = $this->getFromDocstore($this->getDocstoreEndpoint(), $parameters, $sorts);
 
     // Return only items for lists.
     if (isset($results['_count']) && isset($results['results'])) {
@@ -348,8 +348,36 @@ class RestJson extends Rest implements PluginFormInterface {
    *
    * @todo catch the Guzzle exceptions and return something more user friendly.
    */
-  public function getFromDocstore($endpoint, array $parameters = [], $cache = TRUE) {
+  public function getFromDocstore($endpoint, array $parameters = [], $sorts = [], $cache = TRUE) {
     $entity_type_id = $this->externalEntityType->id();
+
+    if (!empty($sorts)) {
+      $sort_parameters = [];
+      foreach ($sorts as $sort) {
+        // Map field names.
+        $external_field_name = $this->externalEntityType->getFieldMapping($sort['field'], 'value');
+
+        if (!$external_field_name) {
+          $external_field_name = $this->externalEntityType->getFieldMapping($sort['field'], 'target_id');
+          if (!$external_field_name) {
+            $external_field_name = $sort['field'];
+          }
+          else {
+            // We only need the property name, a bit ugly.
+            $external_field_name = reset(explode('/', $external_field_name));
+          }
+        }
+
+        if ($sort['direction'] === 'DESC') {
+          $sort_parameters[] = '-' . $external_field_name;
+        }
+        else {
+          $sort_parameters[] = $external_field_name;
+        }
+      }
+
+      $parameters['sort'] = implode(',', $sort_parameters);
+    }
 
     try {
       $response = $this->httpClient->request(

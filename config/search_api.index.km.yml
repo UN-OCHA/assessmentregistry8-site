@@ -2,11 +2,6 @@ uuid: 93a1d2e4-1f67-4b92-b739-3189206d5e8e
 langcode: en
 status: true
 dependencies:
-  module:
-    - search_api_solr
-    - external_entities
-    - search_api
-    - ocha_docstore_files
   config:
     - field.storage.km.field_context
     - field.storage.km.field_countries
@@ -17,24 +12,26 @@ dependencies:
     - field.storage.km.field_population_types
     - field.storage.km.field_published
     - search_api.server.solr
+  module:
+    - search_api_solr
+    - external_entities
+    - search_api
+    - ocha_docstore_files
 third_party_settings:
   search_api_solr:
     finalize: false
     commit_before_finalize: false
     commit_after_finalize: false
-    multilingual:
-      limit_to_content_language: false
-      include_language_independent: true
     highlighter:
       maxAnalyzedChars: 51200
       fragmenter: gap
+      usePhraseHighlighter: true
+      highlightMultiTerm: true
+      preserveMulti: false
       regex:
         slop: 0.5
         pattern: blank
         maxAnalyzedChars: 10000
-      usePhraseHighlighter: true
-      highlightMultiTerm: true
-      preserveMulti: false
       highlight:
         mergeContiguous: false
         requireFieldMatch: false
@@ -58,6 +55,9 @@ third_party_settings:
       index_prefix: ''
       collection: ''
       timezone: ''
+    multilingual:
+      limit_to_content_language: false
+      include_language_independent: true
 id: km
 name: km
 description: ''
@@ -211,6 +211,6 @@ tracker_settings:
   default:
     indexing_order: fifo
 options:
-  index_directly: true
   cron_limit: 50
+  index_directly: true
 server: solr

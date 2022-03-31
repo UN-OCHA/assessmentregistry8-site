@@ -18,12 +18,12 @@ plugin: 'facet_block:km_countries'
 settings:
   id: 'facet_block:km_countries'
   label: Countries
-  provider: facets
   label_display: visible
+  provider: facets
   block_id: km_countries
 visibility:
   request_path:
     id: request_path
-    pages: "/knowledge-management\r\n/knowledge-management/*"
     negate: false
     context_mapping: {  }
+    pages: "/knowledge-management\r\n/knowledge-management/*"

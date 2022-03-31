@@ -15,29 +15,29 @@ bundle: location
 mode: default
 content:
   field_admin_level:
+    type: number
     weight: -2
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-    type: number
-    region: content
   field_geolocation:
+    type: geofield_latlon
     weight: -4
+    region: content
     settings:
       html5_geolocation: false
     third_party_settings: {  }
-    type: geofield_latlon
-    region: content
   field_parent:
+    type: entity_reference_autocomplete
     weight: -3
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
   title:
     type: string_textfield
     weight: -5

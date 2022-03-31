@@ -18,11 +18,11 @@ plugin: 'facets_summary_block:ass_list_summary'
 settings:
   id: 'facets_summary_block:ass_list_summary'
   label: Summary
-  provider: facets_summary
   label_display: '0'
+  provider: facets_summary
 visibility:
   request_path:
     id: request_path
-    pages: "/assessments/list\r\n/assessments/list/*"
     negate: false
     context_mapping: {  }
+    pages: "/assessments/list\r\n/assessments/list/*"

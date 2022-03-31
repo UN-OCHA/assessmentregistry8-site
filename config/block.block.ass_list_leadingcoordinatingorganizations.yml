@@ -18,12 +18,12 @@ plugin: 'facet_block:ass_list_leading_coordinating_organization'
 settings:
   id: 'facet_block:ass_list_leading_coordinating_organization'
   label: 'Leading/Coordinating Organization(s)'
-  provider: facets
   label_display: visible
+  provider: facets
   block_id: ass_list_leadingcoordinatingorganizations
 visibility:
   request_path:
     id: request_path
-    pages: "/assessments/list\r\n/assessments/list/*\r\n"
     negate: false
     context_mapping: {  }
+    pages: "/assessments/list\r\n/assessments/list/*\r\n"
