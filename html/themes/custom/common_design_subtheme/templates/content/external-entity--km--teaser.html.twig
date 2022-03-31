@@ -4,7 +4,7 @@
  * Default theme implementation to display an external entity.
  *
  * Available variables:
- * - entity: The external entity.
+ * - content: The external entity.
 */
 #}
 {%
@@ -19,15 +19,15 @@
 
   <div class="cd-teaser__container [ cd-flow ]">
     <h3 class="cd-teaser__title">
-      {{ entity.title }}
+      {{ content.title }}
     </h3>
 
     <div class="cd-teaser__description node__content">
 
-      {{ entity.field_description }}
-      {{ entity.field_context }}
-      {{ entity.field_life_cycle_steps }}
-      {{ entity.field_population_types }}
+      {{ content.field_description }}
+      {{ content.field_context }}
+      {{ content.field_life_cycle_steps }}
+      {{ content.field_population_types }}
 
     </div>
 
