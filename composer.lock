@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3373dcdbc2673f11059e4c68fcc8bcf3",
+    "content-hash": "b0ad78e5658ae2e4bf897ffca671c8c3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3067,17 +3067,17 @@
         },
         {
             "name": "drupal/external_entities",
-            "version": "2.0.0-alpha4",
+            "version": "2.0.0-alpha5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/external_entities.git",
-                "reference": "8.x-2.0-alpha4"
+                "reference": "8.x-2.0-alpha5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/external_entities-8.x-2.0-alpha4.zip",
-                "reference": "8.x-2.0-alpha4",
-                "shasum": "6a282e903e90faecb9fff8c22e1384d597d771f5"
+                "url": "https://ftp.drupal.org/files/projects/external_entities-8.x-2.0-alpha5.zip",
+                "reference": "8.x-2.0-alpha5",
+                "shasum": "ce2402ec96805598f3664e8a61ad68b30190b92b"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9",
@@ -3086,8 +3086,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.0-alpha4",
-                    "datestamp": "1648634947",
+                    "version": "8.x-2.0-alpha5",
+                    "datestamp": "1648796532",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Alpha releases are not covered by Drupal security advisories."
@@ -15427,6 +15427,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "drupal/external_entities": 15,
         "drupal/inline_entity_form": 5
     },
     "prefer-stable": true,
@@ -15435,5 +15436,5 @@
         "php": ">=8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }

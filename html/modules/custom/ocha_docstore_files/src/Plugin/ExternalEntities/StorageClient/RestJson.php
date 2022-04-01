@@ -158,6 +158,7 @@ class RestJson extends Rest implements PluginFormInterface {
    */
   public function save(ExternalEntityInterface $entity) {
     $result = NULL;
+
     if ($entity->id()) {
       $this->httpClient->request(
         'PUT',
@@ -350,7 +351,7 @@ class RestJson extends Rest implements PluginFormInterface {
    *
    * @todo catch the Guzzle exceptions and return something more user friendly.
    */
-  public function getFromDocstore($endpoint, array $parameters = [], $sorts = [], $cache = TRUE) {
+  public function getFromDocstore($endpoint, array $parameters = [], array $sorts = [], $cache = TRUE) {
     $entity_type_id = $this->externalEntityType->id();
 
     if (!empty($sorts)) {
