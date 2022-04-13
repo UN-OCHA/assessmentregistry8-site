@@ -36,7 +36,7 @@
         "drupal/dream_block_manager": "^1.0",
         "drupal/external_entities": "^2.0-alpha3",
         "drupal/external_media": "^1.0",
-        "drupal/facets": "^1.8",
+        "drupal/facets": "^2.0.2",
         "drupal/facets_pretty_paths": "^1.1",
         "drupal/field_group": "^3.2",
         "drupal/google_tag": "^1.4",

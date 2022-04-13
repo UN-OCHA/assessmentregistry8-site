@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "417dd649d6499a5bf1d167be8b44c109",
+    "content-hash": "eb1589c6889077f64575d755dc17a8e3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3157,6 +3157,10 @@
                     "homepage": "https://www.drupal.org/user/993376"
                 },
                 {
+                    "name": "pgrond",
+                    "homepage": "https://www.drupal.org/user/698374"
+                },
+                {
                     "name": "rodrigoaguilera",
                     "homepage": "https://www.drupal.org/user/408170"
                 },
@@ -3223,39 +3227,42 @@
         },
         {
             "name": "drupal/facets",
-            "version": "1.8.0",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/facets.git",
-                "reference": "8.x-1.8"
+                "reference": "2.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/facets-8.x-1.8.zip",
-                "reference": "8.x-1.8",
-                "shasum": "f621b84b59c5315db14a0529df5dfc74ca5bc9de"
+                "url": "https://ftp.drupal.org/files/projects/facets-2.0.2.zip",
+                "reference": "2.0.2",
+                "shasum": "17afc46d3f4e4300e8e69f23b3b01a4935b57104"
             },
             "require": {
-                "drupal/core": "^8.8 || ^9"
+                "drupal/core": "^9.2 || ^10.0"
             },
             "conflict": {
                 "drupal/search_api": "<1.14"
             },
             "require-dev": {
-                "drupal/search_api": "~1.14"
+                "drupal/jquery_ui_slider": "~1.1",
+                "drupal/jquery_ui_touch_punch": "~1.0",
+                "drupal/search_api": "~1.21"
+            },
+            "suggest": {
+                "drupal/jquery_ui_slider": "Required for the 'Facets Range Widget' module to work",
+                "drupal/jquery_ui_touch_punch": "Required for the 'Facets Range Widget' module to work"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.8",
-                    "datestamp": "1620838256",
+                    "version": "2.0.2",
+                    "datestamp": "1649070269",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
-                },
-                "branch-alias": {
-                    "dev-8.x-1.x": "1.x-dev"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -4354,16 +4361,8 @@
             "authors": [
                 {
                     "name": "Christian Fritsch",
-                    "homepage": "https://www.drupal.org/user/1133806",
+                    "homepage": "https://www.drupal.org/user/2103716",
                     "email": "christian.fritsch@burda.com"
-                },
-                {
-                    "name": "chr.fritsch",
-                    "homepage": "https://www.drupal.org/user/2103716"
-                },
-                {
-                    "name": "oushen",
-                    "homepage": "https://www.drupal.org/user/1200780"
                 },
                 {
                     "name": "thunderbot",
@@ -5196,12 +5195,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "HTMLPurifier": "library/"
-                },
                 "files": [
                     "library/HTMLPurifier.composer.php"
                 ],
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
                 "exclude-from-classmap": [
                     "/library/HTMLPurifier/Language/"
                 ]
@@ -6260,12 +6259,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "League\\Csv\\": "src"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "League\\Csv\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -6471,9 +6470,6 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Complex\\": "classes/src/"
-                },
                 "files": [
                     "classes/src/functions/abs.php",
                     "classes/src/functions/acos.php",
@@ -6517,7 +6513,10 @@
                     "classes/src/operations/multiply.php",
                     "classes/src/operations/divideby.php",
                     "classes/src/operations/divideinto.php"
-                ]
+                ],
+                "psr-4": {
+                    "Complex\\": "classes/src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -6570,9 +6569,6 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Matrix\\": "classes/src/"
-                },
                 "files": [
                     "classes/src/Functions/adjoint.php",
                     "classes/src/Functions/antidiagonal.php",
@@ -6590,7 +6586,10 @@
                     "classes/src/Operations/multiply.php",
                     "classes/src/Operations/divideby.php",
                     "classes/src/Operations/divideinto.php"
-                ]
+                ],
+                "psr-4": {
+                    "Matrix\\": "classes/src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -13634,6 +13633,7 @@
                 "issues": "https://github.com/webmozart/path-util/issues",
                 "source": "https://github.com/webmozart/path-util/tree/2.3.0"
             },
+            "abandoned": "symfony/filesystem",
             "time": "2015-12-17T08:42:14+00:00"
         },
         {
