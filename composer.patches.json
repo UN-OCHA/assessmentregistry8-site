@@ -13,6 +13,10 @@
     "drupal/redis": {
       "https://www.drupal.org/project/redis/issues/3192255": "https://git.drupalcode.org/project/redis/-/merge_requests/3.diff"
     },
+    "drupal/user_expire": {
+      "Allow the notification email to be customised": "https://git.drupalcode.org/project/user_expire/-/merge_requests/5.diff",
+      "Reset expiration when user is reactivated": "https://git.drupalcode.org/project/user_expire/-/merge_requests/6.diff"
+    },
     "drupal/views_data_export": {
       "Ensure the proper number of items is processed in batch export": "PATCHES/views_data_export-fix-number-of-processed-items.patch"
     }
