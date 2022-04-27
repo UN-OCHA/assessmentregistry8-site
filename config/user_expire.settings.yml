@@ -1,0 +1,8 @@
+frequency: 432000
+mail:
+  subject: ''
+  body: ''
+offset: 604800
+send_mail: 1
+user_expire_roles:
+  authenticated: 15552000
