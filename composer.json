@@ -17,6 +17,10 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/UN-OCHA/ocha_security.git"
         }
     ],
     "require": {
@@ -60,6 +64,7 @@
         "phpoffice/phpspreadsheet": "^1.18",
         "unocha/common_design": "^4.0.0",
         "unocha/ocha_integrations": "^1.0",
+        "unocha/ocha_security": "^1.0",
         "webflo/drupal-finder": "^1.2.2"
     },
     "require-dev": {
