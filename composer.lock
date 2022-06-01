@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb1589c6889077f64575d755dc17a8e3",
+    "content-hash": "27c5f020bd2a0dcf9c360588c8a5271b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -13462,6 +13462,37 @@
             "time": "2022-05-26T07:05:11+00:00"
         },
         {
+            "name": "unocha/ocha_security",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/UN-OCHA/ocha_security.git",
+                "reference": "7d254cc87cf6ef1973a472dfad2c37e763ed0879"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/UN-OCHA/ocha_security/zipball/7d254cc87cf6ef1973a472dfad2c37e763ed0879",
+                "reference": "7d254cc87cf6ef1973a472dfad2c37e763ed0879",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "^1.2"
+            },
+            "require-dev": {
+                "drupal/coder": "^8.3",
+                "sebastian/phpcpd": "^6.0"
+            },
+            "type": "drupal-module",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "support": {
+                "source": "https://github.com/UN-OCHA/ocha_security/tree/v1.0.1",
+                "issues": "https://github.com/UN-OCHA/ocha_security/issues"
+            },
+            "time": "2022-06-01T09:48:10+00:00"
+        },
+        {
             "name": "unsplash/unsplash",
             "version": "2.5.1",
             "source": {
@@ -15526,5 +15557,5 @@
         "php": ">=8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.1.0"
 }

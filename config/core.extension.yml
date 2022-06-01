@@ -58,6 +58,7 @@ module:
   ocha_organizations: 0
   ocha_persons: 0
   ocha_population_type: 0
+  ocha_security: 0
   ocha_themes: 0
   options: 0
   page_cache: 0
