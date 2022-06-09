@@ -2,22 +2,22 @@ _core:
   default_config_hash: x6bhN6WZwfVUI_LLMvRJIUW_2c26VTaBozbfXmJWmro
 seckit_xss:
   csp:
-    checkbox: true
+    checkbox: false
     vendor-prefix:
       x: false
       webkit: false
-    report-only: true
+    report-only: false
     default-src: ''
-    script-src: '''self'' fonts.googleapis.com www.gstatic.com google.com www.googletagmanager.com www.google-analytics.com www.youtube.com cdn.jsdelivr.net js-agent.newrelic.com'
+    script-src: ''
     object-src: ''
     style-src: ''
-    img-src: '''self'' data: *.tile.openstreetmap.org www.google-analytics.com www.googletagmanager.com www.gstatic.com translate.google.com'
+    img-src: ''
     media-src: ''
-    frame-src: data.humdata.org
+    frame-src: ''
     frame-ancestors: ''
     child-src: ''
-    font-src: '''self'' data: fonts.gstatic.com'
-    connect-src: '''self'' kmp.hpc.tools gov-bam.nr-data.net www.google-analytics.com'
+    font-src: ''
+    connect-src: ''
     report-uri: /report-csp-violation
     upgrade-req: false
     policy-uri: ''
@@ -29,16 +29,16 @@ seckit_xss:
     select: 0
 seckit_csrf:
   origin: false
-  origin_whitelist: 'https://fonts.gstatic.com'
+  origin_whitelist: ''
 seckit_clickjacking:
   js_css_noscript: false
   noscript_message: 'Sorry, you need to enable JavaScript to visit this website.'
   x_frame: '1'
   x_frame_allow_from: ''
 seckit_ssl:
-  hsts: false
+  hsts: true
   hsts_subdomains: false
-  hsts_max_age: 1000
+  hsts_max_age: 3600
   hsts_preload: false
 seckit_ct:
   expect_ct: false
@@ -51,6 +51,6 @@ seckit_fp:
 seckit_various:
   from_origin: false
   from_origin_destination: same
-  referrer_policy: false
-  referrer_policy_policy: no-referrer-when-downgrade
+  referrer_policy: true
+  referrer_policy_policy: strict-origin-when-cross-origin
   disable_autocomplete: false
