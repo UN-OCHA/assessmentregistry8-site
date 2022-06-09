@@ -54,7 +54,6 @@
         "drupal/role_delegation": "^1.1",
         "drupal/search_api": "^1.20",
         "drupal/search_api_solr": "^4.2",
-        "drupal/seckit": "^2.0",
         "drupal/select2": "^1.13",
         "drupal/social_auth_hid": "^3.1.0",
         "drupal/user_expire": "^1.0",
