@@ -31,6 +31,8 @@ report-only:
       base: none
     script-src:
       base: self
+      flags:
+        - unsafe-inline
       sources:
         - fonts.googleapis.com
         - www.gstatic.com
@@ -40,19 +42,12 @@ report-only:
         - www.youtube.com
         - cdn.jsdelivr.net
         - js-agent.newrelic.com
-        - '''sha256-_rGLbsC3KREsVOihkt0j7wGku9aMLV2tcrug1R-VUY0='''
-        - '''sha256-TxC6et1kD7G5EEMD03IEHpRRGIkHbQmz3bMHB76K0KI='''
-        - '''sha256-0EZqoz-oBhx7gF4nvY2bSqoGyy4zLjNF+SDQXGp_ZrY='''
-        - '''sha256-A-o6SyxwomjWQhUBod5RDCe-PhJBLFXQ6dt50D0-AUk='''
     script-src-attr:
       base: self
     script-src-elem:
       base: self
-      sources:
-        - '''sha256-/rGLbsC3KREsVOihkt0j7wGku9aMLV2tcrug1R+VUY0='''
-        - '''sha256-TxC6et1kD7G5EEMD03IEHpRRGIkHbQmz3bMHB76K0KI='''
-        - '''sha256-0EZqoz+oBhx7gF4nvY2bSqoGyy4zLjNF+SDQXGp/ZrY='''
-        - '''sha256-A+o6SyxwomjWQhUBod5RDCe+PhJBLFXQ6dt50D0+AUk='''
+      flags:
+        - unsafe-inline
     style-src:
       base: self
     style-src-attr:
