@@ -43,6 +43,7 @@ module:
   media: 0
   media_library: 0
   menu_ui: 0
+  mysql: 0
   node: 0
   node_title_help_text: 0
   ocha_assessment_document: 0

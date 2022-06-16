@@ -3,10 +3,6 @@
     "drupal/core": {
       "https://www.drupal.org/project/drupal/issues/2859042#comment-12366507": "https://www.drupal.org/files/issues/entity-original_revision-2926483-17.patch"
     },
-    "drupal/external_entities": {
-      "Dateranges - https://www.drupal.org/project/external_entities/issues/3230639": "https://www.drupal.org/files/issues/2021-08-31/external_entities-daterange.patch",
-      "Always pass boolean fields - https://www.drupal.org/project/external_entities/issues/3230638#comment-14205286": "https://www.drupal.org/files/issues/2021-08-31/external_entity_boolean_0.patch"
-    },
     "drupal/select2": {
       "https://www.drupal.org/project/select2/issues/3078085": "https://www.drupal.org/files/issues/2020-02-27/hierarchical-facet-widget-3078085-2.patch"
     },
