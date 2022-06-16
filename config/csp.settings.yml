@@ -9,6 +9,8 @@ report-only:
         - kmp.hpc.tools
         - gov-bam.nr-data.net
         - www.google-analytics.com
+        - '*.analytics.google.com'
+        - '*.doubleclick.net'
     font-src:
       base: self
       sources:
@@ -48,6 +50,9 @@ report-only:
       base: self
       flags:
         - unsafe-inline
+      sources:
+        - www.google-analytics.com
+        - www.googletagmanager.com
     style-src:
       base: self
       flags:
