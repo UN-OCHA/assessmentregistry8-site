@@ -4,7 +4,7 @@ ENV  NODE_ENV=$BRANCH_ENVIRONMENT
 COPY . /srv/www
 WORKDIR /srv/www
 RUN composer install --no-dev --prefer-dist && \
-    cp -a docker/settings.php docker/services.yml docker/redis.services.yml html/sites/default && \
+    cp -a docker/settings.php docker/services.yml html/sites/default && \
     composer run sass
 
 FROM public.ecr.aws/unocha/php-k8s:8.0-NR-stable
