@@ -9,6 +9,7 @@ report-only:
         - kmp.hpc.tools
         - gov-bam.nr-data.net
         - www.google-analytics.com
+        - analytics.google.com
         - '*.analytics.google.com'
         - '*.doubleclick.net'
     font-src:
