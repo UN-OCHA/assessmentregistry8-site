@@ -35,7 +35,7 @@
         "drupal/ctools": "^3.7",
         "drupal/custom_widgets": "^2.0",
         "drupal/dream_block_manager": "^1.0",
-        "drupal/external_entities": "^2.0-alpha3",
+        "drupal/external_entities": "2.0-alpha3",
         "drupal/external_media": "^1.0",
         "drupal/facets": "^2.0.2",
         "drupal/facets_pretty_paths": "^1.1",
