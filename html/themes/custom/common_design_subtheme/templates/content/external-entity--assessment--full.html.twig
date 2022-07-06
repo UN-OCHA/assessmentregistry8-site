@@ -4,7 +4,7 @@
  * Default theme implementation to display an external entity.
  *
  * Available variables:
- * - entity: The external entity.
+ * - content: The external entity.
 */
 #}
 {%
@@ -20,9 +20,9 @@
 
 <article{{ attributes.addClass(classes) }}>
   {% if logged_in %}
-    {{ entity }}
+    {{ content }}
   {% else %}
     {# See field--assessment--field-contacts.html.twig #}
-    {{ entity|without('field_contacts') }}
+    {{ content|without('field_contacts') }}
   {% endif %}
 </article>
