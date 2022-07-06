@@ -4,7 +4,7 @@
  * Default theme implementation to display an external entity.
  *
  * Available variables:
- * - entity: The external entity.
+ * - content: The external entity.
 */
 #}
 {%
@@ -20,13 +20,13 @@
   <div class="cd-teaser__container [ cd-flow ]">
     <div class="cd-teaser__description node__content">
 
-      {{ entity.field_accessibility }}
+      {{ content.field_accessibility }}
 
-      {% if entity.field_accessibility['#items'].getString() == 'Publicly Available' %}
-        {{ entity.field_files }}
-        {{ entity.field_instructions }}
+      {% if content.field_accessibility['#items'].getString() == 'Publicly Available' %}
+        {{ content.field_files }}
+        {{ content.field_instructions }}
       {% else %}
-        {{ entity.field_instructions }}
+        {{ content.field_instructions }}
       {% endif %}
 
     </div>
