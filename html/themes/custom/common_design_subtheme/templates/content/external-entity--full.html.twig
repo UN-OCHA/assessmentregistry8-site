@@ -4,7 +4,7 @@
  * Default theme implementation to display an external entity.
  *
  * Available variables:
- * - entity: The external entity.
+ * - content: The external entity.
 */
 #}
 {%
@@ -19,5 +19,5 @@
 {{ attach_library('common_design/cd-typography') }}
 
 <article{{ attributes.addClass(classes) }}>
-  {{ entity }}
+  {{ content }}
 </article>

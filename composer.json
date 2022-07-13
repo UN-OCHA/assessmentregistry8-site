@@ -17,10 +17,6 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/UN-OCHA/ocha_security.git"
         }
     ],
     "require": {
@@ -48,6 +44,7 @@
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/leaflet": "^2.1",
         "drupal/maintenance200": "^1.1",
+        "drupal/memcache": "^2.3",
         "drupal/node_title_help_text": "^1.2",
         "drupal/pcb": "^2.3",
         "drupal/role_delegation": "^1.1",
@@ -61,6 +58,7 @@
         "npm-asset/select2": "^4.0",
         "oomphinc/composer-installers-extender": "^2.0",
         "phpoffice/phpspreadsheet": "^1.18",
+        "symfony/flex": "^2.2",
         "unocha/common_design": "^4.0.0",
         "unocha/ocha_integrations": "^1.0",
         "webflo/drupal-finder": "^1.2.2"
