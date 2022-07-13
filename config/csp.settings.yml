@@ -44,7 +44,8 @@ report-only:
         - www.google-analytics.com
         - www.youtube.com
         - cdn.jsdelivr.net
-        - js-agent.newrelic.com
+        - '*.newrelic.com'
+        - '*.nr-data.net'
     script-src-attr:
       base: self
     script-src-elem:
