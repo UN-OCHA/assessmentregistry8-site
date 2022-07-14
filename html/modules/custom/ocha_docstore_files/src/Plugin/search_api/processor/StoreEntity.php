@@ -101,7 +101,7 @@ class StoreEntity extends ProcessorPluginBase {
       $entity_type_id = $entity->getEntityTypeId();
 
       // Get the raw external entity data for the entity.
-      $extracted = $entity->extractRawData();
+      $extracted = $entity->toRawData();
 
       // Get the list of fields that reference external entities.
       $reference_fields = RestJson::getExternalEntityReferenceFields($entity_type_id);
@@ -140,7 +140,7 @@ class StoreEntity extends ProcessorPluginBase {
 
       // Extract the raw data of the loaded entities.
       foreach ($entities as $entity) {
-        $loaded[$entity->uuid()] = $entity->extractRawData();
+        $loaded[$entity->uuid()] = $entity->toRawData();
       }
     }
 
