@@ -45,6 +45,9 @@ report-only:
         - www.youtube.com
         - cdn.jsdelivr.net
         - js-agent.newrelic.com
+        - gov-bam.nr-data.net
+        - '*.newrelic.com'
+        - '*.nr-data.net'
     script-src-attr:
       base: self
     script-src-elem:
