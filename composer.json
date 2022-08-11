@@ -30,7 +30,7 @@
         "drupal/core-composer-scaffold": "^9.3",
         "drupal/core-dev": "^9.3",
         "drupal/core-project-message": "^9.3",
-        "drupal/core-recommended": "^9.3",
+        "drupal/core-recommended": "^9.4.5",
         "drupal/csp": "^1.16",
         "drupal/ctools": "^4.0",
         "drupal/custom_widgets": "^2.0",
@@ -44,7 +44,7 @@
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/leaflet": "^2.1",
         "drupal/maintenance200": "^1.1",
-        "drupal/memcache": "^2.3",
+        "drupal/memcache": "2.3.0",
         "drupal/node_title_help_text": "^1.2",
         "drupal/pcb": "^2.3",
         "drupal/role_delegation": "^1.1",
@@ -79,7 +79,7 @@
     "conflict": {
         "drupal/drupal": "*"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {
         "bin-dir": "vendor/bin/",
