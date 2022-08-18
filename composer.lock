@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e2d00f09c250b47ee79a862c0e83252a",
+    "content-hash": "6335ce3f33fe4a0bd3018fa708c80db4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3917,21 +3917,21 @@
         },
         {
             "name": "drupal/pcb",
-            "version": "2.3.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/pcb.git",
-                "reference": "8.x-2.3"
+                "reference": "3.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/pcb-8.x-2.3.zip",
-                "reference": "8.x-2.3",
-                "shasum": "4dc102d0c3d102238c2e4e7cc480a0ab864353ad"
+                "url": "https://ftp.drupal.org/files/projects/pcb-3.0.1.zip",
+                "reference": "3.0.1",
+                "shasum": "cf2a0c2822dd676e85f58e9c69f7ea18a93f68c1"
             },
             "require": {
-                "drupal/core": "^8.7.7||^9.0",
-                "php": ">=7.2.0"
+                "drupal/core": "^9.0 || ^10",
+                "php": ">=7.4.0"
             },
             "require-dev": {
                 "drupal/memcache": "^2.0",
@@ -3940,8 +3940,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.3",
-                    "datestamp": "1625386216",
+                    "version": "3.0.1",
+                    "datestamp": "1659793310",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3949,7 +3949,7 @@
                 },
                 "drush": {
                     "services": {
-                        "drush.services.yml": "^9"
+                        "drush.services.yml": "^9 || ^10"
                     }
                 }
             },
