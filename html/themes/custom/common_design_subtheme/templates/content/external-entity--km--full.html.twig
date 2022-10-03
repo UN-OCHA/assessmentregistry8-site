@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display an external entity.
+ *
+ * Available variables:
+ * - content: The external entity.
+ */
+#}
+{%
+  set classes = [
+  'node',
+  'cd-article',
+  '[ cd-flow ]'
+]
+%}
+{{ attach_library('common_design/cd-article') }}
+{{ attach_library('common_design/cd-flow') }}
+{{ attach_library('common_design/cd-typography') }}
+
+<article{{ attributes.addClass(classes) }}>
+  {{ content.field_original_publication_date }}
+
+  <div class="field field--name-field-description field--type-string-long field--label-above">
+      <div class="field__label">Description</div>
+      <div class="field__item">
+        {% set output = content.field_description.0['#text'] %}
+        {{ output | check_markup('basic_html') }}
+      </div>
+  </div>
+
+  {{ content.field_context }}
+  {{ content.field_life_cycle_steps }}
+
+  {{ content.field_countries }}
+  {{ content.field_document_type }}
+  {{ content.field_hpc_document_repository }}
+  {{ content.field_population_types }}
+  {{ content.field_global_clusters }}
+  {{ content.field_files }}
+</article>

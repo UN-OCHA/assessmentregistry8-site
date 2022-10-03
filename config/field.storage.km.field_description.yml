@@ -4,13 +4,13 @@ status: true
 dependencies:
   module:
     - external_entities
+    - text
 id: km.field_description
 field_name: field_description
 entity_type: km
-type: string_long
-settings:
-  case_sensitive: false
-module: core
+type: text_long
+settings: {  }
+module: text
 locked: false
 cardinality: 1
 translatable: true
