@@ -21,14 +21,14 @@ function ocha_knowledge_management_update_8001() {
     return;
   }
 
-  $new_fields = array();
+  $new_fields = [];
 
   // Use existing field config for new field.
   foreach ($field_storage->getBundles() as $bundle => $label) {
     $field = FieldConfig::loadByName($entity_type, $bundle, $field_name);
     $new_field = $field->toArray();
     $new_field['field_type'] = 'text_long';
-    $new_field['settings'] = array();
+    $new_field['settings'] = [];
 
     $new_fields[] = $new_field;
   }
