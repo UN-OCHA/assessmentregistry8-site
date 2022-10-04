@@ -19,6 +19,7 @@ dependencies:
     - external_entities
     - ocha_docstore_files
     - ocha_knowledge_management
+    - text
 id: km.km.default
 targetEntityType: km
 bundle: km
@@ -41,7 +42,7 @@ content:
     weight: 5
     region: content
   field_description:
-    type: basic_string
+    type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
@@ -58,7 +59,8 @@ content:
   field_files:
     type: ocha_doc_store_file_formatter
     label: above
-    settings: {  }
+    settings:
+      raw_url_only: false
     third_party_settings: {  }
     weight: 10
     region: content

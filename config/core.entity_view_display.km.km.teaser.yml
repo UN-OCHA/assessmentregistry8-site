@@ -19,6 +19,7 @@ dependencies:
   module:
     - external_entities
     - ocha_knowledge_management
+    - text
 id: km.km.teaser
 targetEntityType: km
 bundle: km
@@ -33,8 +34,8 @@ content:
     weight: 2
     region: content
   field_description:
-    type: basic_string
-    label: hidden
+    type: text_default
+    label: above
     settings: {  }
     third_party_settings: {  }
     weight: 1
