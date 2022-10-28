@@ -22,6 +22,7 @@ third_party_settings:
     finalize: false
     commit_before_finalize: false
     commit_after_finalize: false
+    debug_finalize: false
     highlighter:
       maxAnalyzedChars: 51200
       fragmenter: gap
@@ -58,7 +59,12 @@ third_party_settings:
     multilingual:
       limit_to_content_language: false
       include_language_independent: true
-      specific_languages: { }
+      specific_languages:
+        en: '0'
+        fr: '0'
+        ru: '0'
+        es: '0'
+        ar: '0'
 id: km
 name: km
 description: ''
@@ -116,8 +122,6 @@ field_settings:
     dependencies:
       config:
         - field.storage.km.field_document_type
-      module:
-        - external_entities
   field_hpc_document_repository:
     label: 'HPC document repository'
     datasource_id: 'entity:km'
@@ -204,7 +208,10 @@ processor_settings:
   add_url: {  }
   aggregated_field: {  }
   ar_entity_reference_facet: {  }
+  ar_location_parent: {  }
   ar_store_entity: {  }
+  auto_aggregated_fulltext_field: {  }
+  entity_type: {  }
   language_with_fallback: {  }
   rendered_item: {  }
   solr_date_range: {  }
@@ -214,4 +221,5 @@ tracker_settings:
 options:
   cron_limit: 50
   index_directly: true
+  track_changes_in_references: false
 server: solr
