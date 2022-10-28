@@ -66,12 +66,7 @@ third_party_settings:
     multilingual:
       limit_to_content_language: false
       include_language_independent: true
-      specific_languages:
-        en: '0'
-        fr: '0'
-        ru: '0'
-        es: '0'
-        ar: '0'
+      specific_languages: { }
 id: assessments
 name: Assessments
 description: ''
