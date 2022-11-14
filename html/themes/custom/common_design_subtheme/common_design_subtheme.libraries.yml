@@ -12,6 +12,10 @@ cd-export-button:
   js:
     js/cd-export-button.js: {}
 
+cd-hide-export-button:
+  js:
+    js/cd-hide-export-button.js: {}
+
 cd-table:
   css:
     component:

@@ -31,6 +31,8 @@
  */
 #}
 
+{{ attach_library('common_design_subtheme/cd-hide-export-button') }}
+
 {%
   set classes = [
     'view',
@@ -41,7 +43,7 @@
   ]
 %}
 
-<div class="cd-export-button--wrapper">
+<div class="cd-export-button--wrapper" style="display:none;">
   {{ feed_icons }}
 </div>
 
