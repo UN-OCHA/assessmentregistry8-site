@@ -42,7 +42,7 @@
         "drupal/field_group": "^3.2",
         "drupal/google_tag": "^1.4",
         "drupal/inline_entity_form": "^1.0@RC",
-        "drupal/leaflet": "^2.1",
+        "drupal/leaflet": "^10.0",
         "drupal/maintenance200": "^1.1",
         "drupal/memcache": "^2.5",
         "drupal/node_title_help_text": "^1.2",
