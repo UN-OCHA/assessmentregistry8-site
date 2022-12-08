@@ -9,9 +9,7 @@ report-only:
         - kmp.hpc.tools
         - gov-bam.nr-data.net
         - www.google-analytics.com
-        - analytics.google.com
         - '*.analytics.google.com'
-        - '*.doubleclick.net'
     font-src:
       base: self
       sources:
@@ -39,15 +37,13 @@ report-only:
       sources:
         - fonts.googleapis.com
         - www.gstatic.com
-        - google.com
+        - www.google.com
         - www.googletagmanager.com
-        - www.google-analytics.com
         - www.youtube.com
         - cdn.jsdelivr.net
         - js-agent.newrelic.com
         - gov-bam.nr-data.net
-        - '*.newrelic.com'
-        - '*.nr-data.net'
+        - '*.google-analytics.com'
     script-src-attr:
       base: self
     script-src-elem:
@@ -57,15 +53,13 @@ report-only:
       sources:
         - fonts.googleapis.com
         - www.gstatic.com
-        - google.com
+        - www.google.com
         - www.googletagmanager.com
-        - www.google-analytics.com
         - www.youtube.com
         - cdn.jsdelivr.net
         - js-agent.newrelic.com
         - gov-bam.nr-data.net
-        - '*.newrelic.com'
-        - '*.nr-data.net'
+        - '*.google-analytics.com'
     style-src:
       base: self
       flags:
