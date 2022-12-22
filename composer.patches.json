@@ -10,9 +10,6 @@
     "drupal/select2": {
       "https://www.drupal.org/project/select2/issues/3078085": "https://www.drupal.org/files/issues/2020-02-27/hierarchical-facet-widget-3078085-2.patch"
     },
-    "drupal/search_api_solr": {
-      "#3314711-21: empty specific languages": "https://www.drupal.org/files/issues/2022-10-24/search_api_solr-empty-specific-languages-3314711-21.patch"
-    },
     "drupal/user_expire": {
       "Allow the notification email to be customised": "https://git.drupalcode.org/project/user_expire/-/merge_requests/5.diff",
       "Reset expiration when user is reactivated": "https://git.drupalcode.org/project/user_expire/-/merge_requests/6.diff"
