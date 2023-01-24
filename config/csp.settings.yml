@@ -8,8 +8,10 @@ report-only:
       sources:
         - kmp.hpc.tools
         - gov-bam.nr-data.net
-        - www.google-analytics.com
-        - '*.analytics.google.com'
+        - 'https://*.google-analytics.com'
+        - 'https://analytics.google.com'
+        - 'https://*.analytics.google.com'
+        - 'https://*.googletagmanager.com'
     font-src:
       base: self
       sources:
@@ -24,8 +26,8 @@ report-only:
       sources:
         - 'data:'
         - '*.tile.openstreetmap.org'
-        - www.google-analytics.com
-        - www.googletagmanager.com
+        - 'https://*.google-analytics.com'
+        - 'https://*.googletagmanager.com'
         - www.gstatic.com
         - translate.google.com
     object-src:
@@ -38,12 +40,12 @@ report-only:
         - fonts.googleapis.com
         - www.gstatic.com
         - www.google.com
-        - www.googletagmanager.com
+        - 'https://*.googletagmanager.com'
+        - '*.google-analytics.com'
         - www.youtube.com
         - cdn.jsdelivr.net
         - js-agent.newrelic.com
         - gov-bam.nr-data.net
-        - '*.google-analytics.com'
     script-src-attr:
       base: self
     script-src-elem:
@@ -54,12 +56,12 @@ report-only:
         - fonts.googleapis.com
         - www.gstatic.com
         - www.google.com
-        - www.googletagmanager.com
+        - 'https://*.googletagmanager.com'
+        - '*.google-analytics.com'
         - www.youtube.com
         - cdn.jsdelivr.net
         - js-agent.newrelic.com
         - gov-bam.nr-data.net
-        - '*.google-analytics.com'
     style-src:
       base: self
       flags:
