@@ -13502,16 +13502,16 @@
         },
         {
             "name": "unocha/ocha_integrations",
-            "version": "v1.0.5",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/ocha_integrations.git",
-                "reference": "2dfc2bd91dcb483c2c037d915ddab8b009436f3c"
+                "reference": "4c407cabaf1220af4aa74dd990172114989ab1c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/ocha_integrations/zipball/2dfc2bd91dcb483c2c037d915ddab8b009436f3c",
-                "reference": "2dfc2bd91dcb483c2c037d915ddab8b009436f3c",
+                "url": "https://api.github.com/repos/UN-OCHA/ocha_integrations/zipball/4c407cabaf1220af4aa74dd990172114989ab1c8",
+                "reference": "4c407cabaf1220af4aa74dd990172114989ab1c8",
                 "shasum": ""
             },
             "require": {
@@ -13528,9 +13528,9 @@
             ],
             "support": {
                 "issues": "https://github.com/UN-OCHA/ocha_integrations/issues",
-                "source": "https://github.com/UN-OCHA/ocha_integrations/tree/v1.0.5"
+                "source": "https://github.com/UN-OCHA/ocha_integrations/tree/v1.0.6"
             },
-            "time": "2022-05-26T07:05:11+00:00"
+            "time": "2021-09-03T07:45:25+00:00"
         },
         {
             "name": "unsplash/unsplash",
