@@ -3,8 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - environment_indicator.switcher.dev
-    - environment_indicator.switcher.local
     - filter.format.basic_html
   module:
     - environment_indicator
@@ -21,8 +19,7 @@ is_admin: false
 permissions:
   - 'access comments'
   - 'access content'
-  - 'access environment indicator dev'
-  - 'access environment indicator local'
+  - 'access environment indicator'
   - 'access site-wide contact form'
   - 'post comments'
   - 'search content'

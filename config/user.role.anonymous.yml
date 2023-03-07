@@ -1,15 +1,7 @@
 uuid: 92af0954-b861-4177-87fa-6b9ddd91eb8d
 langcode: en
 status: true
-dependencies:
-  config:
-    - environment_indicator.switcher.dev
-    - environment_indicator.switcher.local
-  module:
-    - environment_indicator
-    - external_entities
-    - media
-    - system
+dependencies: {  }
 _core:
   default_config_hash: pq_mEIu_B4widZN7Ap81iCJSjShFFdcL0jEiCi8VrDk
 id: anonymous
@@ -19,8 +11,6 @@ is_admin: false
 permissions:
   - 'access comments'
   - 'access content'
-  - 'access environment indicator dev'
-  - 'access environment indicator local'
   - 'access site-wide contact form'
   - 'search content'
   - 'view assessment external entity'
