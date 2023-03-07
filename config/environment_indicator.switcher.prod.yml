@@ -1,0 +1,11 @@
+uuid: 39f3a6a4-5eb5-495d-80b8-516da83daf8a
+langcode: en
+status: true
+dependencies: {  }
+machine: prod
+description: null
+name: Prod
+weight: ''
+url: 'https://assessments.hpc.tools'
+fg_color: '#ffffff'
+bg_color: '#6937ac'
