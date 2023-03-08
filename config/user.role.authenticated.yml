@@ -1,7 +1,15 @@
 uuid: a0292b0a-0d07-4841-97c6-97b602554a81
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.basic_html
+  module:
+    - environment_indicator
+    - external_entities
+    - filter
+    - media
+    - system
 _core:
   default_config_hash: btW6TFHajhy7Eo6YUvdFiPh4TcPggo8GBXYctjV6zag
 id: authenticated
@@ -11,6 +19,7 @@ is_admin: false
 permissions:
   - 'access comments'
   - 'access content'
+  - 'access environment indicator'
   - 'access site-wide contact form'
   - 'post comments'
   - 'search content'
