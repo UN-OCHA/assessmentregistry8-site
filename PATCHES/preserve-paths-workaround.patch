@@ -1,5 +1,5 @@
 diff --git a/src/PluginWrapper.php b/src/PluginWrapper.php
-index c2a2cbc..5b19909 100644
+index c2a2cbc..4d520a7 100644
 --- a/src/PluginWrapper.php
 +++ b/src/PluginWrapper.php
 @@ -133,7 +133,7 @@ protected function getInstallPathsFromPackages(array $packages)
@@ -11,3 +11,13 @@ index c2a2cbc..5b19909 100644
          }
  
          return $this->absolutePaths($paths);
+@@ -187,6 +187,9 @@ protected function absolutePaths($paths)
+     {
+         $return = array();
+         foreach ($paths as $path) {
++            if (empty($path)) {
++                continue;
++            }
+             if (!$this->filesystem->isAbsolutePath($path)) {
+                 $path = getcwd().'/'.$path;
+             }
