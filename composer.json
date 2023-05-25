@@ -143,8 +143,7 @@
         },
         "preserve-paths": [
             "html/modules/custom",
-            "html/themes/custom",
-            "html/sites/default"
+            "html/themes/custom"
         ],
         "patches-file": "composer.patches.json",
         "composer-exit-on-patch-failure": true
