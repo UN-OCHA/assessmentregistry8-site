@@ -1,5 +1,8 @@
 {
   "patches": {
+    "drupal-composer/preserve-paths": {
+      "Workaround for empty paths": "PATCHES/preserve-paths-workaround.patch"
+    },
     "drupal/core": {
       "https://www.drupal.org/project/drupal/issues/2859042#comment-12366507": "https://www.drupal.org/files/issues/entity-original_revision-2926483-17.patch",
       "https://www.drupal.org/project/drupal/issues/3143617": "https://www.drupal.org/files/issues/2020-07-07/3143617-28_0.patch"
