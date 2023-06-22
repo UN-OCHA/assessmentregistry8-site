@@ -4138,30 +4138,29 @@
         },
         {
             "name": "drupal/search_api_solr",
-            "version": "4.2.10",
+            "version": "4.2.11",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/search_api_solr.git",
-                "reference": "4.2.10"
+                "reference": "4.2.11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/search_api_solr-4.2.10.zip",
-                "reference": "4.2.10",
-                "shasum": "28b1ccd5c462db92af3561103e9a33569a674387"
+                "url": "https://ftp.drupal.org/files/projects/search_api_solr-4.2.11.zip",
+                "reference": "4.2.11",
+                "shasum": "dad7b3f0fe5e4edce57dc8a800afcca181e7d6ae"
             },
             "require": {
                 "composer/semver": "^1.0|^3.0",
                 "consolidation/annotated-command": "^2.12|^4.1",
                 "drupal/core": "^9.3 || ^10.0",
-                "drupal/search_api": "~1.28",
+                "drupal/search_api": "~1.29",
                 "ext-dom": "*",
                 "ext-json": "*",
                 "ext-simplexml": "*",
                 "laminas/laminas-stdlib": "^3.2",
-                "maennchen/zipstream-php": "^2.2.1",
-                "php": ">=7.4",
-                "solarium/solarium": "^6.2.8"
+                "maennchen/zipstream-php": "^2.2.1|^3.0.2",
+                "solarium/solarium": "^6.3.0"
             },
             "conflict": {
                 "drupal/acquia_search_solr": "<1.0.0-beta8",
@@ -4187,8 +4186,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.2.10",
-                    "datestamp": "1671442326",
+                    "version": "4.2.11",
+                    "datestamp": "1686919012",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
