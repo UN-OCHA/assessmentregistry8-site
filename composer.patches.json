@@ -7,6 +7,9 @@
     "drupal/csp": {
       "Simplify log format": "PATCHES/csp-log-format.patch"
     },
+    "drupal/dream_block_manager": {
+      "Fix unusual missing entity type for tests": "PATCHES/dream_block_manager-check.patch"
+    },
     "drupal/select2": {
       "https://www.drupal.org/project/select2/issues/3078085": "https://www.drupal.org/files/issues/2020-02-27/hierarchical-facet-widget-3078085-2.patch"
     },
