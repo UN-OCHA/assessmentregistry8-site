@@ -14,6 +14,9 @@
       "Allow the notification email to be customised": "PATCHES/user_expire-customize-notification-email.patch",
       "Reset expiration when user is reactivated": "PATCHES/user_expire-reset-expiration-on-reactivation.patch"
     },
+    "drupal/username_enumeration_prevention": {
+        "Avoid leaking the path via Drupal.settings json": "PATCHES/username_enumeration_prevention-user-login-block-form-3312288.patch"
+    },
     "drupal/views_data_export": {
       "Ensure the proper number of items is processed in batch export": "PATCHES/views_data_export-fix-number-of-processed-items.patch"
     }
