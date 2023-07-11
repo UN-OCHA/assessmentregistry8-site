@@ -400,6 +400,10 @@ class RestJson extends Rest implements PluginFormInterface {
       }
     }
 
+    if (empty($response)) {
+      return NULL;
+    }
+
     $body = $response->getBody() . '';
     $results = $this
       ->getResponseDecoderFactory()

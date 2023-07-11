@@ -2,6 +2,8 @@
 
 namespace Drupal\ocha_docstore_files\EventSubscriber;
 
+require '/srv/www/html/modules/contrib/search_api/src/Event/SearchApiEvents.php';
+
 use Drupal\search_api\Event\GatheringPluginInfoEvent;
 use Drupal\search_api\Event\SearchApiEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
