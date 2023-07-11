@@ -85,9 +85,8 @@ jobs:
         with:
           run: |
             docker-compose -f tests/docker-compose.yml up -d
-            sleep 10
+            sleep 5
             docker ps -a
-            docker-compose -f tests/docker-compose.yml exec -w /srv/www -T drupal composer self-update 2.5.5
             docker-compose -f tests/docker-compose.yml exec -w /srv/www -T drupal composer install
         env:
           fail-fast: true
