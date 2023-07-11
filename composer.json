@@ -94,7 +94,8 @@
             "drupal/core-project-message": true,
             "drupal/console-extend-plugin": true,
             "oomphinc/composer-installers-extender": true,
-            "symfony/flex": true
+            "symfony/flex": true,
+            "drupal-composer/preserve-paths": false
         }
     },
     "extra": {
@@ -142,11 +143,6 @@
             "replace": false,
             "merge-extra": false
         },
-        "preserve-paths": [
-            "html/modules/custom",
-            "html/themes/custom",
-            "html/sites/default"
-        ],
         "patches-file": "composer.patches.json",
         "composer-exit-on-patch-failure": true
     },
