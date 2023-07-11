@@ -1,0 +1,49 @@
+version: "2.2"
+
+networks:
+  default:
+
+volumes:
+  assessmentregistry-site-public:
+  assessmentregistry-site-private:
+
+services:
+  mysql:
+    image: public.ecr.aws/unocha/mysql:10.6
+    hostname: assessmentregistry-travis-mysql
+    container_name: assessmentregistry-travis-mysql
+    environment:
+      - MYSQL_DB=assessmentregistry
+      - MYSQL_USER=assessmentregistry
+      - MYSQL_PASS=assessmentregistry
+    networks:
+      - default
+
+  drupal:
+    image: public.ecr.aws/unocha/assessmentregistry8-site:local
+    hostname: assessmentregistry-travis-site
+    container_name: assessmentregistry-travis-site
+    volumes:
+      - "./settings:/srv/www/shared/settings:ro"
+      # Mount volumes for the private and public files.
+      - "assessmentregistry-site-public:/srv/www/html/sites/default/files:rw"
+      - "assessmentregistry-site-private:/srv/www/html/sites/default/private:rw"
+      # Mount the folders needed for the tests.
+      - "../tests:/srv/www/tests"
+      - "../phpcs.xml:/srv/www/phpcs.xml:ro"
+      - "../phpunit.xml:/srv/www/phpunit.xml:ro"
+    environment:
+      - TERM=xterm
+      - ENVIRONMENT=dev
+      - NGINX_SERVERNAME=assessmentregistry-travis-site,localhost,127.0.0.1
+      - NGINX_OVERRIDE_PROTOCOL=HTTP,assessmentregistry-travis-site,localhost,127.0.0.1
+      - DRUSH_OPTIONS_URI=http://assessmentregistry-travis-site
+      - DRUPAL_DB_DATABASE=assessmentregistry
+      - DRUPAL_DB_USERNAME=assessmentregistry
+      - DRUPAL_DB_PASSWORD=assessmentregistry
+      - DRUPAL_DB_HOST=mysql
+      - DRUPAL_DB_DRIVER=mysql
+    networks:
+      - default
+    depends_on:
+      - mysql
