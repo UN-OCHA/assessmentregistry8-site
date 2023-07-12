@@ -2,6 +2,14 @@
 
 namespace Drupal\ocha_docstore_files\EventSubscriber;
 
+/**
+ * Ugly workaround notice.
+ *
+ * @todo This was added to get the tests to pass. It shouldn't be necessary and
+ * should be removed.
+ *
+ * @see https://github.com/UN-OCHA/assessmentregistry8-site/pull/519
+ */
 require '/srv/www/html/modules/contrib/search_api/src/Event/SearchApiEvents.php';
 
 use Drupal\search_api\Event\GatheringPluginInfoEvent;
