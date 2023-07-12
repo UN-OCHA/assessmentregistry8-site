@@ -114,16 +114,16 @@ jobs:
         env:
           fail-fast: true
 
-      - name: Install Environment
-        id: install
-        uses: cafuego/command-output@main
-        with:
-          run: |
-            echo "site install"
-            docker compose -f tests/docker-compose.yml exec -T drupal drush -y si --existing-config
-            echo "site installed"
-        env:
-          fail-fast: true
+      # - name: Install Environment
+      #   id: install
+      #   uses: cafuego/command-output@main
+      #   with:
+      #     run: |
+      #       echo "site install"
+      #       docker compose -f tests/docker-compose.yml exec -T drupal drush -y si --existing-config
+      #       echo "site installed"
+      #   env:
+      #     fail-fast: true
 
       - name: Run tests
         id: tests
@@ -156,13 +156,13 @@ jobs:
           threshold_metric: "lines"
           comment_footer: false
 
-      - name: DB Logs
-        id: dblog
-        if: failure()
-        uses: cafuego/command-output@main
-        with:
-          run: |
-            docker compose -f tests/docker-compose.yml exec -T drupal drush watchdog:show
+      # - name: DB Logs
+      #   id: dblog
+      #   if: failure()
+      #   uses: cafuego/command-output@main
+      #   with:
+      #     run: |
+      #       docker compose -f tests/docker-compose.yml exec -T drupal drush watchdog:show
 
       - name: Find Comment
         uses: peter-evans/find-comment@v2
