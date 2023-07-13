@@ -114,16 +114,14 @@ jobs:
         env:
           fail-fast: true
 
-      # - name: Install Environment
-      #   id: install
-      #   uses: cafuego/command-output@main
-      #   with:
-      #     run: |
-      #       echo "site install"
-      #       docker compose -f tests/docker-compose.yml exec -T drupal drush -y si --existing-config
-      #       echo "site installed"
-      #   env:
-      #     fail-fast: true
+      - name: Install Environment
+        id: install
+        uses: cafuego/command-output@main
+        with:
+          run: |
+            docker compose -f tests/docker-compose.yml exec -T drupal drush -y si standard --existing-config
+        env:
+          fail-fast: true
 
       - name: Run tests
         id: tests
