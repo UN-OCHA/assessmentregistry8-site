@@ -119,7 +119,7 @@ jobs:
         uses: cafuego/command-output@main
         with:
           run: |
-            docker compose -f tests/docker-compose.yml exec -T drupal drush -y si standard --existing-config
+            docker compose -f tests/docker-compose.yml exec -T drupal drush -y si minimal --existing-config
         env:
           fail-fast: true
 
