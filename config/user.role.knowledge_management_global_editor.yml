@@ -1,7 +1,21 @@
 uuid: ffaa1234-94a1-4e83-abc8-3cdb06058312
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.video
+  module:
+    - external_entities
+    - file
+    - media
+    - node
+    - ocha_docstore_files
+    - shortcut
+    - system
+    - toolbar
 id: knowledge_management_global_editor
 label: 'Knowledge Management global editor'
 weight: 5

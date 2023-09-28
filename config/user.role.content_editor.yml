@@ -1,7 +1,23 @@
 uuid: 82efbad2-d293-4a90-bea4-695cf746ca2f
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.full_html
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.video
+    - node.type.page
+  module:
+    - file
+    - filter
+    - media
+    - node
+    - path
+    - shortcut
+    - system
+    - toolbar
 id: content_editor
 label: 'Content editor'
 weight: 7

@@ -1,7 +1,11 @@
 uuid: 92af0954-b861-4177-87fa-6b9ddd91eb8d
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - external_entities
+    - media
+    - system
 _core:
   default_config_hash: pq_mEIu_B4widZN7Ap81iCJSjShFFdcL0jEiCi8VrDk
 id: anonymous
