@@ -1,7 +1,9 @@
 uuid: b09332b8-0e3d-4bd0-af8d-6c6ec6d2744c
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - role_delegation
 id: administer_users
 label: 'Administer users'
 weight: 8

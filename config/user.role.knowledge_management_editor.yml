@@ -1,7 +1,20 @@
 uuid: c90dcbfe-76ed-4ff4-b06b-dca6d9525c12
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.video
+  module:
+    - external_entities
+    - file
+    - media
+    - node
+    - shortcut
+    - system
+    - toolbar
 id: knowledge_management_editor
 label: 'Knowledge Management editor'
 weight: 6

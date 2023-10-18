@@ -1,7 +1,20 @@
 uuid: d2c7d666-855e-4dcb-bf4e-26e42d6c98ad
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.video
+  module:
+    - file
+    - media
+    - node
+    - ocha_docstore_files
+    - shortcut
+    - system
+    - toolbar
 id: assessment_global_editor
 label: 'Assessment global editor'
 weight: 4
@@ -12,13 +25,6 @@ permissions:
   - 'access shortcuts'
   - 'access toolbar'
   - 'create assessment content'
-  - 'create assessment external entity'
-  - 'create assessment_document external entity'
-  - 'create document media'
-  - 'create image media'
-  - 'create media'
-  - 'create remote_video media'
-  - 'create video media'
   - 'delete any assessment content'
   - 'delete any document media'
   - 'delete any image media'
@@ -33,22 +39,9 @@ permissions:
   - 'delete own remote_video media'
   - 'delete own video media'
   - 'edit any assessment content'
-  - 'edit any document media'
-  - 'edit any image media'
-  - 'edit any remote_video media'
-  - 'edit any video media'
   - 'edit own assessment content'
-  - 'edit own document media'
-  - 'edit own image media'
-  - 'edit own remote_video media'
-  - 'edit own video media'
-  - 'ocha assessments bulk import'
   - 'ocha docstore files edit author'
   - 'revert assessment revisions'
-  - 'update any media'
-  - 'update assessment external entity'
-  - 'update assessment_document external entity'
-  - 'update media'
   - 'view all revisions'
   - 'view assessment revisions'
   - 'view own unpublished content'
