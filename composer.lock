@@ -3386,17 +3386,17 @@
         },
         {
             "name": "drupal/geofield",
-            "version": "1.55.0",
+            "version": "1.56.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/geofield.git",
-                "reference": "8.x-1.55"
+                "reference": "8.x-1.56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/geofield-8.x-1.55.zip",
-                "reference": "8.x-1.55",
-                "shasum": "88403ad29424e3b5aba454534fcdcd53565b11f7"
+                "url": "https://ftp.drupal.org/files/projects/geofield-8.x-1.56.zip",
+                "reference": "8.x-1.56",
+                "shasum": "edcb25304edb860d0fe907b8aa2dc73b6fc83f39"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9 || ^10",
@@ -3405,8 +3405,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.55",
-                    "datestamp": "1692829747",
+                    "version": "8.x-1.56",
+                    "datestamp": "1698017493",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3596,17 +3596,17 @@
         },
         {
             "name": "drupal/leaflet",
-            "version": "10.2.1",
+            "version": "10.2.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet.git",
-                "reference": "10.2.1"
+                "reference": "10.2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.1.zip",
-                "reference": "10.2.1",
-                "shasum": "a2ff67ce7efc0ac4c0d671dc14f7a6bee35c9e00"
+                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.2.zip",
+                "reference": "10.2.2",
+                "shasum": "ed8d2d5990b11f8f58615c507f43456a74bf6ad4"
             },
             "require": {
                 "drupal/core": "^9 || ^10",
@@ -3615,8 +3615,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "10.2.1",
-                    "datestamp": "1696628969",
+                    "version": "10.2.2",
+                    "datestamp": "1698092751",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4469,17 +4469,17 @@
         },
         {
             "name": "drupal/token",
-            "version": "1.12.0",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/token.git",
-                "reference": "8.x-1.12"
+                "reference": "8.x-1.13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/token-8.x-1.12.zip",
-                "reference": "8.x-1.12",
-                "shasum": "cefe1b203b793682f74ea43e18d0a814cf768763"
+                "url": "https://ftp.drupal.org/files/projects/token-8.x-1.13.zip",
+                "reference": "8.x-1.13",
+                "shasum": "f2a074b51726de3727c1d900237d6d471806a4d2"
             },
             "require": {
                 "drupal/core": "^9.2 || ^10"
@@ -4487,8 +4487,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.12",
-                    "datestamp": "1688015262",
+                    "version": "8.x-1.13",
+                    "datestamp": "1697885927",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4496,7 +4496,7 @@
                 },
                 "drush": {
                     "services": {
-                        "drush.services.yml": "^9 || ^10"
+                        "drush.services.yml": ">=9"
                     }
                 }
             },
@@ -14376,17 +14376,17 @@
         },
         {
             "name": "drupal/config_filter",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/config_filter.git",
-                "reference": "8.x-2.4"
+                "reference": "8.x-2.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/config_filter-8.x-2.4.zip",
-                "reference": "8.x-2.4",
-                "shasum": "dcf442f228dafd6bbac8948db1d51e3f1ca1d0c7"
+                "url": "https://ftp.drupal.org/files/projects/config_filter-8.x-2.5.zip",
+                "reference": "8.x-2.5",
+                "shasum": "a509ec432b0560fbba853b52e74d71cede5f6bdf"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9 || ^10"
@@ -14400,8 +14400,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.4",
-                    "datestamp": "1656936801",
+                    "version": "8.x-2.5",
+                    "datestamp": "1698096457",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -14561,17 +14561,17 @@
         },
         {
             "name": "drupal/stage_file_proxy",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/stage_file_proxy.git",
-                "reference": "2.1.1"
+                "reference": "2.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/stage_file_proxy-2.1.1.zip",
-                "reference": "2.1.1",
-                "shasum": "0a4d6cb83c4f5da20542e4c9f5fed32dbf490154"
+                "url": "https://ftp.drupal.org/files/projects/stage_file_proxy-2.1.2.zip",
+                "reference": "2.1.2",
+                "shasum": "a25c395022f6ff39aa290c6eca3ead6028bac664"
             },
             "require": {
                 "drupal/core": "^9 || ^10",
@@ -14584,8 +14584,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.1.1",
-                    "datestamp": "1691507193",
+                    "version": "2.1.2",
+                    "datestamp": "1697812711",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
